@@ -1,3 +1,5 @@
+package Entities;
+
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -6,7 +8,7 @@ public class Player {
 
     public String name;
     public int money;
-    public ArrayList<Property>();
+    public ArrayList<Property> properties;
     public boolean inJail;
     public int jailCards;
     public int position;
