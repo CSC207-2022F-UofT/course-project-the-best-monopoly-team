@@ -6,7 +6,7 @@ public class Player {
 
     public String name;
     public int money;
-    public ArrayList<Property>();
+    public ArrayList<Property>;
     public boolean inJail;
     public int jailCards;
     public int position;
