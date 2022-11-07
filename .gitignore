@@ -118,3 +118,5 @@ replay_pid*
 /gradlew.bat
 /gradlew
 /gradle/
+/.idea/misc.xml
+/.idea/vcs.xml
