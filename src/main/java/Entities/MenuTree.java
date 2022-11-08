@@ -3,15 +3,17 @@ package Entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class MenuTree{
+public abstract class MenuTree<T>{
+    private List<OptionsMenuTree<T>> children = new ArrayList<>();
+    private OptionsMenuTree<T> parent = null;
+    private String id;
 
-    protected List<MenuTree> children = new ArrayList<>();
-    protected MenuTree parent;
-    protected String id;
-
-    public abstract MenuTree getParent();
-    public abstract List<MenuTree> getChildren();
-    public abstract String getId();
-    public abstract void setParent(MenuTree parent);
-    public abstract void addChild(MenuTree child);
+    public MenuTree(String id){
+        this.id = id;
+    }
+    abstract OptionsMenuTree<T> getParent();
+    abstract List<OptionsMenuTree<T>> getChildren();
+    abstract String getId();
+    abstract void setParent(OptionsMenuTree<T> parent);
+    abstract void addChild(OptionsMenuTree<T> child);
 }
