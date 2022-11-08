@@ -4,16 +4,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class MenuTree<T>{
-    private List<OptionsMenuTree<T>> children = new ArrayList<>();
-    private OptionsMenuTree<T> parent = null;
+    private List<MenuTree<T>> children;
+    private MenuTree<T> parent;
     private String id;
 
     public MenuTree(String id){
+        this.children = new ArrayList<>();
+        this.parent = null;
         this.id = id;
     }
-    abstract OptionsMenuTree<T> getParent();
-    abstract List<OptionsMenuTree<T>> getChildren();
+    abstract MenuTree<T> getParent();
+    abstract List<MenuTree<T>> getChildren();
     abstract String getId();
-    abstract void setParent(OptionsMenuTree<T> parent);
-    abstract void addChild(OptionsMenuTree<T> child);
+    abstract void setParent(MenuTree<T> parent);
+    abstract void addChild(MenuTree<T> child);
 }
