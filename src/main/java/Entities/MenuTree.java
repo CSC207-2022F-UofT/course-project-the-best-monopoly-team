@@ -8,6 +8,7 @@ public abstract class MenuTree{
     protected List<MenuTree> children = new ArrayList<>();
     protected MenuTree parent;
     protected String name;
+    //makes tree node handling easier
     protected int id;
 
     public abstract MenuTree getParent();
