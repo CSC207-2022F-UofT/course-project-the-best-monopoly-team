@@ -7,25 +7,45 @@ public class Board{
 
     Player[] players;
     Cell[] cells;
-    Map <Player, String> playerPosition = new HashMap<Player, String>();
+    Map <Player, Integer> playerPositions = new HashMap<Player, Integer>();
+    Property[] properties;
 
-
-    public Board(Player[] players, Cell[] cells){
+    public Board(Player[] players, Cell[] cells, Object[][] propertyData){
         this.players = players;
         this.cells = cells;
         for (Player player : players) {
-            this.playerPosition.put(player, "0");
+            this.playerPositions.put(player, 0);
         }
+        Property[] properties = new Property[propertyData.length];
+        for (int i = 0; i < propertyData.length; i++){
+            Object[] data = propertyData[i];
+            String name = (String) data[0];
+            String colour = (String) data[1];
+            int cost = (int) data[2];
+            int rent = (int) data[3];
+            int mortgage = (int) data[4];
+            int houseCost = (int) data[5];
+            properties[i] = new Property(name, colour, cost, rent, mortgage, houseCost);
+        }
+        this.properties = properties;
     }
 
+    public Player[] getPlayers(){
+        return players;
+    }
+
+    public Cell[] getCells(){return cells;}
+
+    public Map<Player, Integer> getPlayerPositions(){return playerPositions;}
+
+    public Property[] getProperties(){return properties;}
+
     public Cell getPlayerCell(Player player){
-        int cell_number = Integer.parseInt(this.playerPosition.get(player));
-        return this.cells[cell_number];
+        return this.cells[this.playerPositions.get(player)];
     }
 
     public void updatePlayerPosition(Player player){
-        int position = player.position;
-        playerPosition.put(player, Integer.toString(position));
+        playerPositions.put(player, player.position);
     }
 
 }
