@@ -1,23 +1,30 @@
-package Interactors;
+package Entities;
 
 public class IOController {
-    private String input;
-    private String[] output;
+    private String output;
+    private int input;
 
     public IOController(){
-        this.input = "";
-        this.output = new String[]{};
+        this.output = "Welcome to Monopoly";
+        this.input = 0;
     }
-    public String[] packageData(String data){
-        String[] temp = new String[this.output.length + 1];
-        temp[this.output.length] = data;
-        this.output = temp;
+    public String presentOutput(){
         return this.output;
     }
-    public void setInput(String input){
+    public void setInput(int input){
         this.input = input;
     }
-    public String getInput(){
+    public int getInput(){
         return this.input;
+    }
+    public void setOutput(String[] output){
+        this.output = convertOutput(output);
+    }
+    public String convertOutput(String[] output){
+        //Function needs to be implemented when connected to front end
+        //In essence, take the resulting output from the UseCaseInteractor/Other Classes, it's not decided yet
+        //but then concatenate that into a string that the user can understand and use to derive the input
+        //for the next turns, so the input will be taken in Strings, take that Array of Strings and format
+        return "";
     }
 }
