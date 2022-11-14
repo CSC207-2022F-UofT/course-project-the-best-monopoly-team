@@ -4,51 +4,22 @@ import java.util.List;
 
 public class GameLogicTree extends MenuTree{
     private boolean didRoll;
+    static int globalID = 0;
+
+    public void setIsSwitchBlock(boolean switchBlock) {
+        this.switchBlock = switchBlock;
+    }
+
+    private boolean switchBlock = false;
+
     public GameLogicTree(String name) {
         didRoll = false;
         this.name = name;
+        this.id = globalID;
+        globalID += 1;
     }
-
-    public GameLogicTree() {
-        GameLogicTree trade = new GameLogicTree("trade");
-        GameLogicTree pickPlayer = new GameLogicTree("pickPlayer");
-        GameLogicTree pickItemOp = new GameLogicTree("pickItemOp");
-        GameLogicTree pickItemSelf = new GameLogicTree("pickItemSelf");
-        GameLogicTree sendTrade = new GameLogicTree("sendTrade");
-
-        pickItemSelf.addChild(sendTrade);
-        pickItemOp.addChild(pickItemSelf);
-        pickPlayer.addChild(pickItemOp);
-        trade.addChild(pickPlayer);
-
-        GameLogicTree manageProperty = new GameLogicTree("manageProperty");
-        GameLogicTree selectProperty = new GameLogicTree("selectProperty");
-        GameLogicTree mortgage = new GameLogicTree("mortgage");
-        GameLogicTree sell = new GameLogicTree("sell");
-        GameLogicTree buildProperty = new GameLogicTree("buildProperty");
-
-        selectProperty.addChild(mortgage);
-        selectProperty.addChild(sell);
-        selectProperty.addChild(buildProperty);
-        manageProperty.addChild(selectProperty);
-
-        GameLogicTree roll = new GameLogicTree("roll");
-        GameLogicTree buy = new GameLogicTree("buy");
-        GameLogicTree auction = new GameLogicTree("auction");
-
-        roll.addChild(buy);
-        roll.addChild(auction);
-
-        GameLogicTree choosePlayer = new GameLogicTree("choosePlayer");
-        GameLogicTree steal = new GameLogicTree("steal");
-        steal.addChild(choosePlayer);
-
-        GameLogicTree main = new GameLogicTree("main");
-        main.addChild(trade);
-        main.addChild(manageProperty);
-        main.addChild(roll);
-        main.addChild(steal);
-
+    public int getID(){
+        return id;
     }
 
     @Override
@@ -85,5 +56,9 @@ public class GameLogicTree extends MenuTree{
     }
     public void gotDoubles(){
         this.didRoll = false;
+    }
+
+    public boolean isSwitchBlock() {
+        return switchBlock;
     }
 }

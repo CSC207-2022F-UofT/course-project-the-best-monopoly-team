@@ -1,5 +1,7 @@
+
 package UseCases;
 
+import Interactors.GameLogic;
 public class UseCaseInteractor{
 
     private OutputTree[] trees = new OutputTree[2];
@@ -8,8 +10,10 @@ public class UseCaseInteractor{
     //This array contains various states for the program which will be used for various calculations
     private int[] globalStates = new int[5];
 
-    public UseCaseInteractor(){
+    private GameLogic logicInteractor;
+    public UseCaseInteractor(GameLogic logicInteractor){
         createTrees();
+        this.logicInteractor = logicInteractor;
     }
 
     /**
@@ -165,6 +169,7 @@ public class UseCaseInteractor{
         selectProperty.setSwitchBlock(true);
         gameOutputMenu.setSwitchBlock(true);
         settings.setSwitchBlock(true);
+        roll.setSwitchBlock(true);
 
         //resetting the id counter
         gameOutputMenu.setGlobalID(0);
@@ -239,7 +244,7 @@ public class UseCaseInteractor{
                 //TODO: Save the game using the input
 
             default:
-                //TODO pass arguments to game logic interactor
+                logicInteractor.performInput(input);
         }
 
     }
