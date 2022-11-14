@@ -6,31 +6,38 @@ public class GameLogicTree extends MenuTree{
     private boolean didRoll;
     public GameLogicTree(String name) {
         didRoll = false;
-        this.id = name;
+        this.name = name;
     }
 
     public GameLogicTree() {
-        GameLogicTree sendTrade = new GameLogicTree("sendTrade");
-        GameLogicTree pickItemSelf = new GameLogicTree("pickItemSelf");
-        GameLogicTree pickItemOp = new GameLogicTree("pickItemOp");
-        GameLogicTree pickPlayer = new GameLogicTree("pickPlayer");
         GameLogicTree trade = new GameLogicTree("trade");
+        GameLogicTree pickPlayer = new GameLogicTree("pickPlayer");
+        GameLogicTree pickItemOp = new GameLogicTree("pickItemOp");
+        GameLogicTree pickItemSelf = new GameLogicTree("pickItemSelf");
+        GameLogicTree sendTrade = new GameLogicTree("sendTrade");
+
         pickItemSelf.addChild(sendTrade);
         pickItemOp.addChild(pickItemSelf);
         pickPlayer.addChild(pickItemOp);
         trade.addChild(pickPlayer);
 
+        GameLogicTree manageProperty = new GameLogicTree("manageProperty");
+        GameLogicTree selectProperty = new GameLogicTree("selectProperty");
         GameLogicTree mortgage = new GameLogicTree("mortgage");
         GameLogicTree sell = new GameLogicTree("sell");
         GameLogicTree buildProperty = new GameLogicTree("buildProperty");
-        GameLogicTree selectProperty = new GameLogicTree("selectProperty");
-        GameLogicTree manageProperty = new GameLogicTree("manageProperty");
+
         selectProperty.addChild(mortgage);
         selectProperty.addChild(sell);
         selectProperty.addChild(buildProperty);
         manageProperty.addChild(selectProperty);
 
         GameLogicTree roll = new GameLogicTree("roll");
+        GameLogicTree buy = new GameLogicTree("buy");
+        GameLogicTree auction = new GameLogicTree("auction");
+
+        roll.addChild(buy);
+        roll.addChild(auction);
 
         GameLogicTree choosePlayer = new GameLogicTree("choosePlayer");
         GameLogicTree steal = new GameLogicTree("steal");
@@ -55,8 +62,8 @@ public class GameLogicTree extends MenuTree{
     }
 
     @Override
-    public String getId() {
-        return this.id;
+    public String getName() {
+        return null;
     }
 
     @Override

@@ -116,19 +116,23 @@ public class UseCaseInteractor{
 
         //ID = 11
         OutputTree roll = new OutputTree("Roll");
-
         //ID = 12
-        OutputTree steal = new OutputTree("Steal");
+        OutputTree buy = new OutputTree("Buy");
         //ID = 13
+        OutputTree auction = new OutputTree("Auction");
+        //ID = 14
+
+        OutputTree steal = new OutputTree("Steal");
+        //ID = 15
         OutputTree choosePlayer = new OutputTree("Choose player");
 
-        //ID = 14
-        OutputTree settings = new OutputTree("Settings");
-        //ID = 15
-        OutputTree exitToMenu = new OutputTree("Exit to menu");
         //ID = 16
-        OutputTree saveGame = new OutputTree("Save game");
+        OutputTree settings = new OutputTree("Settings");
         //ID = 17
+        OutputTree exitToMenu = new OutputTree("Exit to menu");
+        //ID = 18
+        OutputTree saveGame = new OutputTree("Save game");
+        //ID = 19
         OutputTree selectSaveFile = new OutputTree("Select save file");
 
         //creating the tree structure
@@ -141,6 +145,9 @@ public class UseCaseInteractor{
         selectProperty.addChild(sell);
         selectProperty.addChild(buildHouses);
         manageProperty.addChild(selectProperty);
+
+        roll.addChild(buy);
+        roll.addChild(auction);
 
         steal.addChild(choosePlayer);
 
@@ -228,13 +235,13 @@ public class UseCaseInteractor{
                 currentTree = trees[0];
                 globalStates = new int[10];
                 break;
-            case 17:
+            case 18:
                 //TODO: Save the game using the input
 
             default:
                 //TODO pass arguments to game logic interactor
-
         }
+
     }
     public void updateOutput(){
         //TODO update the user interface
