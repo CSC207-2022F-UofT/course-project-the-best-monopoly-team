@@ -26,8 +26,8 @@ class OutputTreeTest {
     }
 
     @Test
-    void getId() {
-        assert tree.getId().equals("Initial Menu");
+    void getName() {
+        assert tree.getName().equals("Initial Menu");
     }
 
 
