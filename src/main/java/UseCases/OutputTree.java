@@ -6,14 +6,27 @@ import java.util.List;
 
 public class OutputTree extends MenuTree {
     private ArrayList<Integer[]> positions = new ArrayList<>();
-    public OutputTree(String id){
+    static int globalID = 0;
+    private boolean switchBlock = false;
+
+    public OutputTree(String name){
         this.parent = null;
-        this.id = id;
+        createObject(name);
     }
-    public OutputTree(String id, OutputTree parent){
-        this.parent = parent;
-        this.id = id;
+
+    public int getID() {
+        return id;
     }
+
+    public void createObject(String name){
+        this.name = name;
+        this.id = globalID;
+        globalID += 1;
+    }
+    public void setGlobalID(int num){
+        globalID = num;
+    }
+
     public void addButtonPosition(Integer[] position){
         this.positions.add(position);
     }
@@ -31,8 +44,8 @@ public class OutputTree extends MenuTree {
     }
 
     @Override
-    public String getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
     @Override
@@ -46,5 +59,11 @@ public class OutputTree extends MenuTree {
     }
 
 
+    public boolean isSwitchBlock() {
+        return switchBlock;
+    }
 
+    public void setSwitchBlock(boolean switchBlock) {
+        this.switchBlock = switchBlock;
+    }
 }
