@@ -20,6 +20,7 @@ public class Property extends Cell {
     private int mortgageValue;
     private int houseCost;
     private int houses;
+    private boolean mortgaged;
 
     public Property (String name, String colour, int cost, int houseCost, int rent,
                      int rent1H, int rent2H, int rent3H, int rent4H, int rentHotel,
@@ -41,7 +42,7 @@ public class Property extends Cell {
 
     public Property (String name, String colour, int cost, int houseCost, int rent,
                      int rent1H, int rent2H, int rent3H, int rent4H, int rentHotel,
-                     Player owner, int mortgageValue, int houses) {
+                     Player owner, int mortgageValue, int houses, boolean mortgaged) {
         this.name = name;
         this.colour = colour;
         this.cost = cost;
@@ -55,17 +56,17 @@ public class Property extends Cell {
         this.ownedBy = owner;
         this.mortgageValue = mortgageValue;
         this.houses = houses;
+        this.mortgaged = mortgaged;
     }
 
     public String performAction(Player currentPlayer){
         // set flag for player to know which branch of game logic tree we go down (property)
         // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
         if (this.getOwner() == null){
-            // need to send back an option to get player input on if they will purchase the property or auction it
             boolean purchaseBoolean = purchaseOrAuction();
             if (purchaseBoolean) {
                 currentPlayer.pay(this.cost);
-                currentPlayer.addProperty(this.name);
+                currentPlayer.addProperty(this);
                 this.ownedBy = currentPlayer;
             } else {
                 Object[] highestOffer = displayAuctionMenu();
@@ -127,8 +128,22 @@ public class Property extends Cell {
         return this.mortgageValue;
     }
 
+    public boolean getMortgageStatus(){return this.mortgaged;}
+
+    public void setMortgageStatus(boolean status){this.mortgaged = status;}
+
     public int getHouses(){
         return this.houses;
+    }
+
+    public boolean addHouse(Player currentPlayer, int houses){
+        if (currentPlayer.getMoney() >= getHouseCost() * houses){
+            this.houses += houses;
+            currentPlayer.pay(getHouseCost());
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public ArrayList<String[]> loadProperties() throws FileNotFoundException {
