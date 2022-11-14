@@ -3,57 +3,82 @@ package Entities;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Property extends Cell {
-    private Player ownedBy;
-    private int houses;
-    private int rent;
     private String name;
     private String colour;
+    private int cost;
+    private int rent;
+    private int rent1H;
+    private int rent2H;
+    private int rent3H;
+    private int rent4H;
+    private int rentHotel;
+    private Player ownedBy;
     private int mortgageValue;
     private int houseCost;
-    private int cost;
+    private int houses;
 
-    public Property (String name, String colour, int cost, int rent, int mortgageValue, int houseCost) {
-        this.ownedBy = null;
-        this.houses = 0;
-        this.cost = cost;
+    public Property (String name, String colour, int cost, int houseCost, int rent,
+                     int rent1H, int rent2H, int rent3H, int rent4H, int rentHotel,
+                     int mortgageValue) {
         this.name = name;
-        this.colour = colour;
-        this.rent = rent;
-        this.mortgageValue = mortgageValue;
         this.houseCost = houseCost;
+        this.colour = colour;
+        this.cost = cost;
+        this.rent = rent;
+        this.rent1H = rent1H;
+        this.rent2H = rent2H;
+        this.rent3H = rent3H;
+        this.rent4H = rent4H;
+        this.rentHotel = rentHotel;
+        this.ownedBy = null;
+        this.mortgageValue = mortgageValue;
+        this.houses = 0;
     }
 
-    public String performAction(){
-        // how do we get the current player?
+    public Property (String name, String colour, int cost, int houseCost, int rent,
+                     int rent1H, int rent2H, int rent3H, int rent4H, int rentHotel,
+                     Player owner, int mortgageValue, int houses) {
+        this.name = name;
+        this.colour = colour;
+        this.cost = cost;
+        this.houseCost = houseCost;
+        this.rent = rent;
+        this.rent1H = rent1H;
+        this.rent2H = rent2H;
+        this.rent3H = rent3H;
+        this.rent4H = rent4H;
+        this.rentHotel = rentHotel;
+        this.ownedBy = owner;
+        this.mortgageValue = mortgageValue;
+        this.houses = houses;
+    }
 
+    public String performAction(Player currentPlayer){
         // set flag for player to know which branch of game logic tree we go down (property)
+        // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
         if (this.getOwner() == null){
             // need to send back an option to get player input on if they will purchase the property or auction it
-
-            // call some menu method to display the option to purchase or auction the property
-            // assume the menu method returns some value to differentiate between purchase or auction
-            // follow separate logic depending on the return of the method
-
-            // purchase property
-            // deduct the price of the property from the current players account
-            // transfer the property to their ownership
-
-
-            // auction property
-            // display menu with total players - 1 input boxes
-            // deduct the offer amount from the players account who made the highest offer
-            // transfer the property to their ownership
-
+            boolean purchaseBoolean = purchaseOrAuction();
+            if (purchaseBoolean) {
+                currentPlayer.pay(this.cost);
+                currentPlayer.addProperty(this.name);
+                this.ownedBy = currentPlayer;
+            } else {
+                Object[] highestOffer = displayAuctionMenu();
+                Player newOwner = (Player) highestOffer[0];
+                int offer = (Integer) highestOffer[1];
+                newOwner.pay(offer);
+                newOwner.addProperty(this.name);
+                this.ownedBy = newOwner;
+            }
         } else {
-            // pay rent
-            // call player pay method with owner of property and getrent price
-            // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
+            currentPlayer.pay(this.ownedBy, this.getRent());
         }
 
-        // temporary return
         return "";
     }
 
@@ -74,11 +99,24 @@ public class Property extends Cell {
     }
 
     public int getRent(){
-        if (this.houses == 0) {
-            return this.rent;
-        } else {
-            return (this.houses * 2) * this.rent;
+        if (this.colour.equals("Railroad")){
+            return 100;
+        } else if (this.colour.equals("Utility")) {
+            return 50;
+        } else if (this.houses==0){
+            return rent;
+        } else if (this.houses==1){
+            return rent1H;
+        } else if (this.houses==2){
+            return rent2H;
+        } else if (this.houses==3){
+            return rent3H;
+        } else if (this.houses==4){
+            return rent4H;
+        } else if (this.houses==5){
+            return rentHotel;
         }
+        return 0; // there was an error if we return 0
     }
 
     public int getHouseCost(){

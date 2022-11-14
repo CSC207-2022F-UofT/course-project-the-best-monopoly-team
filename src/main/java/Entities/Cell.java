@@ -1,7 +1,7 @@
 package Entities;
 
 abstract class Cell {
-    public String performAction(){
+    public String performAction(Player currentPlayer){
         return "";
     }
 }
