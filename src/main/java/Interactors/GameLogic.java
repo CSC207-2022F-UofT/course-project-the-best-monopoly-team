@@ -5,14 +5,13 @@ import Entities.Player;
 
 import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class GameLogic {
 
     Player currentPlayer;
     Board board;
     TreeNode currentTree;
-
-    //add a method to move the player to a specific cell
 
     public GameLogic(Player currentPlayer, Board board, TreeNode currentTree){
         this.currentPlayer = currentPlayer;
@@ -29,8 +28,9 @@ public class GameLogic {
     }
 
     public ArrayList<String> performPlayerAction(Player player){
-        // this one is broken rn
-        return new ArrayList<String>();
+        // updates the current tree based on the action taken
+        // returns a
+
     }
 
     public Object[][] playersToArray(){
@@ -57,14 +57,15 @@ public class GameLogic {
         return boardArray;
     }
 
-    public void movePlayer(int steps){
-
+    public void movePlayer(int cell_number){
+        int total_squares = 40;
+        int current_player_position = this.currentPlayer.position;
+        if (cell_number - current_player_position < 0) {
+            this.currentPlayer.money = this.currentPlayer.money + 200;
+        }
+        this.currentPlayer.position = cell_number;
+        this.board.updatePlayerPosition(this.currentPlayer);
     }
 
-    public void rollDice(){}
-
 }
-
-// taking the instances of the player created and the board and convert it to board and player (2d)
-// keep track of the roll dice
 
