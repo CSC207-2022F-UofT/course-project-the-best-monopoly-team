@@ -14,6 +14,7 @@ public class Property extends Cell {
     private int mortgageValue;
     private int houseCost;
     private int cost;
+    private boolean mortgaged;
 
     public Property (String name, String colour, int cost, int rent, int mortgageValue, int houseCost) {
         this.ownedBy = null;
@@ -23,6 +24,7 @@ public class Property extends Cell {
         this.colour = colour;
         this.rent = rent;
         this.mortgageValue = mortgageValue;
+        this.mortgaged = false;
         this.houseCost = houseCost;
     }
 
@@ -61,6 +63,8 @@ public class Property extends Cell {
         return this.ownedBy;
     }
 
+    public void setOwner(Player player){ownedBy = player;}
+
     public String getName(){
         return this.name;
     }
@@ -88,6 +92,10 @@ public class Property extends Cell {
     public int getMortgageValue(){
         return this.mortgageValue;
     }
+
+    public boolean getMortgageStatus(){return this.mortgaged;}
+
+    public void setMortgageStatus(boolean status){this.mortgaged = status;}
 
     public int getHouses(){
         return this.houses;

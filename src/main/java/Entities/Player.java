@@ -118,6 +118,35 @@ public class Player {
         return (a + "\n" + b);
     }
 
+    public String rollDice_new(int consecutive) {
+        int max = 6;
+        int min = 1;
+        int a =  (int) Math.floor(Math.random() * (max - min + 1) + min);
+        int b = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        if (this.inJail){
+            if(a == b){
+                this.inJail = false;
+                this.move(a + b);
+                return (a + "\n" + b);
+            }
+        }
+        else {
+            if (a == b && (consecutive + 1) < 3){
+                this.rollDice_new((consecutive + 1));
+            }
+            else if(a == b && (consecutive + 1) == 3){
+                // the player goes to jail
+                return (a + "\n" + b + "\n" + "player goes to jail");
+            }
+            else {
+                this.move(a + b);
+                return (a + "\n" + b);
+            }
+        }
+        this.move(a + b);
+        return (a + "\n" + b);
+    }
+
     public void buildHouse(Property property){
             properties.add(property);
         }
