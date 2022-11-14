@@ -3,7 +3,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameLogicTree extends MenuTree{
+    private boolean didRoll;
     public GameLogicTree(String name) {
+        didRoll = false;
         this.id = name;
     }
 
@@ -66,5 +68,15 @@ public class GameLogicTree extends MenuTree{
     public void addChild(MenuTree child) {
         child.setParent(this);
         this.children.add(child);
+    }
+
+    public boolean didRoll(){
+        return this.didRoll;
+    }
+    public void rolled(){
+        this.didRoll = true;
+    }
+    public void gotDoubles(){
+        this.didRoll = false;
     }
 }
