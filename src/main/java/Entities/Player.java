@@ -6,8 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+
 
 public class Player {
     // Represents a player in the game
@@ -69,24 +68,6 @@ public class Player {
         }
     }
 
-    public void save() throws IOException {
-        File savefile = new File("Save.txt");
-
-        FileWriter fw = new FileWriter(savefile);
-
-        PrintWriter pw = new PrintWriter(fw);
-        pw.println(name);
-        pw.println(money);
-        pw.println(inJail);
-        pw.println(jailCards);
-        pw.println(position);
-        pw.println(properties);
-        pw.println();
-        pw.close();
-    }
-
-    // public void load(){}
-
 
     public void move(int step) {
         position += step;
@@ -121,7 +102,7 @@ public class Player {
 
     public void buildHouse(Property property, int houses) {
         if (properties.contains(property)) {
-            property.addHouse(houses);
+//            property.addHouse(houses);
         }
     }
 
@@ -141,26 +122,6 @@ public class Player {
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
-    }
-
-    public void load(File pw) {
-        try {
-            BufferedReader br = new BufferedReader(new FileReader(pw));
-            String line;
-            ArrayList all = new ArrayList<ArrayList>();
-            while ((line = br.readLine()) != null) {
-                ArrayList player = new ArrayList<String>();
-                player.add(line);
-                if (line == "\n") {
-                    all.add(player);
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            throw new RuntimeException(ex);
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-
     }
 
 
