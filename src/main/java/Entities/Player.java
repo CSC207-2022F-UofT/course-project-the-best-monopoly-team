@@ -4,20 +4,18 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.*;
 import java.util.ArrayList;
 
 
 public class Player {
     // Represents a player in the game
 
-    public String name;
-    public int money;
-    public ArrayList<Property> properties;
-    public boolean inJail;
-    public int jailCards;
-    public int position;
-    // public Map<Integer, Integer> actions;
+    private String name;
+    private int money;
+    private ArrayList<Property> properties;
+    private boolean inJail;
+    private int jailCards;
+    private int position;
 
     public Player(String name) {
         this.name = name;
@@ -46,9 +44,25 @@ public class Player {
         this.inJail = !this.inJail;
     }
 
-    // public getPossibleActions(Player player){}
+    public void addJailCards(int cards) {
+        this.jailCards += cards;
+    }
 
-    // public auction(Property property){}
+    /* UNCOMMENT THIS WHEN GameLogicTree IS MERGED INTO THE MAIN BRANCH
+    public StringBuilder getPossibleActions() {
+        StringBuilder actions = new StringBuilder();
+        List<MenuTree> actionList = GameLogicTree.getChildren();
+        for (MenuTree node: actionList) {
+            String concat = node.id + ", ";
+            actions.append(concat);
+        }
+        return actions;
+    }
+    */
+
+    public void addProperty(Property property) {
+        this.properties.add(property);
+    }
 
     public String steal(Player victim) {
         double success = Math.random();
