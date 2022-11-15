@@ -9,17 +9,24 @@ public class GameLogic {
 
     Player currentPlayer;
     Board board;
+    GameLogicTree[] trees = new GameLogicTree[3];
     GameLogicTree currentTree;
     ArrayList<Integer> selectedOptions = new ArrayList<Integer>();
+
+    private int[] globalStates = new int[5];
+    Player[] players;
 
     //add a method to move the player to a specific cell
 
     public GameLogic(Player currentPlayer, Board board){
+        players = board.getPlayers();
         this.currentPlayer = currentPlayer;
+
         this.board = board;
-        this.currentTree = createTree();
+        createTrees();
     }
-    public GameLogicTree createTree(){
+    public void createTrees(){
+        //Creating the game loop tree
         GameLogicTree main = new GameLogicTree("MainTree");
         GameLogicTree trade = new GameLogicTree("Trade");
         GameLogicTree pickPlayer = new GameLogicTree("PickPlayer");
@@ -75,8 +82,32 @@ public class GameLogic {
         main.setIsSwitchBlock(true);
         selectProperty.setIsSwitchBlock(true);
         roll.setIsSwitchBlock(true);
+        trees[0] = main;
 
-        return main;
+        //Creating the trading tree
+        GameLogicTree tradeTree = new GameLogicTree("TradeTree");
+        GameLogicTree acceptTrade = new GameLogicTree("AcceptTrade");
+        GameLogicTree declineTrade = new GameLogicTree("DeclineTrade");
+        trade.addChild(acceptTrade);
+        tradeTree.addChild(declineTrade);
+        tradeTree.setIsSwitchBlock(true);
+        trees[1] = tradeTree;
+
+        //Creating the auction tree
+        GameLogicTree auctionTree = new GameLogicTree("AuctionTree");
+        GameLogicTree lowOption = new GameLogicTree("LowOption");
+        GameLogicTree mediumOption = new GameLogicTree("MediumOption");
+        GameLogicTree highOption = new GameLogicTree("HighOption");
+        GameLogicTree fold = new GameLogicTree("Fold");
+
+        auctionTree.setIsSwitchBlock(true);
+        auctionTree.addChild(lowOption);
+        auctionTree.addChild(mediumOption);
+        auctionTree.addChild(highOption);
+        auctionTree.addChild(fold);
+        trees[2] = auctionTree;
+
+        currentTree = main;
     }
 
     public void setCurrentPlayer(Player player){
@@ -104,9 +135,18 @@ public class GameLogic {
 
         return handleTree(input);
     }
+    public State getInitialState(){
+        State currentState = new State();
+        for (MenuTree tree: currentTree.getChildren()){
+            currentState.addOptions(tree.getName());
+        }
+        return currentState;
+    }
     public State handleTree(int input){
         State currentState = new State();
         switch (currentTree.getName()){
+            case "MainTree":
+                return getInitialState();
             case "Trade":
                 //Case trade selected
                 //provide a list of all possible players considering the current player is not an option
@@ -260,7 +300,6 @@ public class GameLogic {
     }
 
     public Object[][] playersToArray(){
-        Player[] players = this.board.getPlayers();
         Object[][] playersArray = new Object[players.length][6];
         for(int i = 0; i < players.length; i++){
             playersArray[i][0] = players[i].name;
@@ -274,7 +313,6 @@ public class GameLogic {
     }
 
     public Object[] boardToArray(){
-        Board board = this.board;
         Object[] boardArray = new Object[4];
         boardArray[0] = board.getPlayers();
         boardArray[1] = board.getCells();
