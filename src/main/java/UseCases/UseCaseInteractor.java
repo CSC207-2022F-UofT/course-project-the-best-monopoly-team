@@ -1,15 +1,15 @@
 
 package UseCases;
 
+import Entities.GameLogicTree;
+import Entities.State;
 import Interactors.GameLogic;
 public class UseCaseInteractor{
-
-    private OutputTree[] trees = new OutputTree[2];
-    private OutputTree currentTree;
+    private GameLogicTree currentTree;
+    private boolean menuTreeActive = true;
 
     //This array contains various states for the program which will be used for various calculations
     private int[] globalStates = new int[5];
-
     private GameLogic logicInteractor;
     public UseCaseInteractor(GameLogic logicInteractor){
         createTrees();
@@ -25,52 +25,43 @@ public class UseCaseInteractor{
         //Moving through the tree depending on the input and the node
         if (input == -1){
             //Move backwards in tree
-            currentTree = (OutputTree) currentTree.getParent();
+            currentTree = (GameLogicTree) currentTree.getParent();
         }
         else if (currentTree.isSwitchBlock()){
             //Move forward in tree to one of the branches
-            currentTree = (OutputTree) currentTree.getChildren().get(input);
+            currentTree = (GameLogicTree) currentTree.getChildren().get(input);
         }
         else{
             //Move forward in tree
-            currentTree = (OutputTree) currentTree.getChildren().get(0);
+            currentTree = (GameLogicTree) currentTree.getChildren().get(0);
         }
 
         //Handling different tree input
-        if (currentTree == trees[0]){
+        if (menuTreeActive){
             handleInitialTree(input);
         }
         else{
-            handleGameTree(input);
+            handleOtherTrees(input);
         }
 
     }
 
     /**
-     * This method creates the two trees required in the program. <br>
-     * The first tree is for the initialization part of
-     * the program and the second tree is for the game part of the program.
+     * This method creates the initial menu tree for the program <br>
+     * The tree is for the initialization part of the program, allowing the user
+     * to choose game modes, number of players, etc.
      */
     public void createTrees(){
         //creating first tree
-        //ID = 0
-        OutputTree initialMenu = new OutputTree("InitialMenu");
-        //ID = 1
-        OutputTree newGame = new OutputTree("NewGame");
-        //ID = 2
-        OutputTree chooseGameMode = new OutputTree("ChooseGameMode");
-        //ID = 3
-        OutputTree numPlayers = new OutputTree("NumberOfPlayers");
-        //ID = 4
-        OutputTree gameLength = new OutputTree("GameLength");
-        //ID = 5
-        OutputTree createNewGame = new OutputTree("CreateNewGame");
-        //ID = 6
-        OutputTree loadGame = new OutputTree("LoadGame");
-        //ID = 7
-        OutputTree chooseSave = new OutputTree("ChooseSave");
-        //ID = 8
-        OutputTree createGame = new OutputTree("CreateLoadedGame");
+        GameLogicTree initialMenu = new GameLogicTree("InitialMenu");
+        GameLogicTree newGame = new GameLogicTree("NewGame");
+        GameLogicTree chooseGameMode = new GameLogicTree("ChooseGameMode");
+        GameLogicTree numPlayers = new GameLogicTree("NumberOfPlayers");
+        GameLogicTree gameLength = new GameLogicTree("GameLength");
+        GameLogicTree createNewGame = new GameLogicTree("CreateNewGame");
+        GameLogicTree loadGame = new GameLogicTree("LoadGame");
+        GameLogicTree chooseSave = new GameLogicTree("ChooseSave");
+        GameLogicTree createGame = new GameLogicTree("CreateLoadedGame");
 
         //creating the tree structure
         gameLength.addChild(createNewGame);
@@ -84,73 +75,72 @@ public class UseCaseInteractor{
         initialMenu.addChild(newGame);
         initialMenu.addChild(loadGame);
         //indicates that this tree switches with input
-        initialMenu.setSwitchBlock(true);
+        initialMenu.setIsSwitchBlock(true);
 
 
         //adding the tree into an array for later retrieval
-        trees[0] = initialMenu;
-        currentTree = trees[0];
-
-        //creating second tree
-        OutputTree gameOutputMenu = new OutputTree("GameOutputMenu");
-        OutputTree trade = new OutputTree("Trade");
-        OutputTree pickPlayer = new OutputTree("PickPlayer");
-        OutputTree chooseItemOpponent = new OutputTree("ChooseItemFromOpponent");
-        OutputTree chooseItemFromSelf = new OutputTree("ChooseItemFromSelf");
-        OutputTree sendTrade = new OutputTree("SendTradeOffer");
-
-        OutputTree manageProperty = new OutputTree("ManageProperty");
-        OutputTree selectProperty = new OutputTree("SelectProperty");
-        OutputTree mortgage = new OutputTree("MortgageProperty");
-        OutputTree sell = new OutputTree("SellProperty");
-        OutputTree buildHouses = new OutputTree("BuildHouses");
-
-        OutputTree roll = new OutputTree("Roll");
-        OutputTree buy = new OutputTree("Buy");
-        OutputTree auction = new OutputTree("Auction");
-
-        OutputTree steal = new OutputTree("Steal");
-        OutputTree choosePlayer = new OutputTree("ChoosePlayer");
-
-        OutputTree settings = new OutputTree("Settings");
-        OutputTree exitToMenu = new OutputTree("ExitToMenu");
-        OutputTree saveGame = new OutputTree("SaveGame");
-        OutputTree selectSaveFile = new OutputTree("SelectSaveFile");
-
-        //creating the tree structure
-        chooseItemFromSelf.addChild(sendTrade);
-        chooseItemOpponent.addChild(chooseItemFromSelf);
-        pickPlayer.addChild(chooseItemOpponent);
-        trade.addChild(pickPlayer);
-
-        selectProperty.addChild(mortgage);
-        selectProperty.addChild(sell);
-        selectProperty.addChild(buildHouses);
-        manageProperty.addChild(selectProperty);
-
-        roll.addChild(buy);
-        roll.addChild(auction);
-
-        steal.addChild(choosePlayer);
-
-        saveGame.addChild(selectSaveFile);
-        settings.addChild(exitToMenu);
-        settings.addChild(saveGame);
-
-        gameOutputMenu.addChild(trade);
-        gameOutputMenu.addChild(manageProperty);
-        gameOutputMenu.addChild(roll);
-        gameOutputMenu.addChild(steal);
-        gameOutputMenu.addChild(settings);
-
-        //indicates that these trees switch with input
-        selectProperty.setSwitchBlock(true);
-        gameOutputMenu.setSwitchBlock(true);
-        settings.setSwitchBlock(true);
-        roll.setSwitchBlock(true);
-
-
-        trees[1] = gameOutputMenu;
+        currentTree = initialMenu;
+//
+//        //creating second tree (the game logic tree)
+//        GameLogicTree gameOutputMenu = new GameLogicTree("GameOutputMenu");
+//        GameLogicTree trade = new GameLogicTree("Trade");
+//        GameLogicTree pickPlayer = new GameLogicTree("PickPlayer");
+//        GameLogicTree chooseItemOpponent = new GameLogicTree("ChooseItemFromOpponent");
+//        GameLogicTree chooseItemFromSelf = new GameLogicTree("ChooseItemFromSelf");
+//        GameLogicTree sendTrade = new GameLogicTree("SendTradeOffer");
+//
+//        GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
+//        GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
+//        GameLogicTree mortgage = new GameLogicTree("MortgageProperty");
+//        GameLogicTree sell = new GameLogicTree("SellProperty");
+//        GameLogicTree buildHouses = new GameLogicTree("BuildHouses");
+//
+//        GameLogicTree roll = new GameLogicTree("Roll");
+//        GameLogicTree buy = new GameLogicTree("Buy");
+//        GameLogicTree auction = new GameLogicTree("Auction");
+//
+//        GameLogicTree steal = new GameLogicTree("Steal");
+//        GameLogicTree choosePlayer = new GameLogicTree("ChoosePlayer");
+//
+//        GameLogicTree settings = new GameLogicTree("Settings");
+//        GameLogicTree exitToMenu = new GameLogicTree("ExitToMenu");
+//        GameLogicTree saveGame = new GameLogicTree("SaveGame");
+//        GameLogicTree selectSaveFile = new GameLogicTree("SelectSaveFile");
+//
+//        //creating the tree structure
+//        chooseItemFromSelf.addChild(sendTrade);
+//        chooseItemOpponent.addChild(chooseItemFromSelf);
+//        pickPlayer.addChild(chooseItemOpponent);
+//        trade.addChild(pickPlayer);
+//
+//        selectProperty.addChild(mortgage);
+//        selectProperty.addChild(sell);
+//        selectProperty.addChild(buildHouses);
+//        manageProperty.addChild(selectProperty);
+//
+//        roll.addChild(buy);
+//        roll.addChild(auction);
+//
+//        steal.addChild(choosePlayer);
+//
+//        saveGame.addChild(selectSaveFile);
+//        settings.addChild(exitToMenu);
+//        settings.addChild(saveGame);
+//
+//        gameOutputMenu.addChild(trade);
+//        gameOutputMenu.addChild(manageProperty);
+//        gameOutputMenu.addChild(roll);
+//        gameOutputMenu.addChild(steal);
+//        gameOutputMenu.addChild(settings);
+//
+//        //indicates that these trees switch with input
+//        selectProperty.setIsSwitchBlock(true);
+//        gameOutputMenu.setIsSwitchBlock(true);
+//        settings.setIsSwitchBlock(true);
+//        roll.setIsSwitchBlock(true);
+//
+//
+//        trees[1] = gameOutputMenu;
 
     }
 
@@ -209,19 +199,9 @@ public class UseCaseInteractor{
      * This method handles the input of the user in the game part of the program.
      * <p>
      */
-    public void handleGameTree(int input){
+    public void handleOtherTrees(int input){
         //deciding what to do based on node visited
-        switch (currentTree.getName()){
-            case "ExitToMenu":
-                currentTree = trees[0];
-                globalStates = new int[10];
-                break;
-            case "SaveGame":
-                //TODO: Save the game using the input
-
-            default:
-                logicInteractor.performInput(input);
-        }
+        State currentState = logicInteractor.performInput(input);
 
     }
     public void updateOutput(){

@@ -1,13 +1,9 @@
 package Interactors;
 
 import Entities.*;
-import UseCases.OutputTree;
 
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Set;
-import java.util.function.ToDoubleBiFunction;
 
 public class GameLogic {
 
@@ -59,10 +55,22 @@ public class GameLogic {
 
         steal.addChild(choosePlayer);
 
+        GameLogicTree endTurn = new GameLogicTree("EndTurn");
+
+        GameLogicTree settingsMenu = new GameLogicTree("SettingsMenu");
+        GameLogicTree exitGame = new GameLogicTree("ExitGame");
+        GameLogicTree saveGame = new GameLogicTree("SaveGame");
+
+        settingsMenu.addChild(exitGame);
+        settingsMenu.addChild(saveGame);
+        settingsMenu.setIsSwitchBlock(true);
+
         main.addChild(trade);
         main.addChild(manageProperty);
         main.addChild(roll);
         main.addChild(steal);
+        main.addChild(endTurn);
+        main.addChild(settingsMenu);
 
         main.setIsSwitchBlock(true);
         selectProperty.setIsSwitchBlock(true);
@@ -233,6 +241,18 @@ public class GameLogic {
                 playerCopy.remove(this.currentPlayer);
                 String stealStatus = this.currentPlayer.steal(playerCopy.get(input));
                 currentState.setEndNode(true);
+                break;
+            case "EndTurn":
+                //TODO: Change the turn
+                break;
+            case "SettingsMenu":
+                //TODO: show the settings menu
+                break;
+            case "ExitGame":
+                currentState.setExitToMenu(true);
+                break;
+            case "SaveGame":
+                currentState.setSaveGame(true);
                 break;
         }
 

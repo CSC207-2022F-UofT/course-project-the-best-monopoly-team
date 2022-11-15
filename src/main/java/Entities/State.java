@@ -8,6 +8,31 @@ public class State {
     private ArrayList<String> playerInfo = new ArrayList<String>();
     private boolean onProperty;
     private boolean endNode;
+    private String Name;
+    private boolean saveGame;
+    private boolean exitToMenu;
+    public boolean isExitToMenu() {
+        return exitToMenu;
+    }
+
+    public void setExitToMenu(boolean exitToMenu) {
+        this.exitToMenu = exitToMenu;
+    }
+    public boolean isSaveGame() {
+        return saveGame;
+    }
+
+    public void setSaveGame(boolean saveGame) {
+        this.saveGame = saveGame;
+    }
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
     private ArrayList<String> options = new ArrayList<String>();
 
     public void setOnProperty(boolean onProperty) {

@@ -16,6 +16,7 @@ public class GameLogicTree extends MenuTree{
         this.name = name;
     }
 
+
     @Override
     public MenuTree getParent() {
         return this.parent;
@@ -28,7 +29,7 @@ public class GameLogicTree extends MenuTree{
 
     @Override
     public String getName() {
-        return null;
+        return name;
     }
 
     @Override
