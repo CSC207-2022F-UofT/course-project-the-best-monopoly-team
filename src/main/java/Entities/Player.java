@@ -10,6 +10,10 @@ import java.util.ArrayList;
 public class Player {
     // Represents a player in the game
 
+    public int getPosition() {
+        return position;
+    }
+
     private String name;
     private int money;
     private ArrayList<Property> properties;
