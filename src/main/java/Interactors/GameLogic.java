@@ -25,17 +25,17 @@ public class GameLogic {
     }
     public GameLogicTree createTree(){
         //ID = 0
-        GameLogicTree main = new GameLogicTree("Main Tree");
+        GameLogicTree main = new GameLogicTree("MainTree");
         //ID = 1
-        GameLogicTree trade = new GameLogicTree("trade");
+        GameLogicTree trade = new GameLogicTree("Trade");
         //ID = 2
-        GameLogicTree pickPlayer = new GameLogicTree("pickPlayer");
+        GameLogicTree pickPlayer = new GameLogicTree("PickPlayer");
         //ID = 3
-        GameLogicTree pickItemOp = new GameLogicTree("pickItemOp");
+        GameLogicTree pickItemOp = new GameLogicTree("PickItemOp");
         //ID = 4
-        GameLogicTree pickItemSelf = new GameLogicTree("pickItemSelf");
+        GameLogicTree pickItemSelf = new GameLogicTree("PickItemSelf");
         //ID = 5
-        GameLogicTree sendTrade = new GameLogicTree("sendTrade");
+        GameLogicTree sendTrade = new GameLogicTree("SendTrade");
 
         pickItemSelf.addChild(sendTrade);
         pickItemOp.addChild(pickItemSelf);
@@ -43,15 +43,15 @@ public class GameLogic {
         trade.addChild(pickPlayer);
 
         //ID = 6
-        GameLogicTree manageProperty = new GameLogicTree("manageProperty");
+        GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
         //ID = 7
-        GameLogicTree selectProperty = new GameLogicTree("selectProperty");
+        GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
         //ID = 8
-        GameLogicTree mortgage = new GameLogicTree("mortgage");
+        GameLogicTree mortgage = new GameLogicTree("Mortgage");
         //ID = 9
-        GameLogicTree sell = new GameLogicTree("sell");
+        GameLogicTree sell = new GameLogicTree("Sell");
         //ID = 10
-        GameLogicTree buildProperty = new GameLogicTree("buildProperty");
+        GameLogicTree buildProperty = new GameLogicTree("BuildProperty");
 
         selectProperty.addChild(mortgage);
         selectProperty.addChild(sell);
@@ -59,19 +59,19 @@ public class GameLogic {
         manageProperty.addChild(selectProperty);
 
         //ID = 11
-        GameLogicTree roll = new GameLogicTree("roll");
+        GameLogicTree roll = new GameLogicTree("Roll");
         //ID = 12
-        GameLogicTree buy = new GameLogicTree("buy");
+        GameLogicTree buy = new GameLogicTree("Buy");
         //ID = 13
-        GameLogicTree auction = new GameLogicTree("auction");
+        GameLogicTree auction = new GameLogicTree("Auction");
 
         roll.addChild(buy);
         roll.addChild(auction);
 
         //ID = 14
-        GameLogicTree steal = new GameLogicTree("steal");
+        GameLogicTree steal = new GameLogicTree("Steal");
         //ID = 15
-        GameLogicTree choosePlayer = new GameLogicTree("choosePlayer");
+        GameLogicTree choosePlayer = new GameLogicTree("ChoosePlayer");
 
         steal.addChild(choosePlayer);
 
@@ -114,8 +114,8 @@ public class GameLogic {
     }
     public State handleTree(int input){
         State currentState = new State();
-        switch (currentTree.getID()){
-            case 1:
+        switch (currentTree.getName()){
+            case "Trade":
                 //Case trade selected
                 //provide a list of all possible players considering the current player is not an option
                 ArrayList<Player> playerCopy = new ArrayList<Player>(Arrays.asList(this.board.getPlayers()));
@@ -124,7 +124,7 @@ public class GameLogic {
                     currentState.addOptions(Integer.toString(i));
                 }
                 break;
-            case 2:
+            case "PickPlayer":
                 //Case player picked
                 selectedOptions.add(input);
                 //provide item options from the inventory of the selected player
@@ -135,8 +135,8 @@ public class GameLogic {
                     currentState.addOptions(Integer.toString(i));
                 }
                 break;
-            case 3:
-                //Case item picked opponent
+            case "PickItemOp":
+                //Case picking the item of the opponent
                 selectedOptions.add(input);
                 //provide item options from the current player's inventory
                 ArrayList<Property> currentPlayerInventory = this.currentPlayer.properties;
@@ -145,13 +145,13 @@ public class GameLogic {
                     currentState.addOptions(Integer.toString(i));
                 }
                 break;
-            case 4:
-                //Case item picked player
+            case "PickItemSelf":
+                //Case picking the item of the player
                 //send the trade offer using selectedOptions. Index 0 will be the selected item from opponent and
                 //index 1 will be the selected item from the current player.
                 break;
-            case 5:
-                //Case trade sent
+            case "SendTrade":
+                //Case sending the trade
                 //the input should be 0 or 1. 0 if the trade was accepted, 1 if the trade was declined.
                 if(input == 0){
                     //TODO: Process the trade.
@@ -159,7 +159,7 @@ public class GameLogic {
                 }
                 currentState.setEndNode(true);
                 break;
-            case 6:
+            case "ManageProperty":
                 //Case manage property selected
                 //provide options on the properties available
                 ArrayList<Property> currentPlayerProperties = this.currentPlayer.properties;
@@ -167,7 +167,7 @@ public class GameLogic {
                     currentState.addOptions(Integer.toString(i));
                 }
                 break;
-            case 7:
+            case "SelectProperty":
                 //Case property selected (adds the property index)
                 selectedOptions.add(input);
                 //the player chooses what to do to the property
@@ -178,7 +178,7 @@ public class GameLogic {
                 currentState.addOptions(Integer.toString(1));
                 currentState.addOptions(Integer.toString(2));
                 break;
-            case 8:
+            case "Mortgage":
                 //TODO: finish case 8
                 //Case player selected what to do with the property
                 //the player chooses to mortgage the property
@@ -186,15 +186,15 @@ public class GameLogic {
                 this.currentPlayer.mortgage(targetProperty);
                 currentState.setEndNode(true);
                 break;
-            case 9:
+            case "Sell":
                 //the player chooses to sell
                 break;
-            case 10:
+            case "BuildProperty":
                 //the player chooses to build houses
                 targetProperty = this.board.getProperties()[selectedOptions.get(0)];
                 this.currentPlayer.buildHouse(targetProperty);
                 currentState.setEndNode(true);
-            case 11:
+            case "Roll":
                 //Case roll selected
                 //We can determine if a player lands on a property by checking if the position of
                 //the player is on one with a property on it (not 0,2,7,10,17,20,22,30,33,36,38).
@@ -206,15 +206,11 @@ public class GameLogic {
                         break;
                     }
                 }
-                /*
-                TODO: IF THE PLAYER LANDS ON A PROPERTY,
-                DO currentState.setOnProperty(true); !!!!!!
-                 */
                 if(onProperty) {
                     currentState.setOnProperty(true);
                 }
                 break;
-            case 12:
+            case "Buy":
                 //Case buy selected
                 //player buys the property that the player lands on
                 targetProperty = board.getProperties()[this.currentPlayer.position];
@@ -233,11 +229,11 @@ public class GameLogic {
                 }
                 currentState.setEndNode(true);
                 break;
-            case 13:
+            case "Auction":
                 //Case auction selected
                 //TODO: process the auction
                 break;
-            case 14:
+            case "Steal":
                 //Case steal selected
                 //provide options of which players we can steal from
                 playerCopy = new ArrayList<Player>(Arrays.asList(this.board.getPlayers()));
@@ -246,7 +242,7 @@ public class GameLogic {
                     currentState.addOptions(Integer.toString(i));
                 }
                 break;
-            case 15:
+            case "ChoosePlayer":
                 //Case player to steal from selected
                 //steal from the player
                 playerCopy = new ArrayList<Player>(Arrays.asList(this.board.getPlayers()));

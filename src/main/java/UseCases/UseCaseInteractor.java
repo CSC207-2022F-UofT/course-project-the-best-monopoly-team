@@ -54,23 +54,23 @@ public class UseCaseInteractor{
     public void createTrees(){
         //creating first tree
         //ID = 0
-        OutputTree initialMenu = new OutputTree("Initial Menu");
+        OutputTree initialMenu = new OutputTree("InitialMenu");
         //ID = 1
-        OutputTree newGame = new OutputTree("New Game");
+        OutputTree newGame = new OutputTree("NewGame");
         //ID = 2
-        OutputTree chooseGameMode = new OutputTree("Choose Game Mode");
+        OutputTree chooseGameMode = new OutputTree("ChooseGameMode");
         //ID = 3
-        OutputTree numPlayers = new OutputTree("number of players");
+        OutputTree numPlayers = new OutputTree("NumberOfPlayers");
         //ID = 4
-        OutputTree gameLength = new OutputTree("Game Length");
+        OutputTree gameLength = new OutputTree("GameLength");
         //ID = 5
-        OutputTree createNewGame = new OutputTree("Create New Game");
+        OutputTree createNewGame = new OutputTree("CreateNewGame");
         //ID = 6
-        OutputTree loadGame = new OutputTree("Load Game");
+        OutputTree loadGame = new OutputTree("LoadGame");
         //ID = 7
-        OutputTree chooseSave = new OutputTree("Choose Save");
+        OutputTree chooseSave = new OutputTree("ChooseSave");
         //ID = 8
-        OutputTree createGame = new OutputTree("Create Loaded Game");
+        OutputTree createGame = new OutputTree("CreateLoadedGame");
 
         //creating the tree structure
         gameLength.addChild(createNewGame);
@@ -95,26 +95,26 @@ public class UseCaseInteractor{
 
         //creating second tree
         //ID = 0
-        OutputTree gameOutputMenu = new OutputTree("Game output menu");
+        OutputTree gameOutputMenu = new OutputTree("GameOutputMenu");
         //ID = 1
         OutputTree trade = new OutputTree("Trade");
         //ID = 2
-        OutputTree pickPlayer = new OutputTree("Pick player");
+        OutputTree pickPlayer = new OutputTree("PickPlayer");
         //ID = 3
-        OutputTree chooseItemOpponent = new OutputTree("Choose item from opponent");
+        OutputTree chooseItemOpponent = new OutputTree("ChooseItemFromOpponent");
         //ID = 4
-        OutputTree chooseItemFromSelf = new OutputTree("Choose item from self");
+        OutputTree chooseItemFromSelf = new OutputTree("ChooseItemFromSelf");
         //ID = 5
-        OutputTree sendTrade = new OutputTree("Send trade offer");
+        OutputTree sendTrade = new OutputTree("SendTradeOffer");
 
         //ID = 6
-        OutputTree manageProperty = new OutputTree("Manage Property");
+        OutputTree manageProperty = new OutputTree("ManageProperty");
         //ID = 7
-        OutputTree selectProperty = new OutputTree("Select Property");
+        OutputTree selectProperty = new OutputTree("SelectProperty");
         //ID = 8
-        OutputTree mortgage = new OutputTree("Mortgage property");
+        OutputTree mortgage = new OutputTree("MortgageProperty");
         //ID = 9
-        OutputTree sell = new OutputTree("Sell property");
+        OutputTree sell = new OutputTree("SellProperty");
         //ID = 10
         OutputTree buildHouses = new OutputTree("BuildHouses");
 
@@ -128,16 +128,16 @@ public class UseCaseInteractor{
 
         OutputTree steal = new OutputTree("Steal");
         //ID = 15
-        OutputTree choosePlayer = new OutputTree("Choose player");
+        OutputTree choosePlayer = new OutputTree("ChoosePlayer");
 
         //ID = 16
         OutputTree settings = new OutputTree("Settings");
         //ID = 17
-        OutputTree exitToMenu = new OutputTree("Exit to menu");
+        OutputTree exitToMenu = new OutputTree("ExitToMenu");
         //ID = 18
-        OutputTree saveGame = new OutputTree("Save game");
+        OutputTree saveGame = new OutputTree("SaveGame");
         //ID = 19
-        OutputTree selectSaveFile = new OutputTree("Select save file");
+        OutputTree selectSaveFile = new OutputTree("SelectSaveFile");
 
         //creating the tree structure
         chooseItemFromSelf.addChild(sendTrade);
@@ -196,35 +196,35 @@ public class UseCaseInteractor{
      */
     public void handleInitialTree(int input){
         //deciding what to do based on node visited
-        switch (currentTree.getID()){
-            case 1:
+        switch (currentTree.getName()){
+            case "NewGame":
                 //in "New Game" node
                 globalStates[0] = 1;
                 return;
-            case 2:
+            case "ChooseGameMode":
                 //in "Choose Game mode" node
                 globalStates[1] = input;
                 return;
-            case 3:
+            case "NumberOfPlayers":
                 //in "Number of Players" node
                 globalStates[2] = input;
                 return;
-            case 4:
+            case "GameLength":
                 //in "Game Length" node
                 globalStates[3] = input;
                 return;
-            case 5:
+            case "CreateNewGame":
                 //in "Create new Game" node
                 //TODO: CREATE THE GAME
-            case 6:
+            case "LoadGame":
                 //in "Load Game" node
                 globalStates[0] = 0;
                 return;
-            case 7:
+            case "ChooseSave":
                 //in "Choose Save" node
                 globalStates[4] = input;
                 return;
-            case 8:
+            case "CreateLoadedGame":
                 //in "Create Loaded Game" node
                 //TODO: CREATE THE GAME
         }
@@ -235,12 +235,12 @@ public class UseCaseInteractor{
      */
     public void handleGameTree(int input){
         //deciding what to do based on node visited
-        switch (currentTree.getID()){
-            case 15:
+        switch (currentTree.getName()){
+            case "ExitToMenu":
                 currentTree = trees[0];
                 globalStates = new int[10];
                 break;
-            case 18:
+            case "SaveGame":
                 //TODO: Save the game using the input
 
             default:

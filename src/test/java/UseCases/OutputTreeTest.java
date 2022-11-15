@@ -27,24 +27,24 @@ class OutputTreeTest {
 
     @Test
     void getName() {
-        assert tree.getName().equals("Initial Menu");
+        assert tree.getName().equals("InitialMenu");
     }
 
 
     private OutputTree createTree(){
-        OutputTree gameLength = new OutputTree("Game Length");
-        OutputTree gameType = new OutputTree("Game Type");
+        OutputTree gameLength = new OutputTree("GameLength");
+        OutputTree gameType = new OutputTree("GameType");
         gameType.addChild(gameLength);
 
-        OutputTree numPlayers = new OutputTree("number of players");
-        OutputTree newGame = new OutputTree("start menu");
+        OutputTree numPlayers = new OutputTree("NumberOfPlayers");
+        OutputTree newGame = new OutputTree("StartMenu");
         newGame.addChild(numPlayers);
         newGame.addChild(gameType);
 
-        OutputTree loadGame = new OutputTree("Load Game");
+        OutputTree loadGame = new OutputTree("LoadGame");
         Integer[] position = {3,2};
         loadGame.addButtonPosition(position);
-        OutputTree startMenu = new OutputTree("Initial Menu");
+        OutputTree startMenu = new OutputTree("InitialMenu");
         startMenu.addChild(loadGame);
         startMenu.addChild(newGame);
 
