@@ -121,9 +121,12 @@ public class Player {
         pw.close();
     }
 
+    // public void load(){}
+
+
     public void move(int step) {
         position += step;
-        if (step > 40) {
+        if (position > 39) {
             position -= 40;
         }
     }
@@ -141,6 +144,7 @@ public class Player {
             }
         } else {
             if (a == b) {
+                this.move(a + b);
                 this.rollDice();
             } else {
                 this.move(a + b);
@@ -151,11 +155,13 @@ public class Player {
         return (a + "\n" + b);
     }
 
-    public void buildHouse(Property property) {
-        properties.add(property);
+    public void buildHouse(Property property, int houses) {
+        if (properties.contains(property)) {
+            property.addHouse(houses);
+        }
     }
 
-    public void addMoney(int change) {
+    public void changeMoney(int change) {
         money += change;
     }
 
@@ -170,8 +176,29 @@ public class Player {
 
     public void mortgage(Property property) {
         this.properties.remove(property);
-//        this.money += property.getMortgageValue();
+        this.money += property.getMortgageValue();
     }
 
-}
+    public void load(File pw) {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(pw));
+            String line;
+            ArrayList all = new ArrayList<ArrayList>();
+            while ((line = br.readLine()) != null) {
+                ArrayList player = new ArrayList<String>();
+                player.add(line);
+                if (line == "\n") {
+                    all.add(player);
+                }
+            }
+        } catch (FileNotFoundException ex) {
+            throw new RuntimeException(ex);
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+    }
+
+
+    }
 
