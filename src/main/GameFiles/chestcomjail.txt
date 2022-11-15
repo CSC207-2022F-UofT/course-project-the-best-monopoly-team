@@ -1,10 +1,10 @@
-chance:Advance to,advance,0
-chance:Bank pays you $50 dividend,getPaid:50
+chance:Advance:advance:0
+chance:Bank pays you $50 dividend:getPaid:50
 chance:Get out of jail free:getOutOfJailCard:0
 chance:Speeding fine, pay $15:pay:15
-chance:Pay each player $10:pay:10
+chance:Pay each player $10:payAll:10
 chance:Building loan matures, collect $150:getPaid:150
-comchest:Advance to Go:advance:200
+comchest:Advance:advance:200
 comchest:Bank error in your favour($200):getPaid:200
 comchest:Doctor's fee($50):pay:50
 comchest:Collect $50 from sale of stock:getPaid:50
@@ -17,6 +17,7 @@ comchest:Pay hospital fees, pay $100:pay:100
 comchest:Pay school fees, pay $50:pay:50
 comchest:Receive $25 consultancy fee:getPaid:25
 comchest:You have won second prize in a beauty contest, collect $10:getPaid:10
+comchest:Pay each player $20:payAll:20
 comchest:You inherit $100:getPaid:100
 jail:Pay child support($100):pay:100
 jail:Pay the guards($20):pay:20
