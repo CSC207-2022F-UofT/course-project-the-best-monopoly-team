@@ -1,4 +1,5 @@
-package Entities;
+package Main;
+import Interactors.IOController;
 
 import java.util.Scanner;
 

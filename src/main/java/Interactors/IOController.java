@@ -1,4 +1,4 @@
-package Entities;
+package Interactors;
 
 public class IOController {
     private String output;
@@ -25,6 +25,15 @@ public class IOController {
         //In essence, take the resulting output from the UseCaseInteractor/Other Classes, it's not decided yet
         //but then concatenate that into a string that the user can understand and use to derive the input
         //for the next turns, so the input will be taken in Strings, take that Array of Strings and format
-        return "";
+
+        //For a sample (very likely to change in the future)
+        StringBuilder finalString = new StringBuilder("Player x, would you like to: ");
+        int i = 0;
+        for (String option : output){
+            finalString.append(option).append("(").append(i).append("), ");
+            i++;
+        }
+        String inString = finalString.toString();
+        return inString.substring(inString.length() - 2);
     }
 }
