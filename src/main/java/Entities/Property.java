@@ -24,24 +24,6 @@ public class Property extends Cell {
 
     public Property (String name, String colour, int cost, int houseCost, int rent,
                      int rent1H, int rent2H, int rent3H, int rent4H, int rentHotel,
-                     int mortgageValue) {
-        this.name = name;
-        this.houseCost = houseCost;
-        this.colour = colour;
-        this.cost = cost;
-        this.rent = rent;
-        this.rent1H = rent1H;
-        this.rent2H = rent2H;
-        this.rent3H = rent3H;
-        this.rent4H = rent4H;
-        this.rentHotel = rentHotel;
-        this.ownedBy = null;
-        this.mortgageValue = mortgageValue;
-        this.houses = 0;
-    }
-
-    public Property (String name, String colour, int cost, int houseCost, int rent,
-                     int rent1H, int rent2H, int rent3H, int rent4H, int rentHotel,
                      Player owner, int mortgageValue, int houses, boolean mortgaged) {
         this.name = name;
         this.colour = colour;
