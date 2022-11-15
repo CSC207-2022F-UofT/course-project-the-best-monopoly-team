@@ -4,7 +4,6 @@ import java.util.List;
 
 public class GameLogicTree extends MenuTree{
     private boolean didRoll;
-    static int globalID = 0;
 
     public void setIsSwitchBlock(boolean switchBlock) {
         this.switchBlock = switchBlock;
@@ -15,11 +14,6 @@ public class GameLogicTree extends MenuTree{
     public GameLogicTree(String name) {
         didRoll = false;
         this.name = name;
-        this.id = globalID;
-        globalID += 1;
-    }
-    public int getID(){
-        return id;
     }
 
     @Override

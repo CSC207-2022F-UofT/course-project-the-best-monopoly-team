@@ -6,7 +6,7 @@ import java.util.List;
 
 public class OutputTree extends MenuTree {
     private ArrayList<Integer[]> positions = new ArrayList<>();
-    static int globalID = 0;
+
     private boolean switchBlock = false;
 
     public OutputTree(String name){
@@ -14,18 +14,13 @@ public class OutputTree extends MenuTree {
         createObject(name);
     }
 
-    public int getID() {
-        return id;
-    }
+
 
     public void createObject(String name){
         this.name = name;
-        this.id = globalID;
-        globalID += 1;
+
     }
-    public void setGlobalID(int num){
-        globalID = num;
-    }
+
 
     public void addButtonPosition(Integer[] position){
         this.positions.add(position);

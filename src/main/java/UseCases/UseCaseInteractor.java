@@ -86,57 +86,35 @@ public class UseCaseInteractor{
         //indicates that this tree switches with input
         initialMenu.setSwitchBlock(true);
 
-        //Resetting the id counter
-        initialMenu.setGlobalID(0);
 
         //adding the tree into an array for later retrieval
         trees[0] = initialMenu;
         currentTree = trees[0];
 
         //creating second tree
-        //ID = 0
         OutputTree gameOutputMenu = new OutputTree("GameOutputMenu");
-        //ID = 1
         OutputTree trade = new OutputTree("Trade");
-        //ID = 2
         OutputTree pickPlayer = new OutputTree("PickPlayer");
-        //ID = 3
         OutputTree chooseItemOpponent = new OutputTree("ChooseItemFromOpponent");
-        //ID = 4
         OutputTree chooseItemFromSelf = new OutputTree("ChooseItemFromSelf");
-        //ID = 5
         OutputTree sendTrade = new OutputTree("SendTradeOffer");
 
-        //ID = 6
         OutputTree manageProperty = new OutputTree("ManageProperty");
-        //ID = 7
         OutputTree selectProperty = new OutputTree("SelectProperty");
-        //ID = 8
         OutputTree mortgage = new OutputTree("MortgageProperty");
-        //ID = 9
         OutputTree sell = new OutputTree("SellProperty");
-        //ID = 10
         OutputTree buildHouses = new OutputTree("BuildHouses");
 
-        //ID = 11
         OutputTree roll = new OutputTree("Roll");
-        //ID = 12
         OutputTree buy = new OutputTree("Buy");
-        //ID = 13
         OutputTree auction = new OutputTree("Auction");
-        //ID = 14
 
         OutputTree steal = new OutputTree("Steal");
-        //ID = 15
         OutputTree choosePlayer = new OutputTree("ChoosePlayer");
 
-        //ID = 16
         OutputTree settings = new OutputTree("Settings");
-        //ID = 17
         OutputTree exitToMenu = new OutputTree("ExitToMenu");
-        //ID = 18
         OutputTree saveGame = new OutputTree("SaveGame");
-        //ID = 19
         OutputTree selectSaveFile = new OutputTree("SelectSaveFile");
 
         //creating the tree structure
@@ -171,8 +149,6 @@ public class UseCaseInteractor{
         settings.setSwitchBlock(true);
         roll.setSwitchBlock(true);
 
-        //resetting the id counter
-        gameOutputMenu.setGlobalID(0);
 
         trees[1] = gameOutputMenu;
 

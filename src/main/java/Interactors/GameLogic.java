@@ -24,17 +24,11 @@ public class GameLogic {
         this.currentTree = createTree();
     }
     public GameLogicTree createTree(){
-        //ID = 0
         GameLogicTree main = new GameLogicTree("MainTree");
-        //ID = 1
         GameLogicTree trade = new GameLogicTree("Trade");
-        //ID = 2
         GameLogicTree pickPlayer = new GameLogicTree("PickPlayer");
-        //ID = 3
         GameLogicTree pickItemOp = new GameLogicTree("PickItemOp");
-        //ID = 4
         GameLogicTree pickItemSelf = new GameLogicTree("PickItemSelf");
-        //ID = 5
         GameLogicTree sendTrade = new GameLogicTree("SendTrade");
 
         pickItemSelf.addChild(sendTrade);
@@ -42,15 +36,10 @@ public class GameLogic {
         pickPlayer.addChild(pickItemOp);
         trade.addChild(pickPlayer);
 
-        //ID = 6
         GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
-        //ID = 7
         GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
-        //ID = 8
         GameLogicTree mortgage = new GameLogicTree("Mortgage");
-        //ID = 9
         GameLogicTree sell = new GameLogicTree("Sell");
-        //ID = 10
         GameLogicTree buildProperty = new GameLogicTree("BuildProperty");
 
         selectProperty.addChild(mortgage);
@@ -58,19 +47,14 @@ public class GameLogic {
         selectProperty.addChild(buildProperty);
         manageProperty.addChild(selectProperty);
 
-        //ID = 11
         GameLogicTree roll = new GameLogicTree("Roll");
-        //ID = 12
         GameLogicTree buy = new GameLogicTree("Buy");
-        //ID = 13
         GameLogicTree auction = new GameLogicTree("Auction");
 
         roll.addChild(buy);
         roll.addChild(auction);
 
-        //ID = 14
         GameLogicTree steal = new GameLogicTree("Steal");
-        //ID = 15
         GameLogicTree choosePlayer = new GameLogicTree("ChoosePlayer");
 
         steal.addChild(choosePlayer);

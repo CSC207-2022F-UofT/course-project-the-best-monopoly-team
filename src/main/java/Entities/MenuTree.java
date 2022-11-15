@@ -9,7 +9,6 @@ public abstract class MenuTree{
     protected MenuTree parent;
     protected String name;
     //makes tree node handling easier
-    protected int id;
 
     public abstract MenuTree getParent();
     public abstract List<MenuTree> getChildren();
