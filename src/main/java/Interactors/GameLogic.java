@@ -42,11 +42,9 @@ public class GameLogic {
         GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
         GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
         GameLogicTree mortgage = new GameLogicTree("Mortgage");
-        GameLogicTree sell = new GameLogicTree("Sell");
         GameLogicTree buildProperty = new GameLogicTree("BuildProperty");
 
         selectProperty.addChild(mortgage);
-        selectProperty.addChild(sell);
         selectProperty.addChild(buildProperty);
         manageProperty.addChild(selectProperty);
 
@@ -217,9 +215,6 @@ public class GameLogic {
                 Property targetProperty = this.board.getProperties()[selectedOptions.get(0)];
                 this.currentPlayer.mortgage(targetProperty);
                 currentState.setEndNode(true);
-                break;
-            case "Sell":
-                //the player chooses to sell
                 break;
             case "BuildProperty":
                 //the player chooses to build houses
