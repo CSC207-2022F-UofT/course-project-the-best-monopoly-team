@@ -36,6 +36,8 @@ public class Board{
 
     public Cell[] getCells(){return cells;}
 
+    public Cell getCell(int position){return cells[position];}
+
     public Map<Player, Integer> getPlayerPositions(){return playerPositions;}
 
     public Property[] getProperties(){return properties;}

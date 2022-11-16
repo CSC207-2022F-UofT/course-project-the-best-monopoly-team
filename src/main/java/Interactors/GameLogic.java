@@ -1,6 +1,7 @@
 package Interactors;
 
 import Entities.*;
+import org.hamcrest.core.IsInstanceOf;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -225,16 +226,13 @@ public class GameLogic {
                 //Case roll selected
                 //We can determine if a player lands on a property by checking if the position of
                 //the player is on one with a property on it (not 0,2,7,10,17,20,22,30,33,36,38).
-                boolean onProperty = true;
-                int[] nonPropertyIndexes = {0,2,7,10,17,20,22,30,33,36,38};
-                for (int nonPropertyIndex : nonPropertyIndexes) {
-                    if (this.currentPlayer.position == nonPropertyIndex) {
-                        onProperty = false;
-                        break;
-                    }
-                }
-                if(onProperty) {
+                Cell landedOnCell = board.getCell(this.currentPlayer.position);
+                if(landedOnCell instanceof Property &&
+                        ((Property) landedOnCell).getOwner() == null) {
                     currentState.setOnProperty(true);
+                }
+                else {
+                    landedOnCell.performAction();
                 }
                 break;
             case "Buy":
