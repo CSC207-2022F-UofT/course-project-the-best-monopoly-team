@@ -59,6 +59,10 @@ public class Property extends Cell {
         return "";
     }
 
+    public void setHouses(int houses){
+        this.houses = houses;
+    }
+
     public Player getOwner(){
         return this.ownedBy;
     }

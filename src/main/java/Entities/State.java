@@ -59,11 +59,11 @@ public class State {
         return playerInfo;
     }
 
-    public void addOptions(String option){
+    public void addOptions(String option) {
         options.add(option);
     }
 
-    public void addPlayerInfo(String info){
+    public void addPlayerInfo(String info) {
         this.playerInfo.add(info);
     }
 

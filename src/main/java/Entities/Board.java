@@ -1,7 +1,6 @@
 package Entities;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Board{
 
@@ -32,6 +31,16 @@ public class Board{
 
     public Player[] getPlayers(){
         return players;
+    }
+
+    public void removePlayer(Player player){
+        List<Player> newPlayers = Arrays.asList(players);
+        newPlayers.remove(player);
+        Player[] newPlayersArray = new Player[players.length - 1];
+        for(int i = 0; i < newPlayers.size(); i++){
+            newPlayersArray[i] = newPlayers.get(i);
+        }
+        this.players = newPlayersArray;
     }
 
     public Cell[] getCells(){return cells;}

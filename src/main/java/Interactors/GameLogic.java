@@ -156,12 +156,54 @@ public class GameLogic {
         }
 
     }
+    /*
     public State handleTradingTree(int input){
         State currentState = new State();
+        //keep track of the player that initiated the trade. the number in tradingStates[0]
+        //corresponds to the index where the player is stored in the Players array in this.board.
+        Player[] players = this.board.getPlayers();
+        for(int i = 0; i < players.length; i++){
+            if (players[i] == this.currentPlayer){
+                tradingStates[0] = i;
+            }
+        }
+        this.currentTree = this.trees[1];
+        //input corresponds to the index number of the player that is being proposed the trade
+        //in the board players instance attribute.
+        this.currentPlayer = this.board.getPlayers()[input];
+        return currentState;
+    }
+     */
+
+    public State handleTradingTree(int input){
+        State currentState = new State();
+        switch (currentTree.getName()){
+            case "AcceptTrade":
+                Player firstTrader = this.board.getPlayers()[selectedOptions.get(1)];
+                Player secondTrader = this.currentPlayer;
+                Property secondTraderProperty = secondTrader.properties.get(selectedOptions.get(2));
+                Property firstTraderProperty = firstTrader.properties.get(selectedOptions.get(3));
+                // swap the asset owners
+                secondTraderProperty.setOwner(firstTrader);
+                firstTraderProperty.setOwner(secondTrader);
+                secondTrader.properties.remove(secondTraderProperty);
+                secondTrader.properties.add(firstTraderProperty);
+                firstTrader.properties.remove(firstTraderProperty);
+                firstTrader.properties.add(secondTraderProperty);
+                this.currentPlayer = firstTrader;
+                this.currentTree = this.trees[0];
+                break;
+            case "DeclineTrade":
+                firstTrader = this.board.getPlayers()[selectedOptions.get(1)];
+                this.currentPlayer = firstTrader;
+                this.currentTree = this.trees[0];
+                break;
+        }
         return currentState;
     }
     public State handleAuctionTree(int input){
         State currentState = new State();
+
         return currentState;
     }
     public State handleMainTree(int input){
@@ -180,6 +222,7 @@ public class GameLogic {
                 break;
             case "PickPlayer":
                 //Case player picked
+                //adds the chosen player index in selected options
                 selectedOptions.add(input);
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers()[input];
@@ -191,6 +234,7 @@ public class GameLogic {
                 break;
             case "PickItemOp":
                 //Case picking the item of the opponent
+                //the input corresponds to the index of the target player in this.board.getPlayers()
                 selectedOptions.add(input);
                 //provide item options from the current player's inventory
                 ArrayList<Property> currentPlayerInventory = this.currentPlayer.properties;
@@ -200,16 +244,30 @@ public class GameLogic {
                 }
                 break;
             case "PickItemSelf":
+                //the input corresponds to the index of the opponent targeted property;
+                this.selectedOptions.add(input);
                 //Case picking the item of the player
                 //send the trade offer using selectedOptions. Index 0 will be the selected item from opponent and
                 //index 1 will be the selected item from the current player.
                 break;
             case "SendTrade":
+                this.selectedOptions.add(input);
+                //input corresponds to the index of the current player's selected property
                 //Case sending the trade
                 //the input should be 0 or 1. 0 if the trade was accepted, 1 if the trade was declined.
                 if(input == 0){
                     //TODO: Process the trade.
-
+                    int indexOriginalPlayer;
+                    for(int i = 0; i < this.board.getPlayers().length; i++){
+                        if (this.board.getPlayers()[i] == this.currentPlayer){
+                            this.tradingStates[0] = i;
+                            //tradingStates[0] will hold the original player index in this.board.getPlayers()
+                        }
+                    }
+                    this.currentPlayer = this.board.getPlayers()[this.selectedOptions.get(0)];
+                    this.currentTree = this.trees[1];
+                    currentState.addOptions(Integer.toString(0));
+                    currentState.addOptions(Integer.toString(1));
                 }
                 currentState.setEndNode(true);
                 break;
@@ -315,6 +373,13 @@ public class GameLogic {
                 break;
             case "Bankruptcy":
                 //TODO: remove player from game and all of their assets
+                currentPlayerProperties = this.currentPlayer.properties;
+                for (Property targetedProperty : currentPlayerProperties) {
+                    targetedProperty.setOwner(null);
+                    targetedProperty.setHouses(0);
+                    targetedProperty.setMortgageStatus(false);
+                }
+                this.board.removePlayer(this.currentPlayer);
                 break;
         }
 
