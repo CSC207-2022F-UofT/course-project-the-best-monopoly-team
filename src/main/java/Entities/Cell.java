@@ -4,4 +4,6 @@ abstract class Cell {
     public String performAction(){
         return "";
     }
+
+    public abstract String performAction(Player player, Board board, ActionSpace actionSpace);
 }

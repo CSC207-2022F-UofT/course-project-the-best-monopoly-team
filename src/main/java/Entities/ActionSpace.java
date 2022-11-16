@@ -1,12 +1,11 @@
 package Entities;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class ActionSpace {
+public class ActionSpace extends Cell {
     private final HashMap<String, ArrayList<Object>> jailCards;
     private final HashMap<String, ArrayList<Object>> comChestCards;
     private final HashMap<String, ArrayList<Object>> chanceCards;
@@ -69,6 +68,7 @@ public class ActionSpace {
         }
     }
 
+    @Override
     public String performAction(Player player, Board board, ActionSpace actionSpace) {
         // get current player
         ArrayList<Object> generatedCard = getCard(generateRandomCard(actionSpace), actionSpace);
