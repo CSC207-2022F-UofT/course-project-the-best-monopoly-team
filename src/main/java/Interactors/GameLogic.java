@@ -14,7 +14,8 @@ public class GameLogic {
     GameLogicTree currentTree;
     ArrayList<Integer> selectedOptions = new ArrayList<Integer>();
 
-    private int[] globalStates = new int[5];
+    private int[] tradingStates = new int[5];
+    private int[] auctionStates = new int[5];
     Player[] players;
 
     //add a method to move the player to a specific cell
@@ -66,6 +67,7 @@ public class GameLogic {
         GameLogicTree settingsMenu = new GameLogicTree("SettingsMenu");
         GameLogicTree exitGame = new GameLogicTree("ExitGame");
         GameLogicTree saveGame = new GameLogicTree("SaveGame");
+        GameLogicTree bankruptcy = new GameLogicTree("Bankruptcy");
 
         settingsMenu.addChild(exitGame);
         settingsMenu.addChild(saveGame);
@@ -77,6 +79,7 @@ public class GameLogic {
         main.addChild(steal);
         main.addChild(endTurn);
         main.addChild(settingsMenu);
+        main.addChild(bankruptcy);
 
         main.setIsSwitchBlock(true);
         selectProperty.setIsSwitchBlock(true);
@@ -142,6 +145,26 @@ public class GameLogic {
         return currentState;
     }
     public State handleTree(int input){
+        if (currentTree == trees[0]){
+            return handleMainTree(input);
+        }
+        else if (currentTree == trees[1]){
+            return handleTradingTree(input);
+        }
+        else{
+            return handleAuctionTree(input);
+        }
+
+    }
+    public State handleTradingTree(int input){
+        State currentState = new State();
+        return currentState;
+    }
+    public State handleAuctionTree(int input){
+        State currentState = new State();
+        return currentState;
+    }
+    public State handleMainTree(int input){
         State currentState = new State();
         switch (currentTree.getName()){
             case "MainTree":
@@ -232,7 +255,7 @@ public class GameLogic {
                     currentState.setOnProperty(true);
                 }
                 else {
-                    landedOnCell.performAction();
+                    landedOnCell.performAction(currentPlayer);
                 }
                 break;
             case "Buy":
@@ -276,7 +299,10 @@ public class GameLogic {
                 currentState.setEndNode(true);
                 break;
             case "EndTurn":
-                //TODO: Change the turn
+                /*TODO: Change the turn, do not let player end turn if
+                negative money
+                * */
+
                 break;
             case "SettingsMenu":
                 //TODO: show the settings menu
@@ -286,6 +312,9 @@ public class GameLogic {
                 break;
             case "SaveGame":
                 currentState.setSaveGame(true);
+                break;
+            case "Bankruptcy":
+                //TODO: remove player from game and all of their assets
                 break;
         }
 

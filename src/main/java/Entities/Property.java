@@ -28,7 +28,7 @@ public class Property extends Cell {
         this.houseCost = houseCost;
     }
 
-    public String performAction(){
+    public String performAction(Player currentPlayer){
         // how do we get the current player?
 
         // set flag for player to know which branch of game logic tree we go down (property)
