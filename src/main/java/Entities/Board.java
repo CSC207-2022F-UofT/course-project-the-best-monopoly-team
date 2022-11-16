@@ -45,7 +45,7 @@ public class Board{
     }
 
     public void updatePlayerPosition(Player player){
-        playerPositions.put(player, player.position);
+        playerPositions.put(player, player.getPosition());
     }
 
 }
