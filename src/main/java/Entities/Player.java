@@ -10,16 +10,12 @@ import java.util.ArrayList;
 public class Player {
     // Represents a player in the game
 
-    public int getPosition() {
-        return position;
-    }
-
-    public String name;
-    public int money;
-    public ArrayList<Property> properties;
-    public boolean inJail;
-    public int jailCards;
-    public int position;
+    private String name;
+    private int money;
+    private ArrayList<Property> properties;
+    private boolean inJail;
+    private int jailCards;
+    private int position;
 
     public Player(String name) {
         this.name = name;
@@ -29,6 +25,18 @@ public class Player {
         this.jailCards = 0;
         this.position = 0;
     }
+
+    public String getName() { return name; }
+
+    public int getMoney() { return money; }
+
+    public ArrayList<Property> getProperties() { return properties; }
+
+    public int getJailCards() { return jailCards; }
+
+    public int getPosition() { return position; }
+
+    public boolean isInJail() { return inJail; }
 
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         if (money > this.money) {
@@ -63,13 +71,6 @@ public class Player {
         return actions;
     }
     */
-    public String getName(){
-        return this.name;
-    }
-
-    public int getMoney() {
-        return this.money;
-    }
 
     public void addProperty(Property property) {
         this.properties.add(property);
@@ -127,7 +128,7 @@ public class Player {
 
     public void buildHouse(Property property, int houses) {
         if (properties.contains(property)) {
-            //property.addHouse(houses);
+//            property.addHouse(houses);
         }
     }
 
