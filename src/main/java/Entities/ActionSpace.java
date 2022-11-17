@@ -15,10 +15,21 @@ public class ActionSpace extends Cell {
 //       /* Assigning type os that when we land on these corresponding cells we can just get the type and draw from the
 //       corresponding cell*/
         this.type = type;
-//       /* Initialising the different Card HashMaps as we want to set these to the private instance attributes later*/
+//
+        this.jailCards = loadGameFiles().get(0);
+        this.comChestCards = loadGameFiles().get(1);
+        this.chanceCards = loadGameFiles().get(2);
+        // Setting the private variables equal to the HashMaps that we created
+
+    }
+
+    public List<HashMap<String, ArrayList<Object>>> loadGameFiles() throws IOException {
+
+        /* Initialising the different Card HashMaps as we want to set these to the private instance attributes later*/
         HashMap<String, ArrayList<Object>> jailCards = new HashMap<>();
         HashMap<String, ArrayList<Object>> comChestCards = new HashMap<>();
         HashMap<String, ArrayList<Object>> chanceCards = new HashMap<>();
+        List<HashMap<String, ArrayList<Object>>> list = Arrays.asList(jailCards, comChestCards, chanceCards);
 //      // Reading from the game files
         List<String> actions = Files.readAllLines(Paths.get("GameFiles/chestcomjail.txt"));
         // load in from the GameFiles
@@ -44,12 +55,7 @@ public class ActionSpace extends Cell {
                 jailCards.put(action, lst); // putting this into the jailCards variable
             }
         }
-
-        this.chanceCards = chanceCards;
-        this.jailCards = jailCards;
-        this.comChestCards = comChestCards;
-        // Setting the private variables equal to the HashMaps that we created
-
+        return list;
     }
 
     // Getting the type of action space so that we can look in the correct HashMap
