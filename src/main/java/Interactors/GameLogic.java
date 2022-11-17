@@ -5,6 +5,7 @@ import Entities.Player;
 
 import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GameLogic {
 
@@ -34,15 +35,15 @@ public class GameLogic {
     }
 
     public Object[][] playersToArray(){
-        Player[] players = this.board.getPlayers();
-        Object[][] playersArray = new Object[players.length][6];
-        for(int i = 0; i < players.length; i++){
-            playersArray[i][0] = players[i].name;
-            playersArray[i][1] = players[i].money;
-            playersArray[i][2] = players[i].properties;
-            playersArray[i][3] = players[i].inJail;
-            playersArray[i][4] = players[i].jailCards;
-            playersArray[i][5] = players[i].position;
+        List<Player> players = this.board.getPlayers();
+        Object[][] playersArray = new Object[players.size()][6];
+        for(int i = 0; i < players.size(); i++){
+            playersArray[i][0] = players.get(i).name;
+            playersArray[i][1] = players.get(i).money;
+            playersArray[i][2] = players.get(i).properties;
+            playersArray[i][3] = players.get(i).inJail;
+            playersArray[i][4] = players.get(i).jailCards;
+            playersArray[i][5] = players.get(i).position;
         }
         return playersArray;
     }
