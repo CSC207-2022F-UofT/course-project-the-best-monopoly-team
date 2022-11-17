@@ -28,6 +28,18 @@ public class ActionSpace extends Cell {
         return this.type;
     }
 
+    public HashMap<String, ArrayList<Object>> getJailCards() {
+        return this.jailCards;
+    }
+
+    public HashMap<String, ArrayList<Object>> getComChestCards() {
+        return this.comChestCards;
+    }
+
+    public HashMap<String, ArrayList<Object>> getChanceCards() {
+        return this.chanceCards;
+    }
+
     public List<HashMap<String, ArrayList<Object>>> loadGameFiles() throws IOException {
 
         /* Initialising the different Card HashMaps as we want to set these to the private instance attributes later*/
@@ -36,7 +48,7 @@ public class ActionSpace extends Cell {
         HashMap<String, ArrayList<Object>> chanceCards = new HashMap<>();
         List<HashMap<String, ArrayList<Object>>> list = Arrays.asList(jailCards, comChestCards, chanceCards);
 //      // Reading from the game files
-        List<String> actions = Files.readAllLines(Paths.get("GameFiles/chestcomjail.txt"));
+        List<String> actions = Files.readAllLines(Paths.get("src/main/GameFile/chestcomjail.txt"));
         // load in from the GameFiles
         for (String lines: actions) {
             String[] line = lines.split(":");
