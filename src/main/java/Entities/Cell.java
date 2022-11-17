@@ -1,6 +1,6 @@
 package Entities;
 
-abstract class Cell {
+public abstract class Cell {
     public String performAction(){
         return "";
     }

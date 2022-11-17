@@ -1,16 +1,17 @@
 package Entities;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Board{
 
-    Player[] players;
-    Cell[] cells;
+    List<Player> players;
+    List<Cell> cells;
     Map <Player, Integer> playerPositions = new HashMap<Player, Integer>();
     Property[] properties;
 
-    public Board(Player[] players, Cell[] cells, Object[][] propertyData){
+    public Board(List<Player> players, List<Cell> cells, Object[][] propertyData){
         this.players = players;
         this.cells = cells;
         for (Player player : players) {
@@ -30,18 +31,18 @@ public class Board{
         this.properties = properties;
     }
 
-    public Player[] getPlayers(){
+    public List<Player> getPlayers(){
         return players;
     }
 
-    public Cell[] getCells(){return cells;}
+    public List<Cell> getCells(){return cells;}
 
     public Map<Player, Integer> getPlayerPositions(){return playerPositions;}
 
     public Property[] getProperties(){return properties;}
 
     public Cell getPlayerCell(Player player){
-        return this.cells[this.playerPositions.get(player)];
+        return this.cells.get(this.playerPositions.get(player));
     }
 
     public void updatePlayerPosition(Player player){

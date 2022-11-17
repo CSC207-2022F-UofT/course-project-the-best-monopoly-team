@@ -156,7 +156,8 @@ public class Player {
         }
 
     }
-    private void createPlayer(ArrayList<ArrayList> All){
+    private ArrayList<Player> createPlayer(ArrayList<ArrayList> All){
+        ArrayList<Player> playerList = new ArrayList<>();
         for(ArrayList player: All){
             String name = (String) player.get(0);
             Player p = new Player(name);
@@ -168,9 +169,9 @@ public class Player {
             for(int i = 5;i < length;i ++){
                 p.properties.add((Property)player.get(i));
             }
-
-
+            playerList.add(p);
         }
+        return playerList;
     }
 
     }

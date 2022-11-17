@@ -93,7 +93,7 @@ public class Property extends Cell {
         return this.houses;
     }
 
-    public ArrayList<String[]> loadProperties() throws FileNotFoundException {
+    public static ArrayList<String[]> loadProperties() throws FileNotFoundException {
         // return array of all properties in txt file as Strings
         // GameCreationInteractor will parse Strings to create Property instances
         ArrayList<String[]> allProperties = new ArrayList<>();
