@@ -23,6 +23,11 @@ public class ActionSpace extends Cell {
 
     }
 
+    // Getting the type of action space so that we can look in the correct HashMap
+    public String getType() {
+        return this.type;
+    }
+
     public List<HashMap<String, ArrayList<Object>>> loadGameFiles() throws IOException {
 
         /* Initialising the different Card HashMaps as we want to set these to the private instance attributes later*/
@@ -58,16 +63,12 @@ public class ActionSpace extends Cell {
         return list;
     }
 
-    // Getting the type of action space so that we can look in the correct HashMap
-    public String getType() {
-        return this.type;
-    }
-
     // Getting the Card that is associated with the certain action
-    public ArrayList<Object> getCard(String action, ActionSpace actionspace) {
-        if (Objects.equals(actionspace.getType(), "jail")) {
+    public ArrayList<Object> getCard(String action) {
+        String type = getType();
+        if (Objects.equals(type, "jail")) {
             return this.jailCards.get(action);
-        } else if (Objects.equals(actionspace.getType(), "chance")) {
+        } else if (Objects.equals(type, "chance")) {
             return this.chanceCards.get(action);
         } else {
             return this.comChestCards.get(action);
@@ -75,11 +76,16 @@ public class ActionSpace extends Cell {
     }
 
     @Override
-    public String performAction(Player player, Board board, ActionSpace actionSpace) {
-        // get current player
-        ArrayList<Object> generatedCard = getCard(generateRandomCard(actionSpace), actionSpace);
+    public String performAction(Player player, Board board) {
+        // get the current type of the current ActionSpace that the user is on
+        String type = getType();
+        // Generating random card
+        ArrayList<Object> generatedCard = getCard(generateRandomCard());
+        // Getting the action property of the String
         String action = String.valueOf(generatedCard.get(0));
+        //Getting the actionType
         String actionType = String.valueOf(generatedCard.get(1));
+        //Getting the number associated with the action if any
         Integer amount = (Integer) generatedCard.get(2);
 
         //This function takes the player that the action is to be performed on (can be removed if you want),
@@ -92,7 +98,8 @@ public class ActionSpace extends Cell {
             int randomNumberOfSteps = new Random().nextInt(39);
             player.move(randomNumberOfSteps);
             board.updatePlayerPosition(player);
-            if (player.getPosition() == 0) {
+            action = action + " " + randomNumberOfSteps + " steps.";
+            if (player.getPosition() == 0 || player.getPosition() + randomNumberOfSteps > 40) {
                 player.changeMoney(200);
             }
         } else if(Objects.equals(actionType, "getPaid")) {
@@ -103,21 +110,23 @@ public class ActionSpace extends Cell {
             for(int i = 0; i < board.getPlayers().length; i++){
                 player.pay(board.getPlayers()[i], amount);
             }
-//        } else {
-//            player.jailCards = player.jailCards + 1;
+        } else {
+            player.setJailCards(player.getJailCards() + 1);
         }
         return action;
     }
 
     // Randomly selects card from the action space that the player is currently on.
-    public String generateRandomCard(ActionSpace actionSpace) {
-
+    public String generateRandomCard() {
+        // Initialise String object called card to store the return value for each case
         String card;
-        if (Objects.equals(actionSpace.getType(), "jail")) {
+        // Getting the type of ActionSpace that the player is currently on
+        String type = getType();
+        if (Objects.equals(type, "jail")) {
             List<String> keyList = new ArrayList<>(jailCards.keySet());
             int random_index = new Random().nextInt(keyList.size());
             card = String.valueOf(jailCards.get(keyList.get(random_index)));
-        } else if (Objects.equals(actionSpace.getType(), "chance")) {
+        } else if (Objects.equals(type, "chance")) {
             List<String> keyList = new ArrayList<>(chanceCards.keySet());
             int random_index = new Random().nextInt(keyList.size());
             card = String.valueOf(chanceCards.get(keyList.get(random_index)));

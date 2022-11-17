@@ -10,10 +10,6 @@ import java.util.ArrayList;
 public class Player {
     // Represents a player in the game
 
-    public int getPosition() {
-        return position;
-    }
-
     private String name;
     private int money;
     private ArrayList<Property> properties;
@@ -28,6 +24,16 @@ public class Player {
         this.inJail = false;
         this.jailCards = 0;
         this.position = 0;
+    }
+
+    public int getPosition() {
+        return this.position;
+    }
+
+    public int getJailCards() { return this.jailCards; }
+
+    public void setJailCards(int num) {
+        this.jailCards = this.jailCards + num;
     }
 
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {

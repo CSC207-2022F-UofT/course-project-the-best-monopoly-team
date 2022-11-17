@@ -58,7 +58,7 @@ public class Property extends Cell {
     }
 
     @Override
-    public String performAction(Player player, Board board, ActionSpace actionSpace) {
+    public String performAction(Player player, Board board) {
         return null;
     }
 
