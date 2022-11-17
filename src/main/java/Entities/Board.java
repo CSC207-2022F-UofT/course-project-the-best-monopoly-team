@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Represents a Monopoly board.
+ */
 public class Board{
 
     List<Player> players;
@@ -11,6 +14,12 @@ public class Board{
     Map <Player, Integer> playerPositions = new HashMap<Player, Integer>();
     Property[] properties;
 
+    /**
+     * This is the constructor which creates a Board instance.
+     * @param players A List of Player instances that we wish to be a part of the board.
+     * @param cells A List of Cell instances that we wish to be a part of the board.
+     * @param propertyData A two-dimensional array which includes the data important to form Property instances.
+     */
     public Board(List<Player> players, List<Cell> cells, Object[][] propertyData){
         this.players = players;
         this.cells = cells;
@@ -48,20 +57,45 @@ public class Board{
         this.properties = properties;
     }
 
+    /**
+     * This method is used to return a List of all the Player instances that are in Board.
+     * @return A List of all the Player instances stored in Board.
+     */
     public List<Player> getPlayers(){
         return players;
     }
 
+    /**
+     * This method is used to return a List of all the Cell instances on Board.
+     * @return This returns this.cells, a List of all the Cell instances on Board.
+     */
     public List<Cell> getCells(){return cells;}
 
+    /**
+     * This method is used to get a Map of all the positions of Player instances on Board.
+     * @return This returns a Map with a Player instance as a key and an Integer representing the Player's position.
+     */
     public Map<Player, Integer> getPlayerPositions(){return playerPositions;}
 
+    /**
+     * This method is used to return an array of Property objects containing all the Properties on Board.
+     * @return This returns an array of Property objects that are stored in this.properties.
+     */
     public Property[] getProperties(){return properties;}
 
+    /**
+     * This method is used to return the Cell instance that a Player instance is on.
+     * @param player This is a Player instance that we want to know which Cell it is on.
+     * @return This returns a Cell which the Player instance is on.
+     */
     public Cell getPlayerCell(Player player){
         return this.cells.get(this.playerPositions.get(player));
     }
 
+    /**
+     * This method updates the position of a player by making changes to the map, this.playerPositions.
+     * @param player The player that is in need of a position update.
+     */
     public void updatePlayerPosition(Player player){
         playerPositions.put(player, player.position);
     }
