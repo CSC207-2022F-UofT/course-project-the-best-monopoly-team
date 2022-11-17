@@ -23,10 +23,27 @@ public class Board{
             String name = (String) data[0];
             String colour = (String) data[1];
             int cost = (int) data[2];
-            int rent = (int) data[3];
-            int mortgage = (int) data[4];
-            int houseCost = (int) data[5];
-            properties[i] = new Property(name, colour, cost, rent, mortgage, houseCost);
+            int houseCost = (int) data[3];
+            int rent = (int) data[4];
+            int rent1H = (int) data[5];
+            int rent2H = (int) data[6];
+            int rent3H = (int) data[7];
+            int rent4H = (int) data[8];
+            int rentHotel = (int) data[9];
+            Player owner = null;
+            if ((int) data[10] != 0) {
+                owner = players.get((int) data[10]);
+            }
+            int mortgageValue = (int) data[11];
+            int houses = (int) data[12];
+            boolean mortgaged = false;
+            String mortgageString = (String) data[13];
+            if (mortgageString.equals("true")) {
+                mortgaged = true;
+            }
+            properties[i] = new Property(name, colour, cost, houseCost, rent, rent1H,
+                    rent2H, rent3H, rent4H, rentHotel, owner,
+                    mortgageValue, houses, mortgaged);
         }
         this.properties = properties;
     }
