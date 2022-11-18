@@ -98,7 +98,7 @@ public class MainTreeHandler extends TreeHandler {
             case "BuildProperty":
                 //the player chooses to build houses
                 targetProperty = this.board.getProperties()[selectedOptions.get(0)];
-                this.currentPlayer.buildHouse(targetProperty);
+                this.currentPlayer.buildHouse(targetProperty,1);
                 currentState.setEndNode(true);
             case "Roll":
                 //Case roll selected
