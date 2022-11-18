@@ -1,17 +1,15 @@
 package Entities;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Board{
 
-    List<Player> players;
-    List<Cell> cells;
+    Player[] players;
+    Cell[] cells;
     Map <Player, Integer> playerPositions = new HashMap<Player, Integer>();
     Property[] properties;
 
-    public Board(List<Player> players, List<Cell> cells, Object[][] propertyData){
+    public Board(Player[] players, Cell[] cells, Object[][] propertyData){
         this.players = players;
         this.cells = cells;
         for (Player player : players) {
@@ -31,22 +29,34 @@ public class Board{
         this.properties = properties;
     }
 
-    public List<Player> getPlayers(){
+    public Player[] getPlayers(){
         return players;
     }
 
-    public List<Cell> getCells(){return cells;}
+    public void removePlayer(Player player){
+        List<Player> newPlayers = Arrays.asList(players);
+        newPlayers.remove(player);
+        Player[] newPlayersArray = new Player[players.length - 1];
+        for(int i = 0; i < newPlayers.size(); i++){
+            newPlayersArray[i] = newPlayers.get(i);
+        }
+        this.players = newPlayersArray;
+    }
+
+    public Cell[] getCells(){return cells;}
+
+    public Cell getCell(int position){return cells[position];}
 
     public Map<Player, Integer> getPlayerPositions(){return playerPositions;}
 
     public Property[] getProperties(){return properties;}
 
     public Cell getPlayerCell(Player player){
-        return this.cells.get(this.playerPositions.get(player));
+        return this.cells[this.playerPositions.get(player)];
     }
 
     public void updatePlayerPosition(Player player){
-        playerPositions.put(player, player.position);
+        playerPositions.put(player, player.getPosition());
     }
 
 }
