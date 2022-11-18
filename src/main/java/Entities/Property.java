@@ -44,25 +44,12 @@ public class Property extends Cell {
     public String performAction(Player currentPlayer){
         // set flag for player to know which branch of game logic tree we go down (property)
         // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
-        if (this.getOwner() == null){
-            boolean purchaseBoolean = purchaseOrAuction();
-            if (purchaseBoolean) {
-                currentPlayer.pay(this.cost);
-                currentPlayer.addProperty(this);
-                this.ownedBy = currentPlayer;
-            } else {
-                Object[] highestOffer = displayAuctionMenu();
-                Player newOwner = (Player) highestOffer[0];
-                int offer = (Integer) highestOffer[1];
-                newOwner.pay(offer);
-                newOwner.addProperty(this.name);
-                this.ownedBy = newOwner;
-            }
+        if (this.getOwner().equals(currentPlayer)){
+            return "Landed on a property you own";
         } else {
             currentPlayer.pay(this.ownedBy, this.getRent());
+            return "Paid $" + Integer.toString(this.getRent()) + " to " + this.ownedBy.getName();
         }
-
-        return "";
     }
 
     public Player getOwner(){
