@@ -4,6 +4,8 @@ chance:Get out of jail free:getOutOfJailCard:0
 chance:Speeding fine, pay $15:pay:15
 chance:Pay each player $10:payAll:10
 chance:Building loan matures, collect $150:getPaid:150
+chance:Go to Jail,goToJail:0
+chance:Go to Jail,goToJail:0
 comchest:Advance:advance:200
 comchest:Bank error in your favour($200):getPaid:200
 comchest:Doctor's fee($50):pay:50
