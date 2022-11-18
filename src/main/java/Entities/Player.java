@@ -14,12 +14,12 @@ public class Player {
         return position;
     }
 
-    private String name;
-    private int money;
-    private ArrayList<Property> properties;
-    private boolean inJail;
-    private int jailCards;
-    private int position;
+    public String name;
+    public int money;
+    public ArrayList<Property> properties;
+    public boolean inJail;
+    public int jailCards;
+    public int position;
 
     public Player(String name) {
         this.name = name;
