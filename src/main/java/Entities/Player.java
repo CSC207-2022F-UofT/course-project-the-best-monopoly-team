@@ -70,7 +70,7 @@ public class Player {
     public int getMoney() {
         return this.money;
     }
-    
+
     public void addProperty(Property property) {
         this.properties.add(property);
     }
