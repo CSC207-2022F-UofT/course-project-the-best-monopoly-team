@@ -9,7 +9,7 @@ public class MainTreeHandler extends TreeHandler {
 
     public State handleInput(int input){
         State currentState = new State();
-        switch (gameLogicInteractor.currentTree.getName()){
+        switch (gameLogicInteractor.getCurrentTree().getName()){
             case "MainTree":
                 return getInitialState();
             case "Trade":
@@ -24,7 +24,7 @@ public class MainTreeHandler extends TreeHandler {
             case "PickPlayer":
                 //Case player picked
                 //adds the chosen player index in selected options
-                selectedOptions.put(gameLogicInteractor.currentTree.getName(), input);
+                selectedOptions.put(gameLogicInteractor.getCurrentTree().getName(), input);
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers()[input];
                 ArrayList<Property> playerProperties = selectedPlayer.properties;
@@ -36,7 +36,7 @@ public class MainTreeHandler extends TreeHandler {
             case "PickItemOp":
                 //Case picking the item of the opponent
                 //the input corresponds to the index of the target player in this.board.getPlayers()
-                selectedOptions.put(gameLogicInteractor.currentTree.getName(), input);
+                selectedOptions.put(gameLogicInteractor.getCurrentTree().getName(), input);
                 //provide item options from the current player's inventory
                 ArrayList<Property> currentPlayerInventory = currentPlayer.properties;
                 //using "i" starting from 0 to number of properties the player has - 1
@@ -46,13 +46,13 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "PickItemSelf":
                 //the input corresponds to the index of the opponent targeted property;
-                selectedOptions.put(gameLogicInteractor.currentTree.getName(), input);
+                selectedOptions.put(gameLogicInteractor.getCurrentTree().getName(), input);
                 //Case picking the item of the player
                 //send the trade offer using selectedOptions. Index 0 will be the selected item from opponent and
                 //index 1 will be the selected item from the current player.
                 break;
             case "SendTrade":
-                selectedOptions.put(gameLogicInteractor.currentTree.getName(), input);
+                selectedOptions.put(gameLogicInteractor.getCurrentTree().getName(), input);
                 //input corresponds to the index of the current player's selected property
                 //Case sending the trade
                 //the input should be 0 or 1. 0 if the trade was accepted, 1 if the trade was declined.
@@ -62,7 +62,7 @@ public class MainTreeHandler extends TreeHandler {
                     returnPlayerIndex = getCurrentPlayerIndex();
                     //returnPlayerAddress will hold the original player index in this.board.getPlayers()
                     this.currentPlayer = this.board.getPlayers()[selectedOptions.get("PickPlayer")];
-                    gameLogicInteractor.currentTree = gameLogicInteractor.trees[1];
+                    gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[1]);
                     currentState.addOptions(Integer.toString(0));
                     currentState.addOptions(Integer.toString(1));
                 }
@@ -78,7 +78,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "SelectProperty":
                 //Case property selected (adds the property index)
-                selectedOptions.put(gameLogicInteractor.currentTree.getName(), input);
+                selectedOptions.put(gameLogicInteractor.getCurrentTree().getName(), input);
                 //the player chooses what to do to the property
                 //0 is for the mortgage option
                 //1 is for the un mortgaged option
