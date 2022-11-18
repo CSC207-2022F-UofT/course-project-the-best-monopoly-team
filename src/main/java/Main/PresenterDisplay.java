@@ -11,13 +11,15 @@ public class PresenterDisplay {
     }
 
     public void playGame(){
-        IOController inputOutput = new IOController();
+        IOController controller = new IOController();
+        controller.connectLogic();
         Scanner userIn = new Scanner(System.in);
         while (!this.isOver){
-            System.out.println(inputOutput.presentOutput());
+            System.out.println(controller.presentOutput());
             int choice = userIn.nextInt();
-            inputOutput.setInput(choice);
-            finishGame();
+            controller.setInput(choice);
+            controller.connectLogic();
+//            finishGame();
         }
     }
     public void finishGame(){
