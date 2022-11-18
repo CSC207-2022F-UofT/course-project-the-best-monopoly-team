@@ -1,7 +1,5 @@
 package Entities;
 
-abstract class Cell {
-    public String performAction(){
-        return "";
-    }
+public abstract class Cell {
+    public abstract String performAction(Player currentPlayer);
 }

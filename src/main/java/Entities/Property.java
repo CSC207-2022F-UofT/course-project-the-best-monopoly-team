@@ -14,6 +14,7 @@ public class Property extends Cell {
     private int mortgageValue;
     private int houseCost;
     private int cost;
+    private boolean mortgaged;
 
     public Property (String name, String colour, int cost, int rent, int mortgageValue, int houseCost) {
         this.ownedBy = null;
@@ -23,10 +24,11 @@ public class Property extends Cell {
         this.colour = colour;
         this.rent = rent;
         this.mortgageValue = mortgageValue;
+        this.mortgaged = false;
         this.houseCost = houseCost;
     }
 
-    public String performAction(){
+    public String performAction(Player currentPlayer){
         // how do we get the current player?
 
         // set flag for player to know which branch of game logic tree we go down (property)
@@ -57,9 +59,15 @@ public class Property extends Cell {
         return "";
     }
 
+    public void setHouses(int houses){
+        this.houses = houses;
+    }
+
     public Player getOwner(){
         return this.ownedBy;
     }
+
+    public void setOwner(Player player){ownedBy = player;}
 
     public String getName(){
         return this.name;
@@ -88,6 +96,10 @@ public class Property extends Cell {
     public int getMortgageValue(){
         return this.mortgageValue;
     }
+
+    public boolean getMortgageStatus(){return this.mortgaged;}
+
+    public void setMortgageStatus(boolean status){this.mortgaged = status;}
 
     public int getHouses(){
         return this.houses;
