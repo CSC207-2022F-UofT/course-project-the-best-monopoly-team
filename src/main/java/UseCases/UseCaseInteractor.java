@@ -1,15 +1,25 @@
+
 package UseCases;
 
+import Entities.GameLogicTree;
+import Entities.MenuTree;
+import Entities.State;
+import Interactors.GameLogic;
 public class UseCaseInteractor{
-
-    private OutputTree[] trees = new OutputTree[2];
-    private OutputTree currentTree;
+    private GameLogicTree currentTree;
+    private boolean menuTreeActive = true;
 
     //This array contains various states for the program which will be used for various calculations
     private int[] globalStates = new int[5];
-
-    public UseCaseInteractor(){
+    private GameLogic logicInteractor;
+    private State currentState;
+    public UseCaseInteractor(GameLogic logicInteractor){
         createTrees();
+        this.logicInteractor = logicInteractor;
+        currentState = getInitialState();
+        updateOutput(currentState);
+//        currentState = logicInteractor.getInitialState();
+//        updateOutput(currentState);
     }
 
     /**
@@ -18,55 +28,44 @@ public class UseCaseInteractor{
      * @param input the translated input of the user from the input interface
      */
     public void handleInput(int input){
-        //Moving through the tree depending on the input and the node
-        if (input == -1){
-            //Move backwards in tree
-            currentTree = (OutputTree) currentTree.getParent();
-        }
-        else if (currentTree.isSwitchBlock()){
-            //Move forward in tree to one of the branches
-            currentTree = (OutputTree) currentTree.getChildren().get(input);
-        }
-        else{
-            //Move forward in tree
-            currentTree = (OutputTree) currentTree.getChildren().get(0);
-        }
-
-        //Handling different tree input
-        if (currentTree == trees[0]){
-            handleInitialTree(input);
+        if (menuTreeActive){
+            //Moving through the tree depending on the input and the node
+            if (input == -1){
+                //Move backwards in tree
+                currentTree = (GameLogicTree) currentTree.getParent();
+            }
+            else if (currentTree.isSwitchBlock()){
+                //Move forward in tree to one of the branches
+                currentTree = (GameLogicTree) currentTree.getChildren().get(input);
+            }
+            else{
+                //Move forward in tree
+                currentTree = (GameLogicTree) currentTree.getChildren().get(0);
+            }
+            currentState = handleInitialTree(input);
         }
         else{
-            handleGameTree(input);
+            currentState = handleOtherTrees(input);
         }
 
     }
 
     /**
-     * This method creates the two trees required in the program. <br>
-     * The first tree is for the initialization part of
-     * the program and the second tree is for the game part of the program.
+     * This method creates the initial menu tree for the program <br>
+     * The tree is for the initialization part of the program, allowing the user
+     * to choose game modes, number of players, etc.
      */
     public void createTrees(){
         //creating first tree
-        //ID = 0
-        OutputTree initialMenu = new OutputTree("Initial Menu");
-        //ID = 1
-        OutputTree newGame = new OutputTree("New Game");
-        //ID = 2
-        OutputTree chooseGameMode = new OutputTree("Choose Game Mode");
-        //ID = 3
-        OutputTree numPlayers = new OutputTree("number of players");
-        //ID = 4
-        OutputTree gameLength = new OutputTree("Game Length");
-        //ID = 5
-        OutputTree createNewGame = new OutputTree("Create New Game");
-        //ID = 6
-        OutputTree loadGame = new OutputTree("Load Game");
-        //ID = 7
-        OutputTree chooseSave = new OutputTree("Choose Save");
-        //ID = 8
-        OutputTree createGame = new OutputTree("Create Loaded Game");
+        GameLogicTree initialMenu = new GameLogicTree("InitialMenu");
+        GameLogicTree newGame = new GameLogicTree("NewGame");
+        GameLogicTree chooseGameMode = new GameLogicTree("ChooseGameMode");
+        GameLogicTree numPlayers = new GameLogicTree("NumberOfPlayers");
+        GameLogicTree gameLength = new GameLogicTree("GameLength");
+        GameLogicTree createNewGame = new GameLogicTree("CreateNewGame");
+        GameLogicTree loadGame = new GameLogicTree("LoadGame");
+        GameLogicTree chooseSave = new GameLogicTree("ChooseSave");
+        GameLogicTree createGame = new GameLogicTree("CreateLoadedGame");
 
         //creating the tree structure
         gameLength.addChild(createNewGame);
@@ -80,90 +79,19 @@ public class UseCaseInteractor{
         initialMenu.addChild(newGame);
         initialMenu.addChild(loadGame);
         //indicates that this tree switches with input
-        initialMenu.setSwitchBlock(true);
+        initialMenu.setIsSwitchBlock(true);
 
-        //Resetting the id counter
-        initialMenu.setGlobalID(0);
 
         //adding the tree into an array for later retrieval
-        trees[0] = initialMenu;
-        currentTree = trees[0];
+        currentTree = initialMenu;
 
-        //creating second tree
-        //ID = 0
-        OutputTree gameOutputMenu = new OutputTree("Game output menu");
-        //ID = 1
-        OutputTree trade = new OutputTree("Trade");
-        //ID = 2
-        OutputTree pickPlayer = new OutputTree("Pick player");
-        //ID = 3
-        OutputTree chooseItemOpponent = new OutputTree("Choose item from opponent");
-        //ID = 4
-        OutputTree chooseItemFromSelf = new OutputTree("Choose item from self");
-        //ID = 5
-        OutputTree sendTrade = new OutputTree("Send trade offer");
-
-        //ID = 6
-        OutputTree manageProperty = new OutputTree("Manage Property");
-        //ID = 7
-        OutputTree selectProperty = new OutputTree("Select Property");
-        //ID = 8
-        OutputTree mortgage = new OutputTree("Mortgage property");
-        //ID = 9
-        OutputTree sell = new OutputTree("Sell property");
-        //ID = 10
-        OutputTree buildHouses = new OutputTree("BuildHouses");
-
-        //ID = 11
-        OutputTree roll = new OutputTree("Roll");
-
-        //ID = 12
-        OutputTree steal = new OutputTree("Steal");
-        //ID = 13
-        OutputTree choosePlayer = new OutputTree("Choose player");
-
-        //ID = 14
-        OutputTree settings = new OutputTree("Settings");
-        //ID = 15
-        OutputTree exitToMenu = new OutputTree("Exit to menu");
-        //ID = 16
-        OutputTree saveGame = new OutputTree("Save game");
-        //ID = 17
-        OutputTree selectSaveFile = new OutputTree("Select save file");
-
-        //creating the tree structure
-        chooseItemFromSelf.addChild(sendTrade);
-        chooseItemOpponent.addChild(chooseItemFromSelf);
-        pickPlayer.addChild(chooseItemOpponent);
-        trade.addChild(pickPlayer);
-
-        selectProperty.addChild(mortgage);
-        selectProperty.addChild(sell);
-        selectProperty.addChild(buildHouses);
-        manageProperty.addChild(selectProperty);
-
-        steal.addChild(choosePlayer);
-
-        saveGame.addChild(selectSaveFile);
-        settings.addChild(exitToMenu);
-        settings.addChild(saveGame);
-
-        gameOutputMenu.addChild(trade);
-        gameOutputMenu.addChild(manageProperty);
-        gameOutputMenu.addChild(roll);
-        gameOutputMenu.addChild(steal);
-        gameOutputMenu.addChild(settings);
-
-        //indicates that these trees switch with input
-        selectProperty.setSwitchBlock(true);
-        gameOutputMenu.setSwitchBlock(true);
-        settings.setSwitchBlock(true);
-
-        //resetting the id counter
-        gameOutputMenu.setGlobalID(0);
-
-        trees[1] = gameOutputMenu;
-
+    }
+    public State getInitialState(){
+        State currentState = new State();
+        for (MenuTree tree: currentTree.getChildren()){
+            currentState.addOptions(tree.getName());
+        }
+        return currentState;
     }
 
     /**
@@ -182,61 +110,54 @@ public class UseCaseInteractor{
      * globalStates[4]: An integer indicating the choice of saved games to load<br>
      * @param input the translated input of the user from the input interface
      */
-    public void handleInitialTree(int input){
+    public State handleInitialTree(int input){
         //deciding what to do based on node visited
-        switch (currentTree.getID()){
-            case 1:
+        State state = new State();
+        switch (currentTree.getName()){
+            case "NewGame":
                 //in "New Game" node
                 globalStates[0] = 1;
-                return;
-            case 2:
+                break;
+            case "ChooseGameMode":
                 //in "Choose Game mode" node
                 globalStates[1] = input;
-                return;
-            case 3:
+                break;
+            case "NumberOfPlayers":
                 //in "Number of Players" node
                 globalStates[2] = input;
-                return;
-            case 4:
+                break;
+            case "GameLength":
                 //in "Game Length" node
                 globalStates[3] = input;
-                return;
-            case 5:
+                break;
+            case "CreateNewGame":
                 //in "Create new Game" node
                 //TODO: CREATE THE GAME
-            case 6:
+            case "LoadGame":
                 //in "Load Game" node
                 globalStates[0] = 0;
-                return;
-            case 7:
+                break;
+            case "ChooseSave":
                 //in "Choose Save" node
                 globalStates[4] = input;
-                return;
-            case 8:
+                break;
+            case "CreateLoadedGame":
                 //in "Create Loaded Game" node
                 //TODO: CREATE THE GAME
+                break;
         }
+        return state;
     }
     /**
      * This method handles the input of the user in the game part of the program.
      * <p>
      */
-    public void handleGameTree(int input){
+    public State handleOtherTrees(int input){
         //deciding what to do based on node visited
-        switch (currentTree.getID()){
-            case 15:
-                currentTree = trees[0];
-                globalStates = new int[10];
-                break;
-            case 17:
-                //TODO: Save the game using the input
+        return logicInteractor.performInput(input);
 
-            default:
-                //TODO pass arguments to game logic interactor
-
-        }
     }
-    public void updateOutput(){
+    public void updateOutput(State currentState){
         //TODO update the user interface
     }
     public void loadFiles(String filepath){

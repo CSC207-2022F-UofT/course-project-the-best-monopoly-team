@@ -37,6 +37,8 @@ public class Property extends Cell {
         this.rentHotel = rentHotel;
         this.ownedBy = owner;
         this.mortgageValue = mortgageValue;
+        this.mortgaged = false;
+        this.houseCost = houseCost;
         this.houses = houses;
         this.mortgaged = mortgaged;
     }
@@ -52,9 +54,15 @@ public class Property extends Cell {
         }
     }
 
+    public void setHouses(int houses){
+        this.houses = houses;
+    }
+
     public Player getOwner(){
         return this.ownedBy;
     }
+
+    public void setOwner(Player player){ownedBy = player;}
 
     public String getName(){
         return this.name;
