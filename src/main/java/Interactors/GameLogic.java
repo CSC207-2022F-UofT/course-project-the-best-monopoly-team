@@ -6,9 +6,8 @@ import TreeHandlers.MainTreeHandler;
 import TreeHandlers.TradingTreeHandler;
 
 public class GameLogic {
-    //TODO: CREATE GETTERS AND SETTERS FOR BOTH PUBLIC ATTRIBUTES
-    public GameLogicTree[] trees = new GameLogicTree[3];
-    public GameLogicTree currentTree;
+    private GameLogicTree[] trees = new GameLogicTree[3];
+    private GameLogicTree currentTree;
     AuctionTreeHandler auctionTreeHandler;
     MainTreeHandler mainTreeHandler;
     TradingTreeHandler tradingTreeHandler;
@@ -20,6 +19,22 @@ public class GameLogic {
         mainTreeHandler.setGameLogicInteractor(this);
         mainTreeHandler.initialize(currentPlayer,board);
         createTrees();
+    }
+
+    public GameLogicTree[] getTrees(){
+        return this.trees;
+    }
+
+    public void setTrees(GameLogicTree[] newTrees){
+        this.trees = newTrees;
+    }
+
+    public GameLogicTree getCurrentTree(){
+        return this.currentTree;
+    }
+
+    public void setCurrentTree(GameLogicTree newCurrentTree){
+        this.currentTree = newCurrentTree;
     }
 
     public void createTrees(){
@@ -136,23 +151,6 @@ public class GameLogic {
         }
 
     }
-    /*
-    public State handleTradingTree(int input){
-        State currentState = new State();
-        //keep track of the player that initiated the trade. the number in tradingStates[0]
-        //corresponds to the index where the player is stored in the Players array in this.board.
-        Player[] players = this.board.getPlayers();
-        for(int i = 0; i < players.length; i++){
-            if (players[i] == this.currentPlayer){
-                tradingStates[0] = i;
-            }
-        }
-        this.currentTree = this.trees[1];
-        //input corresponds to the index number of the player that is being proposed the trade
-        //in the board players instance attribute.
-        this.currentPlayer = this.board.getPlayers()[input];
-        return currentState;
-    }
-     */
+
 }
 
