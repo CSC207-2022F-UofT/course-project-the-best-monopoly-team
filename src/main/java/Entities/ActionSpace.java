@@ -119,14 +119,16 @@ public class ActionSpace extends Cell {
         } else if (Objects.equals(actionType, "pay")) {
             player.pay(amount);
         } else if (Objects.equals(actionType, "payAll")) {
-            for(int i = 0; i < board.getPlayers().length; i++){
+            for (int i = 0; i < board.getPlayers().length; i++) {
                 player.pay(board.getPlayers()[i], amount);
             }
+        } else if (Objects.equals(actionType, "goToJail")) {
+            player.changeJailStatus(player);
         } else {
-            player.setJailCards(player.getJailCards() + 1);
+                player.setJailCards(player.getJailCards() + 1);
+            }
+            return action;
         }
-        return action;
-    }
 
     // Randomly selects card from the action space that the player is currently on.
     public String generateRandomCard() {
