@@ -16,12 +16,20 @@ public class GameLogicTree extends MenuTree{
         this.name = name;
     }
 
-
     @Override
     public MenuTree getParent() {
         return this.parent;
     }
 
+    @Override
+    public MenuTree getMaxParent(){
+        if (this.parent == null){
+            return this;
+        }
+        else{
+            return this.parent.getMaxParent();
+        }
+    }
     @Override
     public List<MenuTree> getChildren() {
         return this.children;

@@ -11,6 +11,7 @@ public abstract class MenuTree{
     //makes tree node handling easier
 
     public abstract MenuTree getParent();
+    public abstract MenuTree getMaxParent();
     public abstract List<MenuTree> getChildren();
     public abstract String getName();
     public abstract void setParent(MenuTree parent);
