@@ -63,7 +63,9 @@ public class Player {
         return actions;
     }
     */
-
+    public String getName(){
+        return this.name;
+    }
     public void addProperty(Property property) {
         this.properties.add(property);
     }

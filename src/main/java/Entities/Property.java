@@ -37,8 +37,6 @@ public class Property extends Cell {
         this.rentHotel = rentHotel;
         this.ownedBy = owner;
         this.mortgageValue = mortgageValue;
-        this.mortgaged = false;
-        this.houseCost = houseCost;
         this.houses = houses;
         this.mortgaged = mortgaged;
     }
