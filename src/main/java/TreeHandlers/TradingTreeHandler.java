@@ -1,10 +1,10 @@
-package Interactors;
+package TreeHandlers;
 
 import Entities.Player;
 import Entities.Property;
 import Entities.State;
 
-public class TradingTreeHandler extends TreeHandler{
+public class TradingTreeHandler extends TreeHandler {
     int[] tradingStates = new int[5];
     public State handleInput(){
         State currentState = new State();

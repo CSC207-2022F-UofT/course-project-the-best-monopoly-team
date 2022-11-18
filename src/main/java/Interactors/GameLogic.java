@@ -1,17 +1,14 @@
 package Interactors;
 
 import Entities.*;
-import com.sun.tools.javac.Main;
-import org.hamcrest.core.IsInstanceOf;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import TreeHandlers.AuctionTreeHandler;
+import TreeHandlers.MainTreeHandler;
+import TreeHandlers.TradingTreeHandler;
 
 public class GameLogic {
-
-    GameLogicTree[] trees = new GameLogicTree[3];
-    GameLogicTree currentTree;
+    //TODO: CREATE GETTERS AND SETTERS FOR BOTH PUBLIC ATTRIBUTES
+    public GameLogicTree[] trees = new GameLogicTree[3];
+    public GameLogicTree currentTree;
     AuctionTreeHandler auctionTreeHandler;
     MainTreeHandler mainTreeHandler;
     TradingTreeHandler tradingTreeHandler;

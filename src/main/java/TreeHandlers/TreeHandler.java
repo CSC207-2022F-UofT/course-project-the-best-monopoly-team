@@ -1,6 +1,7 @@
-package Interactors;
+package TreeHandlers;
 
 import Entities.*;
+import Interactors.GameLogic;
 
 import java.util.HashMap;
 

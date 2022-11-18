@@ -1,7 +1,6 @@
-package Interactors;
+package TreeHandlers;
 
 import Entities.*;
-import com.sun.tools.javac.Main;
 
 import java.util.ArrayList;
 import java.util.Arrays;

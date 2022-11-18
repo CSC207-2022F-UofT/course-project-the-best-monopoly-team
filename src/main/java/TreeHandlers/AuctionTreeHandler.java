@@ -1,8 +1,8 @@
-package Interactors;
+package TreeHandlers;
 
 import Entities.State;
 
-public class AuctionTreeHandler extends TreeHandler{
+public class AuctionTreeHandler extends TreeHandler {
     final int LOW_OPTION = 20;
     final int MEDIUM_OPTION = 80;
     final int HIGH_OPTION = 160;
