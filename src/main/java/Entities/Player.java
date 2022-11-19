@@ -63,6 +63,13 @@ public class Player {
         return actions;
     }
     */
+    public String getName(){
+        return this.name;
+    }
+
+    public int getMoney() {
+        return this.money;
+    }
 
     public void addProperty(Property property) {
         this.properties.add(property);
@@ -120,7 +127,7 @@ public class Player {
 
     public void buildHouse(Property property, int houses) {
         if (properties.contains(property)) {
-//            property.addHouse(houses);
+            //property.addHouse(houses);
         }
     }
 
