@@ -164,7 +164,9 @@ public class UseCaseInteractor{
         //TODO load files for game creation
     }
 
-
+    public int[] getGlobalStates() {
+        return globalStates;
+    }
 
 
 

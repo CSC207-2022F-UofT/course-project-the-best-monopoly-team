@@ -4,6 +4,7 @@ import Entities.*;
 import Interactors.GameLogic;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class TreeHandler {
     GameLogic gameLogicInteractor;
@@ -11,7 +12,7 @@ public class TreeHandler {
     Board board;
     HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
     int returnPlayerIndex = -1;
-    Player[] players;
+    List<Player> players;
 
     public void initialize(Player currentPlayer, Board board){
         players = board.getPlayers();
@@ -30,22 +31,22 @@ public class TreeHandler {
         return currentState;
     }
     public int getCurrentPlayerIndex(){
-        for (int i = 0; i< players.length; i++){
-            if (currentPlayer == players[i]){
+        for (int i = 0; i< players.size(); i++){
+            if (currentPlayer == players.get(i)){
                 return i;
             }
         }
         throw new RuntimeException("Player not in array");
     }
     public Object[][] playersToArray(){
-        Object[][] playersArray = new Object[players.length][6];
-        for(int i = 0; i < players.length; i++){
-            playersArray[i][0] = players[i].name;
-            playersArray[i][1] = players[i].money;
-            playersArray[i][2] = players[i].properties;
-            playersArray[i][3] = players[i].inJail;
-            playersArray[i][4] = players[i].jailCards;
-            playersArray[i][5] = players[i].position;
+        Object[][] playersArray = new Object[players.size()][6];
+        for(int i = 0; i < players.size(); i++){
+            playersArray[i][0] = players.get(i).getName();
+            playersArray[i][1] = players.get(i).getMoney();
+            playersArray[i][2] = players.get(i).getProperties();
+            players.get(i).setInJail((Boolean) playersArray[i][3]);
+            playersArray[i][4] = players.get(i).getJailCards();
+            playersArray[i][5] = players.get(i).getPosition();
         }
         return playersArray;
     }
@@ -55,17 +56,17 @@ public class TreeHandler {
         boardArray[0] = board.getPlayers();
         boardArray[1] = board.getCells();
         boardArray[2] = board.getPlayerPositions();
-        boardArray[3] = board.getProperties();
+        // boardArray[3] = board.getProperties();
         return boardArray;
     }
 
     public void movePlayer(int cell_number){
         int total_squares = 40;
-        int current_player_position = this.currentPlayer.position;
+        int current_player_position = this.currentPlayer.getPosition();
         if (cell_number - current_player_position < 0) {
-            this.currentPlayer.money = this.currentPlayer.money + 200;
+            this.currentPlayer.setMoney(this.currentPlayer.getMoney() + 200);
         }
-        this.currentPlayer.position = cell_number;
+        this.currentPlayer.setPosition(cell_number);
         this.board.updatePlayerPosition(this.currentPlayer);
     }
 
