@@ -22,19 +22,34 @@ public class Property extends Cell {
     private int houses;
     private boolean mortgaged;
 
-    public Property (String name, String colour, int cost, int houseCost, int rent,
-                     int rent1H, int rent2H, int rent3H, int rent4H, int rentHotel,
+    public Property (String name, String colour, int cost, int houseCost, int[] rentValues,
                      Player owner, int mortgageValue, int houses, boolean mortgaged) {
         this.name = name;
         this.colour = colour;
         this.cost = cost;
         this.houseCost = houseCost;
-        this.rent = rent;
-        this.rent1H = rent1H;
-        this.rent2H = rent2H;
-        this.rent3H = rent3H;
-        this.rent4H = rent4H;
-        this.rentHotel = rentHotel;
+        for (int i = 0; i < 5; i++){
+            switch (i) {
+                case 0:
+                    this.rent = rentValues[i];
+                    break;
+                case 1:
+                    this.rent1H = rentValues[i];
+                    break;
+                case 2:
+                    this.rent2H = rentValues[i];
+                    break;
+                case 3:
+                    this.rent3H = rentValues[i];
+                    break;
+                case 4:
+                    this.rent4H = rentValues[i];
+                    break;
+                case 5:
+                    this.rentHotel = rentValues[i];
+                    break;
+            }
+        }
         this.ownedBy = owner;
         this.mortgageValue = mortgageValue;
         this.houses = houses;
@@ -75,24 +90,32 @@ public class Property extends Cell {
     }
 
     public int getRent(){
-        if (this.colour.equals("Railroad")){
-            return 100;
-        } else if (this.colour.equals("Utility")) {
-            return 50;
-        } else if (this.houses==0){
-            return rent;
-        } else if (this.houses==1){
-            return rent1H;
-        } else if (this.houses==2){
-            return rent2H;
-        } else if (this.houses==3){
-            return rent3H;
-        } else if (this.houses==4){
-            return rent4H;
-        } else if (this.houses==5){
-            return rentHotel;
+
+        switch (this.colour) {
+            case "Railroad":
+                return 100;
+            case "Utility":
+                return 50;
+            default:
+                return this.getHousesRent();
         }
-        return 0; // there was an error if we return 0
+    }
+
+    private int getHousesRent() {
+        switch (this.houses) {
+            case 1:
+                return this.rent1H;
+            case 2:
+                return this.rent2H;
+            case 3:
+                return this.rent3H;
+            case 4:
+                return this.rent4H;
+            case 5:
+                return this.rentHotel;
+            default:
+                return this.rent;
+        }
     }
 
     public int getHouseCost(){
