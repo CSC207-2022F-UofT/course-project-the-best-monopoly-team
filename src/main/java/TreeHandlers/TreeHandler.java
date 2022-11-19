@@ -5,7 +5,11 @@ import Interactors.GameLogic;
 
 import java.util.HashMap;
 
+/**
+ *
+ */
 public class TreeHandler {
+
     GameLogic gameLogicInteractor;
     Player currentPlayer;
     Board board;
@@ -24,7 +28,7 @@ public class TreeHandler {
 
     public State getInitialState(){
         State currentState = new State();
-        for (MenuTree tree: gameLogicInteractor.currentTree.getChildren()){
+        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
             currentState.addOptions(tree.getName());
         }
         return currentState;

@@ -7,6 +7,12 @@ import java.util.Arrays;
 
 public class MainTreeHandler extends TreeHandler {
 
+    int[] mainStates = new int[5];
+    public MainTreeHandler(){
+    }
+    public MainTreeHandler(int[] states){
+        mainStates = states;
+    }
     public State handleInput(int input){
         State currentState = new State();
         switch (gameLogicInteractor.getCurrentTree().getName()){
@@ -56,16 +62,12 @@ public class MainTreeHandler extends TreeHandler {
                 //input corresponds to the index of the current player's selected property
                 //Case sending the trade
                 //the input should be 0 or 1. 0 if the trade was accepted, 1 if the trade was declined.
-                if(input == 0){
-                    //TODO: Process the trade.
 
-                    returnPlayerIndex = getCurrentPlayerIndex();
-                    //returnPlayerAddress will hold the original player index in this.board.getPlayers()
-                    this.currentPlayer = this.board.getPlayers()[selectedOptions.get("PickPlayer")];
-                    gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[1]);
-                    currentState.addOptions(Integer.toString(0));
-                    currentState.addOptions(Integer.toString(1));
-                }
+                returnPlayerIndex = getCurrentPlayerIndex();
+                //returnPlayerAddress will hold the original player index in this.board.getPlayers()
+                this.currentPlayer = this.board.getPlayers()[selectedOptions.get("PickPlayer")];
+                gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[1]);
+                currentState = getInitialState();
                 currentState.setEndNode(true);
                 break;
             case "ManageProperty":
@@ -88,7 +90,6 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.addOptions(Integer.toString(2));
                 break;
             case "Mortgage":
-                //TODO: finish case 8
                 //Case player selected what to do with the property
                 //the player chooses to mortgage the property
                 Property targetProperty = this.board.getProperties()[selectedOptions.get(0)];
@@ -134,7 +135,10 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "Auction":
                 //Case auction selected
-                //TODO: process the auction
+                returnPlayerIndex = getCurrentPlayerIndex();
+                //returnPlayerAddress will hold the original player index in this.board.getPlayers()
+                gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[2]);
+                currentState = getInitialState();
                 break;
             case "Steal":
                 //Case steal selected
@@ -156,11 +160,10 @@ public class MainTreeHandler extends TreeHandler {
             case "EndTurn":
                 /*TODO: Change the turn, do not let player end turn if
                 negative money
-                * */
-
+                */
                 break;
             case "SettingsMenu":
-                //TODO: show the settings menu
+                currentState = getInitialState();
                 break;
             case "ExitGame":
                 currentState.setExitToMenu(true);
@@ -169,7 +172,6 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.setSaveGame(true);
                 break;
             case "Bankruptcy":
-                //TODO: remove player from game and all of their assets
                 currentPlayerProperties = this.currentPlayer.properties;
                 for (Property targetedProperty : currentPlayerProperties) {
                     targetedProperty.setOwner(null);

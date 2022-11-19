@@ -13,9 +13,8 @@ public class UseCaseInteractor{
     private int[] globalStates = new int[5];
     private GameLogic logicInteractor;
     private State currentState;
-    public UseCaseInteractor(GameLogic logicInteractor){
+    public UseCaseInteractor(){
         createTrees();
-        this.logicInteractor = logicInteractor;
         currentState = getInitialState();
         updateOutput(currentState);
 //        currentState = logicInteractor.getInitialState();
@@ -27,7 +26,7 @@ public class UseCaseInteractor{
      * and uses helper methods to deal with the logic afterwards.
      * @param input the translated input of the user from the input interface
      */
-    public void handleInput(int input){
+    public State handleInput(int input){
         if (menuTreeActive){
             //Moving through the tree depending on the input and the node
             if (input == -1){
@@ -47,6 +46,7 @@ public class UseCaseInteractor{
         else{
             currentState = handleOtherTrees(input);
         }
+        return currentState;
 
     }
 
@@ -117,22 +117,37 @@ public class UseCaseInteractor{
             case "NewGame":
                 //in "New Game" node
                 globalStates[0] = 1;
+                state.setName("What mode would you like to play?");
+                state.addOptions("Normal mode");
                 break;
             case "ChooseGameMode":
                 //in "Choose Game mode" node
                 globalStates[1] = input;
+                state.setName("How many players?");
+                for (int i = 2; i<9; i++){
+                    state.addOptions(i + " players");
+                }
                 break;
             case "NumberOfPlayers":
                 //in "Number of Players" node
                 globalStates[2] = input;
+                state.setName("How many rounds?");
+                state.addOptions("30 rounds");
+                state.addOptions("60 rounds");
+                state.addOptions("90 rounds");
+                state.addOptions("no limit");
                 break;
             case "GameLength":
                 //in "Game Length" node
                 globalStates[3] = input;
+                state.setName("Create the game?");
+                state.addOptions("Yes");
+                state.addOptions("No");
                 break;
             case "CreateNewGame":
                 //in "Create new Game" node
-                //TODO: CREATE THE GAME
+                //TODO: CREATE THE GAME BY MAKING THE LOGIC INTERACTOR
+                break;
             case "LoadGame":
                 //in "Load Game" node
                 globalStates[0] = 0;
@@ -143,7 +158,7 @@ public class UseCaseInteractor{
                 break;
             case "CreateLoadedGame":
                 //in "Create Loaded Game" node
-                //TODO: CREATE THE GAME
+                //TODO: CREATE THE GAME BY MAKING THE LOGIC INTERACTOR
                 break;
         }
         return state;

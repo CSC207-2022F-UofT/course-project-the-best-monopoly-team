@@ -15,7 +15,7 @@ public class AuctionTreeHandler extends TreeHandler {
         State currentState = new State();
         int currentPlayerIndex = getCurrentPlayerIndex();
         int potIndex = auctionStates.length - 1;
-        switch (gameLogicInteractor.currentTree.getName()){
+        switch (gameLogicInteractor.getCurrentTree().getName()){
             case "LowOption":
                 auctionStates[potIndex] += LOW_OPTION;
                 break;
