@@ -22,12 +22,8 @@ public class Board{
             String colour = (String) data[1];
             int cost = (int) data[2];
             int houseCost = (int) data[3];
-            int rent = (int) data[4];
-            int rent1H = (int) data[5];
-            int rent2H = (int) data[6];
-            int rent3H = (int) data[7];
-            int rent4H = (int) data[8];
-            int rentHotel = (int) data[9];
+            int[] rentValues = new int[] {(int) data[4], (int) data[5], (int) data[6],
+                                          (int) data[7], (int) data[8], (int) data[9]};
             Player owner = null;
             if ((int) data[10] != 0) {
                 owner = players[(int) data[10]];
@@ -39,9 +35,8 @@ public class Board{
             if (mortgageString.equals("true")) {
                 mortgaged = true;
             }
-            properties[i] = new Property(name, colour, cost, houseCost, rent, rent1H,
-                    rent2H, rent3H, rent4H, rentHotel, owner,
-                    mortgageValue, houses, mortgaged);
+            properties[i] = new Property(name, colour, cost, houseCost, rentValues,
+                                         owner, mortgageValue, houses, mortgaged);
         }
         this.properties = properties;
     }
