@@ -9,9 +9,9 @@ public abstract class MenuTree{
     protected MenuTree parent;
     protected String name;
     //makes tree node handling easier
-    protected int id;
 
     public abstract MenuTree getParent();
+    public abstract MenuTree getMaxParent();
     public abstract List<MenuTree> getChildren();
     public abstract String getName();
     public abstract void setParent(MenuTree parent);

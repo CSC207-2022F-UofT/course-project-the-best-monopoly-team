@@ -14,12 +14,12 @@ public class Player {
         return position;
     }
 
-    private String name;
-    private int money;
-    private ArrayList<Property> properties;
-    private boolean inJail;
-    private int jailCards;
-    private int position;
+    public String name;
+    public int money;
+    public ArrayList<Property> properties;
+    public boolean inJail;
+    public int jailCards;
+    public int position;
 
     public Player(String name) {
         this.name = name;
@@ -63,6 +63,13 @@ public class Player {
         return actions;
     }
     */
+    public String getName(){
+        return this.name;
+    }
+
+    public int getMoney() {
+        return this.money;
+    }
 
     public void addProperty(Property property) {
         this.properties.add(property);
@@ -120,7 +127,7 @@ public class Player {
 
     public void buildHouse(Property property, int houses) {
         if (properties.contains(property)) {
-//            property.addHouse(houses);
+            //property.addHouse(houses);
         }
     }
 
