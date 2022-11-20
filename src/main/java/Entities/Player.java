@@ -10,12 +10,14 @@ import java.util.ArrayList;
 public class Player {
     // Represents a player in the game
 
+
     private String name;
     private int money;
     private ArrayList<Property> properties;
     private boolean inJail;
     private int jailCards;
     private int position;
+
 
     public Player(String name) {
         this.name = name;
@@ -69,6 +71,13 @@ public class Player {
         return actions;
     }
     */
+    public String getName(){
+        return this.name;
+    }
+
+    public int getMoney() {
+        return this.money;
+    }
 
     public void addProperty(Property property) {
         this.properties.add(property);
@@ -126,7 +135,7 @@ public class Player {
 
     public void buildHouse(Property property, int houses) {
         if (properties.contains(property)) {
-//            property.addHouse(houses);
+            //property.addHouse(houses);
         }
     }
 

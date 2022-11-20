@@ -1,0 +1,28 @@
+Mediterranean Avenue,Brown,60,50,2,10,30,90,160,250,0,30,0,false
+Baltic Avenue,Brown,60,50,4,20,60,180,320,450,0,30,0,false
+Oriental Avenue,Light Blue,100,50,6,30,90,270,400,550,0,50,0,false
+Vermont Avenue,Light Blue,100,50,6,30,90,270,400,550,0,50,0,false
+Connecticut Avenue,Light Blue,120,50,8,40,100,300,450,600,0,60,0,false
+St. Charles Place,Pink,140,100,10,50,150,450,625,750,0,70,0,false
+States Avenue,Pink,140,100,10,50,150,450,625,750,0,70,0,false
+Virginia Avenue,Pink,160,100,12,60,180,500,700,900,0,80,0,false
+St. James Place,Orange,180,100,14,70,200,550,750,950,0,90,0,false
+Tennessee Avenue,Orange,180,100,14,70,200,550,750,950,0,90,0,false
+New York Avenue,Orange,200,100,16,80,220,600,800,1000,0,100,0,false
+Kentucky Avenue,Red,220,150,18,90,250,700,875,1050,0,110,0,false
+Indiana Avenue,Red,220,150,18,90,250,700,875,1050,0,110,0,false
+Illinois Avenue,Red,240,150,20,100,300,750,925,1100,0,120,0,false
+Atlantic Avenue,Yellow,260,150,22,110,330,800,975,1150,0,130,0,false
+Ventnor Avenue,Yellow,260,150,22,110,330,800,975,1150,0,130,0,false
+Marven Gardens,Yellow,280,150,24,120,360,850,1025,1200,0,140,0,false
+Pacific Avenue,Green,300,200,26,130,390,900,1100,1275,0,150,0,false
+South Carolina Avenue,Green,300,200,26,130,390,900,1100,1275,0,150,0,false
+Pennsylvania Avenue,Green,320,200,28,150,450,1000,1200,1400,0,160,0,false
+Park Place,Dark Blue,350,200,35,175,500,1100,1300,1500,0,175,0,false
+Boardwalk,Dark Blue,400,200,50,200,600,1400,1700,2000,0,200,0,false
+Reading Railroad,Railroad,200,0,25,50,100,200,0,0,100,0,false
+Pennsylvania Railroad,Railroad,200,0,25,50,100,200,0,0,100,0,false
+B&O Railroad,Railroad,200,0,25,50,100,200,0,0,100,0,false
+Kings Cross,Railroad,200,0,25,50,100,200,0,0,100,0,false
+Electric Company,Utility,150,0,0,0,0,0,0,0,0,75,0,false
+Water Works,Utility,150,0,0,0,0,0,0,0,0,75,0,false
