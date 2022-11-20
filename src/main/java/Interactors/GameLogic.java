@@ -111,6 +111,7 @@ public class GameLogic {
         alreadyRolled.addChild(informationNode);
         saveGame.addChild(informationNode);
         endTurn.addChild(informationNode);
+        auction.addChild(informationNode);
 
         mortgage.addChild(confirmationNode);
         exitGame.addChild(confirmationNode);
@@ -191,6 +192,17 @@ public class GameLogic {
             return auctionTreeHandler.handleInput();
         }
 
+    }
+    public int getCurrentTreeID(){
+        for (int  i = 0; i<trees.length; i++){
+            if (trees[i] == currentTree.getMaxParent()){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public void setupAuction(){
+        auctionTreeHandler.initialize();
     }
 
 }

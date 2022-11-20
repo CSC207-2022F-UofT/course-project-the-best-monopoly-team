@@ -24,12 +24,12 @@ public class TradingTreeHandler extends TreeHandler {
                 firstTrader.getProperties().add(secondTraderProperty);
                 currentPlayer = firstTrader;
                 gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[0]);
-                description = "Trade successful";
+                descriptionOtherTrees = "Trade successful";
                 break;
             case "DeclineTrade":
                 currentPlayer = firstTrader;
                 gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[0]);
-                description = "Trade failed";
+                descriptionOtherTrees = "Trade failed";
                 break;
         }
         return currentState;

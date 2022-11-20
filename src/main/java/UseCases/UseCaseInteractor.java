@@ -72,7 +72,6 @@ public class UseCaseInteractor{
     public State returnToStart(){
         menuTreeActive = true;
         currentTree = (GameLogicTree) currentTree.getMaxParent();
-        treeHandler.resetSelectedOptions();
         return getInitialState();
     }
     /**
@@ -157,7 +156,7 @@ public class UseCaseInteractor{
         try {
             ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
             ArrayList<String> playerNames = new ArrayList<>();
-            for (int i = 0; i <= treeHandler.selectedOptions.get("NumberOfPlayers"); i++) {
+            for (int i = 0; i < treeHandler.selectedOptions.get("NumberOfPlayers") + 2; i++) {
                 playerNames.add("Player " + i);
             }
             Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);

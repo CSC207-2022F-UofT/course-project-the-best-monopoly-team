@@ -6,44 +6,63 @@ import Entities.Property;
 import Entities.State;
 
 public class AuctionTreeHandler extends TreeHandler {
-    final int LOW_OPTION = 20;
-    final int MEDIUM_OPTION = 80;
-    final int HIGH_OPTION = 160;
     int[] auctionStates;
     Player playerWon;
+    Property biddingProperty;
+    int potIndex;
+    int currentPlayerIndex;
+    int auctionComplete = -1;
 
     public AuctionTreeHandler(int playerLength){
         auctionStates = new int[playerLength + 1];
     }
     public State handleInput(){
         State currentState = new State();
-        int currentPlayerIndex = getCurrentPlayerIndex();
-        int potIndex = auctionStates.length - 1;
+        currentPlayerIndex = getCurrentPlayerIndex();
+        do {
+            changePlayers();
+        }while (auctionStates[getCurrentPlayerIndex()] == 1);
+
         switch (gameLogicInteractor.getCurrentTree().getName()){
             case "LowOption":
                 auctionStates[potIndex] += LOW_OPTION;
-                currentState = super.getInitialState();
                 break;
             case "MediumOption":
                 auctionStates[potIndex] += MEDIUM_OPTION;
-                currentState = super.getInitialState();
                 break;
             case "HighOption":
                 auctionStates[potIndex] += HIGH_OPTION;
-                currentState = super.getInitialState();
                 break;
             case "Fold":
                 auctionStates[currentPlayerIndex] = 1;
-                int auctionComplete = checkAuction();
+                auctionComplete = checkAuction();
                 if (auctionComplete != -1){
-                    //TODO: BUY THE PROPERTY
                     playerWon = players.get(auctionComplete);
-                    playerWon.addProperty((Property) board.getPlayerCell(players.get(returnPlayerIndex)));
-                    description = playerWon.getName() + " won the auction for " +auctionStates[potIndex] + " money";
+                    playerWon.addProperty(biddingProperty);
+                    playerWon.pay(auctionStates[potIndex]);
+                    descriptionOtherTrees = playerWon.getName() + " won the auction for " +auctionStates[potIndex] + " money";
+                    gameLogicInteractor.setCurrentTree(getReturnTree());
+                    currentPlayer = players.get(returnPlayerIndex);
+                    return gameLogicInteractor.handleTree(0);
                 }
                 break;
+//            case "Information":
+//                gameLogicInteractor.setCurrentTree(getReturnTree());
+//                currentPlayer = players.get(returnPlayerIndex);
+        }
+        if (auctionComplete == -1){
+            setAuctionDescription();
+            currentState = getInitialState();
+            gameLogicInteractor.setCurrentTreeToMaxParent();
+        }
+        else{
+            currentState.setDescription(descriptionOtherTrees);
+            currentState.addOptions("ok");
         }
         return currentState;
+    }
+    private void setAuctionDescription(){
+        descriptionOtherTrees = "We are bidding on " + biddingProperty.getName() + " with the current pot being"+ auctionStates[potIndex];
     }
 
     private int checkAuction(){
@@ -55,10 +74,17 @@ public class AuctionTreeHandler extends TreeHandler {
                 playerIndex = i;
             }
         }
-        if (auctionFinishedCounter > 1){
+        if (auctionFinishedCounter == 1){
             return playerIndex;
         }
         return -1;
+    }
+    public void initialize() {
+        auctionComplete = -1;
+        this.biddingProperty = (Property) board.getPlayerCell(players.get(returnPlayerIndex));
+        auctionStates = new int[players.size() + 1];
+        potIndex = auctionStates.length - 1;
+        setAuctionDescription();
     }
 
 }

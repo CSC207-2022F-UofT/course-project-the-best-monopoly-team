@@ -86,7 +86,7 @@ public class MainTreeHandler extends TreeHandler {
                     mainStates[1] = 1;
                 }
                 else {
-                    currentState.setDescription(description);
+                    currentState.setDescription(descriptionOtherTrees);
                     currentState.addOptions("ok");
                     mainStates[1] = 0;
                     break;
@@ -206,11 +206,12 @@ public class MainTreeHandler extends TreeHandler {
 
                     returnTree = currentTree;
                     gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[2]);
-                    addSwitchOptions(currentState);
+                    gameLogicInteractor.setupAuction();
+                    currentState = getInitialState();
                     mainStates[1] = 1;
                 }
                 else{
-                    currentState.setDescription(description);
+                    currentState.setDescription(descriptionOtherTrees);
                     currentState.addOptions("ok");
                     mainStates[1] = 0;
                 }
@@ -239,7 +240,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "EndTurn":
                 if (currentPlayer.getMoney() >= 0){
-                    currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
+                    changePlayers();
                     mainStates = new int[5];
                     currentState = afterBottomNode();
                 }
