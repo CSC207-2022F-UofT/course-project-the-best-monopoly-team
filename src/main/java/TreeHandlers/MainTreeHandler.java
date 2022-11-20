@@ -37,7 +37,7 @@ public class MainTreeHandler extends TreeHandler {
                 selectedOptions.put(currentTree.getName(), input);
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers()[input];
-                ArrayList<Property> playerProperties = selectedPlayer.properties;
+                ArrayList<Property> playerProperties = selectedPlayer.getProperties();
                 //using "i" starting from 0 to number of properties the player has - 1
                 for (int i = 0; i < playerProperties.size(); i++){
                     currentState.addOptions(playerProperties.get(i).getName());
@@ -49,9 +49,9 @@ public class MainTreeHandler extends TreeHandler {
                 //the input corresponds to the index of the target player in this.board.getPlayers()
                 selectedOptions.put(currentTree.getName(), input);
                 //provide item options from the current player's inventory
-                ArrayList<Property> currentPlayerInventory = currentPlayer.properties;
+                ArrayList<Property> currentPlayerInventory = currentPlayer.getProperties();
                 //using "i" starting from 0 to number of properties the player has - 1
-                for (int i = 0; i < currentPlayerInventory.size(); i++){
+                for(int i = 0; i < currentPlayer.getProperties().size(); i++){
                     currentState.addOptions(currentPlayerInventory.get(i).getName());
                 }
                 break;
@@ -95,7 +95,7 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.setDescription("What property do you want to manage?");
                 //Case manage property selected
                 //provide options on the properties available
-                ArrayList<Property> currentPlayerProperties = this.currentPlayer.properties;
+                ArrayList<Property> currentPlayerProperties = this.currentPlayer.getProperties();
                 for(int i = 0; i < currentPlayerProperties.size(); i++){
                     currentState.addOptions(Integer.toString(i));
                 }
