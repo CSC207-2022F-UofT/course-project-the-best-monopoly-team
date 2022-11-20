@@ -10,16 +10,26 @@ import java.util.ArrayList;
 public class Player {
     // Represents a player in the game
 
-    public int getPosition() {
-        return position;
-    }
 
-    public String name;
-    public int money;
-    public ArrayList<Property> properties;
-    public boolean inJail;
-    public int jailCards;
-    public int position;
+    private String name;
+
+
+
+    private int money;
+
+
+
+    private ArrayList<Property> properties;
+
+
+
+    private boolean inJail;
+    private int jailCards;
+
+
+
+    private int position;
+
 
     public Player(String name) {
         this.name = name;
@@ -28,6 +38,25 @@ public class Player {
         this.inJail = false;
         this.jailCards = 0;
         this.position = 0;
+    }
+    public boolean isInJail() {
+        return inJail;
+    }
+
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
+    }
+    public void setPosition(int position) {
+        this.position = position;
+    }
+    public int getPosition() {
+        return this.position;
+    }
+
+    public int getJailCards() { return this.jailCards; }
+
+    public void setJailCards(int num) {
+        this.jailCards = this.jailCards + num;
     }
 
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
@@ -66,7 +95,9 @@ public class Player {
     public String getName(){
         return this.name;
     }
-
+    public void setMoney(int money) {
+        this.money = money;
+    }
     public int getMoney() {
         return this.money;
     }
@@ -147,6 +178,13 @@ public class Player {
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
+    }
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
     }
 
 

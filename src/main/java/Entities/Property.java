@@ -71,6 +71,11 @@ public class Property extends Cell {
         this.houses = houses;
     }
 
+    @Override
+    public String performAction(Player player, Board board) {
+        return null;
+    }
+
     public Player getOwner(){
         return this.ownedBy;
     }
