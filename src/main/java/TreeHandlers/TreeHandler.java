@@ -23,7 +23,6 @@ public class TreeHandler {
     String description;
 
 
-
     public void initialize(Player currentPlayer, Board board){
         players = board.getPlayers();
         this.currentPlayer = currentPlayer;

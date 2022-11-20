@@ -40,7 +40,6 @@ public class Player {
     }
 
 
-
     public int getJailCards() { return jailCards; }
 
     public int getPosition() { return position; }
@@ -80,7 +79,6 @@ public class Player {
         return actions;
     }
     */
-
     public String getName(){
         return this.name;
     }
@@ -94,7 +92,6 @@ public class Player {
     public void addProperty(Property property) {
         this.properties.add(property);
     }
-
     public String steal(Player victim) {
         double success = Math.random();
         if (success <= 0.3) {
@@ -112,6 +109,7 @@ public class Player {
             }
         }
     }
+
 
 
     public void move(int step) {

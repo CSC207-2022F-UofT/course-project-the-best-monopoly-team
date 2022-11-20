@@ -168,6 +168,7 @@ public class ActionSpace extends Cell {
         } else if (Objects.equals(actionType, "payAll")) {
             for (int i = 0; i < board.getPlayers().size(); i++) {
                 player.pay(board.getPlayers().get(i), amount);
+
             }
         } else if (Objects.equals(actionType, "goToJail")) {
             player.changeJailStatus(player);
