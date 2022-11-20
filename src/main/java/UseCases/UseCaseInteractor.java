@@ -21,8 +21,6 @@ public class UseCaseInteractor{
 
     private InitialTreeHandler treeHandler;
 
-
-
     private GameLogic logicInteractor;
     private DataAccess dataAccess;
     private GameCreation gameCreation;
@@ -65,8 +63,17 @@ public class UseCaseInteractor{
         else{
             currentState = handleOtherTrees(input);
         }
+        if (currentState.isExitToMenu()){
+            return returnToStart();
+        }
         return currentState;
 
+    }
+    public State returnToStart(){
+        menuTreeActive = true;
+        currentTree = (GameLogicTree) currentTree.getMaxParent();
+        treeHandler.resetSelectedOptions();
+        return getInitialState();
     }
     /**
      * This method creates the initial menu tree for the program <br>

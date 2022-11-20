@@ -11,6 +11,7 @@ public class MainTreeHandler extends TreeHandler {
     //mainStates[2]: reserved for roll
     int[] mainStates = new int[5];
     String answer;
+    GameLogicTree confirmationReturn;
     public MainTreeHandler(){
     }
     public MainTreeHandler(int[] states){
@@ -120,7 +121,7 @@ public class MainTreeHandler extends TreeHandler {
                 //2 is for the build house option
                 currentState.addOptions("Mortgage");
                 currentState.addOptions("Unmortgage");
-                currentState.addOptions(Integer.toString(2));
+                currentState.addOptions("Build a house");
                 break;
             case "Mortgage":
                 if (mainStates[0] == 1) {
@@ -129,11 +130,13 @@ public class MainTreeHandler extends TreeHandler {
                     Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("SelectProperty"));
                     currentPlayer.mortgage(targetProperty);
                     mainStates[0] = 0;
+                    currentState = afterBottomNode();
                 }
                 else{
                     currentState.setDescription("Are you sure you want to mortgage?");
                     currentState.addOptions("yes");
                     currentState.addOptions("no");
+                    confirmationReturn = currentTree;
                 }
                 break;
             case "BuildProperty":
@@ -149,7 +152,7 @@ public class MainTreeHandler extends TreeHandler {
                     //We can determine if a player lands on a property by checking if the position of
                     //the player is on one with a property on it (not 0,2,7,10,17,20,22,30,33,36,38).
 
-                    currentPlayer.riggedRoll(2);
+                    currentPlayer.riggedRoll(3);
                     //currentPlayer.rollDice();
                     board.updatePlayerPosition(currentPlayer);
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
@@ -192,9 +195,8 @@ public class MainTreeHandler extends TreeHandler {
                 currentPlayer.pay(targetProperty.getPrice());
                 currentPlayer.getProperties().add(targetProperty);
                 targetProperty.setOwner(currentPlayer);
+                currentState = afterBottomNode();
 
-                gameLogicInteractor.setCurrentTreeToMaxParent();
-                currentState = getInitialState();
                 break;
             case "Auction":
                 if (mainStates[1] == 0) {
@@ -236,16 +238,15 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.addOptions("ok");
                 break;
             case "EndTurn":
-                if (currentPlayer.getMoney() < 0){
+                if (currentPlayer.getMoney() >= 0){
                     currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
                     mainStates = new int[5];
-                    currentState = getInitialState();
+                    currentState = afterBottomNode();
                 }
                 else{
                     currentState.setDescription("You can't end your turn, you have negative money!");
                     currentState.addOptions("Ok");
                 }
-                gameLogicInteractor.setCurrentTreeToMaxParent();
                 break;
             case "SettingsMenu":
                 currentState.setDescription("Welcome to the settings menu");
@@ -253,12 +254,14 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "ExitGame":
                 if (mainStates[0] == 1) {
+                    mainStates[0]= 0;
+                    currentState.setExitToMenu(true);
+                }
+                else{
                     currentState.setDescription("Are you sure you want to exit?");
                     currentState.addOptions("Yes");
                     currentState.addOptions("No");
-                }
-                else{
-                    currentState.setExitToMenu(true);
+                    confirmationReturn = currentTree;
                 }
                 break;
             case "SaveGame":
@@ -279,10 +282,10 @@ public class MainTreeHandler extends TreeHandler {
                     // switching players
                     currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
                     mainStates = new int[5];
-                    gameLogicInteractor.setCurrentTreeToMaxParent();
-                    currentState = getInitialState();
+                    currentState = afterBottomNode();
                 }
                 else {
+                    confirmationReturn = currentTree;
                     currentState.setDescription("Confirm bankruptcy?");
                     currentState.addOptions("Yes");
                     currentState.addOptions("No");
@@ -291,20 +294,23 @@ public class MainTreeHandler extends TreeHandler {
             case "Confirmation":
                 if (input == 0) {
                     mainStates[0] = 1;
-                    gameLogicInteractor.setCurrentTree((GameLogicTree) currentTree.getParent());
-                    handleInput(input);
+                    gameLogicInteractor.setCurrentTree(confirmationReturn);
+                    currentState = handleInput(input);
                 }
                 else{
-                    gameLogicInteractor.setCurrentTreeToMaxParent();
-                    currentState = getInitialState();
+                    currentState = afterBottomNode();
                 }
                 break;
             case "Information":
-                gameLogicInteractor.setCurrentTreeToMaxParent();
-                currentState = getInitialState();
+                currentState = afterBottomNode();
                 break;
         }
 
         return currentState;
     }
+    public State afterBottomNode(){
+        gameLogicInteractor.setCurrentTreeToMaxParent();
+        return getInitialState();
+    }
+
 }

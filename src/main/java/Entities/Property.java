@@ -55,8 +55,8 @@ public class Property extends Cell {
         this.houses = houses;
         this.mortgaged = mortgaged;
     }
-
-    public String performAction(Player currentPlayer){
+    @Override
+    public String performAction(Player currentPlayer, Board board){
         // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
         if (this.getOwner().equals(currentPlayer)){
             return "Landed on a property you own";
@@ -68,11 +68,6 @@ public class Property extends Cell {
 
     public void setHouses(int houses){
         this.houses = houses;
-    }
-
-    @Override
-    public String performAction(Player player, Board board) {
-        return null;
     }
 
     public Player getOwner(){

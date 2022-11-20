@@ -44,7 +44,6 @@ public class GameLogic {
     }
 
     public void createTrees(){
-        //TODO: make a tree node at the end of most end nodes to show the information after.
         //Creating the game loop tree
         GameLogicTree main = new GameLogicTree("MainTree","It's your turn! What do you want to do?");
         GameLogicTree trade = new GameLogicTree("Trade");
@@ -52,7 +51,6 @@ public class GameLogic {
         GameLogicTree pickItemOp = new GameLogicTree("PickItemOp");
         GameLogicTree pickItemSelf = new GameLogicTree("PickItemSelf");
 
-        //TODO: make the prompt say trade complete/failed
         GameLogicTree sendTrade = new GameLogicTree("SendTrade");
 
         pickItemSelf.addChild(sendTrade);
@@ -74,7 +72,7 @@ public class GameLogic {
         manageProperty.addChild(selectProperty);
         manageProperty.addChild(noProperties);
 
-        //TODO: prompt has to alter based on what the player lands on
+
         GameLogicTree roll = new GameLogicTree("Roll");
         GameLogicTree callAction = new GameLogicTree("CallAction");
         GameLogicTree emptyPropertySpace = new GameLogicTree("EmptyPropertySpace");
@@ -112,6 +110,7 @@ public class GameLogic {
         buildProperty.addChild(informationNode);
         alreadyRolled.addChild(informationNode);
         saveGame.addChild(informationNode);
+        endTurn.addChild(informationNode);
 
         mortgage.addChild(confirmationNode);
         exitGame.addChild(confirmationNode);
@@ -174,11 +173,8 @@ public class GameLogic {
             //Move forward in tree
             currentTree = (GameLogicTree) currentTree.getChildren().get(0);
         }
-        State returnState = handleTree(input);
-        if (currentTree.getChildren().isEmpty()){
-            setCurrentTreeToMaxParent();
-        }
-        return returnState;
+
+        return handleTree(input);
     }
 
     public void transverseCurrentTree(int branchNumber){

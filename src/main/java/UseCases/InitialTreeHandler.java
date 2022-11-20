@@ -86,4 +86,7 @@ public class InitialTreeHandler {
         }
         return state;
     }
+    public void resetSelectedOptions(){
+        selectedOptions = new HashMap<String, Integer>();
+    }
 }
