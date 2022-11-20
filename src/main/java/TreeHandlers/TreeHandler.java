@@ -6,13 +6,23 @@ import Interactors.GameLogic;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ *
+ */
 public class TreeHandler {
+
     GameLogic gameLogicInteractor;
     Player currentPlayer;
     Board board;
     HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
     int returnPlayerIndex = -1;
     List<Player> players;
+
+    GameLogicTree returnTree;
+
+    String description;
+
+
 
     public void initialize(Player currentPlayer, Board board){
         players = board.getPlayers();
@@ -25,10 +35,16 @@ public class TreeHandler {
 
     public State getInitialState(){
         State currentState = new State();
-        for (MenuTree tree: gameLogicInteractor.currentTree.getChildren()){
+        currentState.setDescription(gameLogicInteractor.getCurrentTree().getPrompt());
+        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
             currentState.addOptions(tree.getName());
         }
         return currentState;
+    }
+    public void addSwitchOptions(State currentState){
+        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
+            currentState.addOptions(tree.getName());
+        }
     }
     public int getCurrentPlayerIndex(){
         for (int i = 0; i< players.size(); i++){
@@ -40,13 +56,13 @@ public class TreeHandler {
     }
     public Object[][] playersToArray(){
         Object[][] playersArray = new Object[players.size()][6];
-        for(int i = 0; i < players.size(); i++){
-            playersArray[i][0] = players.get(i).getName();
-            playersArray[i][1] = players.get(i).getMoney();
-            playersArray[i][2] = players.get(i).getProperties();
-            players.get(i).setInJail((Boolean) playersArray[i][3]);
-            playersArray[i][4] = players.get(i).getJailCards();
-            playersArray[i][5] = players.get(i).getPosition();
+        for(int i = 0; i < players.length; i++){
+            playersArray[i][0] = players[i].getName();
+            playersArray[i][1] = players[i].getMoney();
+            playersArray[i][2] = players[i].getProperties();
+            playersArray[i][3] = players[i].isInJail();
+            playersArray[i][4] = players[i].getJailCards();
+            playersArray[i][5] = players[i].getPosition();
         }
         return playersArray;
     }
@@ -59,6 +75,7 @@ public class TreeHandler {
         // boardArray[3] = board.getProperties();
         return boardArray;
     }
+
 
     public void movePlayer(int cell_number){
         int total_squares = 40;
@@ -76,6 +93,13 @@ public class TreeHandler {
 
     public Player getCurrentPlayer(){
         return currentPlayer;
+    }
+    public GameLogicTree getReturnTree() {
+        return returnTree;
+    }
+
+    public void setReturnTree(GameLogicTree returnTree) {
+        this.returnTree = returnTree;
     }
 
 }

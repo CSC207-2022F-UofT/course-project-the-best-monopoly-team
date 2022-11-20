@@ -26,6 +26,7 @@ public class IOController {
     public void connectLogic(){
         String newOutput = "";
         ArrayList<String> options = currentState.getOptions();
+        this.output =  currentState.getDescription();
         for (int i = 0; i < options.size(); i++){
             this.output = this.output + options.get(i) + "(" + i + "), ";
         }

@@ -26,24 +26,10 @@ public class Player {
         this.position = 0;
     }
 
-    public String getName() {return this.name;}
-    public int getPosition() {
-        return position;
-    }
-
     public void setPosition(int position) {
         this.position = position;
     }
 
-    public int getJailCards() { return this.jailCards; }
-
-    public int getMoney() {return this.money; }
-
-    public void setMoney(int amount) {this.money = amount; }
-
-    public ArrayList<Property> getProperties() {return this.properties; }
-
-    public void setInJail(boolean inJail) {this.inJail = inJail;}
 
     public void setJailCards(int num) {
         this.jailCards = this.jailCards + num;
@@ -160,6 +146,13 @@ public class Player {
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
+    }
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
     }
 
 
