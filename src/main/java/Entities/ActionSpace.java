@@ -170,7 +170,7 @@ public class ActionSpace extends Cell {
                 player.pay(board.getPlayers()[i], amount);
             }
         } else if (Objects.equals(actionType, "goToJail")) {
-            player.changeJailStatus(player);
+            player.changeJailStatus();
         } else {
                 player.setJailCards(player.getJailCards() + 1);
             }
