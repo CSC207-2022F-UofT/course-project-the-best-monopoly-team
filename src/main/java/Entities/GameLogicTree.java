@@ -4,18 +4,30 @@ import java.util.List;
 
 public class GameLogicTree extends MenuTree{
     private boolean didRoll;
-
-    public void setIsSwitchBlock(boolean switchBlock) {
-        this.switchBlock = switchBlock;
-    }
-
     private boolean switchBlock = false;
+
+    private String prompt;
+
 
     public GameLogicTree(String name) {
         didRoll = false;
         this.name = name;
     }
-
+    public GameLogicTree(String name, String prompt) {
+        didRoll = false;
+        this.name = name;
+        this.prompt = prompt;
+    }
+    public void setPrompt(String prompt){
+        this.prompt = prompt;
+    }
+    public String getPrompt(){
+        return prompt;
+    }
+    @Override
+    public void setParent(MenuTree parent) {
+        this.parent = parent;
+    }
     @Override
     public MenuTree getParent() {
         return this.parent;
@@ -41,16 +53,10 @@ public class GameLogicTree extends MenuTree{
     }
 
     @Override
-    public void setParent(MenuTree parent) {
-        this.parent = parent;
-    }
-
-    @Override
     public void addChild(MenuTree child) {
         child.setParent(this);
         this.children.add(child);
     }
-
     public boolean didRoll(){
         return this.didRoll;
     }
@@ -60,7 +66,9 @@ public class GameLogicTree extends MenuTree{
     public void gotDoubles(){
         this.didRoll = false;
     }
-
+    public void setIsSwitchBlock(boolean switchBlock) {
+        this.switchBlock = switchBlock;
+    }
     public boolean isSwitchBlock() {
         return switchBlock;
     }
