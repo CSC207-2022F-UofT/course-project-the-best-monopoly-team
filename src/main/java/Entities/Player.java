@@ -46,8 +46,6 @@ public class Player {
 
     public int getPosition() { return position; }
 
-    public boolean isInJail() { return inJail; }
-
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         if (money > this.money) {
             return "Inadequate amount of money";
@@ -81,13 +79,6 @@ public class Player {
         return actions;
     }
     */
-    public String getName(){
-        return this.name;
-    }
-
-    public int getMoney() {
-        return this.money;
-    }
 
     public void addProperty(Property property) {
 
