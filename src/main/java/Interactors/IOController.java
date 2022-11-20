@@ -24,12 +24,15 @@ public class IOController {
         this.input = input;
     }
     public void connectLogic(){
+        this.currentState = this.interactor.handleInput(this.input);
+        displayOptions();
+    }
+    public void displayOptions(){
         String newOutput = "";
         ArrayList<String> options = currentState.getOptions();
         this.output =  currentState.getDescription();
         for (int i = 0; i < options.size(); i++){
             this.output = this.output + options.get(i) + "(" + i + "), ";
         }
-        this.currentState = this.interactor.handleInput(this.input);
     }
 }

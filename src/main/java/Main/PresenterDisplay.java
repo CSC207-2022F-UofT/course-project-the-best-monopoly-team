@@ -12,8 +12,8 @@ public class PresenterDisplay {
 
     public void playGame(){
         IOController controller = new IOController();
-        controller.connectLogic();
         Scanner userIn = new Scanner(System.in);
+        controller.displayOptions();
         while (!this.isOver){
             System.out.println(controller.presentOutput());
             int choice = userIn.nextInt();
