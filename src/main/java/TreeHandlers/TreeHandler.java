@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TreeHandler {
 
-    //Static variables used by all of the subclasses
+    //Static variables used by all the subclasses
     static GameLogic gameLogicInteractor;
     static Player currentPlayer;
     static Board board;
@@ -122,18 +122,31 @@ public class TreeHandler {
 
     /**
      * Setter method for the current player instance attribute
-     * @param player - the player to set the current player to
+     * @param player - the player to set
      */
     public void setCurrentPlayer(Player player){currentPlayer = player;
     }
 
+    /**
+     * getter method for the current player instance attribute
+     * @return the current player
+     */
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
+
+    /**
+     * getter method for the return tree instance attribute
+     * @return the return tree
+     */
     public GameLogicTree getReturnTree() {
         return returnTree;
     }
 
+    /**
+     * setter method for the return tree instance attribute
+     * @param returnTree1 - the tree to set
+     */
     public void setReturnTree(GameLogicTree returnTree1) {
         returnTree = returnTree1;
     }

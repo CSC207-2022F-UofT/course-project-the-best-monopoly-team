@@ -13,12 +13,14 @@ public class UseCaseInteractor{
 
     private GameLogic logicInteractor;
     private State currentState;
+
+    /**
+     * Constructor for the UseCaseInteractor.
+     */
     public UseCaseInteractor(){
         createTrees();
         currentState = getInitialState();
         updateOutput(currentState);
-//        currentState = logicInteractor.getInitialState();
-//        updateOutput(currentState);
         treeHandler = new InitialTreeHandler(this);
     }
 
