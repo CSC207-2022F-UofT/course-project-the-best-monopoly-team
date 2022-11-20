@@ -14,12 +14,22 @@ public class Player {
         return position;
     }
 
-    public String name;
-    public int money;
-    public ArrayList<Property> properties;
-    public boolean inJail;
-    public int jailCards;
-    public int position;
+    private String name;
+
+    private int money;
+    private ArrayList<Property> properties;
+
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
+    }
+
+    public boolean isInJail() {
+        return inJail;
+    }
+
+    private boolean inJail;
+    private int jailCards;
+    private int position;
 
     public Player(String name) {
         this.name = name;
@@ -72,6 +82,7 @@ public class Player {
     }
 
     public void addProperty(Property property) {
+
         this.properties.add(property);
     }
 
@@ -101,24 +112,40 @@ public class Player {
         }
     }
 
-    public String rollDice() {
+    public String rollDice(int consecutive) {
+        /**
+         * Roll 2 dices at once and move the player. If the player is
+         * in jail, and there is a double between 2 dices, player.inJail
+         * is set to False and the player is moved.
+         * If the player is not in jail, when a double
+         * exists the player rolls the dice again. The maximum for consecutive
+         * doubles is 3, and the player goes to jail if consecutive doubles == 3.
+         * This method can be called recursively, and each time
+         * the consecutive is the number of consecutive doubles.
+         */
         int max = 6;
         int min = 1;
-        int a = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        int a =  (int) Math.floor(Math.random() * (max - min + 1) + min);
         int b = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        if (this.inJail) {
-            if (a == b) {
+        if (this.inJail){
+            if(a == b){
                 this.inJail = false;
                 this.move(a + b);
                 return (a + "\n" + b);
             }
-        } else {
-            if (a == b) {
-                this.move(a + b);
-                this.rollDice();
-            } else {
+        }
+        else {
+            if (a != b){
                 this.move(a + b);
                 return (a + "\n" + b);
+            }
+            else if (a == b && (consecutive + 1) < 3){
+                this.rollDice((consecutive + 1));
+            }
+            else if(a == b && (consecutive + 1) == 3){
+                // the player goes to jail
+                this.setInJail(true);
+                return (a + "\n" + b + "\n" + "player goes to jail");
             }
         }
         this.move(a + b);
@@ -150,5 +177,13 @@ public class Player {
     }
 
 
+    public void setMoney(int parseInt) {
+    }
+
+    public void setJailCards(int parseInt) {
+    }
+
+    public void setPosition(int parseInt) {
+    }
 }
 
