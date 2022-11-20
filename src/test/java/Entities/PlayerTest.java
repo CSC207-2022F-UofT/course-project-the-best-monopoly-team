@@ -2,11 +2,9 @@ package Entities;
 
 import org.junit.*;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
-public class PlayersTest {
+public class PlayerTest {
     private Player a = new Player("a");
 
     @Test

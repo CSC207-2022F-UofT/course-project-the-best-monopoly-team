@@ -27,7 +27,7 @@ public class MainTreeHandler extends TreeHandler {
                 selectedOptions.put(gameLogicInteractor.currentTree.getName(), input);
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers()[input];
-                ArrayList<Property> playerProperties = selectedPlayer.properties;
+                ArrayList<Property> playerProperties = selectedPlayer.getProperties();
                 //using "i" starting from 0 to number of properties the player has - 1
                 for(int i = 0; i < playerProperties.size(); i++){
                     currentState.addOptions(Integer.toString(i));
@@ -38,9 +38,9 @@ public class MainTreeHandler extends TreeHandler {
                 //the input corresponds to the index of the target player in this.board.getPlayers()
                 selectedOptions.put(gameLogicInteractor.currentTree.getName(), input);
                 //provide item options from the current player's inventory
-                ArrayList<Property> currentPlayerInventory = currentPlayer.properties;
+                ArrayList<Property> currentPlayerInventory = currentPlayer.getProperties();
                 //using "i" starting from 0 to number of properties the player has - 1
-                for(int i = 0; i < currentPlayer.properties.size(); i++){
+                for(int i = 0; i < currentPlayer.getProperties().size(); i++){
                     currentState.addOptions(Integer.toString(i));
                 }
                 break;
@@ -71,7 +71,7 @@ public class MainTreeHandler extends TreeHandler {
             case "ManageProperty":
                 //Case manage property selected
                 //provide options on the properties available
-                ArrayList<Property> currentPlayerProperties = this.currentPlayer.properties;
+                ArrayList<Property> currentPlayerProperties = this.currentPlayer.getProperties();
                 for(int i = 0; i < currentPlayerProperties.size(); i++){
                     currentState.addOptions(Integer.toString(i));
                 }
@@ -104,24 +104,24 @@ public class MainTreeHandler extends TreeHandler {
                 //Case roll selected
                 //We can determine if a player lands on a property by checking if the position of
                 //the player is on one with a property on it (not 0,2,7,10,17,20,22,30,33,36,38).
-                Cell landedOnCell = board.getCell(this.currentPlayer.position);
+                Cell landedOnCell = board.getCell(this.currentPlayer.getPosition());
                 if(landedOnCell instanceof Property &&
                         ((Property) landedOnCell).getOwner() == null) {
                     currentState.setOnProperty(true);
                 }
                 else {
-                    landedOnCell.performAction(currentPlayer);
+                    landedOnCell.performAction(currentPlayer, board);
                 }
                 break;
             case "Buy":
                 //Case buy selected
                 //player buys the property that the player lands on
-                targetProperty = board.getProperties()[this.currentPlayer.position];
-                if(this.currentPlayer.money >= targetProperty.getPrice()){
+                targetProperty = board.getProperties()[this.currentPlayer.getPosition()];
+                if(this.currentPlayer.getMoney() >= targetProperty.getPrice()){
                     //indicates that the player can afford it and sets the property owner as the current player and
                     //deducts the player's money.
                     this.currentPlayer.pay(targetProperty.getPrice());
-                    this.currentPlayer.properties.add(targetProperty);
+                    this.currentPlayer.getProperties().add(targetProperty);
                     targetProperty.setOwner(this.currentPlayer);
                     //1 indicates the property was bought successfully
                     currentState.addOptions("1");
@@ -170,7 +170,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "Bankruptcy":
                 //TODO: remove player from game and all of their assets
-                currentPlayerProperties = this.currentPlayer.properties;
+                currentPlayerProperties = this.currentPlayer.getProperties();
                 for (Property targetedProperty : currentPlayerProperties) {
                     targetedProperty.setOwner(null);
                     targetedProperty.setHouses(0);
