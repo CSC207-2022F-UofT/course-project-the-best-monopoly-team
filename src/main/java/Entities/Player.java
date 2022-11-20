@@ -38,6 +38,8 @@ public class Player {
 
     public boolean isInJail() { return inJail; }
 
+    public void setMoney(int money) { this.money = money; }
+
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         if (money > this.money) {
             return "Inadequate amount of money";
