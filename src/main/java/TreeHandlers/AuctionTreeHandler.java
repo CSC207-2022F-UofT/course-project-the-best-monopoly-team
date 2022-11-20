@@ -1,5 +1,8 @@
 package TreeHandlers;
 
+import Entities.GameLogicTree;
+import Entities.Player;
+import Entities.Property;
 import Entities.State;
 
 public class AuctionTreeHandler extends TreeHandler {
@@ -7,6 +10,7 @@ public class AuctionTreeHandler extends TreeHandler {
     final int MEDIUM_OPTION = 80;
     final int HIGH_OPTION = 160;
     int[] auctionStates;
+    Player playerWon;
 
     public AuctionTreeHandler(int playerLength){
         auctionStates = new int[playerLength + 1];
@@ -15,21 +19,27 @@ public class AuctionTreeHandler extends TreeHandler {
         State currentState = new State();
         int currentPlayerIndex = getCurrentPlayerIndex();
         int potIndex = auctionStates.length - 1;
-        switch (gameLogicInteractor.currentTree.getName()){
+        switch (gameLogicInteractor.getCurrentTree().getName()){
             case "LowOption":
                 auctionStates[potIndex] += LOW_OPTION;
+                currentState = super.getInitialState();
                 break;
             case "MediumOption":
                 auctionStates[potIndex] += MEDIUM_OPTION;
+                currentState = super.getInitialState();
                 break;
             case "HighOption":
                 auctionStates[potIndex] += HIGH_OPTION;
+                currentState = super.getInitialState();
                 break;
             case "Fold":
                 auctionStates[currentPlayerIndex] = 1;
                 int auctionComplete = checkAuction();
                 if (auctionComplete != -1){
-                    // TODO: PROCESS THE TRADE
+                    //TODO: BUY THE PROPERTY
+                    playerWon = players.get(auctionComplete);
+                    playerWon.addProperty((Property) board.getPlayerCell(players.get(returnPlayerIndex)));
+                    description = playerWon.getName() + " won the auction for " +auctionStates[potIndex] + " money";
                 }
                 break;
         }
@@ -50,4 +60,5 @@ public class AuctionTreeHandler extends TreeHandler {
         }
         return -1;
     }
+
 }

@@ -4,12 +4,11 @@ import java.util.*;
 
 public class Board{
 
-    Player[] players;
-    Cell[] cells;
+    List<Player> players;
+    List<Cell> cells;
     Map <Player, Integer> playerPositions = new HashMap<Player, Integer>();
-    Property[] properties;
 
-    public Board(Player[] players, Cell[] cells, Object[][] propertyData){
+    public Board(List<Player> players, List<Cell> cells, Object[][] propertyData){
         this.players = players;
         this.cells = cells;
         for (Player player : players) {
@@ -21,38 +20,44 @@ public class Board{
             String name = (String) data[0];
             String colour = (String) data[1];
             int cost = (int) data[2];
-            int rent = (int) data[3];
-            int mortgage = (int) data[4];
-            int houseCost = (int) data[5];
-            properties[i] = new Property(name, colour, cost, rent, mortgage, houseCost);
+            int houseCost = (int) data[3];
+            int[] rentValues = new int[] {(int) data[4], (int) data[5], (int) data[6],
+                                          (int) data[7], (int) data[8], (int) data[9]};
+            Player owner = null;
+            if ((int) data[10] != 0) {
+                owner = players.get((int) data[10]);
+            }
+            int mortgageValue = (int) data[11];
+            int houses = (int) data[12];
+            boolean mortgaged = false;
+            String mortgageString = (String) data[13];
+            if (mortgageString.equals("true")) {
+                mortgaged = true;
+            }
+            properties[i] = new Property(name, colour, cost, houseCost, rentValues,
+                                         owner, mortgageValue, houses, mortgaged);
         }
-        this.properties = properties;
+
     }
 
-    public Player[] getPlayers(){
+    public List<Player> getPlayers(){
         return players;
     }
 
     public void removePlayer(Player player){
-        List<Player> newPlayers = Arrays.asList(players);
+        List<Player> newPlayers = players;
         newPlayers.remove(player);
-        Player[] newPlayersArray = new Player[players.length - 1];
-        for(int i = 0; i < newPlayers.size(); i++){
-            newPlayersArray[i] = newPlayers.get(i);
-        }
-        this.players = newPlayersArray;
     }
 
-    public Cell[] getCells(){return cells;}
+    public List<Cell> getCells(){return cells;}
 
-    public Cell getCell(int position){return cells[position];}
+    public Cell getCell(int position){return cells.get(position);}
 
     public Map<Player, Integer> getPlayerPositions(){return playerPositions;}
 
-    public Property[] getProperties(){return properties;}
 
     public Cell getPlayerCell(Player player){
-        return this.cells[this.playerPositions.get(player)];
+        return this.cells.get(this.playerPositions.get(player));
     }
 
     public void updatePlayerPosition(Player player){
