@@ -1,6 +1,7 @@
 package Main;
 import Interactors.IOController;
 
+import java.io.File;
 import java.util.Scanner;
 
 public class PresenterDisplay {
@@ -10,8 +11,8 @@ public class PresenterDisplay {
         this.isOver = false;
     }
 
-    public void playGame(){
-        IOController controller = new IOController();
+    public void playGame(File file){
+        IOController controller = new IOController(file);
         Scanner userIn = new Scanner(System.in);
         controller.displayOptions();
         while (!this.isOver){

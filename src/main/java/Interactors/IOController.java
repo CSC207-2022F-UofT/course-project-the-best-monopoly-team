@@ -3,6 +3,7 @@ package Interactors;
 import Entities.State;
 import UseCases.UseCaseInteractor;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class IOController {
@@ -11,10 +12,10 @@ public class IOController {
     private UseCaseInteractor interactor;
     private State currentState;
 
-    public IOController(){
+    public IOController(File file){
         this.output = "Welcome to Monopoly! Do you want to ";
         this.input = 0;
-        this.interactor = new UseCaseInteractor();
+        this.interactor = new UseCaseInteractor(new TextFileTranslator(file));
         this.currentState = this.interactor.getInitialState();
     }
     public String presentOutput(){

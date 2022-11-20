@@ -4,7 +4,11 @@ package UseCases;
 import Entities.GameLogicTree;
 import Entities.MenuTree;
 import Entities.State;
+import Interactors.DataAccess;
 import Interactors.GameLogic;
+
+import javax.xml.crypto.Data;
+
 public class UseCaseInteractor{
     private GameLogicTree currentTree;
     private boolean menuTreeActive = true;
@@ -12,12 +16,14 @@ public class UseCaseInteractor{
     private InitialTreeHandler treeHandler;
 
     private GameLogic logicInteractor;
+    private DataAccess dataAccess;
     private State currentState;
 
     /**
      * Constructor for the UseCaseInteractor.
      */
-    public UseCaseInteractor(){
+    public UseCaseInteractor(DataAccess dataAccess){
+        this.dataAccess = dataAccess;
         createTrees();
         currentState = getInitialState();
         updateOutput(currentState);
