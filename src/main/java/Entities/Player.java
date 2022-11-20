@@ -11,16 +11,11 @@ public class Player {
     // Represents a player in the game
 
     private String name;
-
     private int money;
     private ArrayList<Property> properties;
 
     public void setInJail(boolean inJail) {
         this.inJail = inJail;
-    }
-
-    public boolean isInJail() {
-        return inJail;
     }
 
     private boolean inJail;
@@ -45,6 +40,10 @@ public class Player {
     public int getJailCards() { return jailCards; }
 
     public int getPosition() { return position; }
+
+    public boolean isInJail() { return inJail; }
+
+    public void setMoney(int money) { this.money = money; }
 
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         if (money > this.money) {
@@ -173,10 +172,6 @@ public class Player {
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
-    }
-
-
-    public void setMoney(int parseInt) {
     }
 
     public void setJailCards(int parseInt) {
