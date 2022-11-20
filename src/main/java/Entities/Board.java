@@ -15,10 +15,14 @@ public class Board{
      * @param players A List of Player instances that we wish to be a part of the board.
      * @param cells A List of Cell instances that we wish to be a part of the board.
      */
-    public Board(List<Player> players, List<Cell> cells, Object[][] propertyData){
+    public Board(List<Player> players, List<Cell> cells){
         this.players = players;
         this.cells = cells;
-
+    }
+    public Board(List<Player> players, List<Cell> cells, Map<Player, Integer> playerPositions){
+        this.players = players;
+        this.cells = cells;
+        this.playerPositions = playerPositions;
     }
     /**
      * This method is used to return a List of all the Player instances that are in Board.

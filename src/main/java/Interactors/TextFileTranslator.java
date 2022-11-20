@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -102,8 +103,30 @@ public class TextFileTranslator implements DataAccess{
     @Override
     public boolean saveGame(String[][] playerData, String[][] boardData,
                             String[][] treeData, String[][] optionData) throws IOException {
-        // fileName should include path (under save folder)
         File saveFile = file;
+
+        // each subarray of playerData represents a Player instance or Property instance
+        // have playerData ordered such that it follows the format:
+        // [[Player 1], [Property 1 (owned by Player 1], [Property 2 (owned by Player 1)], ...
+        //  [Player 2], [Property 1 (owned by Player 2], [Property 2 (owned by Player 2)], ....
+        //  and so on. ]
+
+        // for Player instances:
+        // index [0] is String name, [1] is int money, [2] is String booleanInJail ("true" or "false)
+        // [3] is int jailCards, [4] is int position
+
+        // for owned Property instances:
+        // index [0] is String name, [1] is String colour, [2] is int cost, [3] is int houseCost,
+        // [4] is int rent, [5] is int rent1H, [6] is int rent2H, [7] is int rent3H, [8] is rent4H,
+        // [9] is rentHotel, [10] is String playerOwnerName, [11] is int mortgageValue,
+        // [12] is int houses, [13] is String booleanMortaged ("true" or "false")
+
+        // for unowned Property instances:
+        // index [10] is int mortgageValue, [11] is int houses,
+        // String playerOwnerName and booleanMortaged are not stored by default
+
+        // each subarray of boardData represents a key-value pair between a Player and their position
+        // index[0] of the subarray is String playerName, [1] is int position
 
         if (saveFile.createNewFile()){
             FileWriter writer = new FileWriter(file.getPath());
@@ -112,6 +135,7 @@ public class TextFileTranslator implements DataAccess{
             // loop through playerData and save each Player instance as a line
             for (String[] playerDatum : playerData) {
                 StringBuilder newLine = new StringBuilder();
+                // each line is either a Player Instance attributes, or a Property owned by Player
                 for (String s : playerDatum) {
                     newLine.append(s).append(",");
                 }

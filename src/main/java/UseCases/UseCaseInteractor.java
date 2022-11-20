@@ -1,13 +1,19 @@
 
 package UseCases;
 
+import Entities.Board;
 import Entities.GameLogicTree;
 import Entities.MenuTree;
 import Entities.State;
 import Interactors.DataAccess;
+import Interactors.GameCreation;
 import Interactors.GameLogic;
 
 import javax.xml.crypto.Data;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UseCaseInteractor{
     private GameLogicTree currentTree;
@@ -17,6 +23,7 @@ public class UseCaseInteractor{
 
     private GameLogic logicInteractor;
     private DataAccess dataAccess;
+    private GameCreation gameCreation;
     private State currentState;
 
     /**
@@ -28,6 +35,7 @@ public class UseCaseInteractor{
         currentState = getInitialState();
         updateOutput(currentState);
         treeHandler = new InitialTreeHandler(this);
+        this.gameCreation = new GameCreation();
     }
 
     /**
@@ -116,8 +124,22 @@ public class UseCaseInteractor{
     public void updateOutput(State currentState){
         //TODO update the user interface
     }
-    public void loadFiles(String filepath){
+    public Board loadFiles(String filepath) throws IOException {
         //TODO load files for game creation
+        //TODO correctly implement this method
+
+        ArrayList<ArrayList<String[]>> loadedGame = this.dataAccess.loadGame();
+        ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
+
+        ArrayList<String> playerNames = new ArrayList<>();
+        for (int i = 0; i <= treeHandler.selectedOptions.get("NumberOfPlayers"); i++){
+            playerNames.add("Player " + i);
+        }
+
+        Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);
+        Board savedGame = this.gameCreation.createSavedGame(loadedGame, newProperties);
+
+        return newGame;
     }
 
     public GameLogicTree getCurrentTree(){

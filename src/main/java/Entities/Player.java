@@ -26,6 +26,15 @@ public class Player {
         this.position = 0;
     }
 
+    public Player(String name, int money, boolean inJail, int jailCards, int position) {
+        this.name = name;
+        this.money = money;
+        this.properties = new ArrayList<Property>();
+        this.inJail = inJail;
+        this.jailCards = jailCards;
+        this.position = position;
+    }
+
 
     public void setInJail(boolean inJail) {
         this.inJail = inJail;
