@@ -17,6 +17,12 @@ public class TreeHandler {
     int returnPlayerIndex = -1;
     Player[] players;
 
+    GameLogicTree returnTree;
+
+    String description;
+
+
+
     public void initialize(Player currentPlayer, Board board){
         players = board.getPlayers();
         this.currentPlayer = currentPlayer;
@@ -28,10 +34,16 @@ public class TreeHandler {
 
     public State getInitialState(){
         State currentState = new State();
+        currentState.setDescription(gameLogicInteractor.getCurrentTree().getPrompt());
         for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
             currentState.addOptions(tree.getName());
         }
         return currentState;
+    }
+    public void addSwitchOptions(State currentState){
+        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
+            currentState.addOptions(tree.getName());
+        }
     }
     public int getCurrentPlayerIndex(){
         for (int i = 0; i< players.length; i++){
@@ -63,6 +75,7 @@ public class TreeHandler {
         return boardArray;
     }
 
+
     public void movePlayer(int cell_number){
         int total_squares = 40;
         int current_player_position = this.currentPlayer.position;
@@ -79,6 +92,13 @@ public class TreeHandler {
 
     public Player getCurrentPlayer(){
         return currentPlayer;
+    }
+    public GameLogicTree getReturnTree() {
+        return returnTree;
+    }
+
+    public void setReturnTree(GameLogicTree returnTree) {
+        this.returnTree = returnTree;
     }
 
 }

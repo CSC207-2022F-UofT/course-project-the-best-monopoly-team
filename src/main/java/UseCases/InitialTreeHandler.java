@@ -3,9 +3,11 @@ package UseCases;
 import Entities.GameLogicTree;
 import Entities.State;
 
+import java.util.HashMap;
+
 public class InitialTreeHandler {
     //This array contains various states for the program which will be used for various calculations
-    private int[] globalStates = new int[5];
+    HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
     UseCaseInteractor caseInteractor;
     public InitialTreeHandler(UseCaseInteractor caseInteractor){
         this.caseInteractor = caseInteractor;
@@ -34,22 +36,22 @@ public class InitialTreeHandler {
         switch (currentTree.getName()){
             case "NewGame":
                 //in "New Game" node
-                globalStates[0] = 1;
-                state.setName("What mode would you like to play?");
+                selectedOptions.put("NewOrLoad",1);
+                state.setDescription("What mode would you like to play?");
                 state.addOptions("Normal mode");
                 break;
             case "ChooseGameMode":
                 //in "Choose Game mode" node
-                globalStates[1] = input;
-                state.setName("How many players?");
+                selectedOptions.put(currentTree.getName(),input);
+                state.setDescription("How many players?");
                 for (int i = 2; i<9; i++){
                     state.addOptions(i + " players");
                 }
                 break;
             case "NumberOfPlayers":
                 //in "Number of Players" node
-                globalStates[2] = input;
-                state.setName("How many rounds?");
+                selectedOptions.put(currentTree.getName(),input);
+                state.setDescription("How many rounds?");
                 state.addOptions("30 rounds");
                 state.addOptions("60 rounds");
                 state.addOptions("90 rounds");
@@ -57,8 +59,8 @@ public class InitialTreeHandler {
                 break;
             case "GameLength":
                 //in "Game Length" node
-                globalStates[3] = input;
-                state.setName("Create the game?");
+                selectedOptions.put(currentTree.getName(),input);
+                state.setDescription("Create the game?");
                 state.addOptions("Yes");
                 state.addOptions("No");
                 break;
@@ -68,11 +70,13 @@ public class InitialTreeHandler {
                 break;
             case "LoadGame":
                 //in "Load Game" node
-                globalStates[0] = 0;
+                selectedOptions.put("NewOrLoad",input);
+                state.setDescription("What save do you want to load");
                 break;
             case "ChooseSave":
                 //in "Choose Save" node
-                globalStates[4] = input;
+                selectedOptions.put(currentTree.getName(),input);
+                state.setDescription("Confirm the load?");
                 break;
             case "CreateLoadedGame":
                 //in "Create Loaded Game" node

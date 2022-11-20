@@ -50,7 +50,6 @@ public class UseCaseInteractor{
         return currentState;
 
     }
-
     /**
      * This method creates the initial menu tree for the program <br>
      * The tree is for the initialization part of the program, allowing the user
@@ -58,7 +57,7 @@ public class UseCaseInteractor{
      */
     public void createTrees(){
         //creating first tree
-        GameLogicTree initialMenu = new GameLogicTree("InitialMenu");
+        GameLogicTree initialMenu = new GameLogicTree("InitialMenu", "Welcome to monopoly");
         GameLogicTree newGame = new GameLogicTree("NewGame");
         GameLogicTree chooseGameMode = new GameLogicTree("ChooseGameMode");
         GameLogicTree numPlayers = new GameLogicTree("NumberOfPlayers");
@@ -89,6 +88,7 @@ public class UseCaseInteractor{
     }
     public State getInitialState(){
         State currentState = new State();
+        currentState.setDescription(currentTree.getPrompt());
         for (MenuTree tree: currentTree.getChildren()){
             currentState.addOptions(tree.getName());
         }

@@ -9,7 +9,6 @@ public class Property extends Cell {
     private Player ownedBy;
     private int houses;
     private int rent;
-    private String name;
     private String colour;
     private int mortgageValue;
     private int houseCost;
