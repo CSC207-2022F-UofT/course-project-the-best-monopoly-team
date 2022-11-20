@@ -57,7 +57,7 @@ public class UseCaseInteractor{
      */
     public void createTrees(){
         //creating first tree
-        GameLogicTree initialMenu = new GameLogicTree("InitialMenu", "Welcome to monopoly");
+        GameLogicTree initialMenu = new GameLogicTree("InitialMenu", "Welcome to Monopoly++, Would you like to: ");
         GameLogicTree newGame = new GameLogicTree("NewGame");
         GameLogicTree chooseGameMode = new GameLogicTree("ChooseGameMode");
         GameLogicTree numPlayers = new GameLogicTree("NumberOfPlayers");

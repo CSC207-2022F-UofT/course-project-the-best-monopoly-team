@@ -30,7 +30,7 @@ public class State {
     }
 
     public void setDescription(String description) {
-        description = description;
+        this.description = description;
     }
 
     private ArrayList<String> options = new ArrayList<String>();
