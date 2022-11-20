@@ -26,29 +26,26 @@ public class Player {
         this.position = 0;
     }
 
-    public String getName() {return this.name;}
-    public int getPosition() {
-        return position;
-    }
 
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
+    }
     public void setPosition(int position) {
         this.position = position;
     }
 
-    public int getJailCards() { return this.jailCards; }
-
-    public int getMoney() {return this.money; }
-
-    public void setMoney(int amount) {this.money = amount; }
-
-    public ArrayList<Property> getProperties() {return this.properties; }
-
-    public void setInJail(boolean inJail) {this.inJail = inJail;}
 
     public void setJailCards(int num) {
         this.jailCards = this.jailCards + num;
     }
 
+
+
+    public int getJailCards() { return jailCards; }
+
+    public int getPosition() { return position; }
+
+    public boolean isInJail() { return inJail; }
 
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         if (money > this.money) {
@@ -83,6 +80,16 @@ public class Player {
         return actions;
     }
     */
+
+    public String getName(){
+        return this.name;
+    }
+    public void setMoney(int money) {
+        this.money = money;
+    }
+    public int getMoney() {
+        return this.money;
+    }
 
     public void addProperty(Property property) {
         this.properties.add(property);
@@ -160,6 +167,13 @@ public class Player {
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
+    }
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
     }
 
 

@@ -6,13 +6,23 @@ import Interactors.GameLogic;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ *
+ */
 public class TreeHandler {
+
     GameLogic gameLogicInteractor;
     Player currentPlayer;
     Board board;
     HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
     int returnPlayerIndex = -1;
     List<Player> players;
+
+    GameLogicTree returnTree;
+
+    String description;
+
+
 
     public void initialize(Player currentPlayer, Board board){
         players = board.getPlayers();
@@ -25,10 +35,16 @@ public class TreeHandler {
 
     public State getInitialState(){
         State currentState = new State();
-        for (MenuTree tree: gameLogicInteractor.currentTree.getChildren()){
+        currentState.setDescription(gameLogicInteractor.getCurrentTree().getPrompt());
+        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
             currentState.addOptions(tree.getName());
         }
         return currentState;
+    }
+    public void addSwitchOptions(State currentState){
+        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
+            currentState.addOptions(tree.getName());
+        }
     }
     public int getCurrentPlayerIndex(){
         for (int i = 0; i< players.size(); i++){
@@ -60,6 +76,7 @@ public class TreeHandler {
         return boardArray;
     }
 
+
     public void movePlayer(int cell_number){
         int total_squares = 40;
         int current_player_position = this.currentPlayer.getPosition();
@@ -76,6 +93,13 @@ public class TreeHandler {
 
     public Player getCurrentPlayer(){
         return currentPlayer;
+    }
+    public GameLogicTree getReturnTree() {
+        return returnTree;
+    }
+
+    public void setReturnTree(GameLogicTree returnTree) {
+        this.returnTree = returnTree;
     }
 
 }
