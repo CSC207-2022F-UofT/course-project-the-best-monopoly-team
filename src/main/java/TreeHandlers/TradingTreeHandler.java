@@ -9,7 +9,7 @@ public class TradingTreeHandler extends TreeHandler {
 
     public State handleInput(){
         State currentState = new State();
-        Player firstTrader = board.getPlayers()[returnPlayerIndex];
+        Player firstTrader = board.getPlayers().get(returnPlayerIndex);
         Player secondTrader = currentPlayer;
         switch (gameLogicInteractor.getCurrentTree().getName()){
             case "AcceptTrade":

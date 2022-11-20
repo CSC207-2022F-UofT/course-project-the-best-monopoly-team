@@ -4,6 +4,7 @@ import Entities.*;
 import Interactors.GameLogic;
 
 import java.util.HashMap;
+import java.util.List;
 
 /** This class is the parent class of the three tree handlers used during the game phase of the application.
  *  <br> Each of the subclasses coordinate the game logic of the application.
@@ -16,7 +17,7 @@ public class TreeHandler {
     static Board board;
     static HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
     static int returnPlayerIndex = -1;
-    static Player[] players;
+    static List<Player> players;
     static GameLogicTree returnTree;
     static String description;
 
@@ -63,22 +64,22 @@ public class TreeHandler {
         }
     }
     public int getCurrentPlayerIndex(){
-        for (int i = 0; i< players.length; i++){
-            if (currentPlayer == players[i]){
+        for (int i = 0; i< players.size(); i++){
+            if (currentPlayer == players.get(i)){
                 return i;
             }
         }
         throw new RuntimeException("Player not in array");
     }
     public Object[][] playersToArray(){
-        Object[][] playersArray = new Object[players.length][6];
-        for(int i = 0; i < players.length; i++){
-            playersArray[i][0] = players[i].getName();
-            playersArray[i][1] = players[i].getMoney();
-            playersArray[i][2] = players[i].getProperties();
-            playersArray[i][3] = players[i].isInJail();
-            playersArray[i][4] = players[i].getJailCards();
-            playersArray[i][5] = players[i].getPosition();
+        Object[][] playersArray = new Object[players.size()][6];
+        for(int i = 0; i < players.size(); i++){
+            playersArray[i][0] = players.get(i).getName();
+            playersArray[i][1] = players.get(i).getMoney();
+            playersArray[i][2] = players.get(i).getProperties();
+            playersArray[i][3] = players.get(i).isInJail();
+            playersArray[i][4] = players.get(i).getJailCards();
+            playersArray[i][5] = players.get(i).getPosition();
         }
         return playersArray;
     }
@@ -88,7 +89,6 @@ public class TreeHandler {
         boardArray[0] = board.getPlayers();
         boardArray[1] = board.getCells();
         boardArray[2] = board.getPlayerPositions();
-        boardArray[3] = board.getProperties();
         return boardArray;
     }
 
