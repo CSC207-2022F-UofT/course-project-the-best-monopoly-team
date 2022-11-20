@@ -12,10 +12,22 @@ public class Player {
 
 
     private String name;
+
+
+
     private int money;
+
+
+
     private ArrayList<Property> properties;
+
+
+
     private boolean inJail;
     private int jailCards;
+
+
+
     private int position;
 
 
@@ -27,7 +39,16 @@ public class Player {
         this.jailCards = 0;
         this.position = 0;
     }
+    public boolean isInJail() {
+        return inJail;
+    }
 
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
+    }
+    public void setPosition(int position) {
+        this.position = position;
+    }
     public int getPosition() {
         return this.position;
     }
@@ -74,7 +95,9 @@ public class Player {
     public String getName(){
         return this.name;
     }
-
+    public void setMoney(int money) {
+        this.money = money;
+    }
     public int getMoney() {
         return this.money;
     }
@@ -155,6 +178,13 @@ public class Player {
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
+    }
+    public ArrayList<Property> getProperties() {
+        return properties;
+    }
+
+    public void setProperties(ArrayList<Property> properties) {
+        this.properties = properties;
     }
 
 
