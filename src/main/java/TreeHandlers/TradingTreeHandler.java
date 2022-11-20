@@ -12,15 +12,15 @@ public class TradingTreeHandler extends TreeHandler {
         Player secondTrader = this.currentPlayer;
         switch (gameLogicInteractor.currentTree.getName()){
             case "AcceptTrade":
-                Property secondTraderProperty = secondTrader.properties.get(selectedOptions.get("PickPlayer"));
-                Property firstTraderProperty = firstTrader.properties.get(selectedOptions.get("PickItemOp"));
+                Property secondTraderProperty = secondTrader.getProperties().get(selectedOptions.get("PickPlayer"));
+                Property firstTraderProperty = firstTrader.getProperties().get(selectedOptions.get("PickItemOp"));
                 // swap the asset owners
                 secondTraderProperty.setOwner(firstTrader);
                 firstTraderProperty.setOwner(secondTrader);
-                secondTrader.properties.remove(secondTraderProperty);
-                secondTrader.properties.add(firstTraderProperty);
-                firstTrader.properties.remove(firstTraderProperty);
-                firstTrader.properties.add(secondTraderProperty);
+                secondTrader.getProperties().remove(secondTraderProperty);
+                secondTrader.getProperties().add(firstTraderProperty);
+                firstTrader.getProperties().remove(firstTraderProperty);
+                firstTrader.getProperties().add(secondTraderProperty);
                 this.currentPlayer = firstTrader;
                 gameLogicInteractor.currentTree = gameLogicInteractor.trees[0];
                 break;
