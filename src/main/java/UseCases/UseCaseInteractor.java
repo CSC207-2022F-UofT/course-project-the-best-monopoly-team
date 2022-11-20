@@ -13,9 +13,8 @@ public class UseCaseInteractor{
     private int[] globalStates = new int[5];
     private GameLogic logicInteractor;
     private State currentState;
-    public UseCaseInteractor(GameLogic logicInteractor){
+    public UseCaseInteractor(){
         createTrees();
-        this.logicInteractor = logicInteractor;
         currentState = getInitialState();
         updateOutput(currentState);
 //        currentState = logicInteractor.getInitialState();
@@ -27,7 +26,7 @@ public class UseCaseInteractor{
      * and uses helper methods to deal with the logic afterwards.
      * @param input the translated input of the user from the input interface
      */
-    public void handleInput(int input){
+    public State handleInput(int input){
         if (menuTreeActive){
             //Moving through the tree depending on the input and the node
             if (input == -1){
@@ -47,7 +46,7 @@ public class UseCaseInteractor{
         else{
             currentState = handleOtherTrees(input);
         }
-
+        return currentState;
     }
 
     /**
