@@ -66,7 +66,8 @@ public class InitialTreeHandler {
                 break;
             case "CreateNewGame":
                 //in "Create new Game" node
-                //TODO: CREATE THE GAME BY MAKING THE LOGIC INTERACTOR
+                caseInteractor.loadGame(true);
+                state = caseInteractor.getLogicInteractor().getInitialState();
                 break;
             case "LoadGame":
                 //in "Load Game" node

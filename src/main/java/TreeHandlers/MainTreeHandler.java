@@ -96,10 +96,20 @@ public class MainTreeHandler extends TreeHandler {
                 //Case manage property selected
                 //provide options on the properties available
                 ArrayList<Property> currentPlayerProperties = currentPlayer.getProperties();
-                for(int i = 0; i < currentPlayerProperties.size(); i++){
-                    currentState.addOptions(Integer.toString(i));
+                if (currentPlayerProperties.isEmpty()){
+                    gameLogicInteractor.transverseCurrentTree(1);
+                    currentState = handleInput(0);
                 }
+                for(int i = 0; i < currentPlayerProperties.size(); i++){
+                    currentState.addOptions(currentPlayerProperties.get(i).getName());
+                }
+
                 break;
+            case "NoProperties":
+                currentState.setDescription("You have no properties :(");
+                currentState.addOptions("Ok");
+                break;
+
             case "SelectProperty":
                 currentState.setDescription("What do you want to do with the property?");
                 //Case property selected (adds the property index)
@@ -108,8 +118,8 @@ public class MainTreeHandler extends TreeHandler {
                 //0 is for the mortgage option
                 //1 is for the un mortgaged option
                 //2 is for the build house option
-                currentState.addOptions(Integer.toString(0));
-                currentState.addOptions(Integer.toString(1));
+                currentState.addOptions("Mortgage");
+                currentState.addOptions("Unmortgage");
                 currentState.addOptions(Integer.toString(2));
                 break;
             case "Mortgage":
@@ -138,7 +148,10 @@ public class MainTreeHandler extends TreeHandler {
                     //Case roll selected
                     //We can determine if a player lands on a property by checking if the position of
                     //the player is on one with a property on it (not 0,2,7,10,17,20,22,30,33,36,38).
-                    //TODO: actually roll the dice
+
+                    currentPlayer.riggedRoll(2);
+                    //currentPlayer.rollDice();
+                    board.updatePlayerPosition(currentPlayer);
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
                     if (landedOnCell instanceof Property &&
                             ((Property) landedOnCell).getOwner() == null) {
@@ -147,19 +160,26 @@ public class MainTreeHandler extends TreeHandler {
                         answer = landedOnCell.performAction(currentPlayer,board);
                         gameLogicInteractor.transverseCurrentTree(1);
                     }
+                    currentState = handleInput(0);
                     mainStates[2] = 1;
                 }
                 else{
-                    currentState.setDescription("You already rolled this round!");
-                    currentState.addOptions("ok");
+                    gameLogicInteractor.transverseCurrentTree(2);
+                    currentState = handleInput(0);
                 }
+                break;
+            case "AlreadyRolled":
+                currentState.setDescription("You already rolled this round!");
+                currentState.addOptions("ok");
                 break;
             case "CallAction":
                 currentState.setDescription(answer);
                 currentState.addOptions("ok");
                 break;
             case "EmptyPropertySpace":
-                currentState.setDescription("You have landed on a free property. What do you want to do?");
+                targetProperty = (Property) board.getCell(currentPlayer.getPosition());
+                currentState.setDescription("You have landed on "+ targetProperty.getName() +" a free property. " +
+                        "It costs "+ targetProperty.getPrice() + ". What do you want to do?");
                 addSwitchOptions(currentState);
                 break;
             case "Buy":

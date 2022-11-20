@@ -20,6 +20,9 @@ public class GameLogic {
         mainTreeHandler.initialize(currentPlayer,board);
         createTrees();
     }
+    public State getInitialState(){
+        return mainTreeHandler.getInitialState();
+    }
 
     public GameLogicTree[] getTrees(){
         return this.trees;
@@ -60,11 +63,16 @@ public class GameLogic {
         GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
         GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
         GameLogicTree mortgage = new GameLogicTree("Mortgage");
+        GameLogicTree unMortgage = new GameLogicTree("UnMortgage");
         GameLogicTree buildProperty = new GameLogicTree("BuildProperty");
 
+        GameLogicTree noProperties = new GameLogicTree("NoProperties");
+
         selectProperty.addChild(mortgage);
+        selectProperty.addChild(unMortgage);
         selectProperty.addChild(buildProperty);
         manageProperty.addChild(selectProperty);
+        manageProperty.addChild(noProperties);
 
         //TODO: prompt has to alter based on what the player lands on
         GameLogicTree roll = new GameLogicTree("Roll");
@@ -72,9 +80,11 @@ public class GameLogic {
         GameLogicTree emptyPropertySpace = new GameLogicTree("EmptyPropertySpace");
         GameLogicTree buy = new GameLogicTree("Buy");
         GameLogicTree auction = new GameLogicTree("Auction");
+        GameLogicTree alreadyRolled = new GameLogicTree("AlreadyRolled");
 
         roll.addChild(emptyPropertySpace);
         roll.addChild(callAction);
+        roll.addChild(alreadyRolled);
 
         emptyPropertySpace.addChild(buy);
         emptyPropertySpace.addChild(auction);
@@ -95,11 +105,12 @@ public class GameLogic {
         GameLogicTree confirmationNode = new GameLogicTree("Confirmation");
         GameLogicTree informationNode = new GameLogicTree("Information");
 
+        noProperties.addChild(informationNode);
         sendTrade.addChild(informationNode);
         choosePlayer.addChild(informationNode);
         callAction.addChild(informationNode);
         buildProperty.addChild(informationNode);
-        roll.addChild(informationNode);
+        alreadyRolled.addChild(informationNode);
         saveGame.addChild(informationNode);
 
         mortgage.addChild(confirmationNode);
@@ -163,12 +174,13 @@ public class GameLogic {
             //Move forward in tree
             currentTree = (GameLogicTree) currentTree.getChildren().get(0);
         }
-
+        State returnState = handleTree(input);
         if (currentTree.getChildren().isEmpty()){
             setCurrentTreeToMaxParent();
         }
-        return handleTree(input);
+        return returnState;
     }
+
     public void transverseCurrentTree(int branchNumber){
         currentTree =  (GameLogicTree) currentTree.getChildren().get(branchNumber);
     }

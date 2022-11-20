@@ -21,6 +21,8 @@ public class UseCaseInteractor{
 
     private InitialTreeHandler treeHandler;
 
+
+
     private GameLogic logicInteractor;
     private DataAccess dataAccess;
     private GameCreation gameCreation;
@@ -124,28 +126,54 @@ public class UseCaseInteractor{
     public void updateOutput(State currentState){
         //TODO update the user interface
     }
-    public Board loadFiles(String filepath) throws IOException {
+    public void loadGame(boolean newGame){
+        Board loadedBoard;
+        if (newGame){
+            loadedBoard = loadFiles();
+            if (loadedBoard == null){
+                //TODO: do something when it fails to load
+            }
+            else {
+                logicInteractor = new GameLogic(loadedBoard.getPlayers().get(0), loadedBoard);
+                menuTreeActive = false;
+            }
+        }
+        else {
+            //TODO: DO SOMETHING IF ITS NOT A NEW GAME
+
+        }
+
+    }
+    public Board loadFiles() {
         //TODO load files for game creation
         //TODO correctly implement this method
-
+        try {
+            ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
+            ArrayList<String> playerNames = new ArrayList<>();
+            for (int i = 0; i <= treeHandler.selectedOptions.get("NumberOfPlayers"); i++) {
+                playerNames.add("Player " + i);
+            }
+            Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);
+            return newGame;
+        }
+        catch (Exception IOException){
+            return null;
+        }
+    }
+    public Board loadSavedGame(String filepath) throws IOException{
         ArrayList<ArrayList<String[]>> loadedGame = this.dataAccess.loadGame();
         ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
 
-        ArrayList<String> playerNames = new ArrayList<>();
-        for (int i = 0; i <= treeHandler.selectedOptions.get("NumberOfPlayers"); i++){
-            playerNames.add("Player " + i);
-        }
-
-        Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);
         Board savedGame = this.gameCreation.createSavedGame(loadedGame, newProperties);
-
-        return newGame;
+        return savedGame;
     }
 
     public GameLogicTree getCurrentTree(){
         return currentTree;
     }
-
+    public GameLogic getLogicInteractor() {
+        return logicInteractor;
+    }
 
 
 }

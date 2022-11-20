@@ -28,7 +28,7 @@ public class TreeHandler {
      * @param board1 - the current board being used in the game
      */
     public void initialize(Player currentPlayer1, Board board1){
-        players = board.getPlayers();
+        players = board1.getPlayers();
         currentPlayer = currentPlayer1;
         board = board1;
     }
@@ -47,7 +47,8 @@ public class TreeHandler {
      */
     public State getInitialState(){
         State currentState = new State();
-        currentState.setDescription(gameLogicInteractor.getCurrentTree().getPrompt());
+        currentState.setDescription(currentPlayer.getName() +" "+ gameLogicInteractor.getCurrentTree().getPrompt() + " You currently" +
+                "have " +currentPlayer.getMoney() + " dollars");
         for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
             currentState.addOptions(tree.getName());
         }
