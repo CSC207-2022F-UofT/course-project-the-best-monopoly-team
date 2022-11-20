@@ -63,6 +63,11 @@ public class TreeHandler {
             currentState.addOptions(tree.getName());
         }
     }
+
+    /**
+     * This method gets the index of the current player in the players arraylist.
+     * @return the integer index of the current player.
+     */
     public int getCurrentPlayerIndex(){
         for (int i = 0; i< players.size(); i++){
             if (currentPlayer == players.get(i)){
@@ -71,6 +76,11 @@ public class TreeHandler {
         }
         throw new RuntimeException("Player not in array");
     }
+
+    /**
+     * This method generates an array which holds all the instance attributes of the players in the game.
+     * @return an object array holding all the items.
+     */
     public Object[][] playersToArray(){
         Object[][] playersArray = new Object[players.size()][6];
         for(int i = 0; i < players.size(); i++){
@@ -84,6 +94,10 @@ public class TreeHandler {
         return playersArray;
     }
 
+    /**
+     * This array generates an array which holds all the instance attributes of the board in the game.
+     * @return an object array holding all the items.
+     */
     public Object[] boardToArray(){
         Object[] boardArray = new Object[4];
         boardArray[0] = board.getPlayers();
@@ -92,7 +106,10 @@ public class TreeHandler {
         return boardArray;
     }
 
-
+    /**
+     * This array moves the current player along the board.
+     * @param cell_number how many spaces to move the player by
+     */
     public void movePlayer(int cell_number){
         int total_squares = 40;
         int current_player_position = currentPlayer.getPosition();
@@ -103,6 +120,10 @@ public class TreeHandler {
         board.updatePlayerPosition(currentPlayer);
     }
 
+    /**
+     * Setter method for the current player instance attribute
+     * @param player - the player to set the current player to
+     */
     public void setCurrentPlayer(Player player){currentPlayer = player;
     }
 
