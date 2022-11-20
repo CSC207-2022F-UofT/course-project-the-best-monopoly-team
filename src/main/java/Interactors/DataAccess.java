@@ -7,4 +7,5 @@ import java.util.ArrayList;
 public interface DataAccess {
     ArrayList<ArrayList<String[]>> loadGame(String filePath) throws FileNotFoundException;
     boolean saveGame(String fileName) throws IOException;
+    ArrayList<String[]> loadProperties() throws FileNotFoundException;
 }
