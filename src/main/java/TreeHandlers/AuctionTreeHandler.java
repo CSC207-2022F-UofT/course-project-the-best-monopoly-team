@@ -39,7 +39,7 @@ public class AuctionTreeHandler extends TreeHandler {
                     //TODO: BUY THE PROPERTY
                     playerWon = players[auctionComplete];
                     playerWon.addProperty((Property) board.getPlayerCell(players[returnPlayerIndex]));
-                    description = playerWon.name + " won the auction for " +auctionStates[potIndex] + " money";
+                    description = playerWon.getName() + " won the auction for " +auctionStates[potIndex] + " money";
                 }
                 break;
         }

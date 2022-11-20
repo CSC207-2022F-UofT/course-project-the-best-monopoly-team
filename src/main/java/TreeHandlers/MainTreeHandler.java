@@ -71,9 +71,9 @@ public class MainTreeHandler extends TreeHandler {
                     //the input should be 0 or 1. 0 if the trade was accepted, 1 if the trade was declined.
                     Player tradingOpponent = this.board.getPlayers()[selectedOptions.get("PickPlayer")];
 
-                    currentState.setDescription("Incoming trade from player " + currentPlayer.name +
-                            " requesting for "+ tradingOpponent.properties.get(selectedOptions.get("PickItemOp"))
-                            + " in return for "+ currentPlayer.properties.get(selectedOptions.get("PickItemSelf")));
+                    currentState.setDescription("Incoming trade from player " + currentPlayer.getName() +
+                            " requesting for "+ tradingOpponent.getProperties().get(selectedOptions.get("PickItemOp"))
+                            + " in return for "+ currentPlayer.getProperties().get(selectedOptions.get("PickItemSelf")));
 
                     returnTree = currentTree;
                     returnPlayerIndex = getCurrentPlayerIndex();
@@ -138,12 +138,12 @@ public class MainTreeHandler extends TreeHandler {
                     //Case roll selected
                     //We can determine if a player lands on a property by checking if the position of
                     //the player is on one with a property on it (not 0,2,7,10,17,20,22,30,33,36,38).
-                    Cell landedOnCell = board.getCell(this.currentPlayer.position);
+                    Cell landedOnCell = board.getCell(this.currentPlayer.getPosition());
                     if (landedOnCell instanceof Property &&
                             ((Property) landedOnCell).getOwner() == null) {
                         gameLogicInteractor.transverseCurrentTree(0);
                     } else {
-                        answer = landedOnCell.performAction(currentPlayer);
+                        answer = landedOnCell.performAction(currentPlayer,board);
                         gameLogicInteractor.transverseCurrentTree(1);
                     }
                     mainStates[2] = 1;
@@ -164,12 +164,12 @@ public class MainTreeHandler extends TreeHandler {
             case "Buy":
                 //Case buy selected
                 //player buys the property that the player lands on
-                targetProperty = board.getProperties()[this.currentPlayer.position];
+                targetProperty = board.getProperties()[this.currentPlayer.getPosition()];
 
                 //indicates that the player can afford it and sets the property owner as the current player and
                 //deducts the player's money.
                 this.currentPlayer.pay(targetProperty.getPrice());
-                this.currentPlayer.properties.add(targetProperty);
+                this.currentPlayer.getProperties().add(targetProperty);
                 targetProperty.setOwner(this.currentPlayer);
 
                 gameLogicInteractor.setCurrentTreeToMaxParent();
@@ -215,7 +215,7 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.addOptions("ok");
                 break;
             case "EndTurn":
-                if (currentPlayer.money < 0){
+                if (currentPlayer.getMoney() < 0){
                     currentPlayer = players[(getCurrentPlayerIndex()+1)%players.length];
                     mainStates = new int[5];
                     currentState = getInitialState();
@@ -248,7 +248,7 @@ public class MainTreeHandler extends TreeHandler {
             case "Bankruptcy":
                 if (mainStates[0] == 1) {
                     mainStates[0] = 0;
-                    currentPlayerProperties = this.currentPlayer.properties;
+                    currentPlayerProperties = this.currentPlayer.getProperties();
                     for (Property targetedProperty : currentPlayerProperties) {
                         targetedProperty.setOwner(null);
                         targetedProperty.setHouses(0);
