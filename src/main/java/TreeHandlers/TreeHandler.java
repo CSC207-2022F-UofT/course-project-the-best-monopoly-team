@@ -51,7 +51,7 @@ public class TreeHandler {
     public State getInitialState(){
         State currentState = new State();
         if (gameLogicInteractor.getCurrentTreeID() == 0) {
-            currentState.setDescription(currentPlayer.getName() + " " + gameLogicInteractor.getCurrentTree().getPrompt() + " You currently" +
+            currentState.setDescription(currentPlayer.getName() + " " + gameLogicInteractor.getCurrentTree().getPrompt() + " You currently " +
                     "have " + currentPlayer.getMoney() + " dollars");
             addSwitchOptions(currentState);
         }

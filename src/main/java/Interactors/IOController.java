@@ -71,13 +71,15 @@ public class IOController {
         StringBuilder outputString = new StringBuilder();
         ArrayList<String> options = currentState.getOptions();
         outputString.append(currentState.getDescription());
+        outputString.append("\n");
         for (int i = 0; i < options.size(); i++){
             outputString.append(options.get(i)).append("(").append(i).append("), ");
         }
+        if (currentState.isBackEnable()){
+            outputString.append("back").append("(").append(options.size()).append(")");
+        }
         this.output = outputString.toString();
 
-        if (currentState.isBackEnable()){
-            this.output = this.output + "back" + "(" + options.size() + ")";
-        }
+
     }
 }
