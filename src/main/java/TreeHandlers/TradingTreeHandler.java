@@ -9,8 +9,8 @@ public class TradingTreeHandler extends TreeHandler {
 
     public State handleInput(){
         State currentState = new State();
-        Player firstTrader = this.board.getPlayers()[returnPlayerIndex];
-        Player secondTrader = this.currentPlayer;
+        Player firstTrader = board.getPlayers().get(returnPlayerIndex);
+        Player secondTrader = currentPlayer;
         switch (gameLogicInteractor.getCurrentTree().getName()){
             case "AcceptTrade":
                 Property secondTraderProperty = secondTrader.getProperties().get(selectedOptions.get("PickPlayer"));
@@ -22,12 +22,12 @@ public class TradingTreeHandler extends TreeHandler {
                 secondTrader.getProperties().add(firstTraderProperty);
                 firstTrader.getProperties().remove(firstTraderProperty);
                 firstTrader.getProperties().add(secondTraderProperty);
-                this.currentPlayer = firstTrader;
+                currentPlayer = firstTrader;
                 gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[0]);
                 description = "Trade successful";
                 break;
             case "DeclineTrade":
-                this.currentPlayer = firstTrader;
+                currentPlayer = firstTrader;
                 gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[0]);
                 description = "Trade failed";
                 break;

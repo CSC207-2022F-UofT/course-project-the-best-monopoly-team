@@ -14,7 +14,7 @@ public class GameLogic {
 
     public GameLogic(Player currentPlayer, Board board){
         mainTreeHandler = new MainTreeHandler();
-        auctionTreeHandler = new AuctionTreeHandler(board.getPlayers().length);
+        auctionTreeHandler = new AuctionTreeHandler(board.getPlayers().size());
         tradingTreeHandler = new TradingTreeHandler();
         mainTreeHandler.setGameLogicInteractor(this);
         mainTreeHandler.initialize(currentPlayer,board);

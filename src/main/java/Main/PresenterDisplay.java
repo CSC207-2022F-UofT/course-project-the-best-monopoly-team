@@ -1,28 +1,51 @@
 package Main;
 import Interactors.IOController;
 
+import java.io.File;
 import java.util.Scanner;
 
+/**
+ * PresenterDisplay is a class that runs the game loop and presents the options of each turn to each
+ * player in the game.
+ **/
 public class PresenterDisplay {
-    private boolean isOver;
+    /**
+     * InstanceVar isOver: variable to check if the game is over
+     **/
+    private static boolean isOver;
 
+    /**
+     * This is the constructor for the PresenterDisplay Class
+     **/
     public PresenterDisplay(){
-        this.isOver = false;
+        isOver = false;
     }
 
-    public void playGame(){
-        IOController controller = new IOController();
-        controller.connectLogic();
+
+    /**
+     * Function that runs the game loop by getting game data from the IOController and presenting that to the
+     * user as their options on each turn, getting the user's input and sending that back to the IOController
+     * to further handle state changes based on their option choice.
+     **/
+    public void playGame(File file){
+        IOController controller = new IOController(file);
         Scanner userIn = new Scanner(System.in);
+        controller.displayOptions();
         while (!this.isOver){
+
             System.out.println(controller.presentOutput());
             int choice = userIn.nextInt();
             controller.setInput(choice);
             controller.connectLogic();
-//            finishGame();
+            // TODO Create the ability for game to end by calling finishGame()
         }
+        System.out.println("Thanks for playing!");
     }
-    public void finishGame(){
-        this.isOver = true;
+
+    /**
+     * Static function to update that the game is over to exit the game loop
+     */
+    public static void finishGame(){
+        isOver = true;
     }
 }

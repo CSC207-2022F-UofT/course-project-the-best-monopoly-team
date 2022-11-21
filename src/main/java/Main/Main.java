@@ -1,9 +1,13 @@
 package Main;
 
+import java.io.File;
+
 public class Main {
     public static void main(String[] args){
         PresenterDisplay display = new PresenterDisplay();
-        display.playGame();
+        //TODO GIVE A CORRECT FILEPATH
+        File file = new File("");
+        display.playGame(file);
     }
 }
 
