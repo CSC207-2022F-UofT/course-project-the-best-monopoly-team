@@ -5,10 +5,8 @@ import Entities.Property;
 import Entities.State;
 
 public class TradingTreeHandler extends TreeHandler {
-    int[] tradingStates = new int[5];
 
     public State handleInput(){
-        State currentState = new State();
         Player firstTrader = board.getPlayers().get(returnPlayerIndex);
         Player secondTrader = currentPlayer;
         switch (gameLogicInteractor.getCurrentTree().getName()){
@@ -32,7 +30,9 @@ public class TradingTreeHandler extends TreeHandler {
                 descriptionOtherTrees = "Trade failed";
                 break;
         }
-        return currentState;
+        gameLogicInteractor.setCurrentTree(getReturnTree());
+        currentPlayer = players.get(returnPlayerIndex);
+        return gameLogicInteractor.handleTree(0);
     }
 
 }

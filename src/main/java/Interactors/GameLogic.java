@@ -50,13 +50,15 @@ public class GameLogic {
         GameLogicTree pickPlayer = new GameLogicTree("PickPlayer");
         GameLogicTree pickItemOp = new GameLogicTree("PickItemOp");
         GameLogicTree pickItemSelf = new GameLogicTree("PickItemSelf");
-
         GameLogicTree sendTrade = new GameLogicTree("SendTrade");
+
+        GameLogicTree nothingToTrade = new GameLogicTree("NothingToTrade");
 
         pickItemSelf.addChild(sendTrade);
         pickItemOp.addChild(pickItemSelf);
         pickPlayer.addChild(pickItemOp);
         trade.addChild(pickPlayer);
+        pickPlayer.addChild(nothingToTrade);
 
         GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
         GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
@@ -103,6 +105,7 @@ public class GameLogic {
         GameLogicTree confirmationNode = new GameLogicTree("Confirmation");
         GameLogicTree informationNode = new GameLogicTree("Information");
 
+        nothingToTrade.addChild(informationNode);
         noProperties.addChild(informationNode);
         sendTrade.addChild(informationNode);
         choosePlayer.addChild(informationNode);
@@ -134,12 +137,11 @@ public class GameLogic {
         emptyPropertySpace.setIsSwitchBlock(true);
         trees[0] = main;
 
-        //TODO: SHOW THE TRADED PROPERTIES
         //Creating the trading tree
         GameLogicTree tradeTree = new GameLogicTree("TradeTree");
         GameLogicTree acceptTrade = new GameLogicTree("AcceptTrade");
         GameLogicTree declineTrade = new GameLogicTree("DeclineTrade");
-        trade.addChild(acceptTrade);
+        tradeTree.addChild(acceptTrade);
         tradeTree.addChild(declineTrade);
         tradeTree.setIsSwitchBlock(true);
         trees[1] = tradeTree;

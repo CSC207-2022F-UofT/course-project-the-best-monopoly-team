@@ -7,8 +7,9 @@ import java.util.Arrays;
 
 public class MainTreeHandler extends TreeHandler {
     //mainStates[0]: reserved for confirmation node
-    //mainStates[1]: reserved for sendTrade node and auction node
+    //mainStates[1]: reserved for sendTrade node and auction node (switching the trees)
     //mainStates[2]: reserved for roll
+    //mainStates
     int[] mainStates = new int[5];
     String answer;
     GameLogicTree confirmationReturn;
@@ -28,7 +29,7 @@ public class MainTreeHandler extends TreeHandler {
                 ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
                 playerCopy.remove(currentPlayer);
                 for(int i = 0; i < playerCopy.size(); i++){
-                    currentState.addOptions(Integer.toString(i));
+                    currentState.addOptions(playerCopy.get(i).getName());
                 }
                 break;
             case "PickPlayer":
@@ -39,10 +40,19 @@ public class MainTreeHandler extends TreeHandler {
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers().get(input);
                 ArrayList<Property> playerProperties = selectedPlayer.getProperties();
+                if (playerProperties.isEmpty() || currentPlayer.getProperties().isEmpty()){
+                    gameLogicInteractor.transverseCurrentTree(1);
+                    currentState = handleInput(0);
+                    break;
+                }
                 //using "i" starting from 0 to number of properties the player has - 1
                 for (int i = 0; i < playerProperties.size(); i++){
                     currentState.addOptions(playerProperties.get(i).getName());
                 }
+                break;
+            case "NothingToTrade":
+                currentState.setDescription("Trade cannot be done; one of you have no properties");
+                currentState.addOptions("Ok");
                 break;
             case "PickItemOp":
                 currentState.setDescription("What property are you willing to trade?");
@@ -58,6 +68,8 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "PickItemSelf":
                 currentState.setDescription("Send the trade?");
+                currentState.addOptions("yes");
+                currentState.addOptions("no");
                 //the input corresponds to the index of the opponent targeted property;
                 selectedOptions.put(currentTree.getName(), input);
                 //Case picking the item of the player
@@ -66,15 +78,15 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "SendTrade":
                 if (mainStates[1] == 0) {
-                    selectedOptions.put(currentTree.getName(), input);
+
                     //input corresponds to the index of the current player's selected property
                     //Case sending the trade
                     //the input should be 0 or 1. 0 if the trade was accepted, 1 if the trade was declined.
                     Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
 
                     currentState.setDescription("Incoming trade from player " + currentPlayer.getName() +
-                            " requesting for "+ tradingOpponent.getProperties().get(selectedOptions.get("PickItemOp"))
-                            + " in return for "+ currentPlayer.getProperties().get(selectedOptions.get("PickItemSelf")));
+                            " requesting for "+ tradingOpponent.getProperties().get(selectedOptions.get("PickItemOp")).getName()
+                            + " in return for "+ currentPlayer.getProperties().get(selectedOptions.get("PickItemSelf")).getName());
 
                     returnTree = currentTree;
                     returnPlayerIndex = getCurrentPlayerIndex();
