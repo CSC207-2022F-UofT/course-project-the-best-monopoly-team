@@ -19,7 +19,7 @@ public class Player {
 
     /**
      * This is the constructor method for new player instances
-     * @param name this parameter is for the name of the player
+     * @param name the name of the player
      */
     public Player(String name) {
         this.name = name;
@@ -38,33 +38,31 @@ public class Player {
         this.jailCards = jailCards;
         this.position = position;
     }
-
+    /**
+     * Set the player's position. This is useful when the player needs to move by a mean beside rolling the dice e.g.
+     * action cards, or when we need to load a previous game.
+     * @param position the position of the player on the board should be between 0 and 39 inclusive.
+     */
+    public void setPosition(int position) { this.position = position; }
 
     /**
-     * This basically sets the player attribute of inJail, which in this case is a boolean value
+     * Sets the player's inJail attribute, which in this case is a boolean value
      * @param inJail the parameter for this is a boolean value that sets their inJail property to true or false
      */
-    public void setInJail(boolean inJail) {
-        this.inJail = inJail;
-    }
+    public void setInJail(boolean inJail) { this.inJail = inJail; }
 
     /**
-     * This sets the position of the player
-     * @param position the position of the player should be between 0 and 39 inclusive, as this dictates where on the
-     *                 board the player is
-     */
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    /**
-     * This sets the number of get out of jail free cards the player has that was drawn from the community chest or
+     * Sets the number of get out of jail free cards the player has that was drawn from the community chest or
      * chance cards
      * @param num this parameter is the number of cards to increment by for player
      */
-    public void setJailCards(int num) {
-        this.jailCards = this.jailCards + num;
-    }
+    public void setJailCards(int num) { this.jailCards += num; }
+
+    /**
+     * Sets the amount of money owned by this player. Needed for loading previous games.
+     * @param money the amount of money the player is having
+     */
+    public void setMoney(int money) { this.money = money; }
 
     /**
      * The getter method for jailCards
@@ -79,18 +77,36 @@ public class Player {
     public int getPosition() { return position; }
 
     /**
-     * The getter method to see if the player is in jail or not
-     * @return returns a boolean value of False and True
+     * The getter method for this player's name
+     * @return the name of the player
+     */
+    public String getName(){ return this.name; }
+
+    /**
+     * The getter method for this player's list of properties
+     * @return an ArrayList of properties owned by this player
+     */
+    public ArrayList<Property> getProperties() { return properties; }
+
+    /**
+     * The getter method for this player's amount of money
+     * @return the amount of money currently owned by this player
+     */
+    public int getMoney() { return this.money; }
+
+    /**
+     * This method determines whether this player is currently in jail
+     * @return a boolean value determining whether the player is in jail, with true being the player is in jail
      */
     public boolean isInJail() { return inJail; }
 
     /**
-     * This method facilitates the trading of property, money and jailCards between two players.
-     * @param tradee this parameter is the player that the current player wants to trade with
-     * @param money this is the amount of money that the trader wants to trade
-     * @param properties this is an ArrayList with property objects inside that the player wants to trade
-     * @param jailcards this is the number of jail cards that the player wants to trade the jailCards with
-     * @return returns a string if the trade was successful or not
+     * Method allowing this player to trade assets with another player
+     * @param tradee the player this player wants to trade with
+     * @param money any sufficient amount of money this player wants to offer the tradee
+     * @param properties properties owned by this player that they would like to offer the tradee
+     * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
+     * @return a String indicating whether the player has an insufficient amount of money or if the trade was successful
      */
     public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         if (money > this.money) {
@@ -107,60 +123,27 @@ public class Player {
     }
 
     /**
-     * Changes the jail status of the player
+     * Changes the jail status of this player
+     * @param player the player whose jail status is being changed
      */
-    public void changeJailStatus() {
+    public void changeJailStatus(Player player) {
         this.inJail = !this.inJail;
     }
 
-    /* UNCOMMENT THIS WHEN GameLogicTree IS MERGED INTO THE MAIN BRANCH
-    public StringBuilder getPossibleActions() {
-        StringBuilder actions = new StringBuilder();
-        List<MenuTree> actionList = GameLogicTree.getChildren();
-        for (MenuTree node: actionList) {
-            String concat = node.id + ", ";
-            actions.append(concat);
-        }
-        return actions;
-    }
-    */
-
     /**
-     * Getter method for the name of the player
-     * @return returns a string, which is the name of the player
-     */
-    public String getName(){
-        return this.name;
-    }
-
-    /**
-     * Setter method for setting the amount money
-     * @param money the money that we want to set the money of the player to
-     */
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
-    /**
-     * Getter method for getting the current amount of money that the player has.
-     * @return returns and integer
-     */
-    public int getMoney() {
-        return this.money;
-    }
-
-    /**
-     * Adds a certain property to the current player
-     * @param property the property to add to the properties list of the player
+     * This method adds a property to this player's list of owned properties
+     * @param property the property to be added to the player's property list
      */
     public void addProperty(Property property) {
         this.properties.add(property);
     }
 
     /**
-     * Method for stealing a players money and the player could be thrown in jail
-     * @param victim the player that the current player wants to steal from
-     * @return returns a string output to see if the player was successful or not
+     * Method that allows this player to steal 100 units of money from a player. The success of stealing relies on
+     * a chance basis. Unsuccessfully stealing from the victim gives this player a chance of being put in jail.
+     * @param victim the player whom this player is stealing from
+     * @return returns a String statement indicating whether stealing was successful. If not, the statement indicates
+     * whether this player is put in jail
      */
     public String steal(Player victim) {
         double success = Math.random();
@@ -191,18 +174,13 @@ public class Player {
         }
     }
 
+    /**
+     * This method rolls the dice for the player. The dice result can indicate this player's movement while
+     * they are not in jail. If they are in jail, the dice result can determine if the player can get out of jail
+     * @param consecutive the number of consecutive doubles
+     * @return a String of two numbers indicating the numbers rolled from the dice
+     */
     public String rollDice(int consecutive) {
-        /**
-         * Roll 2 dices at once and move the player. If the player is
-         * in jail, and there is a double between 2 dices, player.inJail
-         * is set to False and the player is moved.
-         * If the player is not in jail, when a double
-         * exists the player rolls the dice again. The maximum for consecutive
-         * doubles is 3, and the player goes to jail if consecutive doubles == 3.
-         * @parameter consecutive = number of consecutive doubles.
-         * This method can be called recursively, and each time
-         * the consecutive is the number of consecutive doubles.
-         */
         int max = 6;
         int min = 1;
         int a =  (int) Math.floor(Math.random() * (max - min + 1) + min);
@@ -232,7 +210,7 @@ public class Player {
     }
 
     /**
-     * Builds a house on the current property
+     * This method allows this player to build houses on a currently owned property
      * @param property the property to build the house on
      * @param houses the number of houses to build
      */
@@ -243,8 +221,8 @@ public class Player {
     }
 
     /**
-     * Increases the money of the player
-     * @param change the integer to change the money by
+     * Increases the amount of money owned by this player
+     * @param change an integer indicating how much money will be added to the player's balance
      */
     public void changeMoney(int change) {
 
@@ -252,8 +230,8 @@ public class Player {
     }
 
     /**
-     * Decrease the money of the player
-     * @param money the amount of money to decrease by
+     * A payment method where money is deducted from the player's balance e.g. to pay tax
+     * @param money the amount of money deducted from this player's balance
      */
     public void pay(int money) {
 
@@ -261,9 +239,9 @@ public class Player {
     }
 
     /**
-     * Decrease the money of the current player and add it to another players money
-     * @param player the player to add the money to
-     * @param money the amount of money to decrease by for current player and increase by for the other player
+     * A payment method that allows this player to pay another player e.g. paying rent
+     * @param player the player whom this player is giving money to
+     * @param money the amount of money being paid by this player
      */
     public void pay(Player player, int money) {
         this.money -= money;
@@ -271,32 +249,13 @@ public class Player {
     }
 
     /**
-     * Placing the property for mortgage
-     * @param property the property to remove and to add the money to the current players balance
+     * This method allows the player to place one of their owned properties for mortgage
+     * @param property the property to mortgaged by this player
      */
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
     }
-
-    /**
-     * Gets all of the properties of the current player
-     * @return returns and array list of properties
-     */
-    public ArrayList<Property> getProperties() {
-
-        return properties;
-    }
-
-    /**
-     * Sets the current players properties to another ArrayList of properties
-     * @param properties the ArrayList of properties to change it to
-     */
-    public void setProperties(ArrayList<Property> properties) {
-
-        this.properties = properties;
-    }
-
 
 }
 
