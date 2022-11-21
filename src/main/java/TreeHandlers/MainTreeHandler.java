@@ -24,8 +24,10 @@ public class MainTreeHandler extends TreeHandler {
         switch (currentTree.getName()){
             case "Trade":
                 currentState.setBackEnable(true);
+
+
                 currentState.setDescription("Who do you want to trade with? ");
-                //Case trade selected
+
                 //provide a list of all possible players considering the current player is not an option
                 ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
                 playerCopy.remove(currentPlayer);
@@ -36,9 +38,10 @@ public class MainTreeHandler extends TreeHandler {
             case "PickPlayer":
                 currentState.setBackEnable(true);
                 currentState.setDescription("What property do you want from the player? ");
-                //Case player picked
-                //adds the chosen player index in selected options
+
+                //adds the chosen player index in selected options (who the current player wants to trade with)
                 selectedOptions.put(currentTree.getName(), input);
+
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers().get(input);
                 ArrayList<Property> playerProperties = selectedPlayer.getProperties();
@@ -59,9 +62,10 @@ public class MainTreeHandler extends TreeHandler {
             case "PickItemOp":
                 currentState.setBackEnable(true);
                 currentState.setDescription("What property are you willing to trade? ");
-                //Case picking the item of the opponent
-                //the input corresponds to the index of the target player in this.board.getPlayers()
+
+                //the input corresponds to the index of the opponent targeted property;
                 selectedOptions.put(currentTree.getName(), input);
+
                 //provide item options from the current player's inventory
                 ArrayList<Property> currentPlayerInventory = currentPlayer.getProperties();
                 //using "i" starting from 0 to number of properties the player has - 1
@@ -73,19 +77,15 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.setBackEnable(true);
                 currentState.setDescription("Send the trade?");
                 currentState.addOptions("yes");
+                //TODO: make this back option do something
                 currentState.addOptions("no");
-                //the input corresponds to the index of the opponent targeted property;
+
+                //the input corresponds to the index of the current player's targeted property;
                 selectedOptions.put(currentTree.getName(), input);
-                //Case picking the item of the player
-                //send the trade offer using selectedOptions. Index 0 will be the selected item from opponent and
-                //index 1 will be the selected item from the current player.
+
                 break;
             case "SendTrade":
                 if (mainStates[1] == 0) {
-
-                    //input corresponds to the index of the current player's selected property
-                    //Case sending the trade
-                    //the input should be 0 or 1. 0 if the trade was accepted, 1 if the trade was declined.
                     Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
 
                     currentState.setDescription("Incoming trade from player " + currentPlayer.getName() +
@@ -133,10 +133,8 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.setDescription("What do you want to do with the property? ");
                 //Case property selected (adds the property index)
                 selectedOptions.put(currentTree.getName(), input);
+
                 //the player chooses what to do to the property
-                //0 is for the mortgage option
-                //1 is for the un mortgaged option
-                //2 is for the build house option
                 currentState.addOptions("Mortgage");
                 currentState.addOptions("Unmortgage");
                 currentState.addOptions("Build a house");
@@ -167,11 +165,9 @@ public class MainTreeHandler extends TreeHandler {
             case "Roll":
                 if (mainStates[2] == 0) {
                     //Case roll selected
-                    //We can determine if a player lands on a property by checking if the position of
-                    //the player is on one with a property on it (not 0,2,7,10,17,20,22,30,33,36,38).
+                    //We can determine if a player lands on a property by checking if the position
 
-                    currentPlayer.riggedRoll(3);
-                    //currentPlayer.rollDice();
+                    currentPlayer.rollDice();
                     board.updatePlayerPosition(currentPlayer);
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
                     if (landedOnCell instanceof Property &&
