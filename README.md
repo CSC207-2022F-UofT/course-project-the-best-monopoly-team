@@ -1,5 +1,9 @@
-# Project Template
+# MONOPOLY PLUS
 
+Currently, this is a text based version of monopoly.
+To run the game, run the main method found in the main folder.
+
+# Project Template
 This is a template repository for CSC 207 projects. 
 This repository contains starter code for a gradle project.
 It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
