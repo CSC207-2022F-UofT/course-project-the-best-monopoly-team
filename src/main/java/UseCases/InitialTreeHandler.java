@@ -35,12 +35,14 @@ public class InitialTreeHandler {
         State state = new State();
         switch (currentTree.getName()){
             case "NewGame":
+                state.setBackEnable(true);
                 //in "New Game" node
                 selectedOptions.put("NewOrLoad",1);
                 state.setDescription("What mode would you like to play?");
                 state.addOptions("Normal mode");
                 break;
             case "ChooseGameMode":
+                state.setBackEnable(true);
                 //in "Choose Game mode" node
                 selectedOptions.put(currentTree.getName(),input);
                 state.setDescription("How many players?");
@@ -49,6 +51,7 @@ public class InitialTreeHandler {
                 }
                 break;
             case "NumberOfPlayers":
+                state.setBackEnable(true);
                 //in "Number of Players" node
                 selectedOptions.put(currentTree.getName(),input);
                 state.setDescription("How many rounds?");
@@ -58,6 +61,7 @@ public class InitialTreeHandler {
                 state.addOptions("no limit");
                 break;
             case "GameLength":
+                state.setBackEnable(true);
                 //in "Game Length" node
                 selectedOptions.put(currentTree.getName(),input);
                 state.setDescription("Create the game?");
@@ -66,8 +70,13 @@ public class InitialTreeHandler {
                 break;
             case "CreateNewGame":
                 //in "Create new Game" node
-                caseInteractor.loadGame(true);
-                state = caseInteractor.getLogicInteractor().getInitialState();
+                if (input == 0) {
+                    caseInteractor.loadGame(true);
+                    state = caseInteractor.getLogicInteractor().getInitialState();
+                }
+                else{
+                    caseInteractor.setCurrentTree((GameLogicTree) currentTree.getMaxParent());
+                }
                 break;
             case "LoadGame":
                 //in "Load Game" node
@@ -84,6 +93,7 @@ public class InitialTreeHandler {
                 //TODO: CREATE THE GAME BY MAKING THE LOGIC INTERACTOR
                 break;
         }
+        currentTree.setPreviousState(state);
         return state;
     }
 }

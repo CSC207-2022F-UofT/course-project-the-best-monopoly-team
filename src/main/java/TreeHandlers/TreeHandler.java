@@ -55,16 +55,14 @@ public class TreeHandler {
                     "have " + currentPlayer.getMoney() + " dollars");
             addSwitchOptions(currentState);
         }
-        else if (gameLogicInteractor.getCurrentTreeID() == 1) {
-
-        }
-        else{
+        else {
             currentState.setDescription(currentPlayer.getName() + " " + descriptionOtherTrees);
             currentState.addOptions(""+LOW_OPTION);
             currentState.addOptions(""+MEDIUM_OPTION);
             currentState.addOptions(""+HIGH_OPTION);
             currentState.addOptions("Fold");
         }
+        gameLogicInteractor.getCurrentTree().setPreviousState(currentState);
         return currentState;
     }
 

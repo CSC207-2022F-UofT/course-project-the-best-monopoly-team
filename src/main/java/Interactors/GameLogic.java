@@ -167,6 +167,7 @@ public class GameLogic {
         if (input == -1){
             //Move backwards in tree
             currentTree = (GameLogicTree) currentTree.getParent();
+            return currentTree.getPreviousState();
         }
         else if (currentTree.isSwitchBlock()){
             //Move forward in tree to one of the branches

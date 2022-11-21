@@ -23,6 +23,7 @@ public class MainTreeHandler extends TreeHandler {
         State currentState = new State();
         switch (currentTree.getName()){
             case "Trade":
+                currentState.setBackEnable(true);
                 currentState.setDescription("Who do you want to trade with?");
                 //Case trade selected
                 //provide a list of all possible players considering the current player is not an option
@@ -33,6 +34,7 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "PickPlayer":
+                currentState.setBackEnable(true);
                 currentState.setDescription("What property do you want from the player?");
                 //Case player picked
                 //adds the chosen player index in selected options
@@ -55,6 +57,7 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.addOptions("Ok");
                 break;
             case "PickItemOp":
+                currentState.setBackEnable(true);
                 currentState.setDescription("What property are you willing to trade?");
                 //Case picking the item of the opponent
                 //the input corresponds to the index of the target player in this.board.getPlayers()
@@ -67,6 +70,7 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "PickItemSelf":
+                currentState.setBackEnable(true);
                 currentState.setDescription("Send the trade?");
                 currentState.addOptions("yes");
                 currentState.addOptions("no");
@@ -105,6 +109,7 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "ManageProperty":
+                currentState.setBackEnable(true);
                 currentState.setDescription("What property do you want to manage?");
                 //Case manage property selected
                 //provide options on the properties available
@@ -124,6 +129,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
 
             case "SelectProperty":
+                currentState.setBackEnable(true);
                 currentState.setDescription("What do you want to do with the property?");
                 //Case property selected (adds the property index)
                 selectedOptions.put(currentTree.getName(), input);
@@ -229,6 +235,7 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "Steal":
+                currentState.setBackEnable(true);
                 currentState.setDescription("What player do you want to steal from?");
                 //Case steal selected
                 //provide options of which players we can steal from
@@ -262,6 +269,7 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "SettingsMenu":
+                currentState.setBackEnable(true);
                 currentState.setDescription("Welcome to the settings menu");
                 addSwitchOptions(currentState);
                 break;
@@ -318,6 +326,7 @@ public class MainTreeHandler extends TreeHandler {
                 currentState = afterBottomNode();
                 break;
         }
+        currentTree.setPreviousState(currentState);
 
         return currentState;
     }

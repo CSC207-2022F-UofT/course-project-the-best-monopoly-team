@@ -25,7 +25,12 @@ public class IOController {
         this.input = input;
     }
     public void connectLogic(){
-        this.currentState = this.interactor.handleInput(this.input);
+        if(input == currentState.getOptions().size()){
+            this.currentState = this.interactor.handleInput(-1);
+        }
+        else {
+            this.currentState = this.interactor.handleInput(this.input);
+        }
         displayOptions();
     }
     public void displayOptions(){
@@ -34,6 +39,9 @@ public class IOController {
         this.output =  currentState.getDescription();
         for (int i = 0; i < options.size(); i++){
             this.output = this.output + options.get(i) + "(" + i + "), ";
+        }
+        if (currentState.isBackEnable()){
+            this.output = this.output + "back" + "(" + options.size() + ")";
         }
     }
 }

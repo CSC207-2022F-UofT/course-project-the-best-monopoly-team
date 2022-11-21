@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UseCaseInteractor{
+
+
     private GameLogicTree currentTree;
     private boolean menuTreeActive = true;
 
@@ -33,7 +35,6 @@ public class UseCaseInteractor{
         this.dataAccess = dataAccess;
         createTrees();
         currentState = getInitialState();
-        updateOutput(currentState);
         treeHandler = new InitialTreeHandler(this);
         this.gameCreation = new GameCreation();
     }
@@ -49,6 +50,7 @@ public class UseCaseInteractor{
             if (input == -1){
                 //Move backwards in tree
                 currentTree = (GameLogicTree) currentTree.getParent();
+                return currentTree.getPreviousState();
             }
             else if (currentTree.isSwitchBlock()){
                 //Move forward in tree to one of the branches
@@ -116,6 +118,7 @@ public class UseCaseInteractor{
         for (MenuTree tree: currentTree.getChildren()){
             currentState.addOptions(tree.getName());
         }
+        currentTree.setPreviousState(currentState);
         return currentState;
     }
 
@@ -129,9 +132,7 @@ public class UseCaseInteractor{
         return logicInteractor.performInput(input);
 
     }
-    public void updateOutput(State currentState){
-        //TODO update the user interface
-    }
+
     public void loadGame(boolean newGame){
         Board loadedBoard;
         if (newGame){
@@ -180,6 +181,8 @@ public class UseCaseInteractor{
     public GameLogic getLogicInteractor() {
         return logicInteractor;
     }
-
+    public void setCurrentTree(GameLogicTree currentTree) {
+        this.currentTree = currentTree;
+    }
 
 }
