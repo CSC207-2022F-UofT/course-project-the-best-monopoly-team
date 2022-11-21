@@ -46,9 +46,7 @@ public class Board{
      * @param player The player that must be removed.
      */
     public void removePlayer(Player player){
-        List<Player> newPlayers = players;
-        newPlayers.remove(player);
-        this.players = newPlayers;
+        this.players.remove(player);
     }
     /**
      * This method is used to return a List of all the Cell instances on Board.
