@@ -1,43 +1,77 @@
 # MONOPOLY PLUS
 
 Currently, this is a text based version of monopoly.
-To run the game, run the main method found in the main folder.
+To run the game, run the main method found in the main folder. Then proceed to run the Main.main() function within the file.
+Sidenote: We are using Java 11 corretto as our JDK.
 
-# Project Template
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+## Playing the game
+This is currently a text based version of monopoly. So then the I/O that we are using is the command line. When prompted for an action, we will have a corresponding number for the input (0,1,2,3). Type in the desired action number then press enter.
 
-## Checklist For Your Project
-- [ ] Verify the correct settings for your project repository
-- [ ] Set up Github Projects
-- [ ] Create the implementation plan using issues and Github Projects
-- [ ] Create deveopment branches for your features
-- [ ] Use pull requests to merge finished features into main branch
-- [ ] Conduct code reviews
+# Navigating the project files in the repository
+This section outlines the brief overview of the structure of the project. The structure that we followed within this project was mainly packaging by feature. After clicking into source, we have 3 directories, main, save and test.
 
-**If your team has trouble with any of these steps, please ask on Piazza. For example, with how GitHub Classroom works, your team *may* not have permissions to do some of the first few steps, in which case we'll post alternative instructions as needed.**
+## main
+This directory contains most of the source code pertaining to entities, use cases, interactors, tree handler and more.
 
-## Workflow Documents
+### Entities
+This directory contains all the core business rules and is the lowest level. The list below contains all the entities and a brief description of what they do.
+- ActionSpace 
+  - Action spaces are spaces where the player has to draw a card from community chest, chance or jail. This class manages the cards that the players are going to draw and their related actions.
+- Board
+  - The board class keeps track of players and which position they are at, the different cells. These cells can either be of class property or action space
+- Cell
+  - Just an abstract class that both property and action space needs to inherit from
+- CornerTiles
+  - This governs the 4 corners of the board, jail, free parking, goToJail, and Go
+- GameLogicTree
+  - This governs the tree that builds the game logic
+- MenuTree
+  - This governs the tree for the different menu actions
+- Player
+  - This class keeps track of everything pertaining to the player, such as money, the properties they have and more.
+- Property
+  - This class keep track of the different properties, their name, color, cost, rent pricing, the player that is owned by and more.
+- State
+  - This class keeps track of the state of the game and the options pertaining to saving the game and player information
 
-* Github Workflow: Please refer to the workflow that was introduced in the first lab. You should follow this when working on your code. The following document provides additional details too.
+### Interactors
+- DataAccess
+  - loadGame method and saveGame method
+- GameCreation
+  - Setting the board up if they were creating the game or loading in a previous saved game
+- GameLogic
+  - Sets up the tree entities and how they interact
+- IOController
+  - Controls the text based output and input of the program
+- TextFileTranslator
+  - loading the game in from the text files and also saving the game to text files.
 
-* [Project Planning and Development Guide](project_plan_dev.md): This document helps you to understand how to create and maintain a project plan for your class project. **This document helps you to complete the Implementation Plan Milestone.**
+### Main
+- Main
+  - Where the game is ran
+- PresenterDisplay
+  - Presents the information
 
-## Gradle Project
-Import this project into your Intellij editor. It should automatically recognise this as a gradle repository.
-The starter code was built using SDK version 11.0.1. Ensure that you are using this version for this project. (You can, of course, change the SDK version as per your requirement if your team has all agreed to use a different version)
+### TreeHandlers
+Some aspects of the game also needs trees to decide and keep track of the options.
+- AuctionTreeHandler
+- MainTreeHandler
+- TradingTreeHandler
+- TreeHandler
 
-You have been provided with two starter files for demonstration: HelloWorld and HelloWorldTest.
+### UseCases
+When the user interacts with a part of the game that is are use cases, the logic begin each use cases should be here.
 
-You will find HelloWorld in `src/main/java/tutorial` directory. Right click on the HelloWorld file and click on `Run HelloWorld.main()`.
-This should run the program and print on your console.
+## save
+This directory contains the save data and the game data that needs to be loaded in when the game is first played or when a previous game needs to be loaded in.
 
-You will find HelloWorldTest in `src/test/java/tutorial` directory. Right click on the HelloWorldTest file and click on `Run HelloWorldTest`.
-All tests should pass. Your team can remove this sample of how testing works once you start adding your project code to the repo.
+- chestcomjail.txt
+  - Cards for community chest, chance and jail.
+- properties.txt
+  - The list of properties and their relevant characteristics.
 
-Moving forward, we expect you to maintain this project structure. You *should* use Gradle as the build environment, but it is fine if your team prefers to use something else -- just remove the gradle files and push your preferred project setup. Assuming you stick with Gradle, your source code should go into `src/main/java` (you can keep creating more subdirectories as per your project requirement). Every source class can auto-generate a test file for you. For example, open HelloWorld.java file and click on the `HelloWorld` variable as shown in the image below. You should see an option `Generate` and on clicking this your should see an option `Test`. Clicking on this will generate a JUnit test file for `HelloWorld` class. This was used to generate the `HelloWorldTest`.
+## test
+This directory includes all the test files for each entity and their use case.
 
-![image](https://user-images.githubusercontent.com/5333020/196066655-d3c97bf4-fdbd-46b0-b6ae-aeb8dbcf351d.png)
-
-You can create another simple class and try generating a test for this class.
+- Entities
+- UseCases
