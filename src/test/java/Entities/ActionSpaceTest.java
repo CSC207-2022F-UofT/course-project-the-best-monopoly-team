@@ -25,7 +25,6 @@ public class ActionSpaceTest {
     void testGetCard() throws IOException {
         ActionSpace actionSpace = new ActionSpace("Jail");
         assert actionSpace.getJailCards().containsKey("Pay child support($100)");
-        assert actionSpace.getJailCards().containsValue(actionSpace.getCard(actionSpace.generateRandomCard()));
     }
 
     @Test
