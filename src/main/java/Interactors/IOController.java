@@ -3,6 +3,7 @@ package Interactors;
 import Entities.State;
 import UseCases.UseCaseInteractor;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -21,13 +22,14 @@ public class IOController {
     private UseCaseInteractor interactor;
     private State currentState;
 
+
     /**
      * The constructor for the IOController class
      */
-    public IOController(){
-        this.output = "";
-        this.input = -1;
-        this.interactor = new UseCaseInteractor();
+    public IOController(File file){
+        this.output = "Welcome to Monopoly! Do you want to ";
+        this.input = 0;
+        this.interactor = new UseCaseInteractor(new TextFileTranslator(file));
         this.currentState = this.interactor.getInitialState();
     }
 
@@ -61,12 +63,11 @@ public class IOController {
      * Helper function that takes state data and formulates the data into a string readable by the user
      */
     public void displayOptions(){
-        StringBuilder outputString = new StringBuilder();
+        String newOutput = "";
         ArrayList<String> options = currentState.getOptions();
         outputString.append(currentState.getDescription());
         for (int i = 0; i < options.size(); i++){
             outputString.append(options.get(i)).append("(").append(i).append("), ");
         }
-        this.output = outputString.toString();
     }
 }

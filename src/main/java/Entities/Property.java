@@ -57,7 +57,6 @@ public class Property extends Cell {
     }
 
     public String performAction(Player currentPlayer){
-        // set flag for player to know which branch of game logic tree we go down (property)
         // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
         if (this.getOwner().equals(currentPlayer)){
             return "Landed on a property you own";

@@ -1,6 +1,7 @@
 package Main;
 import Interactors.IOController;
 
+import java.io.File;
 import java.util.Scanner;
 
 /**
@@ -20,17 +21,18 @@ public class PresenterDisplay {
         isOver = false;
     }
 
+
     /**
      * Function that runs the game loop by getting game data from the IOController and presenting that to the
      * user as their options on each turn, getting the user's input and sending that back to the IOController
      * to further handle state changes based on their option choice.
      **/
-    public void playGame(){
-        IOController controller = new IOController();
-        controller.displayOptions();
+    public void playGame(File file){
+        IOController controller = new IOController(file);
         Scanner userIn = new Scanner(System.in);
-        // TODO add sanitation for user input so make sure it is one of the options in present output
-        while (!isOver){
+        controller.displayOptions();
+        while (!this.isOver){
+
             System.out.println(controller.presentOutput());
             int choice = userIn.nextInt();
             controller.setInput(choice);
