@@ -133,9 +133,8 @@ public class Player {
 
     /**
      * Changes the jail status of this player
-     * @param player the player whose jail status is being changed
      */
-    public void changeJailStatus(Player player) {
+    public void changeJailStatus() {
         this.inJail = !this.inJail;
     }
 
@@ -210,27 +209,25 @@ public class Player {
             if(a == b){
                 this.inJail = false;
                 this.move(a + b);
-                return (a + " " + b + "\n");
             }
-            else {
-                return (a + " " + b + "\n");
-            }
+            return (a + " " + b + "\n");
+
         }
         else {
             if (a != b){
                 this.move(a + b);
-                return (a + "\n" + b);
+                return (a + " " + b + "\n");
             }
             else if (a == b && (consecutive + 1) < 3){
-                this.rollDice((consecutive + 1));
+                return this.rollDice((consecutive + 1));
             }
             else if(a == b && (consecutive + 1) == 3){
                 // the player goes to jail
                 this.setInJail(true);
-                return (a + "\n" + b + "\n" + "player goes to jail");
+                return (a + " " + b + "\n" + "player goes to jail");
             }
+            return (a + " " + b + "\n");
         }
-        return (a + "\n" + b);
     }
 
     /**
