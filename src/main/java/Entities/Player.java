@@ -30,6 +30,15 @@ public class Player {
         this.position = 0;
     }
 
+    /**
+     * This is the constructor method for new player instances that takes in more parameters. Useful when loading a
+     * previously saved game
+     * @param name the name of the player
+     * @param money the amount of money in the player's balance
+     * @param inJail the player's jail status
+     * @param jailCards the number of get out of jail free cards owned by the player
+     * @param position the player's current position on the board
+     */
     public Player(String name, int money, boolean inJail, int jailCards, int position) {
         this.name = name;
         this.money = money;

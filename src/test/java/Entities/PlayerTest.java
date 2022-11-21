@@ -160,4 +160,3 @@ public class PlayerTest {
         assertEquals(new ArrayList<Property>(), player1.getProperties());
     }
 }
-
