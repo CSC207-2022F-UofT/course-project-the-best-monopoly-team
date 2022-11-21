@@ -38,15 +38,15 @@ public class InitialTreeHandler {
                 state.setBackEnable(true);
                 //in "New Game" node
                 selectedOptions.put("NewOrLoad",1);
-                state.setDescription("What mode would you like to play?");
+                state.setDescription("What mode would you like to play? ");
                 state.addOptions("Normal mode");
                 break;
             case "ChooseGameMode":
                 state.setBackEnable(true);
                 //in "Choose Game mode" node
                 selectedOptions.put(currentTree.getName(),input);
-                state.setDescription("How many players?");
-                for (int i = 2; i<9; i++){
+                state.setDescription("How many players? ");
+                for (int i = 2; i < 9; i++){
                     state.addOptions(i + " players");
                 }
                 break;
@@ -54,7 +54,7 @@ public class InitialTreeHandler {
                 state.setBackEnable(true);
                 //in "Number of Players" node
                 selectedOptions.put(currentTree.getName(),input);
-                state.setDescription("How many rounds?");
+                state.setDescription("How many rounds? ");
                 state.addOptions("30 rounds");
                 state.addOptions("60 rounds");
                 state.addOptions("90 rounds");
@@ -64,7 +64,7 @@ public class InitialTreeHandler {
                 state.setBackEnable(true);
                 //in "Game Length" node
                 selectedOptions.put(currentTree.getName(),input);
-                state.setDescription("Create the game?");
+                state.setDescription("Create the game? ");
                 state.addOptions("Yes");
                 state.addOptions("No");
                 break;
@@ -81,12 +81,12 @@ public class InitialTreeHandler {
             case "LoadGame":
                 //in "Load Game" node
                 selectedOptions.put("NewOrLoad",input);
-                state.setDescription("What save do you want to load");
+                state.setDescription("What save do you want to load ");
                 break;
             case "ChooseSave":
                 //in "Choose Save" node
                 selectedOptions.put(currentTree.getName(),input);
-                state.setDescription("Confirm the load?");
+                state.setDescription("Confirm the load? ");
                 break;
             case "CreateLoadedGame":
                 //in "Create Loaded Game" node

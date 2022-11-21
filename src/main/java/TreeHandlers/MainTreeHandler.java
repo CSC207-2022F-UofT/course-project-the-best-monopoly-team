@@ -24,7 +24,7 @@ public class MainTreeHandler extends TreeHandler {
         switch (currentTree.getName()){
             case "Trade":
                 currentState.setBackEnable(true);
-                currentState.setDescription("Who do you want to trade with?");
+                currentState.setDescription("Who do you want to trade with? ");
                 //Case trade selected
                 //provide a list of all possible players considering the current player is not an option
                 ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
@@ -35,7 +35,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "PickPlayer":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What property do you want from the player?");
+                currentState.setDescription("What property do you want from the player? ");
                 //Case player picked
                 //adds the chosen player index in selected options
                 selectedOptions.put(currentTree.getName(), input);
@@ -58,7 +58,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "PickItemOp":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What property are you willing to trade?");
+                currentState.setDescription("What property are you willing to trade? ");
                 //Case picking the item of the opponent
                 //the input corresponds to the index of the target player in this.board.getPlayers()
                 selectedOptions.put(currentTree.getName(), input);
@@ -110,7 +110,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "ManageProperty":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What property do you want to manage?");
+                currentState.setDescription("What property do you want to manage? ");
                 //Case manage property selected
                 //provide options on the properties available
                 ArrayList<Property> currentPlayerProperties = currentPlayer.getProperties();
@@ -130,7 +130,7 @@ public class MainTreeHandler extends TreeHandler {
 
             case "SelectProperty":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What do you want to do with the property?");
+                currentState.setDescription("What do you want to do with the property? ");
                 //Case property selected (adds the property index)
                 selectedOptions.put(currentTree.getName(), input);
                 //the player chooses what to do to the property
@@ -151,7 +151,7 @@ public class MainTreeHandler extends TreeHandler {
                     currentState = afterBottomNode();
                 }
                 else{
-                    currentState.setDescription("Are you sure you want to mortgage?");
+                    currentState.setDescription("Are you sure you want to mortgage? ");
                     currentState.addOptions("yes");
                     currentState.addOptions("no");
                     confirmationReturn = currentTree;
@@ -190,7 +190,7 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "AlreadyRolled":
-                currentState.setDescription("You already rolled this round!");
+                currentState.setDescription("You already rolled this round! ");
                 currentState.addOptions("ok");
                 break;
             case "CallAction":
@@ -200,7 +200,7 @@ public class MainTreeHandler extends TreeHandler {
             case "EmptyPropertySpace":
                 targetProperty = (Property) board.getCell(currentPlayer.getPosition());
                 currentState.setDescription("You have landed on "+ targetProperty.getName() +" a free property. " +
-                        "It costs "+ targetProperty.getPrice() + ". What do you want to do?");
+                        "It costs "+ targetProperty.getPrice() + ". What do you want to do? ");
                 addSwitchOptions(currentState);
                 break;
             case "Buy":
@@ -236,7 +236,7 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "Steal":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What player do you want to steal from?");
+                currentState.setDescription("What player do you want to steal from? ");
                 //Case steal selected
                 //provide options of which players we can steal from
                 playerCopy = new ArrayList<Player>(board.getPlayers());
@@ -264,13 +264,13 @@ public class MainTreeHandler extends TreeHandler {
                     currentState = afterBottomNode();
                 }
                 else{
-                    currentState.setDescription("You can't end your turn, you have negative money!");
+                    currentState.setDescription("You can't end your turn, you have negative money! ");
                     currentState.addOptions("Ok");
                 }
                 break;
             case "SettingsMenu":
                 currentState.setBackEnable(true);
-                currentState.setDescription("Welcome to the settings menu");
+                currentState.setDescription("Welcome to the settings menu! ");
                 addSwitchOptions(currentState);
                 break;
             case "ExitGame":
@@ -279,14 +279,14 @@ public class MainTreeHandler extends TreeHandler {
                     currentState.setExitToMenu(true);
                 }
                 else{
-                    currentState.setDescription("Are you sure you want to exit?");
+                    currentState.setDescription("Are you sure you want to exit? ");
                     currentState.addOptions("Yes");
                     currentState.addOptions("No");
                     confirmationReturn = currentTree;
                 }
                 break;
             case "SaveGame":
-                currentState.setDescription("Game saved!");
+                currentState.setDescription("Game saved! ");
                 currentState.addOptions("ok");
                 currentState.setSaveGame(true);
                 break;
@@ -307,7 +307,7 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 else {
                     confirmationReturn = currentTree;
-                    currentState.setDescription("Confirm bankruptcy?");
+                    currentState.setDescription("Confirm bankruptcy? ");
                     currentState.addOptions("Yes");
                     currentState.addOptions("No");
                 }
