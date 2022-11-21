@@ -295,9 +295,10 @@ public class MainTreeHandler extends TreeHandler {
                         targetedProperty.setHouses(0);
                         targetedProperty.setMortgageStatus(false);
                     }
-                    board.removePlayer(currentPlayer);
+                    Player tempPlayer = currentPlayer;
+                    changePlayers();
+                    board.removePlayer(tempPlayer);
                     // switching players
-                    currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
                     mainStates = new int[5];
                     currentState = afterBottomNode();
                 }
