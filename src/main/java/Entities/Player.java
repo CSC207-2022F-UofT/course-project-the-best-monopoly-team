@@ -30,6 +30,16 @@ public class Player {
         this.position = 0;
     }
 
+    public Player(String name, int money, boolean inJail, int jailCards, int position) {
+        this.name = name;
+        this.money = money;
+        this.properties = new ArrayList<Property>();
+        this.inJail = inJail;
+        this.jailCards = jailCards;
+        this.position = position;
+    }
+
+
     /**
      * This basically sets the player attribute of inJail, which in this case is a boolean value
      * @param inJail the parameter for this is a boolean value that sets their inJail property to true or false
