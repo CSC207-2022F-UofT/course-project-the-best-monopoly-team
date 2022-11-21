@@ -13,6 +13,7 @@ public class MainTreeHandler extends TreeHandler {
     int[] mainStates = new int[5];
     String answer;
     GameLogicTree confirmationReturn;
+    String diceroll;
     public MainTreeHandler(){
     }
     public MainTreeHandler(int[] states){
@@ -167,7 +168,7 @@ public class MainTreeHandler extends TreeHandler {
                     //Case roll selected
                     //We can determine if a player lands on a property by checking if the position
 
-                    currentPlayer.rollDice();
+                    diceroll = currentPlayer.rollDice();
                     board.updatePlayerPosition(currentPlayer);
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
                     if (landedOnCell instanceof Property &&
@@ -190,12 +191,12 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.addOptions("ok");
                 break;
             case "CallAction":
-                currentState.setDescription(answer);
+                currentState.setDescription("You rolled a " + diceroll + answer);
                 currentState.addOptions("ok");
                 break;
             case "EmptyPropertySpace":
                 targetProperty = (Property) board.getCell(currentPlayer.getPosition());
-                currentState.setDescription("You have landed on "+ targetProperty.getName() +" a free property. " +
+                currentState.setDescription("You rolled a "+diceroll+"You have landed on "+ targetProperty.getName() +" a free property. " +
                         "It costs "+ targetProperty.getPrice() + ". What do you want to do? ");
                 addSwitchOptions(currentState);
                 break;

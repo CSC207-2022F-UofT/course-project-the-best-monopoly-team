@@ -216,10 +216,10 @@ public class Player {
             if (a == b) {
                 this.inJail = false;
                 this.move(a + b);
-                return (a + "\n" + b);
+                return (a + " " + b + "\n");
             }
             else {
-                return (a + "\n" + b);
+                return (a + " " + b + "\n");
             }
         } else {
 //            if (a == b) {
@@ -227,7 +227,7 @@ public class Player {
 //                this.rollDice();
 //            } else {
                 this.move(a + b);
-                return (a + "\n" + b);
+            return (a + " " + b + "\n");
 //            }
         }
 //        this.move(a + b);

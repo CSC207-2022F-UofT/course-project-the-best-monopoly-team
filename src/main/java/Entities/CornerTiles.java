@@ -5,10 +5,9 @@ public class CornerTiles extends Cell{
     public void setJail(boolean jail) {
         isJail = jail;
     }
+
     public String name;
-
     boolean isJail = false;
-
     public CornerTiles(String type) {
         this.type = type;
     }

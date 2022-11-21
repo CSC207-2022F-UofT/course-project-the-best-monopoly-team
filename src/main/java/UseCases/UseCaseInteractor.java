@@ -17,12 +17,9 @@ import java.util.Arrays;
 
 public class UseCaseInteractor{
 
-
     private GameLogicTree currentTree;
     private boolean menuTreeActive = true;
-
     private InitialTreeHandler treeHandler;
-
     private GameLogic logicInteractor;
     private DataAccess dataAccess;
     private GameCreation gameCreation;
