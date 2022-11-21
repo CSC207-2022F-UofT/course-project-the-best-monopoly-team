@@ -110,8 +110,7 @@ public class GameCreation {
     private List<Cell> createCells(ArrayList<Cell> propertiesSoFar, ArrayList<Cell> standardProperties) throws IOException {
 
         CornerTiles go = new CornerTiles("Go");
-        CornerTiles visitingJail = new CornerTiles("justVisiting");
-        CornerTiles inJail = new CornerTiles("inJail");
+        CornerTiles jail = new CornerTiles("jail");
         CornerTiles freeParking = new CornerTiles("freeParking");
         CornerTiles goJail = new CornerTiles("goToJail");
         ActionSpace communityChest = new ActionSpace("communityChest");
@@ -124,8 +123,7 @@ public class GameCreation {
         cells.add(2, communityChest);
         cells.add(4, chance);
         cells.add(7, chance);
-        cells.add(10, visitingJail);
-        cells.add(11, inJail);
+        cells.add(10, jail);
         cells.add(18, communityChest);
         cells.add(21, freeParking);
         cells.add(23, chance);
@@ -136,7 +134,7 @@ public class GameCreation {
         if (!propertiesSoFar.equals(standardProperties)) {
             for (Cell property : propertiesSoFar) {
                 Property cProperty = (Property) property;
-                for (int i = 0; i <= 41; i++) {
+                for (int i = 0; i <= 40; i++) {
                     if (cells.get(i) instanceof Property) {
                         Property currentCell = (Property) cells.get(i);
                         if (currentCell.getName().equals(cProperty.getName())) ;
