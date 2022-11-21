@@ -20,6 +20,9 @@ public class GameLogic {
         mainTreeHandler.initialize(currentPlayer,board);
         createTrees();
     }
+    public State getInitialState(){
+        return mainTreeHandler.getInitialState();
+    }
 
     public GameLogicTree[] getTrees(){
         return this.trees;
@@ -41,40 +44,47 @@ public class GameLogic {
     }
 
     public void createTrees(){
-        //TODO: make a tree node at the end of most end nodes to show the information after.
         //Creating the game loop tree
         GameLogicTree main = new GameLogicTree("MainTree","It's your turn! What do you want to do?");
         GameLogicTree trade = new GameLogicTree("Trade");
         GameLogicTree pickPlayer = new GameLogicTree("PickPlayer");
         GameLogicTree pickItemOp = new GameLogicTree("PickItemOp");
         GameLogicTree pickItemSelf = new GameLogicTree("PickItemSelf");
-
-        //TODO: make the prompt say trade complete/failed
         GameLogicTree sendTrade = new GameLogicTree("SendTrade");
+
+        GameLogicTree nothingToTrade = new GameLogicTree("NothingToTrade");
 
         pickItemSelf.addChild(sendTrade);
         pickItemOp.addChild(pickItemSelf);
         pickPlayer.addChild(pickItemOp);
         trade.addChild(pickPlayer);
+        pickPlayer.addChild(nothingToTrade);
 
         GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
         GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
         GameLogicTree mortgage = new GameLogicTree("Mortgage");
+        GameLogicTree unMortgage = new GameLogicTree("UnMortgage");
         GameLogicTree buildProperty = new GameLogicTree("BuildProperty");
 
+        GameLogicTree noProperties = new GameLogicTree("NoProperties");
+
         selectProperty.addChild(mortgage);
+        selectProperty.addChild(unMortgage);
         selectProperty.addChild(buildProperty);
         manageProperty.addChild(selectProperty);
+        manageProperty.addChild(noProperties);
 
-        //TODO: prompt has to alter based on what the player lands on
+
         GameLogicTree roll = new GameLogicTree("Roll");
         GameLogicTree callAction = new GameLogicTree("CallAction");
         GameLogicTree emptyPropertySpace = new GameLogicTree("EmptyPropertySpace");
         GameLogicTree buy = new GameLogicTree("Buy");
         GameLogicTree auction = new GameLogicTree("Auction");
+        GameLogicTree alreadyRolled = new GameLogicTree("AlreadyRolled");
 
         roll.addChild(emptyPropertySpace);
         roll.addChild(callAction);
+        roll.addChild(alreadyRolled);
 
         emptyPropertySpace.addChild(buy);
         emptyPropertySpace.addChild(auction);
@@ -95,12 +105,16 @@ public class GameLogic {
         GameLogicTree confirmationNode = new GameLogicTree("Confirmation");
         GameLogicTree informationNode = new GameLogicTree("Information");
 
+        nothingToTrade.addChild(informationNode);
+        noProperties.addChild(informationNode);
         sendTrade.addChild(informationNode);
         choosePlayer.addChild(informationNode);
         callAction.addChild(informationNode);
         buildProperty.addChild(informationNode);
-        roll.addChild(informationNode);
+        alreadyRolled.addChild(informationNode);
         saveGame.addChild(informationNode);
+        endTurn.addChild(informationNode);
+        auction.addChild(informationNode);
 
         mortgage.addChild(confirmationNode);
         exitGame.addChild(confirmationNode);
@@ -123,12 +137,11 @@ public class GameLogic {
         emptyPropertySpace.setIsSwitchBlock(true);
         trees[0] = main;
 
-        //TODO: SHOW THE TRADED PROPERTIES
         //Creating the trading tree
         GameLogicTree tradeTree = new GameLogicTree("TradeTree");
         GameLogicTree acceptTrade = new GameLogicTree("AcceptTrade");
         GameLogicTree declineTrade = new GameLogicTree("DeclineTrade");
-        trade.addChild(acceptTrade);
+        tradeTree.addChild(acceptTrade);
         tradeTree.addChild(declineTrade);
         tradeTree.setIsSwitchBlock(true);
         trees[1] = tradeTree;
@@ -154,6 +167,7 @@ public class GameLogic {
         if (input == -1){
             //Move backwards in tree
             currentTree = (GameLogicTree) currentTree.getParent();
+            return currentTree.getPreviousState();
         }
         else if (currentTree.isSwitchBlock()){
             //Move forward in tree to one of the branches
@@ -164,11 +178,9 @@ public class GameLogic {
             currentTree = (GameLogicTree) currentTree.getChildren().get(0);
         }
 
-        if (currentTree.getChildren().isEmpty()){
-            setCurrentTreeToMaxParent();
-        }
         return handleTree(input);
     }
+
     public void transverseCurrentTree(int branchNumber){
         currentTree =  (GameLogicTree) currentTree.getChildren().get(branchNumber);
     }
@@ -183,6 +195,17 @@ public class GameLogic {
             return auctionTreeHandler.handleInput();
         }
 
+    }
+    public int getCurrentTreeID(){
+        for (int  i = 0; i<trees.length; i++){
+            if (trees[i] == currentTree.getMaxParent()){
+                return i;
+            }
+        }
+        return -1;
+    }
+    public void setupAuction(){
+        auctionTreeHandler.initialize();
     }
 
 }

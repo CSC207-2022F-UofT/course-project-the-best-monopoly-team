@@ -2,12 +2,6 @@ package Entities;
 
 public class CornerTiles extends Cell{
     private String type;
-    public void setJail(boolean jail) {
-        isJail = jail;
-    }
-    public String name;
-
-    boolean isJail = false;
 
     public CornerTiles(String type) {
         this.type = type;
@@ -15,20 +9,27 @@ public class CornerTiles extends Cell{
     @Override
     public String performAction(Player currentPlayer, Board board) {
         //TODO: check this.type and perform corresponding action
-
-        switch (this.type){
+        String returnMessage = new String();
+        switch (this.type) {
             case "Go":
-            case "justVisiting":
-            case "inJail":
+                returnMessage = "Passed Go! Collected 200";
+                break;
+            case "jail":
+                if (currentPlayer.isInJail()) {
+                    returnMessage = "You are still in Jail";
+                } else {
+                    returnMessage = "You're visiting Jail";
+                }
+                break;
             case "freeParking":
+                returnMessage = "You landed on Free Parking!";
+                break;
             case "goToJail":
+                currentPlayer.setPosition(11);
+                currentPlayer.changeJailStatus();
+                returnMessage = "Go to Jail!";
+                break;
         }
-
-        if (isJail){
-            //TODO: put player in jail and put them in correct location
-            currentPlayer.setPosition(11);
-            return "You went to jail";
-        }
-        return "You're at "+ name + " nothing happens!";
+        return returnMessage;
     }
 }

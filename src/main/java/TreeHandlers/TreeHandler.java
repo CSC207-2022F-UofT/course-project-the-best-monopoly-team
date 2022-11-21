@@ -10,7 +10,9 @@ import java.util.List;
  *  <br> Each of the subclasses coordinate the game logic of the application.
  */
 public class TreeHandler {
-
+    final int LOW_OPTION = 20;
+    final int MEDIUM_OPTION = 80;
+    final int HIGH_OPTION = 160;
     //Static variables used by all the subclasses
     static GameLogic gameLogicInteractor;
     static Player currentPlayer;
@@ -19,7 +21,8 @@ public class TreeHandler {
     static int returnPlayerIndex = -1;
     static List<Player> players;
     static GameLogicTree returnTree;
-    static String description;
+    static String descriptionOtherTrees;
+    static Property biddingProperty;
 
 
     /**
@@ -28,7 +31,7 @@ public class TreeHandler {
      * @param board1 - the current board being used in the game
      */
     public void initialize(Player currentPlayer1, Board board1){
-        players = board.getPlayers();
+        players = board1.getPlayers();
         currentPlayer = currentPlayer1;
         board = board1;
     }
@@ -47,10 +50,19 @@ public class TreeHandler {
      */
     public State getInitialState(){
         State currentState = new State();
-        currentState.setDescription(gameLogicInteractor.getCurrentTree().getPrompt());
-        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
-            currentState.addOptions(tree.getName());
+        if (gameLogicInteractor.getCurrentTreeID() == 0) {
+            currentState.setDescription(currentPlayer.getName() + " " + gameLogicInteractor.getCurrentTree().getPrompt() + " You currently " +
+                    "have " + currentPlayer.getMoney() + " dollars");
+            addSwitchOptions(currentState);
         }
+        else {
+            currentState.setDescription(currentPlayer.getName() + " " + descriptionOtherTrees);
+            currentState.addOptions(""+LOW_OPTION);
+            currentState.addOptions(""+MEDIUM_OPTION);
+            currentState.addOptions(""+HIGH_OPTION);
+            currentState.addOptions("Fold");
+        }
+        gameLogicInteractor.getCurrentTree().setPreviousState(currentState);
         return currentState;
     }
 
@@ -149,6 +161,9 @@ public class TreeHandler {
      */
     public void setReturnTree(GameLogicTree returnTree1) {
         returnTree = returnTree1;
+    }
+    public void changePlayers(){
+        currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
     }
 
 }

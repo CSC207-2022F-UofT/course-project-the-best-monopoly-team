@@ -179,8 +179,20 @@ public class Player {
     public void move(int step) {
         position += step;
         if (position > 39) {
+            //Money on passing go
+            money += 200;
             position -= 40;
         }
+    }
+
+    /**
+     * Rigged roll for testing purposes
+     * @param rig
+     * @return
+     */
+    public String riggedRoll(int rig) {
+        this.move(rig);
+        return (""+rig);
     }
 
     /**
@@ -198,7 +210,10 @@ public class Player {
             if(a == b){
                 this.inJail = false;
                 this.move(a + b);
-                return (a + "\n" + b);
+                return (a + " " + b + "\n");
+            }
+            else {
+                return (a + " " + b + "\n");
             }
         }
         else {
