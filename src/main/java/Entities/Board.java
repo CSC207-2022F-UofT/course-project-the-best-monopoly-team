@@ -71,7 +71,8 @@ public class Board{
      * @return This returns a Cell which the Player instance is on.
      */
     public Cell getPlayerCell(Player player){
-        return this.cells.get(this.playerPositions.get(player));
+        int position = player.getPosition();
+        return this.getCell(position);
     }
     /**
      * This method updates the position of a player by making changes to the map, this.playerPositions.

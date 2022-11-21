@@ -1,12 +1,13 @@
 package Entities;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.util.*;
 
-class BoardTest {
+public class BoardTest {
     @Test
-    void getPlayers(){
+    public void testGetPlayers(){
         Player playerOne = new Player("PlayerOne");
         Player playerTwo = new Player("PlayerTwo");
         List<Player> players = new ArrayList<Player>();
@@ -21,19 +22,29 @@ class BoardTest {
         List<Cell> cells = new ArrayList<Cell>();
         cells.add(cellOne);
         cells.add(cellTwo);
-//        Object[][] propertyData = {{"propertyOne", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerOne, 0, 0, false},
-//                {"propertyTwo", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerTwo, 0, 0, false}};
         Board board = new Board(players, cells);
         List<Player> actual = board.getPlayers();
-        List<Player> expected = Arrays.asList(new Player("PlayerOne"), new Player("PlayerTwo"));
-        assert actual == expected;
+        List<Player> expected = Arrays.asList(playerOne, playerTwo);
+        assertEquals(actual, expected);
     }
 
-    // @Test
-    // TODO create test for removePlayer
+    @Test
+    public void testRemovePlayer(){
+        Player playerOne = new Player("PlayerOne");
+        Player playerTwo = new Player("PlayerTwo");
+        List<Player> players = new ArrayList<Player>();
+        players.add(playerOne);
+        players.add(playerTwo);
+        List<Cell> cells = new ArrayList<Cell>();
+        Board board = new Board(players, cells);
+        board.removePlayer(playerOne);
+        List<Player> actual = board.getPlayers();
+        List<Player> expected = List.of(playerTwo);
+        assertEquals(actual, expected);
+    }
 
     @Test
-    void getCells(){
+    public void testGetCells(){
         Player playerOne = new Player("PlayerOne");
         Player playerTwo = new Player("PlayerTwo");
         List<Player> players = new ArrayList<Player>();
@@ -48,21 +59,37 @@ class BoardTest {
         List<Cell> cells = new ArrayList<Cell>();
         cells.add(cellOne);
         cells.add(cellTwo);
-        Object[][] propertyData = {{"propertyOne", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerOne, 0, 0, false},
-                {"propertyTwo", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerTwo, 0, 0, false}};
         Board board = new Board(players, cells);
         List<Cell> actual = board.getCells();
-        List<Cell> expected = Arrays.asList(new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
-                0, false), new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
-                0, false));
-        assert actual == expected;
+        List<Cell> expected = Arrays.asList(cellOne, cellTwo);
+        assertEquals(actual, expected);
     }
 
-    // @Test
-    // TODO create test for getCell
+    @Test
+    public void testGetCell(){
+        Player playerOne = new Player("PlayerOne", 0, false, 0, 1);
+        Player playerTwo = new Player("PlayerTwo");
+        List<Player> players = new ArrayList<Player>();
+        players.add(playerOne);
+        players.add(playerTwo);
+        int [] rentValues1 = new int[] {1,2,3,4,5};
+        int [] rentValues2 = new int[] {2,4,6,8,10};
+        Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
+                0, false);
+        Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
+                0, false);
+        List<Cell> cells = new ArrayList<Cell>();
+        cells.add(cellOne);
+        cells.add(cellTwo);
+        Board board = new Board(players, cells);
+        Cell actual = board.getCell(1);
+        Cell expected = board.cells.get(1);
+        assertEquals(actual, expected);
+    }
+
 
     @Test
-    void getPlayerPositions(){
+    public void testGetPlayerPositions(){
         Player playerOne = new Player("PlayerOne");
         Player playerTwo = new Player("PlayerTwo");
         List<Player> players = new ArrayList<Player>();
@@ -77,8 +104,6 @@ class BoardTest {
         List<Cell> cells = new ArrayList<Cell>();
         cells.add(cellOne);
         cells.add(cellTwo);
-//        Object[][] propertyData = {{"propertyOne", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerOne, 0, 0, false},
-//                {"propertyTwo", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerTwo, 0, 0, false}};
         Board board = new Board(players, cells);
         playerOne.move(3);
         playerTwo.move(2);
@@ -88,12 +113,12 @@ class BoardTest {
         Map<Player, Integer> expected = new HashMap<Player, Integer>();
         expected.put(playerOne, 3);
         expected.put(playerTwo, 2);
-        assert expected == actual;
+        assertEquals(actual, expected);
     }
 
     @Test
-    void getPlayerCell(){
-        Player playerOne = new Player("PlayerOne");
+    public void testGetPlayerCell(){
+        Player playerOne = new Player("PlayerOne", 0, false, 0, 1);
         Player playerTwo = new Player("PlayerTwo");
         List<Player> players = new ArrayList<Player>();
         players.add(playerOne);
@@ -107,19 +132,14 @@ class BoardTest {
         List<Cell> cells = new ArrayList<Cell>();
         cells.add(cellOne);
         cells.add(cellTwo);
-        Object[][] propertyData = {{"propertyOne", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerOne, 0, 0, false},
-                {"propertyTwo", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerTwo, 0, 0, false}};
         Board board = new Board(players, cells);
-        List<Cell> actual = board.getCells();
-        List<Cell> expected = Arrays.asList(new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
-                        0, false),
-                new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
-                        0, false));
-        assert actual == expected;
+        Cell actual = board.getPlayerCell(playerOne);
+        Cell expected = cells.get(playerOne.getPosition());
+        assertEquals(actual, expected);
     }
 
     @Test
-    void updatePlayerPosition(){
+    public void testUpdatePlayerPosition(){
         Player playerOne = new Player("PlayerOne");
         Player playerTwo = new Player("PlayerTwo");
         List<Player> players = new ArrayList<Player>();
@@ -134,8 +154,6 @@ class BoardTest {
         List<Cell> cells = new ArrayList<Cell>();
         cells.add(cellOne);
         cells.add(cellTwo);
-        Object[][] propertyData = {{"propertyOne", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerOne, 0, 0, false},
-                {"propertyTwo", "Colour", 0, 0, 0, 0, 0, 0, 0, 0, playerTwo, 0, 0, false}};
         Board board = new Board(players, cells);
         playerOne.move(3);
         board.updatePlayerPosition(playerOne);
