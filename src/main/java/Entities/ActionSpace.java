@@ -1,9 +1,12 @@
 package Entities;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
+
 
 public class ActionSpace extends Cell {
     private final HashMap<String, ArrayList<Object>> jailCards;
@@ -80,7 +83,7 @@ public class ActionSpace extends Cell {
         HashMap<String, ArrayList<Object>> chanceCards = new HashMap<>();
         List<HashMap<String, ArrayList<Object>>> list = Arrays.asList(jailCards, comChestCards, chanceCards);
 //      // Reading from the game files
-        List<String> actions = Files.readAllLines(Paths.get("src/main/GameFile/chestcomjail.txt"));
+        List<String> actions = Files.readAllLines(Paths.get("src/save/chestcomjail.txt"));
         // load in from the GameFiles
         for (String lines: actions) {
             // String splitting each line's words and data with the : regrex
@@ -139,13 +142,13 @@ public class ActionSpace extends Cell {
     @Override
     public String performAction(Player player, Board board) {
         // Generating random card
-        ArrayList<Object> generatedCard = getCard(generateRandomCard());
+        String action = generateRandomCard();
+        ArrayList<Object> generatedCard = getCard(action);
         // Getting the action property of the String
-        String action = String.valueOf(generatedCard.get(0));
         //Getting the actionType
-        String actionType = String.valueOf(generatedCard.get(1));
+        String actionType = String.valueOf(generatedCard.get(0));
         //Getting the number associated with the action if any
-        Integer amount = (Integer) generatedCard.get(2);
+        Integer amount = (Integer) generatedCard.get(1);
 
         if (Objects.equals(actionType, "advance")){
             // Generating a random number of steps for the user to go forward
@@ -189,15 +192,15 @@ public class ActionSpace extends Cell {
         if (Objects.equals(type, "jail")) {
             List<String> keyList = new ArrayList<>(jailCards.keySet());
             int random_index = new Random().nextInt(keyList.size());
-            card = String.valueOf(jailCards.get(keyList.get(random_index)));
+            card = keyList.get(random_index);
         } else if (Objects.equals(type, "chance")) {
             List<String> keyList = new ArrayList<>(chanceCards.keySet());
             int random_index = new Random().nextInt(keyList.size());
-            card = String.valueOf(chanceCards.get(keyList.get(random_index)));
+            card = keyList.get(random_index);
         } else {
             List<String> keyList = new ArrayList<>(comChestCards.keySet());
             int random_index = new Random().nextInt(keyList.size());
-            card = String.valueOf(comChestCards.get(keyList.get(random_index)));
+            card = keyList.get(random_index);
         }
         return card;
 
