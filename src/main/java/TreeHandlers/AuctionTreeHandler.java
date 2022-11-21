@@ -40,25 +40,19 @@ public class AuctionTreeHandler extends TreeHandler {
                     playerWon = players.get(auctionComplete);
                     playerWon.addProperty(biddingProperty);
                     playerWon.pay(auctionStates[potIndex]);
-                    descriptionOtherTrees = playerWon.getName() + " won the auction for " +auctionStates[potIndex] + " money";
                     gameLogicInteractor.setCurrentTree(getReturnTree());
                     currentPlayer = players.get(returnPlayerIndex);
-                    return gameLogicInteractor.handleTree(0);
+                    currentState.setDescription(playerWon.getName() + " won the auction for " +auctionStates[potIndex] + " money");
+                    currentState.addOptions("ok");
                 }
                 break;
-//            case "Information":
-//                gameLogicInteractor.setCurrentTree(getReturnTree());
-//                currentPlayer = players.get(returnPlayerIndex);
         }
         if (auctionComplete == -1){
             setAuctionDescription();
             currentState = getInitialState();
             gameLogicInteractor.setCurrentTreeToMaxParent();
         }
-        else{
-            currentState.setDescription(descriptionOtherTrees);
-            currentState.addOptions("ok");
-        }
+
         return currentState;
     }
     private void setAuctionDescription(){

@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 public class MainTreeHandler extends TreeHandler {
     //mainStates[0]: reserved for confirmation node
-    //mainStates[1]: reserved for sendTrade node and auction node (switching the trees)
+    //mainStates[1]: unused
     //mainStates[2]: reserved for roll
     //mainStates
     int[] mainStates = new int[5];
@@ -86,28 +86,19 @@ public class MainTreeHandler extends TreeHandler {
 
                 break;
             case "SendTrade":
-                if (mainStates[1] == 0) {
-                    Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
+                Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
 
-                    currentState.setDescription("Incoming trade from player " + currentPlayer.getName() +
-                            " requesting for "+ tradingOpponent.getProperties().get(selectedOptions.get("PickItemOp")).getName()
-                            + " in return for "+ currentPlayer.getProperties().get(selectedOptions.get("PickItemSelf")).getName());
+                currentState.setDescription("Incoming trade from player " + currentPlayer.getName() +
+                        " requesting for "+ tradingOpponent.getProperties().get(selectedOptions.get("PickItemOp")).getName()
+                        + " in return for "+ currentPlayer.getProperties().get(selectedOptions.get("PickItemSelf")).getName());
 
-                    returnTree = currentTree;
-                    returnPlayerIndex = getCurrentPlayerIndex();
-                    //returnPlayerAddress will hold the original player index in this.board.getPlayers()
-                    currentPlayer = tradingOpponent;
-                    gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[1]);
-                    addSwitchOptions(currentState);
+                returnTree = currentTree;
+                returnPlayerIndex = getCurrentPlayerIndex();
+                //returnPlayerAddress will hold the original player index in this.board.getPlayers()
+                currentPlayer = tradingOpponent;
+                gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[1]);
+                addSwitchOptions(currentState);
 
-                    mainStates[1] = 1;
-                }
-                else {
-                    currentState.setDescription(descriptionOtherTrees);
-                    currentState.addOptions("ok");
-                    mainStates[1] = 0;
-                    break;
-                }
                 break;
             case "ManageProperty":
                 currentState.setBackEnable(true);
@@ -167,7 +158,6 @@ public class MainTreeHandler extends TreeHandler {
                 if (mainStates[2] == 0) {
                     //Case roll selected
                     //We can determine if a player lands on a property by checking if the position
-
                     diceroll = currentPlayer.rollDice();
                     board.updatePlayerPosition(currentPlayer);
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
@@ -214,22 +204,14 @@ public class MainTreeHandler extends TreeHandler {
 
                 break;
             case "Auction":
-                if (mainStates[1] == 0) {
-                    //Case auction selected
-                    returnPlayerIndex = getCurrentPlayerIndex();
-                    //returnPlayerAddress will hold the original player index in this.board.getPlayers()
+                //Case auction selected
+                returnPlayerIndex = getCurrentPlayerIndex();
+                //returnPlayerAddress will hold the original player index in this.board.getPlayers()
 
-                    returnTree = currentTree;
-                    gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[2]);
-                    gameLogicInteractor.setupAuction();
-                    currentState = getInitialState();
-                    mainStates[1] = 1;
-                }
-                else{
-                    currentState.setDescription(descriptionOtherTrees);
-                    currentState.addOptions("ok");
-                    mainStates[1] = 0;
-                }
+                returnTree = currentTree;
+                gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[2]);
+                gameLogicInteractor.setupAuction();
+                currentState = getInitialState();
                 break;
             case "Steal":
                 currentState.setBackEnable(true);
