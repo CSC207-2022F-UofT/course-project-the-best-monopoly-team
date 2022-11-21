@@ -190,8 +190,9 @@ public class TextFileTranslator implements DataAccess{
         // return array of all properties in txt file as Strings
         // GameCreationInteractor will parse Strings to create Property instances
         ArrayList<String[]> allProperties = new ArrayList<>();
-
-        File properties = new File("../../../save/properties.txt");
+        String path = new File("src/save/properties.txt")
+                .getAbsolutePath();
+        File properties = new File(path);
         Scanner scan = new Scanner(properties);
 
         while (scan.hasNextLine()) {

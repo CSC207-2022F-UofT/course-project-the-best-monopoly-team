@@ -16,11 +16,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UseCaseInteractor{
+
     private GameLogicTree currentTree;
     private boolean menuTreeActive = true;
-
     private InitialTreeHandler treeHandler;
-
     private GameLogic logicInteractor;
     private DataAccess dataAccess;
     private GameCreation gameCreation;
@@ -33,7 +32,6 @@ public class UseCaseInteractor{
         this.dataAccess = dataAccess;
         createTrees();
         currentState = getInitialState();
-        updateOutput(currentState);
         treeHandler = new InitialTreeHandler(this);
         this.gameCreation = new GameCreation();
     }
@@ -49,6 +47,7 @@ public class UseCaseInteractor{
             if (input == -1){
                 //Move backwards in tree
                 currentTree = (GameLogicTree) currentTree.getParent();
+                return currentTree.getPreviousState();
             }
             else if (currentTree.isSwitchBlock()){
                 //Move forward in tree to one of the branches
@@ -63,8 +62,16 @@ public class UseCaseInteractor{
         else{
             currentState = handleOtherTrees(input);
         }
+        if (currentState.isExitToMenu()){
+            return returnToStart();
+        }
         return currentState;
 
+    }
+    public State returnToStart(){
+        menuTreeActive = true;
+        currentTree = (GameLogicTree) currentTree.getMaxParent();
+        return getInitialState();
     }
     /**
      * This method creates the initial menu tree for the program <br>
@@ -108,6 +115,7 @@ public class UseCaseInteractor{
         for (MenuTree tree: currentTree.getChildren()){
             currentState.addOptions(tree.getName());
         }
+        currentTree.setPreviousState(currentState);
         return currentState;
     }
 
@@ -121,31 +129,57 @@ public class UseCaseInteractor{
         return logicInteractor.performInput(input);
 
     }
-    public void updateOutput(State currentState){
-        //TODO update the user interface
+
+    public void loadGame(boolean newGame){
+        Board loadedBoard;
+        if (newGame){
+            loadedBoard = loadFiles();
+            if (loadedBoard == null){
+                //TODO: do something when it fails to load
+            }
+            else {
+                logicInteractor = new GameLogic(loadedBoard.getPlayers().get(0), loadedBoard);
+                menuTreeActive = false;
+            }
+        }
+        else {
+            //TODO: DO SOMETHING IF ITS NOT A NEW GAME
+
+        }
+
     }
-    public Board loadFiles(String filepath) throws IOException {
+    public Board loadFiles() {
         //TODO load files for game creation
         //TODO correctly implement this method
-
+        try {
+            ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
+            ArrayList<String> playerNames = new ArrayList<>();
+            for (int i = 0; i < treeHandler.selectedOptions.get("NumberOfPlayers") + 2; i++) {
+                playerNames.add("Player " + i);
+            }
+            Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);
+            return newGame;
+        }
+        catch (Exception IOException){
+            return null;
+        }
+    }
+    public Board loadSavedGame(String filepath) throws IOException{
         ArrayList<ArrayList<String[]>> loadedGame = this.dataAccess.loadGame();
         ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
 
-        ArrayList<String> playerNames = new ArrayList<>();
-        for (int i = 0; i <= treeHandler.selectedOptions.get("NumberOfPlayers"); i++){
-            playerNames.add("Player " + i);
-        }
-
-        Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);
         Board savedGame = this.gameCreation.createSavedGame(loadedGame, newProperties);
-
-        return newGame;
+        return savedGame;
     }
 
     public GameLogicTree getCurrentTree(){
         return currentTree;
     }
-
-
+    public GameLogic getLogicInteractor() {
+        return logicInteractor;
+    }
+    public void setCurrentTree(GameLogicTree currentTree) {
+        this.currentTree = currentTree;
+    }
 
 }

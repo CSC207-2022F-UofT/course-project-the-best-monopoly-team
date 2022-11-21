@@ -55,7 +55,12 @@ public class IOController {
      * processing and then present the new options based on the processing to the user
      */
     public void connectLogic(){
-        this.currentState = this.interactor.handleInput(this.input);
+        if(input == currentState.getOptions().size()){
+            this.currentState = this.interactor.handleInput(-1);
+        }
+        else {
+            this.currentState = this.interactor.handleInput(this.input);
+        }
         displayOptions();
     }
 
@@ -66,10 +71,15 @@ public class IOController {
         StringBuilder outputString = new StringBuilder();
         ArrayList<String> options = currentState.getOptions();
         outputString.append(currentState.getDescription());
+        outputString.append("\n");
         for (int i = 0; i < options.size(); i++){
             outputString.append(options.get(i)).append("(").append(i).append("), ");
         }
+        if (currentState.isBackEnable()){
+            outputString.append("back").append("(").append(options.size()).append(")");
+        }
         this.output = outputString.toString();
+
 
     }
 }

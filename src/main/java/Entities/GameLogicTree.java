@@ -8,6 +8,7 @@ public class GameLogicTree extends MenuTree{
 
     private String prompt;
 
+    private State previousState;
 
     public GameLogicTree(String name) {
         didRoll = false;
@@ -71,5 +72,12 @@ public class GameLogicTree extends MenuTree{
     }
     public boolean isSwitchBlock() {
         return switchBlock;
+    }
+    public State getPreviousState() {
+        return previousState;
+    }
+
+    public void setPreviousState(State previousState) {
+        this.previousState = previousState;
     }
 }
