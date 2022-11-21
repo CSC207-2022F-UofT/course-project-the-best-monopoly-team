@@ -65,4 +65,3 @@ public class PlayerTest {
         assertEquals(new ArrayList<Property>(), a.getProperties());
     }
 }
-
