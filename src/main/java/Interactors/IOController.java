@@ -63,11 +63,13 @@ public class IOController {
      * Helper function that takes state data and formulates the data into a string readable by the user
      */
     public void displayOptions(){
-        String newOutput = "";
+        StringBuilder outputString = new StringBuilder();
         ArrayList<String> options = currentState.getOptions();
         outputString.append(currentState.getDescription());
         for (int i = 0; i < options.size(); i++){
             outputString.append(options.get(i)).append("(").append(i).append("), ");
         }
+        this.output = outputString.toString();
+
     }
 }
