@@ -13,6 +13,7 @@ public class TreeHandler {
     final int LOW_OPTION = 20;
     final int MEDIUM_OPTION = 80;
     final int HIGH_OPTION = 160;
+
     //Static variables used by all the subclasses
     static GameLogic gameLogicInteractor;
     static Player currentPlayer;
@@ -22,7 +23,6 @@ public class TreeHandler {
     static List<Player> players;
     static GameLogicTree returnTree;
     static String descriptionOtherTrees;
-    static Property biddingProperty;
 
 
     /**
@@ -45,12 +45,16 @@ public class TreeHandler {
     }
 
     /**
-     * This method gets the current state object of the program.
-     * @return the current state of the program.
+     * Returns the state object which contains the properties of the current tree and
+     * sets the current tree to the root
+     * @return state object
      */
-    public State getInitialState(){
+    public State getCurrentState(){
         State currentState = new State();
+
+        //mutates the state object with all of its properties
         if (gameLogicInteractor.getCurrentTreeID() == 0) {
+            //object mutation when player is transversing through the main tree
             currentState.setId(gameLogicInteractor.getCurrentTree().getName());
             currentState.setDescription(currentPlayer.getName() + " " + gameLogicInteractor.getCurrentTree().getPrompt() + " You currently " +
                     "have " + currentPlayer.getMoney() + " dollars");
@@ -58,8 +62,10 @@ public class TreeHandler {
             addSwitchOptions(currentState);
         }
         else {
+            //state return when player is transversing through the auction tree
             return gameLogicInteractor.getAuctionState();
         }
+        //mutating the state to have memory of its state, useful for backwards transversal
         gameLogicInteractor.getCurrentTree().setPreviousState(currentState);
         return currentState;
     }
@@ -117,20 +123,6 @@ public class TreeHandler {
     }
 
     /**
-     * This array moves the current player along the board.
-     * @param cell_number how many spaces to move the player by
-     */
-    public void movePlayer(int cell_number){
-        int total_squares = 40;
-        int current_player_position = currentPlayer.getPosition();
-        if (cell_number - current_player_position < 0) {
-            currentPlayer.setMoney(currentPlayer.getMoney() + 200);
-        }
-        currentPlayer.setPosition(cell_number);
-        board.updatePlayerPosition(currentPlayer);
-    }
-
-    /**
      * Setter method for the current player instance attribute
      * @param player - the player to set
      */
@@ -160,6 +152,10 @@ public class TreeHandler {
     public void setReturnTree(GameLogicTree returnTree1) {
         returnTree = returnTree1;
     }
+
+    /**
+     * Method to change players when their turn is over
+     */
     public void changePlayers(){
         currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
     }

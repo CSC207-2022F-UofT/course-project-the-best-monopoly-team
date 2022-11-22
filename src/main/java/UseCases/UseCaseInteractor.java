@@ -8,13 +8,13 @@ import Entities.State;
 import Interactors.DataAccess;
 import Interactors.GameCreation;
 import Interactors.GameLogic;
-
-import javax.xml.crypto.Data;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
+
+/**
+ * This class creates a UseCaseInteractor which coordinates the inputs to the entities layer of the program.
+ */
 public class UseCaseInteractor{
 
     private GameLogicTree currentTree;
@@ -42,6 +42,7 @@ public class UseCaseInteractor{
      * @param input the translated input of the user from the input interface
      */
     public State handleInput(int input){
+        //If the initial menu is open, transverse through this tree
         if (menuTreeActive){
             //Moving through the tree depending on the input and the node
             if (input == -1){
@@ -57,17 +58,25 @@ public class UseCaseInteractor{
                 //Move forward in tree
                 currentTree = (GameLogicTree) currentTree.getChildren().get(0);
             }
+            //performs logic when inside nodes
             currentState = treeHandler.handleTree(input);
         }
         else{
+            //forwards input to GameLogic once the game has started
             currentState = handleOtherTrees(input);
         }
+        //returns to the menu screen
         if (currentState.isExitToMenu()){
             return returnToStart();
         }
         return currentState;
 
     }
+
+    /**
+     * This method allows the user to exit from the game and return to the initial menu.
+     * @return a State object which gives the current state of the program
+     */
     public State returnToStart(){
         menuTreeActive = true;
         currentTree = (GameLogicTree) currentTree.getMaxParent();
@@ -93,6 +102,7 @@ public class UseCaseInteractor{
         //creating the tree structure
         gameLength.addChild(createNewGame);
         numPlayers.addChild(gameLength);
+
         chooseGameMode.addChild(numPlayers);
         newGame.addChild(chooseGameMode);
 
@@ -101,16 +111,27 @@ public class UseCaseInteractor{
 
         initialMenu.addChild(newGame);
         initialMenu.addChild(loadGame);
+
         //indicates that this tree switches with input
         initialMenu.setIsSwitchBlock(true);
-
 
         //adding the tree into an array for later retrieval
         currentTree = initialMenu;
 
     }
+
+    /**
+     * Returns the state object which contains the properties of the root of the current tree and
+     * sets the current tree to the root
+     * @return state object
+     */
     public State getInitialState(){
         State currentState = new State();
+
+        //makes the currentTree the root
+        currentTree = (GameLogicTree) currentTree.getMaxParent();
+
+        //mutates the state object with all of its properties
         currentState.setId(currentTree.getName());
         currentState.setDescription(currentTree.getPrompt());
         for (MenuTree tree: currentTree.getChildren()){
@@ -131,7 +152,12 @@ public class UseCaseInteractor{
 
     }
 
-    public void loadGame(boolean newGame){
+    /**
+     * This method allows the user to create a game, new or loaded, by loading the files
+     * that deal with the game
+     * @param newGame - whether we are creating a new game or old game
+     */
+    public void createGame(boolean newGame){
         Board loadedBoard;
         if (newGame){
             loadedBoard = loadFiles();
@@ -149,6 +175,12 @@ public class UseCaseInteractor{
         }
 
     }
+
+    /**
+     * This method loads the files used in the program and creates an object which contains all the necessary game
+     * files to begin a game
+     * @return the object which will supply the data to create the game
+     */
     public Board loadFiles() {
         //TODO load files for game creation
         //TODO correctly implement this method
@@ -165,6 +197,11 @@ public class UseCaseInteractor{
             return null;
         }
     }
+    /**
+     * This method loads the files used in the program and the save file and
+     * an object which contains all the necessary game files to load a previous game
+     * @return the object which will supply the data to create the game
+     */
     public Board loadSavedGame(String filepath) throws IOException{
         ArrayList<ArrayList<String[]>> loadedGame = this.dataAccess.loadGame();
         ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
@@ -173,12 +210,26 @@ public class UseCaseInteractor{
         return savedGame;
     }
 
+    /**
+     * Returns the current tree used in this program
+     * @return the current tree
+     */
     public GameLogicTree getCurrentTree(){
         return currentTree;
     }
+
+    /**
+     * Returns the GameLogic instance used in this object
+     * @return the GameLogic instance
+     */
     public GameLogic getLogicInteractor() {
         return logicInteractor;
     }
+
+    /**
+     * Sets the current tree of the class
+     * @param currentTree - the current tree to set
+     */
     public void setCurrentTree(GameLogicTree currentTree) {
         this.currentTree = currentTree;
     }

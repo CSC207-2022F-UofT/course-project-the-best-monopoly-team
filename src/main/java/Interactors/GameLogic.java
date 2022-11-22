@@ -20,8 +20,8 @@ public class GameLogic {
         mainTreeHandler.initialize(currentPlayer,board);
         createTrees();
     }
-    public State getInitialState(){
-        return mainTreeHandler.getInitialState();
+    public State getCurrentState(){
+        return mainTreeHandler.getCurrentState();
     }
 
     public GameLogicTree[] getTrees(){

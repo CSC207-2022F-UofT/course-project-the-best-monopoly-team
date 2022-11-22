@@ -92,7 +92,7 @@ public class IOController {
                 outputString.append("Create the game?");
                 break;
             case "CreateNewGame":
-                //NOTHING
+                //Produces no output
                 break;
             case "LoadGame":
                 outputString.append("What save do you want to load ");
@@ -141,13 +141,13 @@ public class IOController {
                 outputString.append("Are you sure you want to mortgage? ");
                 break;
             case "UnMortgage":
-
+                //TODO implement this
                 break;
             case "BuildProperty":
                 outputString.append(currentState.getCurrentPlayerProperty().getHouses()).append(" houses built on this property");
                 break;
             case "Roll":
-                //nothing here
+                //Produces no output
                 break;
             case "AlreadyRolled":
                 outputString.append("You already rolled this round! ");
@@ -163,7 +163,7 @@ public class IOController {
                         .append(" What do you want to do?");
                 break;
             case "Buy":
-                //NOTHING
+                //Produces no output
                 break;
             case "Auction":
             case "AuctionTree":
@@ -175,7 +175,7 @@ public class IOController {
                 outputString.append("What player do you want to steal from?");
                 break;
             case "ChoosePlayer":
-                //Nothing here
+                outputString.append(currentState.getDescription());
                 break;
             case "EndTurn":
                 outputString.append("You can't end your turn, you have negative money");
@@ -193,22 +193,26 @@ public class IOController {
                 outputString.append("Confirm bankruptcy?");
                 break;
             case "Confirmation":
-                //Nothing here
+                //Produces no output
                 break;
             case "Information":
-                //Nothing here
+                //Produces no output
                 break;
             case "LowOption":
+                //Produces no output
                 break;
             case "MediumOption":
+                //Produces no output
                 break;
             case "HighOption":
+                //Produces no output
                 break;
             case "Fold":
                 outputString.append(currentState.getPlayer().getName()).append(" won the auction for ")
                         .append(currentState.getBiddingPot()).append(" dollars");
                 break;
             case "TradeTree":
+                //Produces no output
                 break;
             case "AcceptTrade":
                 outputString.append("Trade success");
