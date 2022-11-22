@@ -36,8 +36,12 @@ public class MainTreeHandler extends TreeHandler {
             case "PickPlayer":
                 currentState.setBackEnable(true);
                 //adds the chosen player index in selected options (who the current player wants to trade with)
-                selectedOptions.put(currentTree.getName(), input);
 
+                //we asked them for an input in reference to a list with their player removed
+                if (input >= getCurrentPlayerIndex()) {
+                    input += 1;
+                }
+                selectedOptions.put(currentTree.getName(), input);
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers().get(input);
                 ArrayList<Property> playerProperties = selectedPlayer.getProperties();

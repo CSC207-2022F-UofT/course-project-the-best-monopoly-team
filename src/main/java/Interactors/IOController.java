@@ -123,7 +123,7 @@ public class IOController {
                 outputString.append("Send the trade?");
                 break;
             case "SendTrade":
-                outputString.append("Incoming trade from player ")
+                outputString.append(currentState.getTradingOpponent().getName()).append(", Incoming trade from player ")
                         .append(currentState.getPlayer().getName())
                         .append(" requesting for ").append(currentState.getTradingPlayerProperty().getName())
                         .append(" in return for ").append(currentState.getCurrentPlayerProperty().getName());
