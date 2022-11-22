@@ -10,12 +10,18 @@ import java.util.HashMap;
 import java.util.List;
 
 public class GameCreation {
-
+    /** Create a new game by initializing a Board instance with default values.
+     *
+     * @param playersName an Arraylist of Strings which denote each player's name.
+     * @param properties  an Arraylist of String[] arrays, each subarray contains the default instance attributes of a Property.
+     * @return a Board instance initialized with default Properties and Players with names given by playersName.
+     * @throws IOException in case there was an error with creating an ActionSpace in createCells
+     */
     public Board createNewGame(ArrayList<String> playersName, ArrayList<String[]> properties) throws IOException {
         // This method is to create a brand-new game and initialize a new Board.
 
         ArrayList<Player> players = new ArrayList<>();
-        ArrayList<Cell> propertiesSoFar = new ArrayList<>();
+        ArrayList<Cell> propertiesSoFar;
 
         for (String name : playersName){
             Player newPlayer = new Player(name);
@@ -28,10 +34,15 @@ public class GameCreation {
         return new Board(players, cells);
     }
 
+    /** Loads a saved game by creating a Board instance with save data from gameData
+     *
+     * @param gameData an Arraylist with three sub Arraylists: 1. Player or Property instance data, 2. Player position data, 3. Tree main states
+     *                 each sub Arraylist contains String[] arrays where each element stores relevant instance data
+     * @param newProperties an Arraylist where each sub String[] array contains default Property instance data
+     * @return a Board instance initialized with gameData represented as their respective Entities
+     * @throws IOException in case there was an error with creating an ActionSpace in createCells
+     */
     public Board createSavedGame(ArrayList<ArrayList<String[]>> gameData, ArrayList<String[]> newProperties) throws IOException {
-        // This method is to re-create a game based on saved data - basically when the players decide to resume a
-        // saved game.
-
         ArrayList<Player> players = new ArrayList<>();
         ArrayList<Cell> properties = new ArrayList<>();
         ArrayList<Cell> standardProperties = parsePropertyData(newProperties);
@@ -78,18 +89,19 @@ public class GameCreation {
                     for (String[] position : gameData.get(i)) {
                         playerPositions.put(getOwner(players, position[0]),Integer.parseInt(position[1]));
                     }
-                    //TODO create saved Tree with savedTree and treeOptions from TextFileTranslator
-                case 2:
-                    // savedTree
-
-                case 3:
-                    // treeOptions
             }
         }
         List<Cell> cells = createCells(properties, standardProperties);
 
         return new Board(players, cells, playerPositions);
     }
+
+    /** Gets the Player instance based on a String of a Player's name.
+     *
+     * @param players an Arraylist of Player instances.
+     * @param playerName a String of a Player's name.
+     * @return the Player instance which has the name playerName, or null if such a Player does not exist
+     */
     private Player getOwner(ArrayList<Player> players, String playerName) {
         for (Player player : players) {
             if (player.getName().equals(playerName)) {
@@ -98,15 +110,16 @@ public class GameCreation {
         }
         return null;
     }
-    private Property getProperty(ArrayList<Cell> standardProperties, String propertyName) {
-        for (Cell property: standardProperties) {
-            Property cProperty = (Property) property;
-            if (cProperty.getName().equals(propertyName)){
-                return cProperty;
-            }
-        }
-        return null;
-    }
+
+    /** Creates all the Cells to be used to create a Board class. Properties which are owned
+     *  by Players (which potentially have houses built already) are inserted in place of
+     *  default Property instance.
+     *
+     * @param propertiesSoFar an Arraylist of Property instances which are owned by Players
+     * @param standardProperties an Arraylist of all Property instances with default values
+     * @return a List of all Cells on the Monopoly board
+     * @throws IOException in case there was an error with creating an ActionSpace
+     */
     private List<Cell> createCells(ArrayList<Cell> propertiesSoFar, ArrayList<Cell> standardProperties) throws IOException {
 
         CornerTiles go = new CornerTiles("Go");
@@ -115,8 +128,6 @@ public class GameCreation {
         CornerTiles goJail = new CornerTiles("goToJail");
         ActionSpace communityChest = new ActionSpace("communityChest");
         ActionSpace chance = new ActionSpace("chance");
-        // TODO: determine when to call jail ActionSpaces
-        // ActionSpace jail = new ActionSpace("jail");
 
         ArrayList<Cell> cells = standardProperties;
         cells.add(0, go);
@@ -131,15 +142,17 @@ public class GameCreation {
         cells.add(34, communityChest);
         cells.add(37, chance);
         cells.add(39, communityChest);
+
         if (!propertiesSoFar.equals(standardProperties)) {
             for (Cell property : propertiesSoFar) {
                 Property cProperty = (Property) property;
                 for (int i = 0; i <= 40; i++) {
                     if (cells.get(i) instanceof Property) {
                         Property currentCell = (Property) cells.get(i);
-                        if (currentCell.getName().equals(cProperty.getName())) ;
-                        cells.remove(i);
-                        cells.add(i, cProperty);
+                        if (currentCell.getName().equals(cProperty.getName())) {
+                            cells.remove(i);
+                            cells.add(i, cProperty);
+                        }
                     }
                 }
             }
@@ -147,7 +160,17 @@ public class GameCreation {
 
         return cells;
     }
-    private ArrayList<Cell> parsePropertyData(ArrayList<String[]> propertyData) throws IOException {
+
+    /** Creates an Arraylist of Property instances with default values.
+     *
+     * @param propertyData an Arraylist of String[] arrays where each array contains default values for a Property instance.
+     * @return an Arraylist of Property instances initialized with their default values.
+     */
+    private ArrayList<Cell> parsePropertyData(ArrayList<String[]> propertyData) {
+        // for unowned Property instances:
+        // index [10] is int mortgageValue, [11] is int houses,
+        // String playerOwnerName and booleanMortaged are not stored by default
+
         ArrayList<Cell> newProperties = new ArrayList<>();
 
         for (String[] data : propertyData) {
