@@ -6,6 +6,7 @@ import UseCases.CardMapperUseCase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CardMapperInteractor implements CardMapperUseCase {
     
@@ -20,7 +21,7 @@ public class CardMapperInteractor implements CardMapperUseCase {
         for (String s : lst) {
             String[] arr = s.split(":");
             String type = arr[0];
-            if (type == "jail") {
+            if (Objects.equals(type, "jail")) {
                 String action = arr[1];
                 String actiontype = arr[2];
                 Integer amount = Integer.parseInt(arr[3]);
@@ -43,7 +44,7 @@ public class CardMapperInteractor implements CardMapperUseCase {
         for (String s : lst) {
             String[] arr = s.split(":");
             String type = arr[0];
-            if (type == "chance") {
+            if (Objects.equals(type, "chance")) {
                 String action = arr[1];
                 String actiontype = arr[2];
                 Integer amount = Integer.parseInt(arr[3]);
@@ -66,7 +67,7 @@ public class CardMapperInteractor implements CardMapperUseCase {
         for (String s : lst) {
             String[] arr = s.split(":");
             String type = arr[0];
-            if (type == "comchest") {
+            if (Objects.equals(type, "comchest")) {
                 String action = arr[1];
                 String actiontype = arr[2];
                 Integer amount = Integer.parseInt(arr[3]);

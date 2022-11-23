@@ -15,8 +15,8 @@ import UseCases.ActionSpaceCreationUseCase;
  */
 public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase {
 
-    private LoadCards loadCards;
-    private CardAccess cardAccess;
+    private final LoadCards loadCards;
+    private final CardAccess cardAccess;
 
     /**
      * 
@@ -32,13 +32,11 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
     /**
      * 
      * @return the action space
-     * @throws IOException
      */
     public ActionSpace2 loadCards() throws IOException {
         // TODO Auto-generated method stub
         HashMap<String, List<Card>> cards = cardAccess.CardMapperJailCards(loadCards.loadCards());
-        ActionSpace2 actionSpace2 = new ActionSpace2(cards);
-        return actionSpace2;
+        return new ActionSpace2(cards);
     }
 
 }
