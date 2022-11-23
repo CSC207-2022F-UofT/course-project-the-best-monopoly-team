@@ -1,6 +1,7 @@
 package Interactors;
 
 import Entities.State;
+import Persistence.TextFileTranslator;
 import UseCases.UseCaseInteractor;
 
 import java.io.File;

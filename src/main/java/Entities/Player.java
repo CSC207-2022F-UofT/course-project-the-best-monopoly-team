@@ -213,9 +213,10 @@ public class Player {
 
     /**
      * The method used to roll the dice for the player
+     * @param i
      * @return returns the string of the number on the dice
      */
-    public String rollDice() {
+    public String rollDice(int i) {
         int max = 6;
         int min = 1;
         int a = (int) Math.floor(Math.random() * (max - min + 1) + min);
@@ -229,7 +230,7 @@ public class Player {
         } else {
             if (a == b) {
                 this.move(a + b);
-                this.rollDice();
+                this.rollDice(b);
             } else {
                 this.move(a + b);
                 return (a + "\n" + b);

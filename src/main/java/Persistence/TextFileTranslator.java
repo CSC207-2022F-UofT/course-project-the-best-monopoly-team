@@ -1,14 +1,16 @@
-package Interactors;
+package Persistence;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.Array;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class TextFileTranslator implements DataAccess{
+public class TextFileTranslator implements DataAccess, LoadCards {
     // each subarray holds the instance attributes of a Player instance
 
     private File file;
@@ -206,5 +208,16 @@ public class TextFileTranslator implements DataAccess{
 
     public File getFile() {
         return this.file;
+    }
+    /**
+     * 
+     * @return a list of strings that represents all of the cards in the game
+     * @throws IOException
+     *
+     */
+    public List<String> loadCards() throws IOException {
+
+        return Files.readAllLines(Paths.get("src/save/cards.txt"));
+
     }
 }
