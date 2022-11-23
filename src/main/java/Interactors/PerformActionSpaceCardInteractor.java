@@ -88,7 +88,6 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     /**
      * Performs the go to jail action of the card
      * @param player the player
-     * @param board the board
      * @param card the card
      * @return the message
      */

@@ -31,7 +31,6 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
 
     /**
      * 
-     * @param type the type of action space
      * @return the action space
      * @throws IOException
      */
