@@ -41,7 +41,7 @@ public class Property extends Cell {
         this.colour = colour;
         this.cost = cost;
         this.houseCost = houseCost;
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 6; i++){
             switch (i) {
                 case 0:
                     this.rent = rentValues[i];
