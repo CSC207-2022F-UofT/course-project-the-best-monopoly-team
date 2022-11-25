@@ -201,7 +201,7 @@ public class GameLogic {
     }
 
     /**
-     * This has to be updated since I'm not sure what the best way to describe this methof would be.
+     * This has to be updated since I'm not sure what the best way to describe this method would be.
      * @param input
      * @return
      */
