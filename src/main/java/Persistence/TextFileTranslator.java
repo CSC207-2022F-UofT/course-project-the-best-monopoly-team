@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class TextFileTranslator implements DataAccess, LoadCards {
+public class TextFileTranslator implements DataAccess {
     // each subarray holds the instance attributes of a Player instance
 
     private File file;
@@ -209,15 +209,17 @@ public class TextFileTranslator implements DataAccess, LoadCards {
     public File getFile() {
         return this.file;
     }
+
     /**
      * 
-     * @return a list of strings that represents all of the cards in the game
+     * @return a list of strings that represents all the cards in the game
      * @throws IOException
      *
      */
-    public List<String> loadCards() throws IOException {
+    @Override
+    public List<String> loadCards(File file) throws IOException {
 
-        return Files.readAllLines(Paths.get("src/save/cards.txt"));
+        return Files.readAllLines(file.toPath());
 
     }
 }

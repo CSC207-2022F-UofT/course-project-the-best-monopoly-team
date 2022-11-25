@@ -15,7 +15,8 @@ public class CardMapperInteractor implements CardMapperUseCase {
      * @param lst the list of cards before they are mapped
      * @return the list of jail cards map to the Card Entity
      */
-    public HashMap<String,List<Card>> CardMapperJailCards(List<String> lst) {
+    @Override
+    public HashMap<String,List<Card>> cardMapperJailCards(List<String> lst) {
         List<Card> cards = new ArrayList<>();
         HashMap<String,List<Card>> jailCards = new HashMap<>();
         for (String s : lst) {
@@ -38,7 +39,8 @@ public class CardMapperInteractor implements CardMapperUseCase {
      * @param lst the list of cards before they are mapped
      * @return the list of chance cards map to the Card Entity
      */
-    public HashMap<String, List<Card>> CardMapperChanceCards(List<String> lst) {
+    @Override
+    public HashMap<String, List<Card>> cardMapperChanceCards(List<String> lst) {
         List<Card> cards = new ArrayList<>();
         HashMap<String,List<Card>> chanceCards = new HashMap<>();
         for (String s : lst) {
@@ -61,7 +63,8 @@ public class CardMapperInteractor implements CardMapperUseCase {
      * @param lst the list of cards before they are mapped
      * @return the list of community chest cards map to the Card Entity
      */
-    public HashMap<String, List<Card>> CardMapperComChest(List<String> lst) {
+    @Override
+    public HashMap<String, List<Card>> cardMapperComChest(List<String> lst) {
         List<Card> cards = new ArrayList<>();
         HashMap<String,List<Card>> comChestCards = new HashMap<>();
         for (String s : lst) {
@@ -78,5 +81,4 @@ public class CardMapperInteractor implements CardMapperUseCase {
         comChestCards.put("comchest", cards);
         return comChestCards;
     }
-
 }
