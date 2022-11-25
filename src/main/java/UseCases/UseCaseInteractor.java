@@ -111,6 +111,7 @@ public class UseCaseInteractor{
     }
     public State getInitialState(){
         State currentState = new State();
+        currentState.setId(currentTree.getName());
         currentState.setDescription(currentTree.getPrompt());
         for (MenuTree tree: currentTree.getChildren()){
             currentState.addOptions(tree.getName());
