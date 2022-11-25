@@ -66,6 +66,11 @@ public class Property extends Cell {
         }
     }
 
+    @Override
+    public String getType() {
+        return null;
+    }
+
     public void setHouses(int houses){
         this.houses = houses;
     }

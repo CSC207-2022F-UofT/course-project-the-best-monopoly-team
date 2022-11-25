@@ -32,4 +32,9 @@ public class CornerTiles extends Cell{
         }
         return returnMessage;
     }
+
+    @Override
+    public String getType() {
+        return null;
+    }
 }
