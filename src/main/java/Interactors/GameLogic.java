@@ -5,6 +5,9 @@ import TreeHandlers.AuctionTreeHandler;
 import TreeHandlers.MainTreeHandler;
 import TreeHandlers.TradingTreeHandler;
 
+/**
+ * This class creates a GameLogic instance which coordinates the flow of the game.
+ */
 public class GameLogic {
     private GameLogicTree[] trees = new GameLogicTree[3];
     private GameLogicTree currentTree;
@@ -12,6 +15,11 @@ public class GameLogic {
     MainTreeHandler mainTreeHandler;
     TradingTreeHandler tradingTreeHandler;
 
+    /**
+     * This is the constructor for creating a GameLogic instance.
+     * @param currentPlayer A Player instance that is intended to be the current player of the game's turn.
+     * @param board A board instance that the GameLogic instance will help govern.
+     */
     public GameLogic(Player currentPlayer, Board board){
         mainTreeHandler = new MainTreeHandler();
         auctionTreeHandler = new AuctionTreeHandler(board.getPlayers().size());
@@ -20,29 +28,58 @@ public class GameLogic {
         mainTreeHandler.initialize(currentPlayer,board);
         createTrees();
     }
+
+    /**
+     * This method returns a State object which represents the state of the game.
+     * @return A State object representing the state of the game.
+     */
     public State getCurrentState(){
         return mainTreeHandler.getCurrentState();
     }
 
+    /**
+     * This method returns the instance attribute called trees in the GameLogic instance.
+     * @return Returns a GameLogicTree array containing the trees stored in the GameLogic instance.
+     */
     public GameLogicTree[] getTrees(){
         return this.trees;
     }
 
+    /**
+     * This method sets the value of the instance attribute trees.
+     * @param newTrees A GameLogicTree array containing the trees to set the value of the tree instance attribute.
+     */
     public void setTrees(GameLogicTree[] newTrees){
         this.trees = newTrees;
     }
 
+    /**
+     * This method returns a tree stored by the currentTree instance attribute. The currentTree instance attribute
+     * stores the tree that determines the flow of the game at the current turn.
+     * @return A GameLogicTree that determines the flow of the game at the current turn.
+     */
     public GameLogicTree getCurrentTree(){
         return this.currentTree;
     }
 
+    /**
+     * This method sets the value of the currentTree instance attribute.
+     * @param newCurrentTree a GameLogicTree that will be set as the currentTree.
+     */
     public void setCurrentTree(GameLogicTree newCurrentTree){
         this.currentTree = newCurrentTree;
     }
+
+    /**
+     * This method sets the currentTree instance attribute to the highest possible node of the currenTree.
+     */
     public void setCurrentTreeToMaxParent(){
         currentTree = (GameLogicTree) currentTree.getMaxParent();
     }
 
+    /**
+     * This method creates the GameLogic trees for the different scenarios in the game.
+     */
     public void createTrees(){
         //Creating the game loop tree
         GameLogicTree main = new GameLogicTree("MainTree","It's your turn! What do you want to do?");
@@ -162,6 +199,12 @@ public class GameLogic {
 
         currentTree = main;
     }
+
+    /**
+     * This has to be updated since I'm not sure what the best way to describe this methof would be.
+     * @param input
+     * @return
+     */
     public State performInput(int input){
         //Moving through the tree depending on the input and the node
         if (input == -1){
@@ -181,9 +224,21 @@ public class GameLogic {
         return handleTree(input);
     }
 
+    /**
+     * This method sets the currentTree instance attribute to a GameLogicTree which is a child of the currentTree
+     * selected through the parameter.
+     * @param branchNumber an int value that identifies the GameLogicTree that is to be set as currentTree.
+     */
     public void transverseCurrentTree(int branchNumber){
         currentTree =  (GameLogicTree) currentTree.getChildren().get(branchNumber);
     }
+
+    /**
+     * This method handles the GameLogicTree that corresponds to the current state of the game and returns a State
+     * instance containing relevant information related to the action performed.
+     * @param input an int value corresponding to a specific action for mainTreeHandler to handle.
+     * @return a State instance containing relevant information related to the action handled.
+     */
     public State handleTree(int input){
         if (currentTree.getMaxParent() == trees[0]){
             return mainTreeHandler.handleInput(input);
@@ -196,6 +251,11 @@ public class GameLogic {
         }
 
     }
+
+    /**
+     * This method returns the currentTree instance attribute's ID.
+     * @return an int value representing the currentTree's ID. It will return -1 if the ID failed to be retrieved.
+     */
     public int getCurrentTreeID(){
         for (int  i = 0; i<trees.length; i++){
             if (trees[i] == currentTree.getMaxParent()){
@@ -204,9 +264,18 @@ public class GameLogic {
         }
         return -1;
     }
+
+    /**
+     * This method is used to initialize the auctionTreeHandler to prepare for an auction scenario.
+     */
     public void setupAuction(){
         auctionTreeHandler.initialize();
     }
+
+    /**
+     * This method returns a State object representing the current condition of the game in relation to the auctionTreeHandler instance attribute.
+     * @return Returns a State object representing the current condition of the game.
+     */
     public State getAuctionState(){
         return auctionTreeHandler.getState();
     }
