@@ -1,4 +1,4 @@
-package Entities;
+package Interactors;
 
 import org.junit.jupiter.api.Test;
 
