@@ -1,11 +1,9 @@
 package Entities;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 public class Player {
     // Represents a player in the game
@@ -108,6 +106,78 @@ public class Player {
      * @return a boolean value determining whether the player is in jail, with true being the player is in jail
      */
     public boolean isInJail() { return inJail; }
+
+    /**
+     * Gets the number of railroads owned by this player
+     * @return the number of railroads owned by this player
+     */
+    public int getRailroads() {
+        int railroads = 0;
+        for (Property property : this.properties) {
+            if (Objects.equals(property.getColour(), "Railroad")) {
+                railroads += 1;
+            }
+        }
+        return railroads;
+    }
+
+    /**
+     * Gets the number of utilities owned by this player
+     * @return the number of utilities owned by this player
+     */
+    public int getUtilities() {
+        int utility = 0;
+        for (Property property : this.properties) {
+            if (Objects.equals(property.getColour(), "Utility")) {
+                utility += 1;
+            }
+        }
+        return utility;
+    }
+
+    /**
+     * Gets all the complete sets of properties owned by this player (sets are grouped by colours)
+     *
+     * @return an ArrayList of colours referring to the complete sets of properties owned by this player
+     */
+    public ArrayList<String> ownedPropertySets() {
+        ArrayList<String> ownedSets = new ArrayList<>();
+        HashMap<String, Integer> sets = createSetMap();
+        for (Property property : this.properties) {
+            sets.put(property.getColour(), sets.get(property.getColour()) + 1);
+            for (Map.Entry<String, Integer> colour : sets.entrySet()) {
+                if (colour.getKey().equals("Brown") || colour.getKey().equals("Dark Blue")) {
+                    if (colour.getValue() == 2) {
+                        ownedSets.add(colour.getKey());
+                    }
+                } else {
+                    if (colour.getValue() == 3) {
+                        ownedSets.add(colour.getKey());
+                    }
+                }
+            }
+        }
+        return ownedSets;
+    }
+
+
+    /**
+     * Helper function for ownedPropertySets(). This function creates a map with the property colours as the key and
+     * an int counter as its value.
+     * @return a HashMap with the property colours as the key and an int counter as its value.
+     */
+    private HashMap<String, Integer> createSetMap() {
+        HashMap<String, Integer> sets = new HashMap<>();
+        sets.put("Brown", 0);
+        sets.put("Light Blue", 0);
+        sets.put("Pink", 0);
+        sets.put("Orange", 0);
+        sets.put("Red", 0);
+        sets.put("Yellow", 0);
+        sets.put("Green", 0);
+        sets.put("Dark Blue", 0);
+        return sets;
+    }
 
     /**
      * Method allowing this player to trade assets with another player
@@ -235,9 +305,20 @@ public class Player {
      * @param property the property to build the house on
      * @param houses the number of houses to build
      */
-    public void buildHouse(Property property, int houses) {
-        if (properties.contains(property)) {
-            property.addHouse(this, houses);
+    public String buildHouse(Property property, int houses) {
+        switch (property.addHouse(this, houses)) {
+            case "house":
+                return ((houses + " houses have been built on " + property.getName()));
+            case "hotel":
+                return ("A hotel has been built on " + property.getName());
+            case "not owned":
+                return ("Player does not own " + property.getName());
+            case "not owned set":
+                return ("Player does not own the full colour set of " + property.getName());
+            case "not enough money":
+                return ("Player does not have enough money to build " + houses + " houses on " + property.getName());
+            default:
+                return null;
         }
     }
 
