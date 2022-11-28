@@ -23,7 +23,8 @@ public class TreeHandler {
     static List<Player> players;
     static GameLogicTree returnTree;
     static String descriptionOtherTrees;
-
+    static int[] mainStates = new int[2];
+    static GameLogicTree confirmationReturn;
 
     /**
      * This method initializes variables used by the tree handlers
@@ -158,6 +159,11 @@ public class TreeHandler {
      */
     public void changePlayers(){
         currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
+    }
+
+    public State afterBottomNode(){
+        gameLogicInteractor.setCurrentTreeToMaxParent();
+        return getCurrentState();
     }
 
 }

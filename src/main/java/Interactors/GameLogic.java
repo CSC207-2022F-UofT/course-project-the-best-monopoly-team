@@ -201,8 +201,9 @@ public class GameLogic {
     }
 
     /**
-     * This has to be updated since I'm not sure what the best way to describe this method would be.
-     * @param input
+     * This method traverses through the GameLogicTrees that handle the state of the program.
+     * @param input an int value that represents the direction of which the GameLogicTrees are to be traversed. -1
+     *              represents traversing backwards. Otherwise, it will traverse forwards.
      * @return
      */
     public State performInput(int input){
