@@ -7,10 +7,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static UseCases.UseCasesGlobalVariables.*;
 
 public class PlayerLogic {
     private Player player;
+    public static final int BROWN_DARKBLUE_SETSIZE = 2;
+    public static final int PROPERTY_SETSIZE = 3;
+    public static final double STEAL_CHANCE = 0.3;
+    public static final double STEAL_JAIL_CHANCE = 0.6;
+    public static final int STEAL_MONEY = 100;
 
     public PlayerLogic(Player player) {
         this.player = player;
