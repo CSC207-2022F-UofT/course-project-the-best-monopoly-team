@@ -108,13 +108,28 @@ public class PlayerLogic {
      * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
      * @return a String indicating whether the player has an insufficient amount of money or if the trade was successful
      */
-    public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
+    public trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         player.pay(tradee, money);
         tradee.getProperties().addAll(properties);
         player.getProperties().removeAll(properties);
         tradee.addJailCards(jailcards);
         player.removeJailCards(jailcards);
-        return "Trade successful";
+    }
+
+    public String stealSuccessful(Player thief, Player victim) {
+        victim.pay(thief, STEAL_MONEY);
+        return thief.getName() + " stole money from " + victim.getName();
+    }
+
+    public String stealUnsuccessful(Player thief, Player victim) {
+        double jail = Math.random();
+        if (jail <= STEAL_JAIL_CHANCE) {
+            thief.setInJail(true);
+            return ("The police are looking for " + thief.getName() + "\n" + thief.getName() + " is put in jail");
+        } else {
+            return ("The police are looking for " + thief.getName() + "\n" + thief.getName() +
+                    " escaped from the police");
+        }
     }
 
     /**
@@ -127,17 +142,9 @@ public class PlayerLogic {
     public String steal(Player thief, Player victim) {
         double success = Math.random();
         if (success <= STEAL_CHANCE) {
-            victim.pay(thief, STEAL_MONEY);
-            return thief.getName() + " stole money from " + victim.getName();
+            return stealSuccessful(thief, victim);
         } else {
-            System.out.println("The police are looking for " + thief.getName());
-            double jail = Math.random();
-            if (jail <= STEAL_JAIL_CHANCE) {
-                thief.setInJail(true);
-                return thief.getName() + " is put in jail";
-            } else {
-                return thief.getName() + " escaped from the police";
-            }
+            return stealUnsuccessful(thief, victim);
         }
     }
 
