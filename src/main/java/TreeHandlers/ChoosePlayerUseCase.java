@@ -10,6 +10,7 @@ public class ChoosePlayerUseCase extends TreeHandler implements NodeLogic{
     public State create_state(int input){
         ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         //Steal from the target player
         playerCopy = new ArrayList<Player>(board.getPlayers());
         playerCopy.remove(currentPlayer);

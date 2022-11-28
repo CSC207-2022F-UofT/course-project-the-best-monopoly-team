@@ -8,7 +8,9 @@ public class Mortgage extends TreeHandler implements NodeLogic {
     @Override
     public State create_state(int input) {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
+
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         if (mainStates[0] == 1) {
             //the player chooses to mortgage the property
             Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("SelectProperty"));

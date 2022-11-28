@@ -9,6 +9,7 @@ public class SendTrade extends TreeHandler implements NodeLogic {
     public State create_state(int input) {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         if (input == 0) {
             Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
             currentState.setTradingOpponent(tradingOpponent);

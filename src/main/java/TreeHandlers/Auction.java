@@ -8,6 +8,7 @@ public class Auction extends TreeHandler implements NodeLogic {
     public State create_state(int input) {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         //returnPlayerAddress will hold the original player index in this.board.getPlayers()
         returnPlayerIndex = getCurrentPlayerIndex();
 

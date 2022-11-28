@@ -8,6 +8,7 @@ public class SelectProperty extends TreeHandler implements NodeLogic {
     public State create_state(int input) {
         State currentState = new State();
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         currentState.setBackEnable(true);
 
         //Case property selected (adds the property index)

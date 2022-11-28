@@ -6,6 +6,7 @@ public class EndTurnUseCase extends TreeHandler implements NodeLogic{
 
     public State create_state(int input){
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         //end the turn if the person is not in debt
         if (currentPlayer.getMoney()  >= 0){
             //changing the player and turning the state back to normal

@@ -55,7 +55,7 @@ public class TreeHandler {
      */
     public State getCurrentState(){
         State currentState = new State();
-
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         //mutates the state object with all of its properties
         if (gameLogicInteractor.getCurrentTreeID() == 0) {
             //object mutation when player is transversing through the main tree

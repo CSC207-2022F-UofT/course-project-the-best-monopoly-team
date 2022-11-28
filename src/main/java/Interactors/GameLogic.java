@@ -242,7 +242,10 @@ public class GameLogic {
      */
     public State handleTree(int input){
         if (currentTree.getMaxParent() == trees[0]){
-            return mainTreeHandler.handleInput(input);
+            State returnState =  mainTreeHandler.getUseCase().create_state(input);
+            //mutating the state to have memory of its state, useful for backwards transversal
+            currentTree.setPreviousState(returnState);
+            return returnState;
         }
         else if (currentTree.getMaxParent() == trees[1]){
             return tradingTreeHandler.handleInput();

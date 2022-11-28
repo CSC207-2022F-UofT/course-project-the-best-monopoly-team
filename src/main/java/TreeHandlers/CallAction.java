@@ -6,6 +6,7 @@ public class CallAction extends TreeHandler implements NodeLogic {
     @Override
     public State create_state(int input) {
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         //gets the response from rolling on a space
         currentState.setRoll(diceRoll);
         currentState.setDescription(answer);

@@ -10,6 +10,7 @@ public class ManageProperty extends TreeHandler implements NodeLogic {
     public State create_state(int input) {
         State currentState = new State();
         currentState.setBackEnable(true);
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         ArrayList<Property> currentPlayerProperties = currentPlayer.getProperties();
 
         //if player has no properties, go to another node.

@@ -28,7 +28,6 @@ public class MainTreeHandler extends TreeHandler {
      * This method handles the input of the user in the main game part of the program.
      * <p>
      *
-     * @param input the translated input of the user from the input interface
      */
     public NodeLogic getUseCase(){
 
@@ -89,12 +88,6 @@ public class MainTreeHandler extends TreeHandler {
             case "Information":
                 return new InformationUseCase();
         }
-        //TODO: PUT THIS SOMEWHERE
-        //mutating the state to have memory of its state, useful for backwards transversal
-        currentTree.setPreviousState(currentState);
-        return currentState;
+        return new ErrorCase();
     }
-
-
-
 }

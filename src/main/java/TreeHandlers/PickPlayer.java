@@ -12,6 +12,7 @@ public class PickPlayer extends TreeHandler implements NodeLogic{
     public State create_state(int input) {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
+        currentState.setId(currentTree.getName());
         currentState.setBackEnable(true);
         //adds the chosen player index in selected options (who the current player wants to trade with)
 

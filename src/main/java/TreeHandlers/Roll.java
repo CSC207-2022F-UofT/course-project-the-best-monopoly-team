@@ -8,6 +8,7 @@ public class Roll extends TreeHandler implements NodeLogic {
     @Override
     public State create_state(int input) {
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         if (mainStates[1] == 0) {
             //roll the dice and update the position
             diceRoll = currentPlayer.rollDice(0);

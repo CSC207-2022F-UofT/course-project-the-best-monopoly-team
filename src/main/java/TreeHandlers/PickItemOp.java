@@ -12,6 +12,7 @@ public class PickItemOp extends TreeHandler implements NodeLogic {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
         currentState.setBackEnable(true);
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         //the input corresponds to the index of the targeted opponent's property inventory
         selectedOptions.put(currentTree.getName(), input);
 

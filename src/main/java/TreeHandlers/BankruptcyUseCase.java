@@ -12,6 +12,7 @@ public class BankruptcyUseCase extends TreeHandler implements NodeLogic{
     @Override
     public State create_state(int input) {
         State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         if (mainStates[0] == 1) {
             mainStates[0] = 0;

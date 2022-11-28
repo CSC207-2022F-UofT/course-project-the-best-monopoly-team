@@ -8,7 +8,7 @@ public class PickItemSelf extends TreeHandler implements NodeLogic {
     public State create_state(int input) {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
-
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         currentState.setBackEnable(true);
         currentState.addOptions("Yes");
         currentState.addOptions("No");
