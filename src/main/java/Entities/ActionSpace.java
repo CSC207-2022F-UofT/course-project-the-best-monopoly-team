@@ -129,58 +129,6 @@ public class ActionSpace extends Cell {
     }
 
     /**
-     * This function takes the player that the action is to be performed on (can be removed if you want),
-     * actionType just tells if its advance, getPaid, pay or, getOutOfJailCard.
-     * amount is the number associated to the actions if appropriate.
-     * action is just the string of the description on the action card.
-     * For advance, it automatically generates a number and then calculates the position that it would go to and checks
-     * if it ever passes the Go
-     * @param player the corresponding player, so that it could update values using setter methods within player.
-     * @param board the board to update player position.
-     * @return the returns value is just the description, this would be passed so that it can be displayed to the user.
-     */
-    @Override
-    public String performAction(Player player, Board board) {
-        // Generating random card
-        String action = generateRandomCard();
-        ArrayList<Object> generatedCard = getCard(action);
-        // Getting the action property of the String
-        //Getting the actionType
-        String actionType = String.valueOf(generatedCard.get(0));
-        //Getting the number associated with the action if any
-        Integer amount = (Integer) generatedCard.get(1);
-
-        if (Objects.equals(actionType, "advance")){
-            // Generating a random number of steps for the user to go forward
-            int randomNumberOfSteps = new Random().nextInt(39);
-            // moves the player
-            player.move(randomNumberOfSteps);
-            //updates the players position on the board
-            board.updatePlayerPosition(player);
-            // returns a new action string as the action string in the game file is just advance
-            action = action + " " + randomNumberOfSteps + " steps.";
-            // checks the position of if they have pass go
-            if (player.getPosition() == 0 || player.getPosition() + randomNumberOfSteps > 40) {
-                // if the player did pass go then add 200 dollars to their balance
-                player.changeMoney(200);
-            }
-        } else if(Objects.equals(actionType, "getPaid")) {
-            player.changeMoney(amount);
-        } else if (Objects.equals(actionType, "pay")) {
-            player.pay(amount);
-        } else if (Objects.equals(actionType, "payAll")) {
-            for (int i = 0; i < board.getPlayers().size(); i++) {
-                player.pay(board.getPlayers().get(i), amount);
-            }
-        } else if (Objects.equals(actionType, "goToJail")) {
-            player.changeJailStatus();
-        } else {
-                player.setJailCards(player.getJailCards() + 1);
-            }
-            return action;
-        }
-
-    /**
      * This method generates a random card from the corresponding list
      * @return returns the key value of the card so that this method can be called to get the value of this random card
      */

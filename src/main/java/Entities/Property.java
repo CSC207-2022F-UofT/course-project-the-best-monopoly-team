@@ -69,25 +69,6 @@ public class Property extends Cell {
         this.mortgaged = mortgaged;
     }
 
-    /**
-     * This method overrides performAction from the parent class Cell and allows actions to be performed on a player
-     * when they land on a property cell. The action (e.g. pay rent) is determined by whether the player owns this
-     * property.
-     * @param currentPlayer the player currently landing on this property
-     * @param board the game board
-     * @return A String notifying whether they've landed on their own property and what actions are being performed on
-     * them
-     */
-    @Override
-    public String performAction(Player currentPlayer, Board board){
-        // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
-        if (this.getOwner().equals(currentPlayer)){
-            return "Landed on a property you own";
-        } else {
-            currentPlayer.pay(this.ownedBy, this.getRent());
-            return "Paid $" + Integer.toString(this.getRent()) + " to " + this.ownedBy.getName();
-        }
-    }
 
     /**
      * Sets the number of houses on this property
@@ -232,4 +213,8 @@ public class Property extends Cell {
         }
     }
 
+    @Override
+    public String getType() {
+        return "Property";
+    }
 }
