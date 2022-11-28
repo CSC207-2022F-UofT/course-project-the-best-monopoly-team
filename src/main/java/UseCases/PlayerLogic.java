@@ -28,23 +28,31 @@ public class PlayerLogic {
         int min = 1;
         int roll1 =  (int) Math.floor(Math.random() * (max - min + 1) + min);
         int roll2 = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        if (this.player.isInJail() && roll1 == roll2){
+        if (isInJail() && isConsecutive(roll1, roll2)){
                 this.player.setInJail(false);
                 this.player.move(roll1 + roll2);
             }
-        else if (! this.player.isInJail() && roll1 != roll2 ){
+        else if (!isInJail() && ! isConsecutive(roll1, roll2) ){
                 this.player.move(roll1 + roll2);
                 return (roll1 + " " + roll2 + "\n");
             }
-        else if (! this.player.isInJail() && roll1 == roll2 && (consecutive + 1) < 3){
+        else if (!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) < 3){
                 return this.rollDice((consecutive + 1));
             }
-        else if(! this.player.isInJail() && roll1 == roll2 && (consecutive + 1) == 3){
+        else if(!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) == 3){
                 // the player goes to jail
                 this.player.setInJail(true);
                 return (roll1 + " " + roll2 + "\n" + "player goes to jail");
             }
         return (roll1 + " " + roll2 + "\n");
+    }
+
+    private static boolean isConsecutive(int roll1, int roll2) {
+        return roll1 == roll2;
+    }
+
+    private boolean isInJail() {
+        return this.player.isInJail();
     }
 
     /**
@@ -108,13 +116,37 @@ public class PlayerLogic {
      * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
      * @return a String indicating whether the player has an insufficient amount of money or if the trade was successful
      */
-    public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
+    public void trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         player.pay(tradee, money);
         tradee.getProperties().addAll(properties);
         player.getProperties().removeAll(properties);
         tradee.addJailCards(jailcards);
         player.removeJailCards(jailcards);
-        return "Trade successful";
+    }
+
+    /**
+     * A helper function for steal that deals with the stealSuccessful situation.
+     * @param victim The victim whose moeny is going to be stolen
+     * @return A string that indicates if the stealing is successful or if the player is in jail.
+     */
+    public String stealSuccessful(Player victim) {
+        victim.pay(player, STEAL_MONEY);
+        return player.getName() + " stole money from " + victim.getName();
+    }
+
+    /**
+     * A helper function for steal that deals with the stealUnsuccessful situation.
+     * @return A string that indicates if the stealing is successful or if the player is in jail.
+     */
+    public String stealUnsuccessful() {
+        double jail = Math.random();
+        if (jail <= STEAL_JAIL_CHANCE) {
+            player.setInJail(true);
+            return ("The police are looking for " + player.getName() + "\n" + player.getName() + " is put in jail");
+        } else {
+            return ("The police are looking for " + player.getName() + "\n" + player.getName() +
+                    " escaped from the police");
+        }
     }
 
     /**
@@ -124,20 +156,12 @@ public class PlayerLogic {
      * @return returns a String statement indicating whether stealing was successful. If not, the statement indicates
      * whether this player is put in jail
      */
-    public String steal(Player thief, Player victim) {
+    public String steal(Player victim) {
         double success = Math.random();
         if (success <= STEAL_CHANCE) {
-            victim.pay(thief, STEAL_MONEY);
-            return thief.getName() + " stole money from " + victim.getName();
+            return stealSuccessful(victim);
         } else {
-            System.out.println("The police are looking for " + thief.getName());
-            double jail = Math.random();
-            if (jail <= STEAL_JAIL_CHANCE) {
-                thief.setInJail(true);
-                return thief.getName() + " is put in jail";
-            } else {
-                return thief.getName() + " escaped from the police";
-            }
+            return stealUnsuccessful();
         }
     }
 
