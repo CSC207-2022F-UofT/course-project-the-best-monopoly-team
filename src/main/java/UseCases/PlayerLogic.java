@@ -17,29 +17,34 @@ public class PlayerLogic {
     }
 
 
-
+    /**
+     * This method rolls the dice for the player. The dice result can indicate this player's movement while
+     * they are not in jail. If they are in jail, the dice result can determine if the player can get out of jail
+     * @param consecutive the number of consecutive doubles
+     * @return a String of two numbers indicating the numbers rolled from the dice
+     */
     public String rollDice(int consecutive){
         int max = 6;
         int min = 1;
-        int a =  (int) Math.floor(Math.random() * (max - min + 1) + min);
-        int b = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        if (this.player.isInJail() && a == b){
+        int roll1 =  (int) Math.floor(Math.random() * (max - min + 1) + min);
+        int roll2 = (int) Math.floor(Math.random() * (max - min + 1) + min);
+        if (this.player.isInJail() && roll1 == roll2){
                 this.player.setInJail(false);
-                this.player.move(a + b);
+                this.player.move(roll1 + roll2);
             }
-        else if (! this.player.isInJail() && a != b ){
-                this.player.move(a + b);
-                return (a + " " + b + "\n");
+        else if (! this.player.isInJail() && roll1 != roll2 ){
+                this.player.move(roll1 + roll2);
+                return (roll1 + " " + roll2 + "\n");
             }
-        else if (! this.player.isInJail() && a == b && (consecutive + 1) < 3){
+        else if (! this.player.isInJail() && roll1 == roll2 && (consecutive + 1) < 3){
                 return this.rollDice((consecutive + 1));
             }
-        else if(! this.player.isInJail() && a == b && (consecutive + 1) == 3){
+        else if(! this.player.isInJail() && roll1 == roll2 && (consecutive + 1) == 3){
                 // the player goes to jail
                 this.player.setInJail(true);
-                return (a + " " + b + "\n" + "player goes to jail");
+                return (roll1 + " " + roll2 + "\n" + "player goes to jail");
             }
-        return (a + " " + b + "\n");
+        return (roll1 + " " + roll2 + "\n");
     }
 
     /**
@@ -65,7 +70,7 @@ public class PlayerLogic {
      * @return a HashMap mapping each colour to an int value correlating to the number of properties of that colour
      * owned by this player
      */
-    public HashMap<String, Integer> countPropertySets(Player player) {
+    public HashMap<String, Integer> countPropertySets() {
         HashMap<String, Integer> sets = createSetMap();
         for (Property property : player.getProperties()) {
             sets.put(property.getColour(), sets.get(property.getColour()) + 1);
@@ -78,9 +83,9 @@ public class PlayerLogic {
      *
      * @return an ArrayList of colours referring to the complete sets of properties owned by this player
      */
-    public ArrayList<String> ownedPropertySets(Player player) {
+    public ArrayList<String> ownedPropertySets() {
         ArrayList<String> ownedSets = new ArrayList<>();
-        HashMap<String, Integer> sets = countPropertySets(player);
+        HashMap<String, Integer> sets = countPropertySets();
         for (Map.Entry<String, Integer> colour : sets.entrySet()) {
             if (colour.getKey().equals("Brown") || colour.getKey().equals("Dark Blue")) {
                 if (colour.getValue() == BROWN_DARKBLUE_SETSIZE) {
@@ -103,12 +108,12 @@ public class PlayerLogic {
      * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
      * @return a String indicating whether the player has an insufficient amount of money or if the trade was successful
      */
-    public String trade(Player trader, Player tradee, int money, ArrayList<Property> properties, int jailcards) {
-        trader.pay(tradee, money);
+    public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
+        player.pay(tradee, money);
         tradee.getProperties().addAll(properties);
-        trader.getProperties().removeAll(properties);
+        player.getProperties().removeAll(properties);
         tradee.addJailCards(jailcards);
-        trader.removeJailCards(jailcards);
+        player.removeJailCards(jailcards);
         return "Trade successful";
     }
 
@@ -141,7 +146,7 @@ public class PlayerLogic {
      * @param property the property to build the house on
      * @param houses the number of houses to build
      */
-    public String buildHouse(Player player, Property property, int houses) {
+    public String buildHouse(Property property, int houses) {
         switch (property.addHouse(player, houses)) {
             case "house":
                 return ((houses + " houses have been built on " + property.getName()));

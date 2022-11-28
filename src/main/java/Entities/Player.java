@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import static Entities.EntitiesGlobalVariables.*;
+import static UseCases.UseCasesGlobalVariables.*;
 
 public class Player {
     // Represents a player in the game
@@ -273,6 +274,65 @@ public class Player {
     public void mortgage(Property property) {
         this.properties.remove(property);
         this.money += property.getMortgageValue();
+    }
+
+    public String buildHouse(Property property, int houses) {
+        switch (property.addHouse(this, houses)) {
+            case "house":
+                return ((houses + " houses have been built on " + property.getName()));
+            case "hotel":
+                return ("A hotel has been built on " + property.getName());
+            case "not owned":
+                return ("Player does not own " + property.getName());
+            case "not owned set":
+                return ("Player does not own the full colour set of " + property.getName());
+            case "not enough money":
+                return ("Player does not have enough money to build " + houses + " houses on " + property.getName());
+            default:
+                return null;
+        }
+    }
+
+    public String steal(Player victim) {
+        double success = Math.random();
+        if (success <= STEAL_CHANCE) {
+            victim.pay(this, STEAL_MONEY);
+            return this.getName() + " stole money from " + victim.getName();
+        } else {
+            System.out.println("The police are looking for " + this.getName());
+            double jail = Math.random();
+            if (jail <= STEAL_JAIL_CHANCE) {
+                this.setInJail(true);
+                return this.getName() + " is put in jail";
+            } else {
+                return this.getName() + " escaped from the police";
+            }
+        }
+    }
+
+    public ArrayList<String> ownedPropertySets() {
+        ArrayList<String> ownedSets = new ArrayList<>();
+        HashMap<String, Integer> sets = countPropertySets();
+        for (Map.Entry<String, Integer> colour : sets.entrySet()) {
+            if (colour.getKey().equals("Brown") || colour.getKey().equals("Dark Blue")) {
+                if (colour.getValue() == BROWN_DARKBLUE_SETSIZE) {
+                    ownedSets.add(colour.getKey());
+                }
+            } else {
+                if (colour.getValue() == PROPERTY_SETSIZE) {
+                    ownedSets.add(colour.getKey());
+                }
+            }
+        }
+        return ownedSets;
+    }
+
+    public HashMap<String, Integer> countPropertySets() {
+        HashMap<String, Integer> sets = createSetMap();
+        for (Property property : this.getProperties()) {
+            sets.put(property.getColour(), sets.get(property.getColour()) + 1);
+        }
+        return sets;
     }
 
 }
