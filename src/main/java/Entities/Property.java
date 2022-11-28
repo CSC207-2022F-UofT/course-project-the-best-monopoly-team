@@ -69,7 +69,6 @@ public class Property extends Cell {
         this.mortgaged = mortgaged;
     }
 
-
     /**
      * Sets the number of houses on this property
      * @param houses number of houses on this property

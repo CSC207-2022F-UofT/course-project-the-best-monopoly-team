@@ -1,9 +1,10 @@
 package Interactors;
 
 import Entities.*;
+import Persistence.DataAccess;
+import Persistence.TextFileTranslator;
 
-import javax.swing.*;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -113,8 +114,11 @@ public class GameCreation {
         CornerTiles jail = new CornerTiles("jail");
         CornerTiles freeParking = new CornerTiles("freeParking");
         CornerTiles goJail = new CornerTiles("goToJail");
-        ActionSpace communityChest = new ActionSpace("communityChest");
-        ActionSpace chance = new ActionSpace("chance");
+
+        DataAccess textFileTranslator = new TextFileTranslator(new File(""));
+        ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(textFileTranslator);
+        ActionSpace2 communityChest = actionSpaceCreationInteractor.loadComChestCards(new File("src/save/cards.txt"));
+        ActionSpace2 chance = actionSpaceCreationInteractor.loadChanceCards(new File("src/save/cards.txt"));
         // TODO: determine when to call jail ActionSpaces
         // ActionSpace jail = new ActionSpace("jail");
 

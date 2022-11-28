@@ -5,15 +5,12 @@ import Entities.Board;
 import Entities.GameLogicTree;
 import Entities.MenuTree;
 import Entities.State;
-import Interactors.DataAccess;
+import Persistence.DataAccess;
 import Interactors.GameCreation;
 import Interactors.GameLogic;
 
-import javax.xml.crypto.Data;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class UseCaseInteractor{
 
