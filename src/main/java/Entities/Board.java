@@ -19,6 +19,15 @@ public class Board{
         this.players = players;
         this.cells = cells;
     }
+
+    /**
+     * This is a constructor which creates a Board instance.
+     * @param players A List of Player instances that we wish to be a part of the board,
+     * @param cells A List of Cell instances that we wish to be a part of the board.
+     * @param playerPositions A Map of the positions of Player instances where the key is the Player instance
+     *                        corresponding to an Integer representing its position.
+     */
+
     public Board(List<Player> players, List<Cell> cells, Map<Player, Integer> playerPositions){
         this.players = players;
         this.cells = cells;
@@ -37,8 +46,7 @@ public class Board{
      * @param player The player that must be removed.
      */
     public void removePlayer(Player player){
-        List<Player> newPlayers = players;
-        newPlayers.remove(player);
+        this.players.remove(player);
     }
     /**
      * This method is used to return a List of all the Cell instances on Board.
@@ -63,7 +71,8 @@ public class Board{
      * @return This returns a Cell which the Player instance is on.
      */
     public Cell getPlayerCell(Player player){
-        return this.cells.get(this.playerPositions.get(player));
+        int position = player.getPosition();
+        return this.getCell(position);
     }
     /**
      * This method updates the position of a player by making changes to the map, this.playerPositions.

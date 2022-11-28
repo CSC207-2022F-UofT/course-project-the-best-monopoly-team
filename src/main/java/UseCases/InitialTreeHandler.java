@@ -33,6 +33,7 @@ public class InitialTreeHandler {
         GameLogicTree currentTree = caseInteractor.getCurrentTree();
         //deciding what to do based on node visited
         State state = new State();
+        state.setId(currentTree.getName());
         switch (currentTree.getName()){
             case "NewGame":
                 state.setBackEnable(true);
