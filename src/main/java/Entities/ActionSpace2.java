@@ -16,7 +16,7 @@ public class ActionSpace2 extends Cell{
 
     @Override
     public String getType() {
-        return "actionspace";
+        return "Action Space";
     }
 
     public String getActionType() {
