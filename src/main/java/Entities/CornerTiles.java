@@ -16,8 +16,4 @@ public class CornerTiles extends Cell{
         return "Corner Tile";
     }
 
-    @Override
-    public String getType() {
-        return null;
-    }
 }

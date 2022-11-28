@@ -14,18 +14,18 @@ public class ActionSpace2 extends Cell{
         this.type = key;
     }
 
+    @Override
     public String getType() {
-        return type;
+        return "actionspace";
     }
+
+    public String getActionType() {
+        return this.type;
+    }
+
 
     public List<Card> getCards() {
         return cards;
-    }
-
-    @Override
-    public String performAction(Player player, Board board) {
-        // TODO Auto-generated method stub
-        return null;
     }
 
 }
