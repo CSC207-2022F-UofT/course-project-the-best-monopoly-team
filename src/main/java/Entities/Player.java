@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import static Entities.EntitiesGlobalVariables.*;
+
 public class Player {
     // Represents a player in the game
 
@@ -21,11 +23,11 @@ public class Player {
      */
     public Player(String name) {
         this.name = name;
-        this.money = 1500;
+        this.money = STARTING_MONEY;
         this.properties = new ArrayList<Property>();
         this.inJail = false;
-        this.jailCards = 0;
-        this.position = 0;
+        this.jailCards = STARTING_JAILCARDS;
+        this.position = STARTING_POSITION;
     }
 
     /**
@@ -59,11 +61,10 @@ public class Player {
     public void setInJail(boolean inJail) { this.inJail = inJail; }
 
     /**
-     * Sets the number of get out of jail free cards the player has that was drawn from the community chest or
-     * chance cards
-     * @param num this parameter is the number of cards to increment by for player
+     * Sets the player's number of get out of jail free cards
+     * @param num the number of jail cards the player has
      */
-    public void setJailCards(int num) { this.jailCards += num; }
+    public void setJailCards(int num) { this.jailCards = num; }
 
     /**
      * Sets the amount of money owned by this player. Needed for loading previous games.
@@ -136,30 +137,16 @@ public class Player {
     }
 
     /**
-     * Gets all the complete sets of properties owned by this player (sets are grouped by colours)
-     *
-     * @return an ArrayList of colours referring to the complete sets of properties owned by this player
+     * Increment the player's number of get out of jail free cards by a specific number
+     * @param num this parameter is the number of cards to increment by for player
      */
-    public ArrayList<String> ownedPropertySets() {
-        ArrayList<String> ownedSets = new ArrayList<>();
-        HashMap<String, Integer> sets = createSetMap();
-        for (Property property : this.properties) {
-            sets.put(property.getColour(), sets.get(property.getColour()) + 1);
-            for (Map.Entry<String, Integer> colour : sets.entrySet()) {
-                if (colour.getKey().equals("Brown") || colour.getKey().equals("Dark Blue")) {
-                    if (colour.getValue() == 2) {
-                        ownedSets.add(colour.getKey());
-                    }
-                } else {
-                    if (colour.getValue() == 3) {
-                        ownedSets.add(colour.getKey());
-                    }
-                }
-            }
-        }
-        return ownedSets;
-    }
+    public void addJailCards(int num) { this.jailCards += num; }
 
+    /**
+     * Decrement the player's number of get out of jail free cards by a specific number
+     * @param num this parameter is the number of cards to decrement by for player
+     */
+    public void removeJailCards(int num) { this.jailCards -= num; }
 
     /**
      * Helper function for ownedPropertySets(). This function creates a map with the property colours as the key and
@@ -180,28 +167,6 @@ public class Player {
     }
 
     /**
-     * Method allowing this player to trade assets with another player
-     * @param tradee the player this player wants to trade with
-     * @param money any sufficient amount of money this player wants to offer the tradee
-     * @param properties properties owned by this player that they would like to offer the tradee
-     * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
-     * @return a String indicating whether the player has an insufficient amount of money or if the trade was successful
-     */
-    public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
-        if (money > this.money) {
-            return "Inadequate amount of money";
-        } else {
-            this.money -= money;
-            tradee.money += money;
-            tradee.properties.addAll(properties);
-            this.properties.removeAll(properties);
-            this.jailCards -= jailcards;
-            tradee.jailCards += jailCards;
-            return "Trade successful";
-        }
-    }
-
-    /**
      * Changes the jail status of this player
      */
     public void changeJailStatus() {
@@ -217,40 +182,15 @@ public class Player {
     }
 
     /**
-     * Method that allows this player to steal 100 units of money from a player. The success of stealing relies on
-     * a chance basis. Unsuccessfully stealing from the victim gives this player a chance of being put in jail.
-     * @param victim the player whom this player is stealing from
-     * @return returns a String statement indicating whether stealing was successful. If not, the statement indicates
-     * whether this player is put in jail
-     */
-    public String steal(Player victim) {
-        double success = Math.random();
-        if (success <= 0.3) {
-            this.money += 100;
-            victim.money -= 100;
-            return this.name + " stole money from " + victim.name;
-        } else {
-            System.out.println("The police are looking for " + this.name);
-            double jail = Math.random();
-            if (jail <= 0.6) {
-                this.inJail = true;
-                return this.name + " is put in jail";
-            } else {
-                return this.name + " escaped from the police";
-            }
-        }
-    }
-
-    /**
      * Method to move the player by x number of steps
      * @param step the steps to move the player to
      */
     public void move(int step) {
         position += step;
-        if (position > 39) {
+        if (position > LAST_POSITION_INDEX) {
             //Money on passing go
-            money += 200;
-            position -= 40;
+            money += GO_MONEY;
+            position -= BOARD_SIZE;
         }
     }
 
@@ -301,34 +241,11 @@ public class Player {
     }
 
     /**
-     * This method allows this player to build houses on a currently owned property
-     * @param property the property to build the house on
-     * @param houses the number of houses to build
-     */
-    public String buildHouse(Property property, int houses) {
-        switch (property.addHouse(this, houses)) {
-            case "house":
-                return ((houses + " houses have been built on " + property.getName()));
-            case "hotel":
-                return ("A hotel has been built on " + property.getName());
-            case "not owned":
-                return ("Player does not own " + property.getName());
-            case "not owned set":
-                return ("Player does not own the full colour set of " + property.getName());
-            case "not enough money":
-                return ("Player does not have enough money to build " + houses + " houses on " + property.getName());
-            default:
-                return null;
-        }
-    }
-
-    /**
      * Increases the amount of money owned by this player
      * @param change an integer indicating how much money will be added to the player's balance
      */
     public void changeMoney(int change) {
-
-        money += change;
+        this.money += change;
     }
 
     /**
@@ -336,7 +253,6 @@ public class Player {
      * @param money the amount of money deducted from this player's balance
      */
     public void pay(int money) {
-
         this.money -= money;
     }
 
