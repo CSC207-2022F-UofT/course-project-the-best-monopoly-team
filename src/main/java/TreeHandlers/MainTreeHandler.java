@@ -1,13 +1,17 @@
 package TreeHandlers;
 
 import Entities.*;
+import Interactors.CornerTilePerformActionInteractor;
+import Interactors.PropertyPerformActionInteractor;
+import UseCases.CornerTilePerformActionUseCase;
+import UseCases.PropertyPerformActionUseCase;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MainTreeHandler extends TreeHandler {
     //mainStates[0]: reserved for confirmation node
-    //mainStates[1]: reserved for sendTrade node and auction node (switching the trees)
+    //mainStates[1]: unused
     //mainStates[2]: reserved for roll
     //mainStates
     int[] mainStates = new int[5];
@@ -22,13 +26,10 @@ public class MainTreeHandler extends TreeHandler {
     public State handleInput(int input){
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
+        currentState.setId(currentTree.getName());
         switch (currentTree.getName()){
             case "Trade":
                 currentState.setBackEnable(true);
-
-
-                currentState.setDescription("Who do you want to trade with? ");
-
                 //provide a list of all possible players considering the current player is not an option
                 ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
                 playerCopy.remove(currentPlayer);
@@ -38,11 +39,13 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "PickPlayer":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What property do you want from the player? ");
-
                 //adds the chosen player index in selected options (who the current player wants to trade with)
-                selectedOptions.put(currentTree.getName(), input);
 
+                //we asked them for an input in reference to a list with their player removed
+                if (input >= getCurrentPlayerIndex()) {
+                    input += 1;
+                }
+                selectedOptions.put(currentTree.getName(), input);
                 //provide item options from the inventory of the selected player
                 Player selectedPlayer = board.getPlayers().get(input);
                 ArrayList<Property> playerProperties = selectedPlayer.getProperties();
@@ -57,13 +60,10 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "NothingToTrade":
-                currentState.setDescription("Trade cannot be done; one of you have no properties");
                 currentState.addOptions("Ok");
                 break;
             case "PickItemOp":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What property are you willing to trade? ");
-
                 //the input corresponds to the index of the opponent targeted property;
                 selectedOptions.put(currentTree.getName(), input);
 
@@ -76,7 +76,6 @@ public class MainTreeHandler extends TreeHandler {
                 break;
             case "PickItemSelf":
                 currentState.setBackEnable(true);
-                currentState.setDescription("Send the trade?");
                 currentState.addOptions("yes");
                 //TODO: make this back option do something
                 currentState.addOptions("no");
@@ -86,32 +85,21 @@ public class MainTreeHandler extends TreeHandler {
 
                 break;
             case "SendTrade":
-                if (mainStates[1] == 0) {
-                    Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
+                Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
+                currentState.setTradingOpponent(tradingOpponent);
+                currentState.setPlayer(currentPlayer);
+                currentState.setCurrentPlayerProperty(currentPlayer.getProperties().get(selectedOptions.get("PickItemSelf")));
+                currentState.setTradingPlayerProperty(tradingOpponent.getProperties().get(selectedOptions.get("PickItemOp")));
+                returnTree = currentTree;
+                returnPlayerIndex = getCurrentPlayerIndex();
+                //returnPlayerAddress will hold the original player index in this.board.getPlayers()
+                currentPlayer = tradingOpponent;
+                gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[1]);
+                addSwitchOptions(currentState);
 
-                    currentState.setDescription("Incoming trade from player " + currentPlayer.getName() +
-                            " requesting for "+ tradingOpponent.getProperties().get(selectedOptions.get("PickItemOp")).getName()
-                            + " in return for "+ currentPlayer.getProperties().get(selectedOptions.get("PickItemSelf")).getName());
-
-                    returnTree = currentTree;
-                    returnPlayerIndex = getCurrentPlayerIndex();
-                    //returnPlayerAddress will hold the original player index in this.board.getPlayers()
-                    currentPlayer = tradingOpponent;
-                    gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[1]);
-                    addSwitchOptions(currentState);
-
-                    mainStates[1] = 1;
-                }
-                else {
-                    currentState.setDescription(descriptionOtherTrees);
-                    currentState.addOptions("ok");
-                    mainStates[1] = 0;
-                    break;
-                }
                 break;
             case "ManageProperty":
                 currentState.setBackEnable(true);
-                currentState.setDescription("What property do you want to manage? ");
                 //Case manage property selected
                 //provide options on the properties available
                 ArrayList<Property> currentPlayerProperties = currentPlayer.getProperties();
@@ -156,11 +144,15 @@ public class MainTreeHandler extends TreeHandler {
                     confirmationReturn = currentTree;
                 }
                 break;
+            case "UnMortgage":
+                //TODO: ADD FUNCTIONALITY
+                break;
             case "BuildProperty":
                 Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("SelectProperty"));
                 //the player chooses to build houses
                 currentPlayer.buildHouse(targetProperty,1);
-                currentState.setDescription(targetProperty.getHouses() + " houses built on this property");
+                currentState.setCurrentPlayerProperty(targetProperty);
+    //            currentState.setDescription(targetProperty.getHouses() + " houses built on this property");
                 currentState.addOptions("ok");
                 break;
             case "Roll":
@@ -175,7 +167,20 @@ public class MainTreeHandler extends TreeHandler {
                             ((Property) landedOnCell).getOwner() == null) {
                         gameLogicInteractor.transverseCurrentTree(0);
                     } else {
-                        answer = landedOnCell.performAction(currentPlayer,board);
+                        switch (landedOnCell.getType()) {
+                            case "Property":
+                                PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
+                                Property property = (Property) landedOnCell;
+                                answer = propertyInteractor.performAction(property, currentPlayer);
+                                break;
+                            case "Corner Tile":
+                                CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+                                CornerTiles cornerTile = (CornerTiles) landedOnCell;
+                                answer = cornerTileInteractor.performAction(currentPlayer,board, cornerTile);
+
+                            case "Action Space":
+                                // TODO add action space case
+                        }
                         gameLogicInteractor.transverseCurrentTree(1);
                     }
                     currentState = handleInput(0);
@@ -187,17 +192,17 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 break;
             case "AlreadyRolled":
-                currentState.setDescription("You already rolled this round! ");
                 currentState.addOptions("ok");
                 break;
             case "CallAction":
-                currentState.setDescription("You rolled a " + diceroll + answer);
+                currentState.setRoll(diceroll);
+                currentState.setDescription(answer);
                 currentState.addOptions("ok");
                 break;
             case "EmptyPropertySpace":
+                currentState.setRoll(diceroll);
                 targetProperty = (Property) board.getCell(currentPlayer.getPosition());
-                currentState.setDescription("You rolled a "+diceroll+"You have landed on "+ targetProperty.getName() +" a free property. " +
-                        "It costs "+ targetProperty.getPrice() + ". What do you want to do? ");
+                currentState.setCurrentPlayerProperty(targetProperty);
                 addSwitchOptions(currentState);
                 break;
             case "Buy":
@@ -214,22 +219,13 @@ public class MainTreeHandler extends TreeHandler {
 
                 break;
             case "Auction":
-                if (mainStates[1] == 0) {
-                    //Case auction selected
-                    returnPlayerIndex = getCurrentPlayerIndex();
-                    //returnPlayerAddress will hold the original player index in this.board.getPlayers()
-
-                    returnTree = currentTree;
-                    gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[2]);
-                    gameLogicInteractor.setupAuction();
-                    currentState = getInitialState();
-                    mainStates[1] = 1;
-                }
-                else{
-                    currentState.setDescription(descriptionOtherTrees);
-                    currentState.addOptions("ok");
-                    mainStates[1] = 0;
-                }
+                //Case auction selected
+                returnPlayerIndex = getCurrentPlayerIndex();
+                //returnPlayerAddress will hold the original player index in this.board.getPlayers()
+                returnTree = currentTree;
+                gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[2]);
+                gameLogicInteractor.setupAuction();
+                currentState = getInitialState();
                 break;
             case "Steal":
                 currentState.setBackEnable(true);
@@ -255,19 +251,17 @@ public class MainTreeHandler extends TreeHandler {
                 currentState.addOptions("ok");
                 break;
             case "EndTurn":
-                if (currentPlayer.getMoney() >= 0){
+                if (currentPlayer.getMoney()  >= 0){
                     changePlayers();
                     mainStates = new int[5];
                     currentState = afterBottomNode();
                 }
                 else{
-                    currentState.setDescription("You can't end your turn, you have negative money! ");
                     currentState.addOptions("Ok");
                 }
                 break;
             case "SettingsMenu":
                 currentState.setBackEnable(true);
-                currentState.setDescription("Welcome to the settings menu! ");
                 addSwitchOptions(currentState);
                 break;
             case "ExitGame":
@@ -276,14 +270,12 @@ public class MainTreeHandler extends TreeHandler {
                     currentState.setExitToMenu(true);
                 }
                 else{
-                    currentState.setDescription("Are you sure you want to exit? ");
                     currentState.addOptions("Yes");
                     currentState.addOptions("No");
                     confirmationReturn = currentTree;
                 }
                 break;
             case "SaveGame":
-                currentState.setDescription("Game saved! ");
                 currentState.addOptions("ok");
                 currentState.setSaveGame(true);
                 break;
@@ -305,7 +297,6 @@ public class MainTreeHandler extends TreeHandler {
                 }
                 else {
                     confirmationReturn = currentTree;
-                    currentState.setDescription("Confirm bankruptcy? ");
                     currentState.addOptions("Yes");
                     currentState.addOptions("No");
                 }

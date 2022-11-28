@@ -22,7 +22,7 @@ public class AuctionTreeHandler extends TreeHandler {
         do {
             changePlayers();
         }while (auctionStates[getCurrentPlayerIndex()] == 1);
-
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
         switch (gameLogicInteractor.getCurrentTree().getName()){
             case "LowOption":
                 auctionStates[potIndex] += LOW_OPTION;
@@ -40,29 +40,33 @@ public class AuctionTreeHandler extends TreeHandler {
                     playerWon = players.get(auctionComplete);
                     playerWon.addProperty(biddingProperty);
                     playerWon.pay(auctionStates[potIndex]);
-                    descriptionOtherTrees = playerWon.getName() + " won the auction for " +auctionStates[potIndex] + " money";
                     gameLogicInteractor.setCurrentTree(getReturnTree());
                     currentPlayer = players.get(returnPlayerIndex);
-                    return gameLogicInteractor.handleTree(0);
+                    currentState.setPlayer(playerWon);
+                    currentState.setBiddingPot(auctionStates[potIndex]);
+                    currentState.addOptions("ok");
                 }
                 break;
-//            case "Information":
-//                gameLogicInteractor.setCurrentTree(getReturnTree());
-//                currentPlayer = players.get(returnPlayerIndex);
         }
         if (auctionComplete == -1){
-            setAuctionDescription();
-            currentState = getInitialState();
             gameLogicInteractor.setCurrentTreeToMaxParent();
+            currentState = getState();
         }
-        else{
-            currentState.setDescription(descriptionOtherTrees);
-            currentState.addOptions("ok");
-        }
+
         return currentState;
     }
-    private void setAuctionDescription(){
-        descriptionOtherTrees = "We are bidding on " + biddingProperty.getName() + " with the current pot being"+ auctionStates[potIndex];
+    public State getState(){
+        State currentState = new State();
+        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setPlayer(currentPlayer);
+        currentState.setDescription(currentPlayer.getName() + " " + descriptionOtherTrees);
+        currentState.addOptions(""+LOW_OPTION);
+        currentState.addOptions(""+MEDIUM_OPTION);
+        currentState.addOptions(""+HIGH_OPTION);
+        currentState.addOptions("Fold");
+        currentState.setBiddingPot(auctionStates[potIndex]);
+        currentState.setBiddingProperty(biddingProperty);
+        return currentState;
     }
 
     private int checkAuction(){
@@ -84,7 +88,6 @@ public class AuctionTreeHandler extends TreeHandler {
         this.biddingProperty = (Property) board.getPlayerCell(players.get(returnPlayerIndex));
         auctionStates = new int[players.size() + 1];
         potIndex = auctionStates.length - 1;
-        setAuctionDescription();
     }
 
 }

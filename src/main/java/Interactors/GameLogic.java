@@ -207,6 +207,8 @@ public class GameLogic {
     public void setupAuction(){
         auctionTreeHandler.initialize();
     }
-
+    public State getAuctionState(){
+        return auctionTreeHandler.getState();
+    }
 }
 

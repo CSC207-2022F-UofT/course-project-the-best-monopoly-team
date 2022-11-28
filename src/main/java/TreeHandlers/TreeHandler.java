@@ -51,16 +51,14 @@ public class TreeHandler {
     public State getInitialState(){
         State currentState = new State();
         if (gameLogicInteractor.getCurrentTreeID() == 0) {
+            currentState.setId(gameLogicInteractor.getCurrentTree().getName());
             currentState.setDescription(currentPlayer.getName() + " " + gameLogicInteractor.getCurrentTree().getPrompt() + " You currently " +
                     "have " + currentPlayer.getMoney() + " dollars");
+            currentState.setPlayer(currentPlayer);
             addSwitchOptions(currentState);
         }
         else {
-            currentState.setDescription(currentPlayer.getName() + " " + descriptionOtherTrees);
-            currentState.addOptions(""+LOW_OPTION);
-            currentState.addOptions(""+MEDIUM_OPTION);
-            currentState.addOptions(""+HIGH_OPTION);
-            currentState.addOptions("Fold");
+            return gameLogicInteractor.getAuctionState();
         }
         gameLogicInteractor.getCurrentTree().setPreviousState(currentState);
         return currentState;
