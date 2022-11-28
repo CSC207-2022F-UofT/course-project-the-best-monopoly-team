@@ -43,75 +43,51 @@ public class MainTreeHandler extends TreeHandler {
             case "AlreadyRolled":
                 return new AlreadyRolled();
             case "PickItemOp":
-
-                break;
+                return new PickItemOp();
             case "PickItemSelf":
-
-
-                break;
+                return new PickItemSelf();
             case "SendTrade":
-
-                break;
+                return new SendTrade();
             case "ManageProperty":
-
-                break;
+                return new ManageProperty();
             case "NoProperties":
-
-                break;
-
+                return new NoProperties();
             case "SelectProperty":
-
-                break;
+                return new SelectProperty();
             case "Mortgage":
-
-                break;
+                return new Mortgage();
             case "UnMortgage":
-                //TODO: ADD FUNCTIONALITY
-                break;
+                return new UnMortgage();
             case "BuildProperty":
-
-                break;
+                return new BuildProperty();
             case "Roll":
-
-                break;
+                return new Roll();
             case "CallAction":
-
-                break;
+                return new CallAction();
             case "EmptyPropertySpace":
-
-                break;
+                return new EmptyPropertySpace();
             case "Buy":
-
-                break;
+                return new Buy();
             case "Auction":
-
-                break;
+                return new Auction();
             case "Steal":
-
-                break;
+                return new Steal();
             case "ChoosePlayer":
-
-                break;
+                return new ChoosePlayerUseCase();
             case "EndTurn":
-
-                break;
+                return new EndTurnUseCase();
             case "SettingsMenu":
-
-                break;
+                return new SettingsMenuUseCase();
             case "ExitGame":
-
-                break;
+                return new ExitGameUseCase();
             case "SaveGame":
-
-                break;
+                return new SaveGameUseCase();
             case "Bankruptcy":
-
-                break;
+                return new BankruptcyUseCase();
             case "Confirmation":
-
-                break;
+                return new ConfirmationUseCase();
             case "Information":
-
+                return new InformationUseCase();
         }
         //TODO: PUT THIS SOMEWHERE
         //mutating the state to have memory of its state, useful for backwards transversal
