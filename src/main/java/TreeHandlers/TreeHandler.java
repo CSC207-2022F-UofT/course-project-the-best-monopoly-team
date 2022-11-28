@@ -24,7 +24,10 @@ public class TreeHandler {
     static GameLogicTree returnTree;
     static String descriptionOtherTrees;
     static int[] mainStates = new int[2];
+    static String answer;
     static GameLogicTree confirmationReturn;
+    static String diceRoll;
+    static Property targetProperty;
 
     /**
      * This method initializes variables used by the tree handlers
@@ -160,10 +163,12 @@ public class TreeHandler {
     public void changePlayers(){
         currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
     }
-
+    /**
+     * Sets the tree back to its top position and returns the current state of the tree
+     * @return state object
+     */
     public State afterBottomNode(){
         gameLogicInteractor.setCurrentTreeToMaxParent();
         return getCurrentState();
     }
-
 }
