@@ -117,8 +117,8 @@ public class GameCreation {
 
         DataAccess textFileTranslator = new TextFileTranslator(new File(""));
         ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(textFileTranslator);
-        ActionSpace2 communityChest = actionSpaceCreationInteractor.loadComChestCards(new File("src/save/cards.txt"));
-        ActionSpace2 chance = actionSpaceCreationInteractor.loadChanceCards(new File("src/save/cards.txt"));
+        ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards(new File("src/save/cards.txt"));
+        ActionSpace chance = actionSpaceCreationInteractor.loadChanceCards(new File("src/save/cards.txt"));
         // TODO: determine when to call jail ActionSpaces
         // ActionSpace jail = new ActionSpace("jail");
 

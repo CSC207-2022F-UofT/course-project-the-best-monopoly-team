@@ -188,8 +188,8 @@ public class MainTreeHandler extends TreeHandler {
                                 break;
                             case "Action Space":
                                 PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
-                                ActionSpace2 actionSpace2 = (ActionSpace2) landedOnCell;
-                                answer = actionSpaceInteractor.performAction(actionSpace2, currentPlayer, board);
+                                ActionSpace actionSpace = (ActionSpace) landedOnCell;
+                                answer = actionSpaceInteractor.performAction(actionSpace, currentPlayer, board);
                         }
                         gameLogicInteractor.transverseCurrentTree(1);
                     }
