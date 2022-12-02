@@ -11,7 +11,7 @@ import java.util.Objects;
 public class ActionSpaceTest {
 
     @Test
-    public void testGetType() throws IOException {
+    void testGetType() throws IOException {
         ActionSpace actionSpace1 = new ActionSpace("Jail");
         ActionSpace actionSpace2 = new ActionSpace("comchest");
         ActionSpace actionSpace3 = new ActionSpace("chance");
@@ -21,13 +21,13 @@ public class ActionSpaceTest {
     }
 
     @Test
-    public void testGetCard() throws IOException {
+    void testGetCard() throws IOException {
         ActionSpace actionSpace = new ActionSpace("Jail");
         assert actionSpace.getJailCards().containsKey("Pay child support($100)");
     }
 
     @Test
-    public void testLoadFile() throws IOException {
+    void testLoadFile() throws IOException {
         ActionSpace actionSpace = new ActionSpace("jail");
 
         HashMap<String, ArrayList<Object>> actual = new HashMap<>();

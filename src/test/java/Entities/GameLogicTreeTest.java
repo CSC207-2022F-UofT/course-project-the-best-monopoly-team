@@ -7,13 +7,13 @@ class GameLogicTreeTest {
 
 
     @Test
-    public void getParent() {
+    void getParent() {
         assert tree.getParent() == null;
     }
 
 
     @Test
-    public void getName() {
+    void getName() {
         assert tree.getName().equals("InitialMenu");
     }
 
