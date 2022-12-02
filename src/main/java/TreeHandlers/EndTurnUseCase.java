@@ -2,8 +2,18 @@ package TreeHandlers;
 
 import Entities.State;
 
+/**
+ * This class represents the use case when a player ends its turn.
+ */
 public class EndTurnUseCase extends TreeHandler implements NodeLogic{
 
+    /**
+     * This method creates a State object that either helps to tell the user that it cannot end its turn or changes
+     * the current player and makes the state go back to normal.
+     * @param input An integer representing the user's input. However, this parameter will not be used for this method.
+     * @return A State object containing either an "Ok" option or a State object corresponding to one at the end of a
+     * tree path.
+     */
     public State create_state(int input){
         State currentState = new State();
         currentState.setId(gameLogicInteractor.getCurrentTree().getName());
