@@ -1,9 +1,10 @@
 package Interactors;
 
 import Entities.*;
+import Persistence.LoadAccess;
+import Persistence.LoadFile;
 
-import javax.swing.*;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,8 +37,7 @@ public class GameCreation {
 
     /** Loads a saved game by creating a Board instance with save data from gameData
      *
-     * @param gameData an Arraylist with three sub Arraylists: 1. Player or Property instance data, 2. Player position data, 3. Tree main states
-     *                 each sub Arraylist contains String[] arrays where each element stores relevant instance data
+     * @param gameData an Arraylist with a sub Arraylists of String[] arrays where each array represents Player or Property instance data
      * @param newProperties an Arraylist where each sub String[] array contains default Property instance data
      * @return a Board instance initialized with gameData represented as their respective Entities
      * @throws IOException in case there was an error with creating an ActionSpace in createCells
@@ -46,54 +46,44 @@ public class GameCreation {
         ArrayList<Player> players = new ArrayList<>();
         ArrayList<Cell> properties = new ArrayList<>();
         ArrayList<Cell> standardProperties = parsePropertyData(newProperties);
-        HashMap<Player, Integer> playerPositions = new HashMap<>();
 
-        for (int i=0; i<= gameData.size(); i++){
-            switch (i) {
-                case 0:
-                    // playerData
-                    for (String[] instance : gameData.get(i)){
-                        if (instance.length == 5){
-                            // Player instance
-                            boolean inJail = false;
-                            if (instance[2].equals("true")) {
-                                inJail = true;
-                            }
 
-                            Player player = new Player(instance[0], Integer.parseInt(instance[1]), inJail,
-                                    Integer.parseInt(instance[3]), Integer.parseInt(instance[4]));
-                            players.add(player);
-                        } else {
-                            // Property instance
-                            boolean mortgaged = false;
-                            if (instance[13].equals("true")) {
-                                mortgaged = true;
-                            }
-                            Player owner = getOwner(players, instance[10]);
+        // playerData
+        for (String[] instance : gameData.get(0)){
+            if (instance.length == 5){
+                // Player instance
+                boolean inJail = false;
+                if (instance[2].equals("true")) {
+                    inJail = true;
+                }
 
-                            int[] rentValues = new int[] {Integer.parseInt(instance[4]), Integer.parseInt(instance[5]),
-                                    Integer.parseInt(instance[6]), Integer.parseInt(instance[7]),
-                                    Integer.parseInt(instance[8]), Integer.parseInt(instance[9])};
+                Player player = new Player(instance[0], Integer.parseInt(instance[1]), inJail,
+                        Integer.parseInt(instance[3]), Integer.parseInt(instance[4]));
+                players.add(player);
+            } else {
+                // Property instance
+                boolean mortgaged = false;
+                if (instance[13].equals("true")) {
+                    mortgaged = true;
+                }
+                Player owner = getOwner(players, instance[10]);
 
-                            Property property = new Property(instance[0], instance[1], Integer.parseInt(instance[2]),
-                                    Integer.parseInt(instance[3]), rentValues, owner, Integer.parseInt(instance[11]),
-                                    Integer.parseInt(instance[12]), mortgaged);
+                int[] rentValues = new int[] {Integer.parseInt(instance[4]), Integer.parseInt(instance[5]),
+                        Integer.parseInt(instance[6]), Integer.parseInt(instance[7]),
+                        Integer.parseInt(instance[8]), Integer.parseInt(instance[9])};
 
-                            owner.addProperty(property);
-                            properties.add(property);
-                        }
+                Property property = new Property(instance[0], instance[1], Integer.parseInt(instance[2]),
+                        Integer.parseInt(instance[3]), rentValues, owner, Integer.parseInt(instance[11]),
+                        Integer.parseInt(instance[12]), mortgaged);
 
-                    }
-                case 1:
-                    // playerPositions
-                    for (String[] position : gameData.get(i)) {
-                        playerPositions.put(getOwner(players, position[0]),Integer.parseInt(position[1]));
-                    }
+                owner.addProperty(property);
+                properties.add(property);
+                }
             }
-        }
-        List<Cell> cells = createCells(properties, standardProperties);
 
-        return new Board(players, cells, playerPositions);
+        List<Cell> cells = createCells(properties, standardProperties);
+        Board savedBoard = new Board(players, cells);
+        return savedBoard;
     }
 
     /** Gets the Player instance based on a String of a Player's name.
@@ -120,14 +110,17 @@ public class GameCreation {
      * @return a List of all Cells on the Monopoly board
      * @throws IOException in case there was an error with creating an ActionSpace
      */
-    private List<Cell> createCells(ArrayList<Cell> propertiesSoFar, ArrayList<Cell> standardProperties) throws IOException {
+    public List<Cell> createCells(ArrayList<Cell> propertiesSoFar, ArrayList<Cell> standardProperties) throws IOException {
 
         CornerTiles go = new CornerTiles("Go");
         CornerTiles jail = new CornerTiles("jail");
         CornerTiles freeParking = new CornerTiles("freeParking");
         CornerTiles goJail = new CornerTiles("goToJail");
-        ActionSpace communityChest = new ActionSpace("communityChest");
-        ActionSpace chance = new ActionSpace("chance");
+        LoadAccess loadAccess = new LoadFile(new File(""));
+        ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(loadAccess);
+        ActionSpace2 communityChest = actionSpaceCreationInteractor.loadComChestCards(new File("src/save/cards.txt"));
+        ActionSpace2 chance = actionSpaceCreationInteractor.loadChanceCards(new File("src/save/cards.txt"));
+
 
         ArrayList<Cell> cells = standardProperties;
         cells.add(0, go);
@@ -146,7 +139,7 @@ public class GameCreation {
         if (!propertiesSoFar.equals(standardProperties)) {
             for (Cell property : propertiesSoFar) {
                 Property cProperty = (Property) property;
-                for (int i = 0; i <= 40; i++) {
+                for (int i = 0; i < 40; i++) {
                     if (cells.get(i) instanceof Property) {
                         Property currentCell = (Property) cells.get(i);
                         if (currentCell.getName().equals(cProperty.getName())) {
@@ -166,7 +159,7 @@ public class GameCreation {
      * @param propertyData an Arraylist of String[] arrays where each array contains default values for a Property instance.
      * @return an Arraylist of Property instances initialized with their default values.
      */
-    private ArrayList<Cell> parsePropertyData(ArrayList<String[]> propertyData) {
+    public ArrayList<Cell> parsePropertyData(ArrayList<String[]> propertyData) {
         // for unowned Property instances:
         // index [10] is int mortgageValue, [11] is int houses,
         // String playerOwnerName and booleanMortaged are not stored by default

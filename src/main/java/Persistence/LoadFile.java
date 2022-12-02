@@ -1,22 +1,17 @@
-package Interactors;
+package Persistence;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
-public class TextFileTranslator implements DataAccess{
+public class LoadFile implements LoadAccess{
     private File file;
 
-    /**
-     * Constructor for TextFileTranslator which implements load and save game functionality.
-     * The UseCaseInteractor handles implementation with respect to DataAccessInterface.
-     *
-     * @param file  is the file used to load or save game data to.
-     */
-    public TextFileTranslator(File file) {
+    public LoadFile(File file){
         this.file = file;
     }
 
@@ -41,6 +36,7 @@ public class TextFileTranslator implements DataAccess{
         return folder.listFiles();
     }
 
+
     /**
      * Loads the game data from this.file.
      *
@@ -62,10 +58,8 @@ public class TextFileTranslator implements DataAccess{
 
         ArrayList<ArrayList<String[]>> gameInfo = new ArrayList<>();
         ArrayList<String[]> players = new ArrayList<>();
-        ArrayList<String[]> playerPositions = new ArrayList<>();
         ArrayList<String[]> savedTree = new ArrayList<>();
         boolean player = false;
-        boolean board = false;
         boolean tree = false;
 
         File gameData = new File(file.getPath());
@@ -77,14 +71,9 @@ public class TextFileTranslator implements DataAccess{
             switch (data.trim()) {
                 case "playerStart":
                     player = true;
+                    break;
                 case "playerEnd":
                     player = false;
-                    break;
-                case "positionStart":
-                    board = true;
-                    break;
-                case "positionEnd":
-                    board = false;
                     break;
                 case "treeStart":
                     tree = true;
@@ -97,93 +86,19 @@ public class TextFileTranslator implements DataAccess{
             if (player){
                 String[] playerAttributes = data.trim().split(","); // denotes either a Player instance or a Property instance owned by a Player
                 players.add(playerAttributes);
-
-            } else if (board) {
-                String[] position = data.trim().split(","); // denotes a key-value pair representing a Player name and their position
-                playerPositions.add(position);
-
             } else if (tree) {
                 String[] treeData = data.trim().split(","); // denotes an array of Integers representing mainStates
                 savedTree.add(treeData);
             }
         }
+        players.remove(0);
+        savedTree.remove(0);
         gameInfo.add(players);
-        gameInfo.add(playerPositions);
         gameInfo.add(savedTree);
 
         return gameInfo;
     }
 
-    /**
-     * Given game data to save, save the information to txt file this.file.
-     *
-     * @param playerData each subarray of playerData represents a Player instance or Property instance
-     *                   playerData should be ordered with a Player followed by the Properties they own
-     *                   for each Player instance all values should be Strings:
-     *                   index [0] name, [1] money, [2] booleanInJail ("true" or "false), [3] jailCards, [4] position
-     *                   for each Property instance all values should be Strings:
-     *                   index [0] name, [1] colour, [2] cost, [3] houseCost, [4] rent, [5] rent1H,
-     *                   [6] rent2H, [7] rent3H, [8] rent4H, [9] rentHotel, [10] playerOwnerName,
-     *                   [11] mortgageValue, [12] numHouses, [13] booleanMortaged ("true" or "false")
-     *
-     * @param boardData  each subarray of boardData represents a key-value pair between a Player and their position
-     *                   index[0] of the subarray is String playerName, [1] is int position
-     *
-     * @param mainStates an Integer[] array of ints representing main states for Trees
-     * @return a boolean representing whether the save to this.file was successful
-     * @throws IOException in the case that there was an error writing the data in the subarrays to the file
-     */
-    public boolean saveGame(String[][] playerData, String[][] boardData, Integer[] mainStates) throws IOException {
-        File saveFile = file;
-
-        if (saveFile.createNewFile()){
-            FileWriter writer = new FileWriter(file.getPath());
-
-            writer.write("playerStart\n");
-            // loop through playerData and save each Player instance as a line
-            saveArray(playerData, writer);
-            writer.write("playerEnd\n");
-            writer.write("positionStart\n");
-
-            // loop through Board instance and save player-position key value pair as a line
-            saveArray(boardData, writer);
-            writer.write("positionEnd\n");
-            writer.write("treeStart\n");
-
-            // save the Integer[] mainStates as a line
-            StringBuilder newLine = new StringBuilder();
-            for (int stateDatum : mainStates) {
-                newLine.append(stateDatum).append(",");
-            }
-            newLine.deleteCharAt(newLine.length() - 1);
-            writer.write(String.valueOf(newLine) + "\n");
-            writer.write("treeEnd\n");
-
-            writer.close();
-            return true;
-        } else {
-            return false;
-        }
-
-    }
-
-    /**
-     * Loops through each subarray of data and stores it as a line in a txt file.
-     *
-     * @param data      a 2D array where each subarray stores information of an instance of an Entity to be saved
-     * @param writer    a FileWriter instance with the save file
-     * @throws IOException  in case the writer was unable to write to the file
-     */
-    private void saveArray(String[][] data, FileWriter writer) throws IOException {
-        for (String[] datum : data) {
-            StringBuilder newLine = new StringBuilder();
-            for (String s : datum) {
-                newLine.append(s).append(",");
-            }
-            newLine.deleteCharAt(newLine.length() - 1);
-            writer.write(String.valueOf(newLine) + "\n");
-        }
-    }
 
     /**
      * Loads all the instance attributes of properties in properties.txt as an array of String values.
@@ -208,7 +123,17 @@ public class TextFileTranslator implements DataAccess{
         return allProperties;
     }
 
-    public File getFile() {
-        return this.file;
+
+    /**
+     * Return a list of all the cards as a list of Strings
+     * @return a list of strings that represents all the cards in the game
+     * @throws IOException
+     *
+     */
+    @Override
+    public List<String> loadCards(File file) throws IOException {
+
+        return Files.readAllLines(file.toPath());
+
     }
 }

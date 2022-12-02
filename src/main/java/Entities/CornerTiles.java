@@ -15,4 +15,5 @@ public class CornerTiles extends Cell{
     public String getType() {
         return "Corner Tile";
     }
+
 }
