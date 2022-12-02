@@ -8,6 +8,8 @@ import Entities.State;
 import Interactors.DataAccess;
 import Interactors.GameCreation;
 import Interactors.GameLogic;
+import UseCases.InitialNodeLogic.InitialLogic;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -34,6 +36,7 @@ public class UseCaseInteractor{
         currentState = getInitialState();
         treeHandler = new InitialTreeHandler(this);
         this.gameCreation = new GameCreation();
+        InitialLogic.setCaseInteractor(this);
     }
 
     /**
@@ -59,7 +62,7 @@ public class UseCaseInteractor{
                 currentTree = (GameLogicTree) currentTree.getChildren().get(0);
             }
             //performs logic when inside nodes
-            currentState = treeHandler.handleTree(input);
+            currentState = treeHandler.getUseCase().create_state(input);
         }
         else{
             //forwards input to GameLogic once the game has started
@@ -187,7 +190,8 @@ public class UseCaseInteractor{
         try {
             ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
             ArrayList<String> playerNames = new ArrayList<>();
-            for (int i = 0; i < treeHandler.selectedOptions.get("NumberOfPlayers") + 2; i++) {
+            InitialLogic temp = new InitialLogic();
+            for (int i = 0; i < temp.getSelectedOptions().get("NumberOfPlayers") + 2; i++) {
                 playerNames.add("Player " + i);
             }
             Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);

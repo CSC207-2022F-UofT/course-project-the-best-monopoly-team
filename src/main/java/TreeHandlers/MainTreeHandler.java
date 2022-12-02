@@ -1,27 +1,22 @@
 package TreeHandlers;
 
 import Entities.*;
-
-import java.util.ArrayList;
+import Interactors.GameLogic;
+import Interface.ErrorCase;
+import Interface.NodeLogic;
+import TreeHandlers.MainTreeNodeLogic.*;
 
 
 /**
  * This tree handler handles the input during main game phase of the program.
  */
-public class MainTreeHandler extends TreeHandler {
+public class MainTreeHandler {
 
     //mainStates[0]: variable reserved for confirmation node
     //mainStates[1]: variable reserved for roll
-
-    public MainTreeHandler(){
-    }
-
-    /**
-     * Constructor for the class when states are already known.
-     * @param states
-     */
-    public MainTreeHandler(int[] states){
-        mainStates = states;
+    GameLogic gameLogicInteractor;
+    public MainTreeHandler(GameLogic gameLogicInteractor){
+        this.gameLogicInteractor = gameLogicInteractor;
     }
 
     /**
@@ -30,7 +25,6 @@ public class MainTreeHandler extends TreeHandler {
      *
      */
     public NodeLogic getUseCase(){
-
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         switch (currentTree.getName()){
             case "Trade":

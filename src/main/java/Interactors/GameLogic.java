@@ -1,9 +1,11 @@
 package Interactors;
 
 import Entities.*;
+import TreeHandlers.AuctionNodeLogic.AuctionTreeNodeLogic;
 import TreeHandlers.AuctionTreeHandler;
 import TreeHandlers.MainTreeHandler;
 import TreeHandlers.TradingTreeHandler;
+import TreeHandlers.GeneralGameLogic;
 
 /**
  * This class creates a GameLogic instance which coordinates the flow of the game.
@@ -21,11 +23,12 @@ public class GameLogic {
      * @param board A board instance that the GameLogic instance will help govern.
      */
     public GameLogic(Player currentPlayer, Board board){
-        mainTreeHandler = new MainTreeHandler();
-        auctionTreeHandler = new AuctionTreeHandler(board.getPlayers().size());
-        tradingTreeHandler = new TradingTreeHandler();
-        mainTreeHandler.setGameLogicInteractor(this);
-        mainTreeHandler.initialize(currentPlayer,board);
+        mainTreeHandler = new MainTreeHandler(this);
+        AuctionTreeNodeLogic.array_init(board.getPlayers().size());
+        auctionTreeHandler = new AuctionTreeHandler(this);
+        tradingTreeHandler = new TradingTreeHandler(this);
+        GeneralGameLogic.initialize(currentPlayer,board, this);
+
         createTrees();
     }
 
@@ -34,7 +37,8 @@ public class GameLogic {
      * @return A State object representing the state of the game.
      */
     public State getCurrentState(){
-        return mainTreeHandler.getCurrentState();
+        GeneralGameLogic temp = new GeneralGameLogic();
+        return temp.getCurrentState();
     }
 
     /**
@@ -248,10 +252,10 @@ public class GameLogic {
             return returnState;
         }
         else if (currentTree.getMaxParent() == trees[1]){
-            return tradingTreeHandler.handleInput();
+            return tradingTreeHandler.getUseCase().create_state(input);
         }
         else{
-            return auctionTreeHandler.handleInput();
+            return auctionTreeHandler.getUseCase().create_state(input);
         }
 
     }
@@ -269,19 +273,11 @@ public class GameLogic {
         return -1;
     }
 
-    /**
-     * This method is used to initialize the auctionTreeHandler to prepare for an auction scenario.
-     */
-    public void setupAuction(){
-        auctionTreeHandler.initialize();
-    }
 
     /**
      * This method returns a State object representing the current condition of the game in relation to the auctionTreeHandler instance attribute.
      * @return Returns a State object representing the current condition of the game.
      */
-    public State getAuctionState(){
-        return auctionTreeHandler.getState();
-    }
+
 }
 
