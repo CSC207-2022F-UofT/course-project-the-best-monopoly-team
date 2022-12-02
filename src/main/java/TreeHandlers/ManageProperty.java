@@ -20,8 +20,8 @@ public class ManageProperty extends TreeHandler implements NodeLogic {
         }
 
         //provide options on the properties available
-        for(int i = 0; i < currentPlayerProperties.size(); i++){
-            currentState.addOptions(currentPlayerProperties.get(i).getName());
+        for (Property currentPlayerProperty : currentPlayerProperties) {
+            currentState.addOptions(currentPlayerProperty.getName());
         }
 
         return currentState;

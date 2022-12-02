@@ -4,7 +4,17 @@ import Entities.Cell;
 import Entities.Property;
 import Entities.State;
 
+/**
+ * This class represents the use case where the current player rolls the dice.
+ */
 public class Roll extends TreeHandler implements NodeLogic {
+
+    /**
+     * This method creates a State object and conducts the appropriate actions related to the current state of the game,
+     * and sets up the tree objects that are required due to the movement of the game.
+     * @param input An integer that represents the input of the user. However, this will not be used in this method.
+     * @return A State object representing the state of the game after the current player rolls the dice.
+     */
     @Override
     public State create_state(int input) {
         State currentState = new State();

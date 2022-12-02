@@ -3,7 +3,17 @@ package TreeHandlers;
 import Entities.GameLogicTree;
 import Entities.State;
 
+/**
+ * This class represents a use case where the current player selects a property that it owns that will then be either
+ * mortgaged, un-mortgaged, or have a house built on it.
+ */
 public class SelectProperty extends TreeHandler implements NodeLogic {
+    /**
+     * This method creates a State object and adds the current player's selected option for which property it wants to
+     * manage and adds the options to mortgage, un-mortgage, and to build a house to the State object.
+     * @param input An integer representing the index of the property that is to be selected.
+     * @return A State object containing options to mortgage, un-mortgage, or build a house and the chosen property.
+     */
     @Override
     public State create_state(int input) {
         State currentState = new State();

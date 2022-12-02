@@ -7,7 +7,17 @@ import Entities.State;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a use case where the current player has to choose a player to interact with.
+ */
 public class PickPlayer extends TreeHandler implements NodeLogic{
+
+    /**
+     * This method creates a State object and adds the selected player to the State object. It will also add options to
+     * the State object. These options are the items from the inventory of the selected player.
+     * @param input An integer representing the Player instance that the current player has chosen.
+     * @return A State object containing the selected player and a list of the chosen player's properties.
+     */
     @Override
     public State create_state(int input) {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();

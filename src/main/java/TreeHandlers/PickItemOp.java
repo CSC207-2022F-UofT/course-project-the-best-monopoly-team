@@ -6,7 +6,16 @@ import Entities.State;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents the use case where the current player has to choose an item of a targeted opponent's
+ * inventory.
+ */
 public class PickItemOp extends TreeHandler implements NodeLogic {
+    /** This method creates a State object and adds the selected inventory item belonging to a targeted opponent to the
+     * State object and adds the properties of the current player as options to be chosen from later.
+     * @param input An integer representing the index of the targeted opponent's property.
+     * @return A State object containing the selected item and options for the current player to choose from later.
+     */
     @Override
     public State create_state(int input) {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
