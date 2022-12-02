@@ -2,7 +2,7 @@ package Entities;
 import Interactors.CornerTilePerformActionInteractor;
 import Interactors.GameCreation;
 import UseCases.CornerTilePerformActionUseCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,6 +31,7 @@ public class CornerTilesTest {
         CornerTiles t = new CornerTiles("jail");
         player1.setInJail(true);
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+        String mystr = cornerTileInteractor.performAction(player1, bo, t);
         assertEquals( "You are still in Jail", cornerTileInteractor.performAction(player1, bo, t));
     }
 

@@ -7,26 +7,26 @@ import static org.junit.jupiter.api.Assertions.*;
 class UseCaseInteractorTest {
 
     @Test
-    void handleInput() {
+    public void handleInput() {
     }
 
     @Test
-    void createTrees() {
+    public void createTrees() {
     }
 
     @Test
-    void handleInitialTree() {
+    public void handleInitialTree() {
     }
 
     @Test
-    void handleGameTree() {
+    public void handleGameTree() {
     }
 
     @Test
-    void updateOutput() {
+    public void updateOutput() {
     }
 
     @Test
-    void loadFiles() {
+    public void loadFiles() {
     }
 }
