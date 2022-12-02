@@ -1,6 +1,6 @@
 package Entities;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import static org.junit.Assert.*;
 
 import java.util.*;
@@ -13,8 +13,8 @@ public class BoardTest {
         List<Player> players = new ArrayList<Player>();
         players.add(playerOne);
         players.add(playerTwo);
-        int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
-        int [] rentValues2 = new int[] {2, 4, 6, 8, 10, 12};
+        int [] rentValues1 = new int[] {1,2,3,4,5};
+        int [] rentValues2 = new int[] {2,4,6,8,10};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
@@ -50,8 +50,8 @@ public class BoardTest {
         List<Player> players = new ArrayList<Player>();
         players.add(playerOne);
         players.add(playerTwo);
-        int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
-        int [] rentValues2 = new int[] {2, 4, 6, 8, 10, 12};
+        int [] rentValues1 = new int[] {1,2,3,4,5};
+        int [] rentValues2 = new int[] {2,4,6,8,10};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
@@ -72,8 +72,8 @@ public class BoardTest {
         List<Player> players = new ArrayList<Player>();
         players.add(playerOne);
         players.add(playerTwo);
-        int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
-        int [] rentValues2 = new int[] {2, 4, 6, 8, 10, 12};
+        int [] rentValues1 = new int[] {1,2,3,4,5};
+        int [] rentValues2 = new int[] {2,4,6,8,10};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
@@ -95,8 +95,8 @@ public class BoardTest {
         List<Player> players = new ArrayList<Player>();
         players.add(playerOne);
         players.add(playerTwo);
-        int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
-        int [] rentValues2 = new int[] {2, 4, 6, 8, 10, 12};
+        int [] rentValues1 = new int[] {1,2,3,4,5};
+        int [] rentValues2 = new int[] {2,4,6,8,10};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
@@ -123,8 +123,8 @@ public class BoardTest {
         List<Player> players = new ArrayList<Player>();
         players.add(playerOne);
         players.add(playerTwo);
-        int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
-        int [] rentValues2 = new int[] {2, 4, 6, 8, 10, 12};
+        int [] rentValues1 = new int[] {1,2,3,4,5};
+        int [] rentValues2 = new int[] {2,4,6,8,10};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
@@ -145,8 +145,8 @@ public class BoardTest {
         List<Player> players = new ArrayList<Player>();
         players.add(playerOne);
         players.add(playerTwo);
-        int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
-        int [] rentValues2 = new int[] {2, 4, 6, 8, 10, 12};
+        int [] rentValues1 = new int[] {1,2,3,4,5};
+        int [] rentValues2 = new int[] {2,4,6,8,10};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
