@@ -46,7 +46,8 @@ class LoadFileTest {
         // "cards.txt, properties.txt"
         String[] expectedReturn = new String[] {"cards.txt", "properties.txt"};
 
-        File save = new File("src/save");
+        File initial = new File("src/save");
+        File save = new File(initial.getAbsolutePath());
         String[] actualReturn = save.list();
         assert Arrays.equals(actualReturn, expectedReturn);
     }
