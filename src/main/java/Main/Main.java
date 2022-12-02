@@ -1,7 +1,5 @@
 package Main;
 
-import UseCases.PresenterDisplay;
-
 import java.io.File;
 
 public class Main {
@@ -12,3 +10,4 @@ public class Main {
         display.playGame(file);
     }
 }
+
