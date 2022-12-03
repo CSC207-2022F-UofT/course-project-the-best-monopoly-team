@@ -1,7 +1,7 @@
 package UseCases;
 import Interactors.InputInteractor;
 import Interactors.OutputInteractor;
-import Persistence.TextFileTranslator;
+import Persistence.LoadFile;
 
 import java.io.File;
 import java.util.Scanner;
@@ -31,7 +31,7 @@ public class PresenterDisplay {
      * the game ends
      **/
     public void playGame(File file){
-        UseCaseInteractor interactor = new UseCaseInteractor(new TextFileTranslator(file));
+        UseCaseInteractor interactor = new UseCaseInteractor(new LoadFile(file));
         InputInteractor inputControl = new InputInteractor(interactor);
         OutputInteractor outputControl = new OutputInteractor(interactor);
         Scanner userIn = new Scanner(System.in);

@@ -5,7 +5,7 @@ import Entities.Board;
 import Entities.GameLogicTree;
 import Entities.MenuTree;
 import Entities.State;
-import Persistence.DataAccess;
+import Persistence.LoadAccess;
 import Interactors.GameCreation;
 import Interactors.GameLogic;
 
@@ -18,15 +18,15 @@ public class UseCaseInteractor{
     private boolean menuTreeActive = true;
     private InitialTreeHandler treeHandler;
     private GameLogic logicInteractor;
-    private DataAccess dataAccess;
+    private LoadAccess loadAccess;
     private GameCreation gameCreation;
     private State currentState;
 
     /**
      * Constructor for the UseCaseInteractor.
      */
-    public UseCaseInteractor(DataAccess dataAccess){
-        this.dataAccess = dataAccess;
+    public UseCaseInteractor(LoadAccess loadAccess){
+        this.loadAccess = loadAccess;
         createTrees();
         currentState = getInitialState();
         treeHandler = new InitialTreeHandler(this);
@@ -150,7 +150,7 @@ public class UseCaseInteractor{
         //TODO load files for game creation
         //TODO correctly implement this method
         try {
-            ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
+            ArrayList<String[]> newProperties = this.loadAccess.loadProperties();
             ArrayList<String> playerNames = new ArrayList<>();
             for (int i = 0; i < treeHandler.selectedOptions.get("NumberOfPlayers") + 2; i++) {
                 playerNames.add("Player " + i);
@@ -163,8 +163,8 @@ public class UseCaseInteractor{
         }
     }
     public Board loadSavedGame(String filepath) throws IOException{
-        ArrayList<ArrayList<String[]>> loadedGame = this.dataAccess.loadGame();
-        ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
+        ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame();
+        ArrayList<String[]> newProperties = this.loadAccess.loadProperties();
 
         Board savedGame = this.gameCreation.createSavedGame(loadedGame, newProperties);
         return savedGame;
