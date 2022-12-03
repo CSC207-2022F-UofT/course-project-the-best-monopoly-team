@@ -22,19 +22,13 @@ public class GeneralGameLogic {
     static GameLogicTree returnTree;
     static String answer;
     static GameLogicTree confirmationReturn;
-    static Property targetProperty;
+
 
     public void setAnswer(String answer1){
         answer = answer1;
     }
     public String getAnswer(){
         return answer;
-    }
-    public void setTargetProperty(Property property){
-        targetProperty = property;
-    }
-    public Property getTargetProperty(){
-        return targetProperty;
     }
     public void setConfirmationReturn(GameLogicTree tree){
         confirmationReturn = tree;
