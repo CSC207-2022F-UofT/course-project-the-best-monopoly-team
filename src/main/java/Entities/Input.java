@@ -1,10 +1,5 @@
 package Entities;
 
-import Persistence.TextFileTranslator;
-import UseCases.UseCaseInteractor;
-
-import java.io.File;
-
 /**
  * Input Entity that stores all the input values
  */
