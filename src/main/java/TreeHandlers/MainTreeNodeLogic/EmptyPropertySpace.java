@@ -4,7 +4,18 @@ import Entities.*;
 import Interactors.GameLogic;
 import Interface.NodeLogic;
 
+/**
+ * This use case represents when the current user lands on an empty property space.
+ */
 public class EmptyPropertySpace extends MainTreeNodeLogic implements NodeLogic {
+
+    /**
+     * This method creates a State object containing information on the response and options from rolling on an empty
+     * property space.
+     * @param input An integer representing the user's input. This parameter will not be used for this method.
+     * @return a State object containing information on the response and options from rolling on an empty property
+     * space.
+     */
     @Override
     public State create_state(int input) {
         Board board = getBoard();

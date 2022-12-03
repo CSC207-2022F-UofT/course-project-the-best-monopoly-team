@@ -4,8 +4,18 @@ import Entities.*;
 import Interactors.GameLogic;
 import Interface.NodeLogic;
 
+/**
+ * This class represents a use case where the current player has to confirm something.
+ */
 public class ConfirmationUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    /**
+     * This method returns a State object either containing a State object representing the end of a tree path or one
+     * that aids in allowing the user to confirm their actions.
+     * @param input An integer representing if a user would like to confirm their actions.
+     * @return A State object either containing a State object representing the end of a tree path or one that aids in
+     * allowing the user to confirm their actions.
+     */
     @Override
     public State create_state(int input) {
 

@@ -6,8 +6,17 @@ import Interface.NodeLogic;
 
 import java.util.ArrayList;
 
+/**
+ * This class represents a use case when a player in the game is bankrupt.
+ */
 public class BankruptcyUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    /**
+     * This method creates a State and returns it. The State object either contains options for confirmation or be one
+     * representing the end of a tree path. The method also disconnects the bankrupt player from the game.
+     * @param input An integer representing the user's input. This parameter will nto be used for this method.
+     * @return A State object either contains options for confirmation or be one representing the end of a tree path.
+     */
     @Override
     public State create_state(int input) {
         State currentState = new State();

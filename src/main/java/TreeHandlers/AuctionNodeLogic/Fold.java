@@ -7,7 +7,17 @@ import Interface.NodeLogic;
 
 import java.util.List;
 
+/**
+ * This class represents a use case when a player folds during an auction.
+ */
 public class Fold extends AuctionTreeNodeLogic implements NodeLogic {
+
+    /**
+     * This method handles a case where a player folds during an auction. It returns a State object containing
+     * information required to continue the auction process.
+     * @param input An integer representing the user's input. However, this parameter will not be used for this method.
+     * @return A State object containing information required to continue the auction process.
+     */
     @Override
     public State create_state(int input) {
         State currentState = beforeLogic();

@@ -6,7 +6,18 @@ import Interface.NodeLogic;
 
 import java.util.HashMap;
 
+/**
+ * This class represents a use case where the current user send a trade to the targeted player.
+ */
+
 public class SendTrade extends MainTreeNodeLogic implements NodeLogic {
+
+    /**
+     * This method creates a State
+     * @param input An integer representing if the trade is to be sent. 0 means that the trade will be sent over.
+     * @return A State object containing either one that represents the end of a tree path, or one that contains
+     * required to propose the trade.
+     */
     @Override
     public State create_state(int input) {
         Board board = getBoard();

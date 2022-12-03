@@ -6,7 +6,17 @@ import Entities.State;
 import Interactors.GameLogic;
 import Interface.NodeLogic;
 
+/**
+ * This class represents the use case when a player declines a trade proposal from another player.
+ */
 public class DeclineTrade extends TradingTreeNodeLogic implements NodeLogic {
+
+    /**
+     * This method reverts the game to its previous state before the trade was attempted. It returns a State object
+     * containing information to continue the game.
+     * @param input An integer representing the user's input. This parameter will not be used for this method.
+     * @return State object containing information to continue the game.
+     */
     @Override
     public State create_state(int input) {
         Board board = getBoard();
