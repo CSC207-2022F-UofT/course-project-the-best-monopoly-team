@@ -21,7 +21,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class GameCreationTest {
 
     @Test
-    void createNewGame() throws IOException {
+    void testCreateNewGame() throws IOException {
         // create a new game
         // assert that all the player instance attributes match default expected values
         // assert the board cells match expected value
@@ -64,7 +64,7 @@ class GameCreationTest {
     }
 
     @Test
-    void createSavedGame() throws IOException {
+    void testCreateSavedGame() throws IOException {
         // create a saved game
         // assert that the player instance attributes match the given player data
         // assert the board cells match the owned properties of the players
