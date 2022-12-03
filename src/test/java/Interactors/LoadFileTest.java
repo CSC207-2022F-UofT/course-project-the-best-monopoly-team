@@ -43,10 +43,10 @@ class LoadFileTest {
     @Test
     void testCheckSaves() {
         // search save directory and assert the return text to match
-        // "cards.txt, properties.txt"
+        // "cards.txt, properties.txt, states.txt"
         String[] expectedReturn = new String[] {"properties.txt", "states.txt", "cards.txt"};
 
-        String path = new File("src/save").getAbsolutePath();
+        String path = new File("src/save").getPath();
         File save = new File(path);
         String[] actualReturn = save.list();
         assert Arrays.equals(actualReturn, expectedReturn);
