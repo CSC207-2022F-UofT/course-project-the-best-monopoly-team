@@ -13,7 +13,7 @@ public class Fold extends AuctionTreeNodeLogic implements NodeLogic {
         State currentState = beforeLogic();
         List<Player> players = getPlayers();
         GameLogic gameLogicInteractor = getGameLogicInteractor();
-        Player currentPlayer = getCurrentPlayer();
+
         int returnPlayerIndex = getReturnPlayerIndex();
 
         //fold indicator
@@ -29,7 +29,7 @@ public class Fold extends AuctionTreeNodeLogic implements NodeLogic {
 
             //return to the main tree and correct player
             gameLogicInteractor.setCurrentTree(getReturnTree());
-            currentPlayer = players.get(returnPlayerIndex);
+            setCurrentPlayer(players.get(returnPlayerIndex));
 
             //mutate state object
             currentState.setPlayer(playerWon);
