@@ -2,12 +2,9 @@ package Interactors;
 
 import Entities.*;
 import TreeHandlers.AuctionNodeLogic.*;
-//import TreeHandlers.AuctionTreeHandler;
-//import TreeHandlers.MainTreeHandler;
 import TreeHandlers.MainTreeNodeLogic.*;
 import TreeHandlers.TradingNodeLogic.AcceptTrade;
 import TreeHandlers.TradingNodeLogic.DeclineTrade;
-//import TreeHandlers.TradingTreeHandler;
 import TreeHandlers.GeneralGameLogic;
 import TreeHandlers.TradingNodeLogic.TradingParentNode;
 
@@ -17,9 +14,6 @@ import TreeHandlers.TradingNodeLogic.TradingParentNode;
 public class GameLogic {
     private GameLogicTree[] trees = new GameLogicTree[3];
     private GameLogicTree currentTree;
-//    AuctionTreeHandler auctionTreeHandler;
- //   MainTreeHandler mainTreeHandler;
- //   TradingTreeHandler tradingTreeHandler;
 
     /**
      * This is the constructor for creating a GameLogic instance.
@@ -27,12 +21,8 @@ public class GameLogic {
      * @param board A board instance that the GameLogic instance will help govern.
      */
     public GameLogic(Player currentPlayer, Board board){
- //       mainTreeHandler = new MainTreeHandler(this);
         AuctionTreeNodeLogic.array_init(board.getPlayers().size());
- //       auctionTreeHandler = new AuctionTreeHandler(this);
-  //      tradingTreeHandler = new TradingTreeHandler(this);
         GeneralGameLogic.initialize(currentPlayer,board, this);
-
         createTrees();
     }
 
@@ -212,7 +202,7 @@ public class GameLogic {
      * This method traverses through the GameLogicTrees that handle the state of the program.
      * @param input an int value that represents the direction of which the GameLogicTrees are to be traversed. -1
      *              represents traversing backwards. Otherwise, it will traverse forwards.
-     * @return
+     * @return A state object indicating the current state of the program
      */
     public State performInput(int input){
         //Moving through the tree depending on the input and the node
@@ -268,12 +258,6 @@ public class GameLogic {
         }
         return -1;
     }
-
-
-    /**
-     * This method returns a State object representing the current condition of the game in relation to the auctionTreeHandler instance attribute.
-     * @return Returns a State object representing the current condition of the game.
-     */
 
 }
 

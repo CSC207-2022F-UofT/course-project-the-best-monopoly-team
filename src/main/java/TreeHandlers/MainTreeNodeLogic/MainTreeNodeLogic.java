@@ -14,7 +14,7 @@ public class MainTreeNodeLogic extends GeneralGameLogic {
 
     /**
      * When states are already known.
-     * @param states
+     * @param states - The states of the program from the loaded game
      */
     public static void initializeStates(int[] states){
         mainStates = states;

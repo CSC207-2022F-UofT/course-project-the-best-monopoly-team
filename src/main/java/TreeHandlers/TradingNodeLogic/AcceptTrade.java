@@ -16,8 +16,8 @@ public class AcceptTrade extends TradingTreeNodeLogic implements NodeLogic {
     /**
      * This method handles the trade when it is accepted and moves their property items from one player to another.
      * It returns a State object containing an "Ok" option and all the necessary information to continue.
-     * @param input
-     * @return
+     * @param input - unused in this node
+     * @return A state object representing the current state of the program
      */
     @Override
     public State create_state(int input) {

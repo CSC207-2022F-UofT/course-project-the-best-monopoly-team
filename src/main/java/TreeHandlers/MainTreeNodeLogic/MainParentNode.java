@@ -2,7 +2,6 @@ package TreeHandlers.MainTreeNodeLogic;
 
 import Entities.Player;
 import Entities.State;
-import Interactors.GameLogic;
 import Interface.NodeLogic;
 
 public class MainParentNode extends MainTreeNodeLogic implements NodeLogic {
@@ -13,7 +12,6 @@ public class MainParentNode extends MainTreeNodeLogic implements NodeLogic {
     @Override
     public State create_state(int input) {
         Player currentPlayer = getCurrentPlayer();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         State currentState = new State();
         currentState.setId(getName());
         currentState.setPlayer(currentPlayer);

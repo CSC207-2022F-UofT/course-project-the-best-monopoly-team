@@ -40,10 +40,9 @@ public class BankruptcyUseCase extends MainTreeNodeLogic implements NodeLogic {
                 targetedProperty.setHouses(0);
                 targetedProperty.setMortgageStatus(false);
             }
-            Player tempPlayer = currentPlayer;
             //switching the player before removing the original player
             changePlayers();
-            board.removePlayer(tempPlayer);
+            board.removePlayer(currentPlayer);
 
             //changing the player and turning the state back to normal
             mainStates = new int[2];

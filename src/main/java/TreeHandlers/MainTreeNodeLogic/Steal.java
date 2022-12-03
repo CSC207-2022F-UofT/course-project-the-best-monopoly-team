@@ -1,10 +1,8 @@
 package TreeHandlers.MainTreeNodeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
 import Interface.NodeLogic;
 
-import java.util.ArrayList;
 
 /**
  * This class represents a use case where a Player instance chooses to steal money from another Player instance.

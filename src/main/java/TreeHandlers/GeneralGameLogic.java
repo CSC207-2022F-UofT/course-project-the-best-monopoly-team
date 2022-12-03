@@ -214,8 +214,8 @@ public class GeneralGameLogic {
     public void addPlayersState(State currentState){
         ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
         playerCopy.remove(currentPlayer);
-        for(int i = 0; i < playerCopy.size(); i++){
-            currentState.addOptions(playerCopy.get(i).getName());
+        for (Player player : playerCopy) {
+            currentState.addOptions(player.getName());
         }
 
     }

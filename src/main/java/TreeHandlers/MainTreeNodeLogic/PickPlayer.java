@@ -53,8 +53,8 @@ public class PickPlayer extends MainTreeNodeLogic implements NodeLogic{
             return currentState;
         }
         //using "i" starting from 0 to number of properties the player has - 1
-        for (int i = 0; i < playerProperties.size(); i++){
-            currentState.addOptions(playerProperties.get(i).getName());
+        for (Property playerProperty : playerProperties) {
+            currentState.addOptions(playerProperty.getName());
         }
 
         return currentState;
