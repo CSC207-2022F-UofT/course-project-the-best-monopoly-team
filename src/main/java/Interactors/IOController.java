@@ -1,7 +1,7 @@
 package Interactors;
 
 import Entities.State;
-import Persistence.TextFileTranslator;
+import Persistence.LoadFile;
 import UseCases.UseCaseInteractor;
 
 import java.io.File;
@@ -30,7 +30,7 @@ public class IOController {
     public IOController(File file){
         this.output = "Welcome to Monopoly! Do you want to ";
         this.input = 0;
-        this.interactor = new UseCaseInteractor(new TextFileTranslator(file));
+        this.interactor = new UseCaseInteractor(new LoadFile(file));
         this.currentState = this.interactor.getInitialState();
     }
 
