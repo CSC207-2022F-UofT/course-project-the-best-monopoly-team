@@ -1,6 +1,7 @@
 package Interactors;
 
 import Entities.*;
+import TreeHandlers.AuctionNodeLogic.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -31,11 +32,11 @@ public class GameLogicTest {
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
 
-        GameLogicTree auctionTree = new GameLogicTree("AuctionTree");
-        GameLogicTree lowOption = new GameLogicTree("LowOption");
-        GameLogicTree mediumOption = new GameLogicTree("MediumOption");
-        GameLogicTree highOption = new GameLogicTree("HighOption");
-        GameLogicTree fold = new GameLogicTree("Fold");
+        GameLogicTree auctionTree = new GameLogicTree(new AuctionParentNode());
+        GameLogicTree lowOption = new GameLogicTree(new LowOption());
+        GameLogicTree mediumOption = new GameLogicTree(new MediumOption());
+        GameLogicTree highOption = new GameLogicTree(new HighOption());
+        GameLogicTree fold = new GameLogicTree(new Fold());
 
         auctionTree.setIsSwitchBlock(true);
         auctionTree.addChild(lowOption);
