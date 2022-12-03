@@ -21,7 +21,7 @@ public class EmptyPropertySpace extends MainTreeNodeLogic implements NodeLogic {
         Board board = getBoard();
         GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
-        Property targetProperty = getTargetProperty();
+        Property targetProperty;
 
         State currentState = new State();
         currentState.setId(gameLogicInteractor.getCurrentTree().getName());
