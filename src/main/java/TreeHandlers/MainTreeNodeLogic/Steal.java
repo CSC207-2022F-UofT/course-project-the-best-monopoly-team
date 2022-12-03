@@ -30,8 +30,8 @@ public class Steal extends MainTreeNodeLogic implements NodeLogic {
         //provide options of which players we can steal from
         ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
         playerCopy.remove(currentPlayer);
-        for(int i = 0; i < playerCopy.size(); i++){
-            currentState.addOptions(playerCopy.get(i).getName());
+        for (Player player : playerCopy) {
+            currentState.addOptions(player.getName());
         }
         return currentState;
     }

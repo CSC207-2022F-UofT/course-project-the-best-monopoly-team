@@ -45,6 +45,7 @@ public class Fold extends AuctionTreeNodeLogic implements NodeLogic {
             currentState.setPlayer(playerWon);
             currentState.setBiddingPot(auctionStates[potIndex]);
             currentState.addOptions("Ok");
-        }        return afterLogic(currentState);
+        }
+        return afterLogic(currentState);
     }
 }

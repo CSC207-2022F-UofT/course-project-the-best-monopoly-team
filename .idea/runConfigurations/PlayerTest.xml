@@ -3,7 +3,7 @@
     <module name="course-project-the-best-monopoly-team.test" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="Entities.*" />
+        <option name="PATTERN" value="Interactors.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

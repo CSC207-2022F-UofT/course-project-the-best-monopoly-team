@@ -25,7 +25,7 @@ public class Buy extends MainTreeNodeLogic implements NodeLogic {
         Board board = getBoard();
         GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
-         Property targetProperty = getTargetProperty();
+        Property targetProperty = getTargetProperty();
 
         State currentState = new State();
         currentState.setId(gameLogicInteractor.getCurrentTree().getName());
