@@ -22,7 +22,7 @@ public class StateOutputReader {
      */
     public void initStateHash(){
         try {
-            File stateFile = new File("src/save/states.txt");
+            File stateFile = new File("src/initialoutputs/states.txt");
             Scanner stateFileReader = new Scanner(stateFile);
             while (stateFileReader.hasNextLine()){
                 String stateString = stateFileReader.nextLine();
