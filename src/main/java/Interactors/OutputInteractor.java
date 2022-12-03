@@ -24,6 +24,9 @@ public class OutputInteractor {
      */
     public OutputInteractor(UseCaseInteractor interactor){
         this.output = new Output();
+        StateOutputReader createInitOutput = new StateOutputReader();
+        createInitOutput.initStateHash();
+        this.output.setInitStateHash(createInitOutput.getStateMap());
         this.currentState = interactor.getInitialState();
     }
 
@@ -45,51 +48,67 @@ public class OutputInteractor {
         StringBuilder currString = new StringBuilder();
         switch (state) {
             case "MainTree":
-                currString.append(this.currentState.getPlayer().getName()).append(" It's your turn! What do you want to do? You currently have ")
-                    .append(this.currentState.getPlayer().getMoney()).append(" dollars");
-                this.output.modifyStateOutput("MainTree", currString.toString());
-                currString.setLength(0);
+                updateMainTree();
                 break;
             case "SendTrade":
-                currString.append(currentState.getTradingOpponent().getName()).append(", Incoming trade from player ")
-                        .append(currentState.getPlayer().getName())
-                        .append(" requesting for ").append(currentState.getTradingPlayerProperty().getName())
-                        .append(" in return for ").append(currentState.getCurrentPlayerProperty().getName());
-                this.output.modifyStateOutput("SendTrade", currString.toString());
-                currString.setLength(0);
+                updateSendTrade();
                 break;
             case "BuildProperty":
-                currString.append(currentState.getCurrentPlayerProperty().getHouses()).append(" houses built on this property");
-                this.output.modifyStateOutput("BuildProperty", currString.toString());
-                currString.setLength(0);
+                updateBuildProperty();
                 break;
             case "CallAction":
-                currString.append("You rolled a ").append(currentState.getRoll()).append(currentState.getDescription());
-                this.output.modifyStateOutput("CallAction", currString.toString());
-                currString.setLength(0);
+                updateCallAction();
                 break;
             case "EmptyPropertySpace":
-                currString.append("You rolled a ").append(currentState.getRoll())
-                        .append(" You have landed on ").append(currentState.getCurrentPlayerProperty().getName())
-                        .append(" and no ones owns this. It costs ")
-                        .append(currentState.getCurrentPlayerProperty().getPrice())
-                        .append(" What do you want to do?");
-                this.output.modifyStateOutput("EmptyPropertySpace", currString.toString());
-                currString.setLength(0);
+                updateEmptyPropertySpace();
                 break;
             case "AuctionTree":
-                currString.append(currentState.getPlayer().getName())
-                        .append(", we are bidding on ").append(currentState.getBiddingProperty().getName())
-                        .append(" with the current pot being ").append(currentState.getBiddingPot());
-                this.output.modifyStateOutput("AuctionTree", currString.toString());
-                currString.setLength(0);
+                updateAuctionTree();
                 break;
             case "Fold":
-                currString.append(currentState.getPlayer().getName()).append(" won the auction for ")
-                        .append(currentState.getBiddingPot()).append(" dollars");
-                this.output.modifyStateOutput("Fold", currString.toString());
-                currString.setLength(0);
+                updateFold();
+                break;
         }
+    }
+
+    /**
+     * All the functions below are helper update functions
+     */
+    public void updateMainTree(){
+        String currString = this.currentState.getPlayer().getName() + " It's your turn! What do you want to do? You currently have " +
+                this.currentState.getPlayer().getMoney() + " dollars";
+        this.output.modifyStateOutput("MainTree", currString);
+    }
+
+    public void updateSendTrade(){
+        String currString = currentState.getTradingOpponent().getName() + ", Incoming trade from player " +
+                currentState.getPlayer().getName() + " requesting for " + currentState.getTradingPlayerProperty().getName() +
+                " in return for " + currentState.getCurrentPlayerProperty().getName();
+        this.output.modifyStateOutput("SendTrade", currString);
+    }
+    public void updateBuildProperty(){
+        String currString = currentState.getCurrentPlayerProperty().getHouses() + " houses built on this property";
+        this.output.modifyStateOutput("BuildProperty", currString);
+    }
+
+    public void updateCallAction(){
+        String currString =  "You rolled a " + currentState.getRoll()+ currentState.getDescription();
+        this.output.modifyStateOutput("CallAction", currString);
+    }
+    public void updateEmptyPropertySpace(){
+        String currString = "You rolled a " + currentState.getRoll() + " You have landed on " +
+                currentState.getCurrentPlayerProperty().getName() + " and no ones owns this. It costs " +
+                currentState.getCurrentPlayerProperty().getPrice() + " What do you want to do?";
+        this.output.modifyStateOutput("EmptyPropertySpace", currString);
+    }
+    public void updateAuctionTree(){
+        String currString = currentState.getPlayer().getName() + ", we are bidding on " + currentState.getBiddingProperty().getName() +
+                " with the current pot being " + currentState.getBiddingPot();
+        this.output.modifyStateOutput("AuctionTree", currString);
+    }
+    public void updateFold(){
+        String currString = currentState.getPlayer().getName() + " won the auction for " + currentState.getBiddingPot() + " dollars";
+        this.output.modifyStateOutput("Fold", currString.toString());
     }
 
     /**
