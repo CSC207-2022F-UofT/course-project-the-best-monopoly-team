@@ -9,6 +9,10 @@ import Interface.NodeLogic;
  */
 public class NoProperties extends MainTreeNodeLogic implements NodeLogic {
 
+    public NoProperties() {
+        super("User Has No Properties (Manage Properties)");
+    }
+
     /**
      * This method creates a State object and sets a description showing that there are not properties available and
      * the required option, "Ok", to the State object.
@@ -18,9 +22,8 @@ public class NoProperties extends MainTreeNodeLogic implements NodeLogic {
      */
     @Override
     public State create_state(int input) {
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         currentState.setDescription("You have no properties :(");
         currentState.addOptions("Ok");
 

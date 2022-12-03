@@ -4,9 +4,13 @@ import Entities.State;
 import Interface.NodeLogic;
 
 public class CreateNewGame extends InitialLogic implements NodeLogic {
+    public CreateNewGame() {
+        super("Create New Game");
+    }
+
     @Override
     public State create_state(int input) {
-        State state = beforeLogic();
+        State state;
         //creating the game if confirmed
         if (input == 0) {
             caseInteractor.createGame(true);

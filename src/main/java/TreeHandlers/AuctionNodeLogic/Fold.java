@@ -12,6 +12,11 @@ import java.util.List;
  */
 public class Fold extends AuctionTreeNodeLogic implements NodeLogic {
 
+    public Fold() {
+        super("Fold");
+    }
+
+
     /**
      * This method handles a case where a player folds during an auction. It returns a State object containing
      * information required to continue the auction process.

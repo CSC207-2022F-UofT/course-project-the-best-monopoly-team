@@ -9,6 +9,10 @@ import Interface.NodeLogic;
  */
 public class EmptyPropertySpace extends MainTreeNodeLogic implements NodeLogic {
 
+    public EmptyPropertySpace() {
+        super("Property Unowned");
+    }
+
     /**
      * This method creates a State object containing information on the response and options from rolling on an empty
      * property space.
@@ -19,12 +23,11 @@ public class EmptyPropertySpace extends MainTreeNodeLogic implements NodeLogic {
     @Override
     public State create_state(int input) {
         Board board = getBoard();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
         Property targetProperty;
 
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //gets the response and options from rolling on an empty property
         currentState.setRoll(diceRoll);
         targetProperty = (Property) board.getCell(currentPlayer.getPosition());

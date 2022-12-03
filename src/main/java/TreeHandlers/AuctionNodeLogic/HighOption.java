@@ -8,6 +8,10 @@ import Interface.NodeLogic;
  */
 public class HighOption extends AuctionTreeNodeLogic implements NodeLogic {
 
+    public HighOption() {
+        super("High Option");
+    }
+
     /**
      * This method a State object containing necessary information after the high bid is attempted.
      * @param input An integer representing the user's input. This parameter will not be used for this method.

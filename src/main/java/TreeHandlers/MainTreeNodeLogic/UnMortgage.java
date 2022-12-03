@@ -5,11 +5,15 @@ import Interactors.GameLogic;
 import Interface.NodeLogic;
 
 public class UnMortgage extends MainTreeNodeLogic implements NodeLogic {
+    public UnMortgage() {
+        super("Un-Mortgage property");
+    }
+
     @Override
     public State create_state(int input) {
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
+
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //TODO ADD FUNCTIONALITY
 
         return currentState;

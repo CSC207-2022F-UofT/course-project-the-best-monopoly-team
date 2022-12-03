@@ -9,6 +9,10 @@ import Interface.NodeLogic;
  */
 public class ConfirmationUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    public ConfirmationUseCase() {
+        super("Confirm Action");
+    }
+
     /**
      * This method returns a State object either containing a State object representing the end of a tree path or one
      * that aids in allowing the user to confirm their actions.

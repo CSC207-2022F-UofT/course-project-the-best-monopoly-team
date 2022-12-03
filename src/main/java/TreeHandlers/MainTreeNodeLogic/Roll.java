@@ -9,6 +9,10 @@ import Interface.NodeLogic;
  */
 public class Roll extends MainTreeNodeLogic implements NodeLogic {
 
+    public Roll() {
+        super("Roll The Dice");
+    }
+
     /**
      * This method creates a State object and conducts the appropriate actions related to the current state of the game,
      * and sets up the tree objects that are required due to the movement of the game.
@@ -22,7 +26,7 @@ public class Roll extends MainTreeNodeLogic implements NodeLogic {
         Player currentPlayer = getCurrentPlayer();
 
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         if (mainStates[1] == 0) {
             //roll the dice and update the position
             diceRoll = currentPlayer.rollDice(0);

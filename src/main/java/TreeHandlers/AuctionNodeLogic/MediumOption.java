@@ -8,6 +8,10 @@ import Interface.NodeLogic;
  */
 public class MediumOption extends AuctionTreeNodeLogic implements NodeLogic {
 
+    public MediumOption() {
+        super("Medium Option");
+    }
+
     /**
      * This method a State object containing necessary information after the medium bid is attempted.
      * @param input An integer representing the user's input. This parameter will not be used for this method.

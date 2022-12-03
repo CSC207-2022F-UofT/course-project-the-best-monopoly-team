@@ -10,6 +10,10 @@ import Interface.NodeLogic;
 
 public class EndTurnUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    public EndTurnUseCase() {
+        super("End Turn");
+    }
+
     /**
      * This method creates a State object that either helps to tell the user that it cannot end its turn or changes
      * the current player and makes the state go back to normal.
@@ -20,10 +24,9 @@ public class EndTurnUseCase extends MainTreeNodeLogic implements NodeLogic {
     public State create_state(int input){
         State currentState = new State();
 
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
 
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //end the turn if the person is not in debt
         if (currentPlayer.getMoney()  >= 0){
             //changing the player and turning the state back to normal

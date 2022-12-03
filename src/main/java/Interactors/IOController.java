@@ -76,33 +76,33 @@ public class IOController {
     public String stateToString(State state){
         StringBuilder outputString = new StringBuilder();
         switch (state.getId()){
-            case "InitialMenu":
+            case "Initial Menu Parent Node":
                 outputString.append("Welcome to Monopoly++, Would you like to do?");
                 break;
-            case "NewGame":
+            case "New Game":
                 outputString.append("What mode would you like to play?");
                 break;
-            case "ChooseGameMode":
+            case "Choose Game Mode":
                 outputString.append("How many players");
                 break;
-            case "NumberOfPlayers":
+            case "Number of Players":
                 outputString.append("How many rounds? ");
                 break;
-            case "GameLength":
+            case "Game Length":
                 outputString.append("Create the game?");
                 break;
-            case "CreateNewGame":
+            case "Create New Game":
                 //Produces no output
                 break;
-            case "LoadGame":
+            case "Load Game":
                 outputString.append("What save do you want to load ");
                 break;
-            case "ChooseSave":
+            case "Choose Save":
                 outputString.append("Confirm the load? ");
                 break;
-            case "CreateLoadedGame":
+            case "Create Loaded Game":
                 break;
-            case "MainTree":
+            case "Main Tree Parent Node":
                 outputString.append(currentState.getPlayer().getName())
                         .append(" It's your turn! What do you want to do? You currently have ")
                         .append(currentState.getPlayer().getMoney()).append(" dollars");
@@ -110,63 +110,63 @@ public class IOController {
             case "Trade":
                 outputString.append("Who do you want to trade with? ");
                 break;
-            case "PickPlayer":
+            case "Pick Player (Trade)":
                 outputString.append("What property do you want from the player? ");
                 break;
-            case "NothingToTrade":
+            case "Trader/Tradee Has No Properties":
                 outputString.append("Trade cannot be done; one of you have no properties");
                 break;
-            case "PickItemOp":
+            case "Pick Item Of Opponent":
                 outputString.append("What property are you willing to trade? ");
                 break;
-            case "PickItemSelf":
+            case "Pick Item Of Self":
                 outputString.append("Send the trade?");
                 break;
-            case "SendTrade":
+            case "Send The Trade":
                 outputString.append(currentState.getTradingOpponent().getName()).append(", Incoming trade from player ")
                         .append(currentState.getPlayer().getName())
                         .append(" requesting for ").append(currentState.getTradingPlayerProperty().getName())
                         .append(" in return for ").append(currentState.getCurrentPlayerProperty().getName());
                 break;
-            case "ManageProperty":
+            case "Manage Property":
                 outputString.append("What property do you want to manage? ");
                 break;
-            case "NoProperties":
+            case "User Has No Properties (Manage Properties)":
                 outputString.append("You have no properties :(");
                 break;
-            case "SelectProperty":
+            case "Select The Property (Manage Property)":
                 outputString.append("What do you want to do with the property? ");
                 break;
-            case "Mortgage":
+            case "Mortgage Property":
                 outputString.append("Are you sure you want to mortgage? ");
                 break;
-            case "UnMortgage":
+            case "Un-Mortgage property":
                 //TODO implement this
                 break;
-            case "BuildProperty":
+            case "Build House/Hotel":
                 outputString.append(currentState.getCurrentPlayerProperty().getHouses()).append(" houses built on this property");
                 break;
-            case "Roll":
+            case "Roll The Dice":
                 //Produces no output
                 break;
-            case "AlreadyRolled":
+            case "Already Rolled":
                 outputString.append("You already rolled this round! ");
                 break;
-            case "CallAction":
+            case "Perform Action":
                 outputString.append("You rolled a ").append(currentState.getRoll()).append(currentState.getDescription());
                 break;
-            case "EmptyPropertySpace":
+            case "Property Unowned":
                 outputString.append("You rolled a ").append(currentState.getRoll())
                         .append(" You have landed on ").append(currentState.getCurrentPlayerProperty().getName())
                         .append(" and no ones owns this. It costs ")
                         .append(currentState.getCurrentPlayerProperty().getPrice())
                         .append(" What do you want to do?");
                 break;
-            case "Buy":
+            case "Buy Property":
                 //Produces no output
                 break;
             case "Auction":
-            case "AuctionTree":
+            case "Auction Tree Parent Node":
                 outputString.append(currentState.getPlayer().getName())
                         .append(", we are bidding on ").append(currentState.getBiddingProperty().getName())
                         .append(" with the current pot being ").append(currentState.getBiddingPot());
@@ -174,50 +174,50 @@ public class IOController {
             case "Steal":
                 outputString.append("What player do you want to steal from?");
                 break;
-            case "ChoosePlayer":
+            case "Choose Player (Steal)":
                 outputString.append(currentState.getDescription());
                 break;
-            case "EndTurn":
+            case "End Turn":
                 outputString.append("You can't end your turn, you have negative money");
                 break;
-            case "SettingsMenu":
+            case "Settings Menu":
                 outputString.append("Welcome to the settings menu!");
                 break;
-            case "ExitGame":
+            case "Exit Game":
                 outputString.append("Are you sure you want to exit?");
                 break;
-            case "SaveGame":
+            case "Save The Game":
                 outputString.append("Game saved!");
                 break;
             case "Bankruptcy":
                 outputString.append("Confirm bankruptcy?");
                 break;
-            case "Confirmation":
+            case "Confirm Action":
                 //Produces no output
                 break;
-            case "Information":
+            case "Information Node":
                 //Produces no output
                 break;
-            case "LowOption":
+            case "Low Option":
                 //Produces no output
                 break;
-            case "MediumOption":
+            case "Medium Option":
                 //Produces no output
                 break;
-            case "HighOption":
+            case "High Option":
                 //Produces no output
                 break;
             case "Fold":
                 outputString.append(currentState.getPlayer().getName()).append(" won the auction for ")
                         .append(currentState.getBiddingPot()).append(" dollars");
                 break;
-            case "TradeTree":
+            case "Trading Parent Node":
                 //Produces no output
                 break;
-            case "AcceptTrade":
+            case "Accept The Trade":
                 outputString.append("Trade success");
                 break;
-            case "DeclineTrade":
+            case "Decline The Trade":
                 outputString.append("Trade failure");
                 break;
         }

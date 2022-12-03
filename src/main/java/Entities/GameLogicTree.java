@@ -1,23 +1,22 @@
 package Entities;
-import java.util.ArrayList;
+import Interface.NodeLogic;
 import java.util.List;
 
 public class GameLogicTree extends MenuTree{
     private boolean didRoll;
     private boolean switchBlock = false;
-
     private String prompt;
-
     private State previousState;
+    private NodeLogic useCase;
 
-    public GameLogicTree(String name) {
+    public GameLogicTree(NodeLogic useCase) {
         didRoll = false;
-        this.name = name;
+  //      this.name = name;
+        this.useCase = useCase;
     }
-    public GameLogicTree(String name, String prompt) {
-        didRoll = false;
-        this.name = name;
-        this.prompt = prompt;
+
+    public NodeLogic getUseCase(){
+        return useCase;
     }
     public void setPrompt(String prompt){
         this.prompt = prompt;
@@ -48,10 +47,10 @@ public class GameLogicTree extends MenuTree{
         return this.children;
     }
 
-    @Override
-    public String getName() {
-        return name;
-    }
+//    @Override
+//    public String getName() {
+//        return name;
+//    }
 
     @Override
     public void addChild(MenuTree child) {

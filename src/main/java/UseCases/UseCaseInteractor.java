@@ -8,7 +8,7 @@ import Entities.State;
 import Interactors.DataAccess;
 import Interactors.GameCreation;
 import Interactors.GameLogic;
-import UseCases.InitialNodeLogic.InitialLogic;
+import UseCases.InitialNodeLogic.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class UseCaseInteractor{
 
     private GameLogicTree currentTree;
     private boolean menuTreeActive = true;
-    private InitialTreeHandler treeHandler;
+ //   private InitialTreeHandler treeHandler;
     private GameLogic logicInteractor;
     private DataAccess dataAccess;
     private GameCreation gameCreation;
@@ -33,8 +33,7 @@ public class UseCaseInteractor{
     public UseCaseInteractor(DataAccess dataAccess){
         this.dataAccess = dataAccess;
         createTrees();
-        currentState = getInitialState();
-        treeHandler = new InitialTreeHandler(this);
+  //    treeHandler = new InitialTreeHandler(this);
         this.gameCreation = new GameCreation();
         InitialLogic.setCaseInteractor(this);
     }
@@ -62,7 +61,7 @@ public class UseCaseInteractor{
                 currentTree = (GameLogicTree) currentTree.getChildren().get(0);
             }
             //performs logic when inside nodes
-            currentState = treeHandler.getUseCase().create_state(input);
+            currentState = currentTree.getUseCase().create_state(input);
         }
         else{
             //forwards input to GameLogic once the game has started
@@ -92,15 +91,15 @@ public class UseCaseInteractor{
      */
     public void createTrees(){
         //creating first tree
-        GameLogicTree initialMenu = new GameLogicTree("InitialMenu", "Welcome to Monopoly++, Would you like to: ");
-        GameLogicTree newGame = new GameLogicTree("NewGame");
-        GameLogicTree chooseGameMode = new GameLogicTree("ChooseGameMode");
-        GameLogicTree numPlayers = new GameLogicTree("NumberOfPlayers");
-        GameLogicTree gameLength = new GameLogicTree("GameLength");
-        GameLogicTree createNewGame = new GameLogicTree("CreateNewGame");
-        GameLogicTree loadGame = new GameLogicTree("LoadGame");
-        GameLogicTree chooseSave = new GameLogicTree("ChooseSave");
-        GameLogicTree createGame = new GameLogicTree("CreateLoadedGame");
+        GameLogicTree initialMenu = new GameLogicTree(new InitialParentNode());
+        GameLogicTree newGame = new GameLogicTree(new NewGame());
+        GameLogicTree chooseGameMode = new GameLogicTree(new ChooseGameMode());
+        GameLogicTree numPlayers = new GameLogicTree( new NumberOfPlayers());
+        GameLogicTree gameLength = new GameLogicTree(new GameLength());
+        GameLogicTree createNewGame = new GameLogicTree(new CreateNewGame());
+        GameLogicTree loadGame = new GameLogicTree(new LoadGame());
+        GameLogicTree chooseSave = new GameLogicTree(new ChooseSave());
+        GameLogicTree createLoadedGame = new GameLogicTree(new CreateLoadedGame());
 
         //creating the tree structure
         gameLength.addChild(createNewGame);
@@ -109,7 +108,7 @@ public class UseCaseInteractor{
         chooseGameMode.addChild(numPlayers);
         newGame.addChild(chooseGameMode);
 
-        chooseSave.addChild(createGame);
+        chooseSave.addChild(createLoadedGame);
         loadGame.addChild(chooseSave);
 
         initialMenu.addChild(newGame);
@@ -129,19 +128,21 @@ public class UseCaseInteractor{
      * @return state object
      */
     public State getInitialState(){
-        State currentState = new State();
+        //State currentState = new State();
 
         //makes the currentTree the root
         currentTree = (GameLogicTree) currentTree.getMaxParent();
 
-        //mutates the state object with all of its properties
-        currentState.setId(currentTree.getName());
-        currentState.setDescription(currentTree.getPrompt());
-        for (MenuTree tree: currentTree.getChildren()){
-            currentState.addOptions(tree.getName());
-        }
-        currentTree.setPreviousState(currentState);
-        return currentState;
+        return currentTree.getUseCase().create_state(0);
+
+//        //mutates the state object with all of its properties
+//        currentState.setId(((InitialLogic)currentTree.getUseCase()).getName());
+//        currentState.setDescription(currentTree.getPrompt());
+//        for (MenuTree tree: currentTree.getChildren()){
+//            currentState.addOptions(((InitialLogic)((GameLogicTree)tree).getUseCase()).getName());
+//        }
+//        currentTree.setPreviousState(currentState);
+//        return currentState;
     }
 
 
@@ -190,8 +191,8 @@ public class UseCaseInteractor{
         try {
             ArrayList<String[]> newProperties = this.dataAccess.loadProperties();
             ArrayList<String> playerNames = new ArrayList<>();
-            InitialLogic temp = new InitialLogic();
-            for (int i = 0; i < temp.getSelectedOptions().get("NumberOfPlayers") + 2; i++) {
+            InitialLogic temp = new InitialLogic("Temp");
+            for (int i = 0; i < temp.getSelectedOptions().get("NumOfPlayers") + 2; i++) {
                 playerNames.add("Player " + i);
             }
             Board newGame = this.gameCreation.createNewGame(playerNames, newProperties);

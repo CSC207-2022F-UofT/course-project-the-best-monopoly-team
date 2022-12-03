@@ -12,6 +12,10 @@ import java.util.HashMap;
  * inventory.
  */
 public class PickItemOp extends MainTreeNodeLogic implements NodeLogic {
+    public PickItemOp() {
+        super("Pick Item Of Opponent");
+    }
+
     /** This method creates a State object and adds the selected inventory item belonging to a targeted opponent to the
      * State object and adds the properties of the current player as options to be chosen from later.
      * @param input An integer representing the index of the targeted opponent's property.
@@ -19,16 +23,14 @@ public class PickItemOp extends MainTreeNodeLogic implements NodeLogic {
      */
     @Override
     public State create_state(int input) {
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
         HashMap<String, Integer> selectedOptions = getSelectedOptions();
 
-        GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
         currentState.setBackEnable(true);
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //the input corresponds to the index of the targeted opponent's property inventory
-        selectedOptions.put(currentTree.getName(), input);
+        selectedOptions.put("PickItemOp", input);
 
         //provide item options from the current player's inventory
         ArrayList<Property> currentPlayerInventory = currentPlayer.getProperties();

@@ -11,6 +11,10 @@ import java.util.HashMap;
  */
 public class Mortgage extends MainTreeNodeLogic implements NodeLogic {
 
+    public Mortgage() {
+        super("Mortgage Property");
+    }
+
     /**
      * This method creates a State object and updates it based on whether the current player chose to mortgage the
      * property or not. It will mortgage the property if the current player chooses to.
@@ -28,10 +32,10 @@ public class Mortgage extends MainTreeNodeLogic implements NodeLogic {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
 
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         if (mainStates[0] == 1) {
             //the player chooses to mortgage the property
-            Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("SelectProperty"));
+            Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("PropertySelected"));
             currentPlayer.mortgage(targetProperty);
             mainStates[0] = 0;
             currentState = afterBottomNode();

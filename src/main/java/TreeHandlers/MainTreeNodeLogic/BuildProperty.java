@@ -13,6 +13,10 @@ import java.util.HashMap;
  */
 public class BuildProperty extends MainTreeNodeLogic implements NodeLogic {
 
+    public BuildProperty() {
+        super("Build House/Hotel");
+    }
+
     /**
      * This method builds a house on a chosen property and returns a State object containing the necessary information
      * to continue the game after the house is built.
@@ -23,12 +27,11 @@ public class BuildProperty extends MainTreeNodeLogic implements NodeLogic {
     @Override
     public State create_state(int input) {
         State currentState = new State();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
         HashMap<String, Integer> selectedOptions = getSelectedOptions();
 
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
-        Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("SelectProperty"));
+        currentState.setId(getName());
+        Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("PropertySelected"));
 
         //builds a house on the chosen property
         currentPlayer.buildHouse(targetProperty,1);

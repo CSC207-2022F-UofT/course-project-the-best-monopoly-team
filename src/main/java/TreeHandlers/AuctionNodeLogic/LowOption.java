@@ -7,6 +7,10 @@ import Interface.NodeLogic;
  * This class represents the use case when a player chooses to bid low in an auction.
  */
 public class LowOption extends AuctionTreeNodeLogic implements NodeLogic {
+    public LowOption() {
+        super("Low Option");
+    }
+
     /**
      * This method a State object containing necessary information after the low bid is attempted.
      * @param input An integer representing the user's input. This parameter will not be used for this method.

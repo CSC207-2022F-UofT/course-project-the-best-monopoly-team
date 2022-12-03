@@ -12,6 +12,10 @@ import java.util.HashMap;
  */
 public class PickPlayer extends MainTreeNodeLogic implements NodeLogic{
 
+    public PickPlayer() {
+        super("Pick Player (Trade)");
+    }
+
     /**
      * This method creates a State object and adds the selected player to the State object. It will also add options to
      * the State object. These options are the items from the inventory of the selected player.
@@ -25,9 +29,8 @@ public class PickPlayer extends MainTreeNodeLogic implements NodeLogic{
         Player currentPlayer = getCurrentPlayer();
         HashMap<String, Integer> selectedOptions = getSelectedOptions();
 
-        GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
-        currentState.setId(currentTree.getName());
+        currentState.setId(getName());
         currentState.setBackEnable(true);
         //adds the chosen player index in selected options (who the current player wants to trade with)
 
@@ -39,7 +42,7 @@ public class PickPlayer extends MainTreeNodeLogic implements NodeLogic{
             input += 1;
         }
         //getting the player the user wants to trade with
-        selectedOptions.put(currentTree.getName(), input);
+        selectedOptions.put("PickPlayer", input);
 
         //provide item options from the inventory of the selected player
         Player selectedPlayer = board.getPlayers().get(input);

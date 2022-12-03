@@ -9,6 +9,10 @@ import Interface.NodeLogic;
  */
 public class AcceptTrade extends TradingTreeNodeLogic implements NodeLogic {
 
+    public AcceptTrade() {
+        super("Accept The Trade");
+    }
+
     /**
      * This method handles the trade when it is accepted and moves their property items from one player to another.
      * It returns a State object containing an "Ok" option and all the necessary information to continue.
@@ -25,9 +29,9 @@ public class AcceptTrade extends TradingTreeNodeLogic implements NodeLogic {
         State currentState = new State();
         Player firstTrader = board.getPlayers().get(returnPlayerIndex);
         Player secondTrader = getCurrentPlayer();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         Property secondTraderProperty = secondTrader.getProperties().get(getSelectedOptions().get("PickItemOp"));
-        Property firstTraderProperty = firstTrader.getProperties().get(getSelectedOptions().get("PickPlayer"));
+        Property firstTraderProperty = firstTrader.getProperties().get(getSelectedOptions().get("PickItemSelf"));
 
         // swap the asset owners
         secondTraderProperty.setOwner(firstTrader);

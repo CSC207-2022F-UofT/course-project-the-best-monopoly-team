@@ -5,13 +5,16 @@ import Interactors.GameLogic;
 import Interface.NodeLogic;
 
 public class CallAction extends MainTreeNodeLogic implements NodeLogic {
+    public CallAction() {
+        super("Perform Action");
+    }
+
     @Override
     public State create_state(int input) {
         State currentState = new State();
         String answer = getAnswer();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
 
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //gets the response from rolling on a space
         currentState.setRoll(diceRoll);
         currentState.setDescription(answer);

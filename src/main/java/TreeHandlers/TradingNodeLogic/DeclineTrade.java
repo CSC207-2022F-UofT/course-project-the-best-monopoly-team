@@ -11,6 +11,10 @@ import Interface.NodeLogic;
  */
 public class DeclineTrade extends TradingTreeNodeLogic implements NodeLogic {
 
+    public DeclineTrade() {
+        super("Decline The Trade");
+    }
+
     /**
      * This method reverts the game to its previous state before the trade was attempted. It returns a State object
      * containing information to continue the game.
@@ -26,7 +30,7 @@ public class DeclineTrade extends TradingTreeNodeLogic implements NodeLogic {
         State currentState = new State();
         Player firstTrader = board.getPlayers().get(returnPlayerIndex);
 
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         // swap control back to the original player
         setCurrentPlayer(firstTrader);
         //goes back to initial tree

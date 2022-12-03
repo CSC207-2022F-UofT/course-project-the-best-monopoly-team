@@ -13,6 +13,10 @@ import java.util.ArrayList;
  */
 public class ChoosePlayerUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    public ChoosePlayerUseCase() {
+        super("Choose Player (Steal)");
+    }
+
     /**
      * This method creates makes the current player steal from a specific player specified by the input parameter. It
      * then returns a State object containing information about the steal attempt and information required to continue
@@ -23,12 +27,11 @@ public class ChoosePlayerUseCase extends MainTreeNodeLogic implements NodeLogic 
      */
     public State create_state(int input){
         Board board = getBoard();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
 
         ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //Steal from the target player
         playerCopy = new ArrayList<Player>(board.getPlayers());
         playerCopy.remove(currentPlayer);

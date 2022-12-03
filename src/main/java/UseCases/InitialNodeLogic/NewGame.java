@@ -4,6 +4,10 @@ import Entities.State;
 import Interface.NodeLogic;
 
 public class NewGame extends InitialLogic implements NodeLogic {
+    public NewGame() {
+        super("New Game");
+    }
+
     @Override
     public State create_state(int input) {
         State state = beforeLogic();

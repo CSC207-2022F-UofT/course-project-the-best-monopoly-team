@@ -12,6 +12,10 @@ import Interface.NodeLogic;
  */
 public class Buy extends MainTreeNodeLogic implements NodeLogic {
 
+    public Buy() {
+        super("Buy Property");
+    }
+
     /**
      * This method goes through the steps for the current player to buy the house if the current player has sufficient
      * funds and returns a State object with the necessary information on the game. If the purchase was successful, it
@@ -23,12 +27,11 @@ public class Buy extends MainTreeNodeLogic implements NodeLogic {
     @Override
     public State create_state(int input) {
         Board board = getBoard();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
          Property targetProperty;
 
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //player buys the property that the player lands on
                 targetProperty = (Property) board.getCell(currentPlayer.getPosition());
 

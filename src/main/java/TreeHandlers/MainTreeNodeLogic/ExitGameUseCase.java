@@ -10,6 +10,10 @@ import Interface.NodeLogic;
 
 public class ExitGameUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    public ExitGameUseCase() {
+        super("Exit Game");
+    }
+
     /**
      * This method creates a State
      * @param input An integer representing the user's input. However, this parameter is not used for this method.
@@ -21,7 +25,7 @@ public class ExitGameUseCase extends MainTreeNodeLogic implements NodeLogic {
 
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         if (mainStates[0] == 1) {
             mainStates[0]= 0;
             currentState.setExitToMenu(true);

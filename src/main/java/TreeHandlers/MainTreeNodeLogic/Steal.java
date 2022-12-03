@@ -11,6 +11,10 @@ import java.util.ArrayList;
  */
 public class Steal extends MainTreeNodeLogic implements NodeLogic {
 
+    public Steal() {
+        super("Steal");
+    }
+
     /**
      * This method creates a States object and adds all the possible list of players that the current player can steal
      * from as options. Then it returns the State object.
@@ -20,19 +24,11 @@ public class Steal extends MainTreeNodeLogic implements NodeLogic {
      */
     @Override
     public State create_state(int input) {
-
-        Board board = getBoard();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
-        Player currentPlayer = getCurrentPlayer();
         State currentState = new State();
         currentState.setBackEnable(true);
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //provide options of which players we can steal from
-        ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
-        playerCopy.remove(currentPlayer);
-        for (Player player : playerCopy) {
-            currentState.addOptions(player.getName());
-        }
+        addPlayersState(currentState);
         return currentState;
     }
 }

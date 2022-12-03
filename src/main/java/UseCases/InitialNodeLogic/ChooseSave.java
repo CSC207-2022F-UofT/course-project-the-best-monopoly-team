@@ -4,11 +4,15 @@ import Entities.State;
 import Interface.NodeLogic;
 
 public class ChooseSave extends InitialLogic implements NodeLogic {
+    public ChooseSave() {
+        super("Choose Save");
+    }
+
     @Override
     public State create_state(int input) {
         State state = beforeLogic();
         //getting the user's saved game choice
-        selectedOptions.put(currentTree.getName(),input);
+        selectedOptions.put("SaveChoice",input);
 
         //options associated with the next node
         state.addOptions("Yes");

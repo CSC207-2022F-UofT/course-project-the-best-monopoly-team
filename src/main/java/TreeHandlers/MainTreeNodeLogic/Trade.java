@@ -12,6 +12,10 @@ import java.util.ArrayList;
  */
 public class Trade extends MainTreeNodeLogic implements NodeLogic {
 
+    public Trade() {
+        super("Trade");
+    }
+
     /**
      * This method creates a State object and adds all the possible list of player that the current player can trade
      * with into the State object that was created and returns it.
@@ -21,19 +25,12 @@ public class Trade extends MainTreeNodeLogic implements NodeLogic {
      */
     @Override
     public State create_state(int input) {
-
-        Board board = getBoard();
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
-        Player currentPlayer = getCurrentPlayer();
         State currentState = new State();
         currentState.setBackEnable(true);
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //provide a list of all possible players considering the current player is not an option
-        ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
-        playerCopy.remove(currentPlayer);
-        for(int i = 0; i < playerCopy.size(); i++){
-            currentState.addOptions(playerCopy.get(i).getName());
-        }
+        addPlayersState(currentState);
         return currentState;
+
     }
 }

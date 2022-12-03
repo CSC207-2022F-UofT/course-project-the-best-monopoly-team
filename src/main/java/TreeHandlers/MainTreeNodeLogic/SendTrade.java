@@ -3,6 +3,7 @@ package TreeHandlers.MainTreeNodeLogic;
 import Entities.*;
 import Interactors.GameLogic;
 import Interface.NodeLogic;
+import org.w3c.dom.Node;
 
 import java.util.HashMap;
 
@@ -11,6 +12,10 @@ import java.util.HashMap;
  */
 
 public class SendTrade extends MainTreeNodeLogic implements NodeLogic {
+
+    public SendTrade() {
+        super("Send The Trade");
+    }
 
     /**
      * This method creates a State
@@ -27,7 +32,7 @@ public class SendTrade extends MainTreeNodeLogic implements NodeLogic {
 
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         if (input == 0) {
             Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
             currentState.setTradingOpponent(tradingOpponent);

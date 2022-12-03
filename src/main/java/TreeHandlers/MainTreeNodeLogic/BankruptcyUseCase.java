@@ -11,6 +11,10 @@ import java.util.ArrayList;
  */
 public class BankruptcyUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    public BankruptcyUseCase() {
+        super("Bankruptcy");
+    }
+
     /**
      * This method creates a State and returns it. The State object either contains options for confirmation or be one
      * representing the end of a tree path. The method also disconnects the bankrupt player from the game.
@@ -24,7 +28,7 @@ public class BankruptcyUseCase extends MainTreeNodeLogic implements NodeLogic {
         Player currentPlayer = getCurrentPlayer();
         Board board = getBoard();
 
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         if (mainStates[0] == 1) {
             mainStates[0] = 0;

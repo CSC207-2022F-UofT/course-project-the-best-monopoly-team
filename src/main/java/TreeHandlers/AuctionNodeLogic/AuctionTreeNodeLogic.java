@@ -13,14 +13,16 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
     final int LOW_OPTION = 20;
     final int MEDIUM_OPTION = 80;
     final int HIGH_OPTION = 160;
-
     static int[] auctionStates;
     static Player playerWon;
     static Property biddingProperty;
     static int potIndex;
     static int currentPlayerIndex;
     static int auctionComplete = -1;
-    public AuctionTreeNodeLogic(){}
+
+    public AuctionTreeNodeLogic(String name){
+        super(name);
+    }
 
     public static void array_init(int playerLength){
         auctionStates = new int[playerLength + 1];
@@ -28,26 +30,13 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
 
 
 
-    /**
-     * Gets the current state object of the tree when the auction is not yet complete
-     * @return a state object representing the program
-     */
-    public State getState(){
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
-        Player currentPlayer = getCurrentPlayer();
-
-        State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
-        currentState.setPlayer(currentPlayer);
-        currentState.setDescription(currentPlayer.getName());
-        currentState.addOptions(""+LOW_OPTION);
-        currentState.addOptions(""+MEDIUM_OPTION);
-        currentState.addOptions(""+HIGH_OPTION);
-        currentState.addOptions("Fold");
-        currentState.setBiddingPot(auctionStates[potIndex]);
-        currentState.setBiddingProperty(biddingProperty);
-        return currentState;
-    }
+//    /**
+//     * Gets the current state object of the tree when the auction is not yet complete
+//     * @return a state object representing the program
+//     */
+//    public State getState(){
+//
+//    }
     public State beforeLogic(){
         State currentState = new State();
         GameLogic gameLogicInteractor = getGameLogicInteractor();
@@ -56,7 +45,7 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
         do {
             changePlayers();
         }while (auctionStates[getCurrentPlayerIndex()] == 1);
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(((GeneralGameLogic)gameLogicInteractor.getCurrentTree().getUseCase()).getName());
         return currentState;
     }
 
@@ -65,7 +54,7 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
         GameLogic gameLogicInteractor = getGameLogicInteractor();
         if (auctionComplete == -1){
             gameLogicInteractor.setCurrentTreeToMaxParent();
-            currentState = getState();
+            currentState = gameLogicInteractor.getCurrentState();
         }
         return currentState;
     }

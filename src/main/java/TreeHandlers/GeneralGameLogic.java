@@ -2,8 +2,11 @@ package TreeHandlers;
 
 import Entities.*;
 import Interactors.GameLogic;
+import Interface.NodeLogic;
 import TreeHandlers.AuctionNodeLogic.AuctionTreeNodeLogic;
+import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -22,6 +25,11 @@ public class GeneralGameLogic {
     static GameLogicTree returnTree;
     static String answer;
     static GameLogicTree confirmationReturn;
+
+    private String name;
+    public GeneralGameLogic(String name){
+        this.name = name;
+    }
 
 
     public void setAnswer(String answer1){
@@ -86,22 +94,19 @@ public class GeneralGameLogic {
      * @return state object
      */
     public State getCurrentState(){
-        State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
-        //mutates the state object with all of its properties
-        if (gameLogicInteractor.getCurrentTreeID() == 0) {
-            //object mutation when player is transversing through the main tree
-            currentState.setId(gameLogicInteractor.getCurrentTree().getName());
-            currentState.setDescription(currentPlayer.getName() + " " + gameLogicInteractor.getCurrentTree().getPrompt() + " You currently " +
-                    "have " + currentPlayer.getMoney() + " dollars");
-            currentState.setPlayer(currentPlayer);
-            addSwitchOptions(currentState);
-        }
-        else {
-            //state return when player is transversing through the auction tree
-            AuctionTreeNodeLogic temp = new AuctionTreeNodeLogic();
-            return temp.getState();
-        }
+        State currentState = gameLogicInteractor.getCurrentTree().getUseCase().create_state(0);
+//        //mutates the state object with all of its properties
+//        if (gameLogicInteractor.getCurrentTreeID() == 0) {
+//            //object mutation when player is transversing through the main tree
+//
+//            return currentTree.getUseCase().create_state(0);
+//
+//        }
+//        else {
+//            //state return when player is transversing through the auction tree
+//            AuctionTreeNodeLogic temp = new AuctionTreeNodeLogic("Temp");
+//            return temp.getState();
+//        }
         //mutating the state to have memory of its state, useful for backwards transversal
         gameLogicInteractor.getCurrentTree().setPreviousState(currentState);
         return currentState;
@@ -113,7 +118,8 @@ public class GeneralGameLogic {
      */
     public void addSwitchOptions(State currentState){
         for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
-            currentState.addOptions(tree.getName());
+
+            currentState.addOptions(((GeneralGameLogic)((GameLogicTree)tree).getUseCase()).getName());
         }
     }
 
@@ -204,6 +210,17 @@ public class GeneralGameLogic {
     public State afterBottomNode(){
         gameLogicInteractor.setCurrentTreeToMaxParent();
         return getCurrentState();
+    }
+    public void addPlayersState(State currentState){
+        ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
+        playerCopy.remove(currentPlayer);
+        for(int i = 0; i < playerCopy.size(); i++){
+            currentState.addOptions(playerCopy.get(i).getName());
+        }
+
+    }
+    public String getName() {
+        return name;
     }
 
 }

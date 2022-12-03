@@ -11,6 +11,10 @@ import java.util.HashMap;
  * mortgaged, un-mortgaged, or have a house built on it.
  */
 public class SelectProperty extends MainTreeNodeLogic implements NodeLogic {
+    public SelectProperty() {
+        super("Select The Property (Manage Property)");
+    }
+
     /**
      * This method creates a State object and adds the current player's selected option for which property it wants to
      * manage and adds the options to mortgage, un-mortgage, and to build a house to the State object.
@@ -19,15 +23,13 @@ public class SelectProperty extends MainTreeNodeLogic implements NodeLogic {
      */
     @Override
     public State create_state(int input) {
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         HashMap<String, Integer> selectedOptions = getSelectedOptions();
         State currentState = new State();
-        GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         currentState.setBackEnable(true);
 
         //Case property selected (adds the property index)
-        selectedOptions.put(currentTree.getName(), input);
+        selectedOptions.put("PropertySelected", input);
 
         //the player chooses what to do to the property
         currentState.addOptions("Mortgage");

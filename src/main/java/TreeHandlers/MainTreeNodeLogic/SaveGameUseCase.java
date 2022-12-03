@@ -10,6 +10,10 @@ import Interface.NodeLogic;
  */
 public class SaveGameUseCase extends MainTreeNodeLogic implements NodeLogic {
 
+    public SaveGameUseCase() {
+        super("Save The Game");
+    }
+
     /**
      * This method returns a State object containing the option to confirm the saving of the game and sets up the State
      * object with to prepare for the saving of the game.
@@ -19,11 +23,9 @@ public class SaveGameUseCase extends MainTreeNodeLogic implements NodeLogic {
      */
     public State create_state(int input){
 
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
-
         State currentState = new State();
         //options for saving the game
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         currentState.addOptions("Ok");
         //TODO: make this option save the game in use case interactor
         currentState.setSaveGame(true);

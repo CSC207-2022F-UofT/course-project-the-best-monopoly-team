@@ -9,6 +9,10 @@ import Interface.NodeLogic;
  */
 public class AlreadyRolled extends MainTreeNodeLogic implements NodeLogic {
 
+    public AlreadyRolled() {
+        super("Already Rolled");
+    }
+
     /**
      * This method creates a State object containing information required to proceed when the current player has already
      * rolled the dice.
@@ -18,9 +22,8 @@ public class AlreadyRolled extends MainTreeNodeLogic implements NodeLogic {
      */
     @Override
     public State create_state(int input) {
-        GameLogic gameLogicInteractor = getGameLogicInteractor();
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         currentState.addOptions("Ok");
 
         return currentState;

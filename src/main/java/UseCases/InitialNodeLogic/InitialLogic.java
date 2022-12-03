@@ -11,17 +11,23 @@ public class InitialLogic {
     static HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
     static UseCaseInteractor caseInteractor;
     static GameLogicTree currentTree;
-
+    private String name;
     public static void setCaseInteractor(UseCaseInteractor interactor){
         caseInteractor = interactor;
     }
 
-
+    public InitialLogic(String name){
+        this.name = name;
+    }
     public State beforeLogic(){
         currentTree = caseInteractor.getCurrentTree();
         State state = new State();
-        state.setId(currentTree.getName());
+        state.setId(((InitialLogic)currentTree.getUseCase()).getName());
         return state;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public State afterLogic(State state){

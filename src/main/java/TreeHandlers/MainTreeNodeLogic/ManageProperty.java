@@ -10,6 +10,10 @@ import java.util.ArrayList;
  * This method represents the use case where the users want to manage a property.
  */
 public class ManageProperty extends MainTreeNodeLogic implements NodeLogic {
+    public ManageProperty() {
+        super("Manage Property");
+    }
+
     /**
      * This method creates a State object either containing properties as options or moves to another node when there
      * are no properties to manage.
@@ -23,7 +27,7 @@ public class ManageProperty extends MainTreeNodeLogic implements NodeLogic {
 
         State currentState = new State();
         currentState.setBackEnable(true);
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         ArrayList<Property> currentPlayerProperties = currentPlayer.getProperties();
 
         //if player has no properties, go to another node.

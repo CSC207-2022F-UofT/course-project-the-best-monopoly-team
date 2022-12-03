@@ -1,11 +1,15 @@
 package Interactors;
 
 import Entities.*;
-import TreeHandlers.AuctionNodeLogic.AuctionTreeNodeLogic;
-import TreeHandlers.AuctionTreeHandler;
-import TreeHandlers.MainTreeHandler;
-import TreeHandlers.TradingTreeHandler;
+import TreeHandlers.AuctionNodeLogic.*;
+//import TreeHandlers.AuctionTreeHandler;
+//import TreeHandlers.MainTreeHandler;
+import TreeHandlers.MainTreeNodeLogic.*;
+import TreeHandlers.TradingNodeLogic.AcceptTrade;
+import TreeHandlers.TradingNodeLogic.DeclineTrade;
+//import TreeHandlers.TradingTreeHandler;
 import TreeHandlers.GeneralGameLogic;
+import TreeHandlers.TradingNodeLogic.TradingParentNode;
 
 /**
  * This class creates a GameLogic instance which coordinates the flow of the game.
@@ -13,9 +17,9 @@ import TreeHandlers.GeneralGameLogic;
 public class GameLogic {
     private GameLogicTree[] trees = new GameLogicTree[3];
     private GameLogicTree currentTree;
-    AuctionTreeHandler auctionTreeHandler;
-    MainTreeHandler mainTreeHandler;
-    TradingTreeHandler tradingTreeHandler;
+//    AuctionTreeHandler auctionTreeHandler;
+ //   MainTreeHandler mainTreeHandler;
+ //   TradingTreeHandler tradingTreeHandler;
 
     /**
      * This is the constructor for creating a GameLogic instance.
@@ -23,10 +27,10 @@ public class GameLogic {
      * @param board A board instance that the GameLogic instance will help govern.
      */
     public GameLogic(Player currentPlayer, Board board){
-        mainTreeHandler = new MainTreeHandler(this);
+ //       mainTreeHandler = new MainTreeHandler(this);
         AuctionTreeNodeLogic.array_init(board.getPlayers().size());
-        auctionTreeHandler = new AuctionTreeHandler(this);
-        tradingTreeHandler = new TradingTreeHandler(this);
+ //       auctionTreeHandler = new AuctionTreeHandler(this);
+  //      tradingTreeHandler = new TradingTreeHandler(this);
         GeneralGameLogic.initialize(currentPlayer,board, this);
 
         createTrees();
@@ -86,14 +90,14 @@ public class GameLogic {
      */
     public void createTrees(){
         //Creating the game loop tree
-        GameLogicTree main = new GameLogicTree("MainTree","It's your turn! What do you want to do?");
-        GameLogicTree trade = new GameLogicTree("Trade");
-        GameLogicTree pickPlayer = new GameLogicTree("PickPlayer");
-        GameLogicTree pickItemOp = new GameLogicTree("PickItemOp");
-        GameLogicTree pickItemSelf = new GameLogicTree("PickItemSelf");
-        GameLogicTree sendTrade = new GameLogicTree("SendTrade");
+        GameLogicTree main = new GameLogicTree( new MainParentNode());
+        GameLogicTree trade = new GameLogicTree(new Trade());
+        GameLogicTree pickPlayer = new GameLogicTree(new PickPlayer());
+        GameLogicTree pickItemOp = new GameLogicTree(new PickItemOp());
+        GameLogicTree pickItemSelf = new GameLogicTree(new PickItemSelf());
+        GameLogicTree sendTrade = new GameLogicTree(new SendTrade());
 
-        GameLogicTree nothingToTrade = new GameLogicTree("NothingToTrade");
+        GameLogicTree nothingToTrade = new GameLogicTree(new NothingToTrade());
 
         pickItemSelf.addChild(sendTrade);
         pickItemOp.addChild(pickItemSelf);
@@ -101,13 +105,13 @@ public class GameLogic {
         trade.addChild(pickPlayer);
         pickPlayer.addChild(nothingToTrade);
 
-        GameLogicTree manageProperty = new GameLogicTree("ManageProperty");
-        GameLogicTree selectProperty = new GameLogicTree("SelectProperty");
-        GameLogicTree mortgage = new GameLogicTree("Mortgage");
-        GameLogicTree unMortgage = new GameLogicTree("UnMortgage");
-        GameLogicTree buildProperty = new GameLogicTree("BuildProperty");
+        GameLogicTree manageProperty = new GameLogicTree(new ManageProperty());
+        GameLogicTree selectProperty = new GameLogicTree(new SelectProperty());
+        GameLogicTree mortgage = new GameLogicTree(new Mortgage());
+        GameLogicTree unMortgage = new GameLogicTree(new UnMortgage());
+        GameLogicTree buildProperty = new GameLogicTree(new BuildProperty());
 
-        GameLogicTree noProperties = new GameLogicTree("NoProperties");
+        GameLogicTree noProperties = new GameLogicTree(new NoProperties());
 
         selectProperty.addChild(mortgage);
         selectProperty.addChild(unMortgage);
@@ -116,12 +120,12 @@ public class GameLogic {
         manageProperty.addChild(noProperties);
 
 
-        GameLogicTree roll = new GameLogicTree("Roll");
-        GameLogicTree callAction = new GameLogicTree("CallAction");
-        GameLogicTree emptyPropertySpace = new GameLogicTree("EmptyPropertySpace");
-        GameLogicTree buy = new GameLogicTree("Buy");
-        GameLogicTree auction = new GameLogicTree("Auction");
-        GameLogicTree alreadyRolled = new GameLogicTree("AlreadyRolled");
+        GameLogicTree roll = new GameLogicTree(new Roll());
+        GameLogicTree callAction = new GameLogicTree(new CallAction());
+        GameLogicTree emptyPropertySpace = new GameLogicTree(new EmptyPropertySpace());
+        GameLogicTree buy = new GameLogicTree(new Buy());
+        GameLogicTree auction = new GameLogicTree(new Auction());
+        GameLogicTree alreadyRolled = new GameLogicTree(new AlreadyRolled());
 
         roll.addChild(emptyPropertySpace);
         roll.addChild(callAction);
@@ -130,21 +134,21 @@ public class GameLogic {
         emptyPropertySpace.addChild(buy);
         emptyPropertySpace.addChild(auction);
 
-        GameLogicTree steal = new GameLogicTree("Steal");
-        GameLogicTree choosePlayer = new GameLogicTree("ChoosePlayer");
+        GameLogicTree steal = new GameLogicTree(new Steal());
+        GameLogicTree choosePlayer = new GameLogicTree(new ChoosePlayerUseCase());
 
         steal.addChild(choosePlayer);
 
-        GameLogicTree endTurn = new GameLogicTree("EndTurn");
+        GameLogicTree endTurn = new GameLogicTree(new EndTurnUseCase());
 
-        GameLogicTree settingsMenu = new GameLogicTree("SettingsMenu");
-        GameLogicTree exitGame = new GameLogicTree("ExitGame");
-        GameLogicTree saveGame = new GameLogicTree("SaveGame", "Game saved!");
+        GameLogicTree settingsMenu = new GameLogicTree(new SettingsMenuUseCase());
+        GameLogicTree exitGame = new GameLogicTree(new ExitGameUseCase());
+        GameLogicTree saveGame = new GameLogicTree(new SaveGameUseCase());
 
-        GameLogicTree bankruptcy = new GameLogicTree("Bankruptcy", "Are you sure you want to declare bankruptcy?");
+        GameLogicTree bankruptcy = new GameLogicTree(new BankruptcyUseCase());
 
-        GameLogicTree confirmationNode = new GameLogicTree("Confirmation");
-        GameLogicTree informationNode = new GameLogicTree("Information");
+        GameLogicTree confirmationNode = new GameLogicTree(new ConfirmationUseCase());
+        GameLogicTree informationNode = new GameLogicTree(new InformationUseCase());
 
         nothingToTrade.addChild(informationNode);
         noProperties.addChild(informationNode);
@@ -179,20 +183,20 @@ public class GameLogic {
         trees[0] = main;
 
         //Creating the trading tree
-        GameLogicTree tradeTree = new GameLogicTree("TradeTree");
-        GameLogicTree acceptTrade = new GameLogicTree("AcceptTrade");
-        GameLogicTree declineTrade = new GameLogicTree("DeclineTrade");
+        GameLogicTree tradeTree = new GameLogicTree(new TradingParentNode());
+        GameLogicTree acceptTrade = new GameLogicTree(new AcceptTrade());
+        GameLogicTree declineTrade = new GameLogicTree(new DeclineTrade());
         tradeTree.addChild(acceptTrade);
         tradeTree.addChild(declineTrade);
         tradeTree.setIsSwitchBlock(true);
         trees[1] = tradeTree;
 
         //Creating the auction tree
-        GameLogicTree auctionTree = new GameLogicTree("AuctionTree");
-        GameLogicTree lowOption = new GameLogicTree("LowOption");
-        GameLogicTree mediumOption = new GameLogicTree("MediumOption");
-        GameLogicTree highOption = new GameLogicTree("HighOption");
-        GameLogicTree fold = new GameLogicTree("Fold");
+        GameLogicTree auctionTree = new GameLogicTree(new AuctionParentNode());
+        GameLogicTree lowOption = new GameLogicTree(new LowOption());
+        GameLogicTree mediumOption = new GameLogicTree(new MediumOption());
+        GameLogicTree highOption = new GameLogicTree(new HighOption());
+        GameLogicTree fold = new GameLogicTree(new Fold());
 
         auctionTree.setIsSwitchBlock(true);
         auctionTree.addChild(lowOption);
@@ -245,18 +249,10 @@ public class GameLogic {
      * @return a State instance containing relevant information related to the action handled.
      */
     public State handleTree(int input){
-        if (currentTree.getMaxParent() == trees[0]){
-            State returnState =  mainTreeHandler.getUseCase().create_state(input);
-            //mutating the state to have memory of its state, useful for backwards transversal
+
+            State returnState =  currentTree.getUseCase().create_state(input);
             currentTree.setPreviousState(returnState);
             return returnState;
-        }
-        else if (currentTree.getMaxParent() == trees[1]){
-            return tradingTreeHandler.getUseCase().create_state(input);
-        }
-        else{
-            return auctionTreeHandler.getUseCase().create_state(input);
-        }
 
     }
 

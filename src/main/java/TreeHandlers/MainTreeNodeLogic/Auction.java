@@ -9,6 +9,10 @@ import Interface.NodeLogic;
  * This class represents the use case of when an auction is to be started.
  */
 public class Auction extends MainTreeNodeLogic implements NodeLogic {
+    public Auction() {
+        super("Auction");
+    }
+
     /**
      * This method returns a State object containing the original current player and the original tree node that the
      * game was on. It will then change the trees and start the auction.
@@ -21,7 +25,7 @@ public class Auction extends MainTreeNodeLogic implements NodeLogic {
         GameLogic gameLogicInteractor = getGameLogicInteractor();
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
-        currentState.setId(gameLogicInteractor.getCurrentTree().getName());
+        currentState.setId(getName());
         //returnPlayerAddress will hold the original player index in this.board.getPlayers()
         setReturnPlayerIndex(getCurrentPlayerIndex());
 
