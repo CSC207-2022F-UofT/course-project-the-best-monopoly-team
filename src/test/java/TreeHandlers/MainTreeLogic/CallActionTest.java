@@ -3,18 +3,18 @@ package TreeHandlers.MainTreeLogic;
 import Entities.*;
 import Interactors.GameLogic;
 import TreeHandlers.GeneralGameLogic;
-import TreeHandlers.MainTreeNodeLogic.Buy;
+import TreeHandlers.MainTreeNodeLogic.CallAction;
+import TreeHandlers.MainTreeNodeLogic.MainTreeNodeLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class BuyTest {
+public class CallActionTest {
 
     @Test
-    public void testBuyCreateState(){
+    public void testCallActionCreateState(){
         Player playerOne = new Player("Player One");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
@@ -23,9 +23,13 @@ public class BuyTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
-        Buy buy = new Buy();
-        State actual = buy.create_state(0);
-        Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
+        GeneralGameLogic generalGameLogic = new GeneralGameLogic();
+        CallAction callAction = new CallAction();
+        State actual = callAction.create_state(0);
+        ArrayList<String> options = new ArrayList<String>();
+        options.add("Ok");
+        Assertions.assertEquals(actual.getOptions(), options);
+        Assertions.assertEquals(actual.getDescription(), generalGameLogic.getAnswer());
     }
+
 }

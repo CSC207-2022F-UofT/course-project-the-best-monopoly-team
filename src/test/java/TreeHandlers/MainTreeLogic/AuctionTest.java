@@ -2,19 +2,17 @@ package TreeHandlers.MainTreeLogic;
 
 import Entities.*;
 import Interactors.GameLogic;
-import TreeHandlers.GeneralGameLogic;
-import TreeHandlers.MainTreeNodeLogic.Buy;
+import TreeHandlers.MainTreeNodeLogic.Auction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class BuyTest {
+public class AuctionTest {
 
     @Test
-    public void testBuyCreateState(){
+    public void testAuctionTestCreateState(){
         Player playerOne = new Player("Player One");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
@@ -24,8 +22,9 @@ public class BuyTest {
         cells.add(test_property);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        Buy buy = new Buy();
-        State actual = buy.create_state(0);
-        Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
+        Auction auction = new Auction();
+        State actual = auction.create_state(0);
+        Assertions.assertEquals(actual.getId(), "Auction Tree Parent Node");
     }
+
 }
