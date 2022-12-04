@@ -2,7 +2,7 @@ package Entities;
 import Interactors.CornerTilePerformActionInteractor;
 import Interactors.GameCreation;
 import UseCases.CornerTilePerformActionUseCase;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
