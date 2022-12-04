@@ -47,7 +47,6 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     /**
      * Performs the paid action of the card
      * @param player the player
-     * @param board the board
      * @param card the card
      * @return the message
      */
@@ -60,7 +59,6 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     /**
      * Performs the pay action of the card
      * @param player the player
-     * @param board the board
      * @param card the card
      * @return the message
      */
@@ -100,7 +98,6 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     /**
      * Performs the get out of jail card action of the card, adds one to the users jail cards
      * @param player the player
-     * @param board the board
      * @param card the card
      * @return the message
      */
@@ -114,7 +111,6 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * Aggregates all the actions of the card and the main perform action method
      * @param player the player
      * @param board the board
-     * @param card the card
      * @return the message
      */
     public String performAction(ActionSpace2 actionSpace2, Player player, Board board) {

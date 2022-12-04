@@ -1,19 +1,8 @@
 package Entities;
 
-public class CornerTiles extends Cell{
-    private String type;
-
-    /**
-     * The constructor for CornerTiles.
-     * @param type The type of the Player/
-     */
-    public CornerTiles(String type) {
-        this.type = type;
-    }
-
-    @Override
-    public String getType() {
+public abstract class CornerTiles extends Cell {
+    public String getType(){
         return "Corner Tile";
     }
-
+    public abstract String returnMessage(Player player);
 }
