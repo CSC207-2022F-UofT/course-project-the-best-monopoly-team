@@ -27,12 +27,12 @@ public class Buy extends MainTreeNodeLogic implements NodeLogic {
     public State create_state(int input) {
         Board board = getBoard();
         Player currentPlayer = getCurrentPlayer();
-         Property targetProperty;
+        Property targetProperty;
 
         State currentState = new State();
         currentState.setId(getName());
         //player buys the property that the player lands on
-                targetProperty = (Property) board.getCell(currentPlayer.getPosition());
+        targetProperty = (Property) board.getCell(currentPlayer.getPosition());
 
         //indicates that the player can afford it and sets the property owner as the current player and
         //deducts the player's money.
