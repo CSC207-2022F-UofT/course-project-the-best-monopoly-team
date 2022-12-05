@@ -162,7 +162,6 @@ public class GeneralGameLogic {
         Object[] boardArray = new Object[4];
         boardArray[0] = board.getPlayers();
         boardArray[1] = board.getCells();
-        boardArray[2] = board.getPlayerPositions();
         return boardArray;
     }
 
