@@ -6,6 +6,7 @@ import Interactors.PerformActionSpaceCardInteractor;
 import Interactors.PropertyPerformActionInteractor;
 import UseCases.CornerTilePerformActionUseCase;
 import UseCases.PerformActionSpaceUseCase;
+import UseCases.PlayerLogic;
 import UseCases.PropertyPerformActionUseCase;
 
 import javax.swing.*;
@@ -153,7 +154,8 @@ public class MainTreeHandler extends TreeHandler {
             case "BuildProperty":
                 Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("SelectProperty"));
                 //the player chooses to build houses
-                currentPlayer.buildHouse(targetProperty,1);
+                PlayerLogic playerLogic = new PlayerLogic(currentPlayer);
+                playerLogic.buildHouse(targetProperty,1);
                 currentState.setCurrentPlayerProperty(targetProperty);
     //            currentState.setDescription(targetProperty.getHouses() + " houses built on this property");
                 currentState.addOptions("ok");
@@ -162,8 +164,8 @@ public class MainTreeHandler extends TreeHandler {
                 if (mainStates[2] == 0) {
                     //Case roll selected
                     //We can determine if a player lands on a property by checking if the position
-
-                    diceroll = currentPlayer.rollDice(0);
+                    PlayerLogic playerLogic2 = new PlayerLogic(currentPlayer);
+                    diceroll= playerLogic2.rollDice(0);
                     currentPlayer.move(Integer.parseInt(diceroll));
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
                     if (landedOnCell instanceof Property &&
@@ -251,7 +253,8 @@ public class MainTreeHandler extends TreeHandler {
 
                 playerCopy = new ArrayList<Player>(board.getPlayers());
                 playerCopy.remove(currentPlayer);
-                String stealStatus = currentPlayer.steal(playerCopy.get(input));
+                PlayerLogic playerLogic3 = new PlayerLogic(currentPlayer);
+                String stealStatus = playerLogic3.steal(playerCopy.get(input));
 
                 //TODO: add description of stealing
                 currentState.setDescription(stealStatus);

@@ -1,5 +1,6 @@
 package Entities;
 
+import UseCases.PlayerLogic;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -62,94 +63,6 @@ public class PlayerTest {
         player1.move(5);
         assertEquals(5, player1.getPosition());
     }
-
-    @Test
-    public void testBuildHouseSuccess() {
-        Player player1 = new Player("Player1");
-        Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        Property property4 = new Property("property4", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        player1.addProperty(property2);
-        player1.addProperty(property3);
-        player1.addProperty(property4);
-        String returnString = player1.buildHouse(property2,2);
-        assertEquals("2 houses have been built on property2", returnString);
-        assertEquals(2, property2.getHouses());
-    }
-
-    @Test
-    public void testBuildHouseHotel() {
-        Player player1 = new Player("Player1");
-        Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        Property property4 = new Property("property4", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        player1.addProperty(property2);
-        player1.addProperty(property3);
-        player1.addProperty(property4);
-        String returnString = player1.buildHouse(property2,3);
-        assertEquals("A hotel has been built on property2", returnString);
-        assertEquals(5, property2.getHouses());
-    }
-
-    @Test
-    public void testBuildHouseFailNotOwned() {
-        Player player1 = new Player("Player1");
-        Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        String returnString = player1.buildHouse(property2,1);
-        assertEquals("Player does not own property2", returnString);
-        assertEquals(0, property2.getHouses());
-    }
-
-    @Test
-    public void testBuildHouseFailNotOwnedSet2() {
-        Player player1 = new Player("Player1");
-        Property property2 = new Property("property2", "Dark Blue",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        player1.addProperty(property2);
-        String returnString = player1.buildHouse(property2,2);
-        assertEquals("Player does not own the full colour set of property2", returnString);
-        assertEquals(0, property2.getHouses());
-    }
-
-    @Test
-    public void testBuildHouseFailNotOwnedSet3() {
-        Player player1 = new Player("Player1");
-        Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        player1.addProperty(property2);
-        player1.addProperty(property3);
-        String returnString = player1.buildHouse(property3,2);
-        assertEquals("Player does not own the full colour set of property3", returnString);
-        assertEquals(0, property2.getHouses());
-    }
-
-    @Test
-    public void testBuildHouseFailMoney() {
-        Player player1 = new Player("Player1");
-        Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        Property property4 = new Property("property4", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
-        player1.addProperty(property2);
-        player1.addProperty(property3);
-        player1.addProperty(property4);
-        player1.setMoney(10);
-        String returnString = player1.buildHouse(property4,2);
-        assertEquals("Player does not have enough money to build 2 houses on property4", returnString);
-        assertEquals(0, property4.getHouses());
-    }
-
     @Test
     public void testChangeMoney(){
         Player player1 = new Player("Player1");
