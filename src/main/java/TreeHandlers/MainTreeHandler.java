@@ -1,13 +1,9 @@
 package TreeHandlers;
 
 import Entities.*;
-import Interactors.ActionSpaceCreationInteractor;
 import Interactors.CornerTilePerformActionInteractor;
 import Interactors.PerformActionSpaceCardInteractor;
 import Interactors.PropertyPerformActionInteractor;
-import Persistence.DataAccess;
-import Persistence.TextFileTranslator;
-import UseCases.ActionSpaceCreationUseCase;
 import UseCases.CornerTilePerformActionUseCase;
 import UseCases.PerformActionSpaceUseCase;
 import UseCases.PropertyPerformActionUseCase;

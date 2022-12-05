@@ -7,8 +7,8 @@ import Entities.ActionSpace;
 
 public interface    ActionSpaceCreationUseCase {
 
-    ActionSpace loadJailCards(File file) throws IOException;
-    ActionSpace loadChanceCards(File file) throws IOException;
-    ActionSpace loadComChestCards(File file) throws IOException;
+    ActionSpace loadJailCards() throws IOException;
+    ActionSpace loadChanceCards() throws IOException;
+    ActionSpace loadComChestCards() throws IOException;
 
 }

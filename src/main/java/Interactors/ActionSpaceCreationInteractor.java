@@ -1,13 +1,12 @@
 package Interactors;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
 import Entities.ActionSpace;
 import Entities.Card;
-import Persistence.DataAccess;
+import Persistence.LoadAccess;
 import UseCases.ActionSpaceCreationUseCase;
 
 /**
@@ -15,14 +14,14 @@ import UseCases.ActionSpaceCreationUseCase;
  */
 public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase {
 
-    private final DataAccess dataAccess;
+    private final LoadAccess loadAccess;
 
     /**
      *
-     * @param dataAccess the CardAccess object
+     * @param loadAccess the CardAccess object
      */
-    public ActionSpaceCreationInteractor(DataAccess dataAccess) {
-        this.dataAccess = dataAccess;
+    public ActionSpaceCreationInteractor(LoadAccess loadAccess) {
+        this.loadAccess = loadAccess;
 
     }
 
@@ -30,21 +29,22 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
      * 
      * @return the action space
      */
-    public ActionSpace loadJailCards(File file) throws IOException {
+    public ActionSpace loadJailCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
-        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperJailCards(dataAccess.loadCards(file));
+        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperJailCards(loadAccess.loadCards());
+        return new ActionSpace(cards);
+
+    }
+
+    public ActionSpace loadChanceCards() throws IOException {
+        CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
+        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperChanceCards(loadAccess.loadCards());
         return new ActionSpace(cards);
     }
 
-    public ActionSpace loadChanceCards(File file) throws IOException {
+    public ActionSpace loadComChestCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
-        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperChanceCards(dataAccess.loadCards(file));
-        return new ActionSpace(cards);
-    }
-
-    public ActionSpace loadComChestCards(File file) throws IOException {
-        CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
-        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperComChest(dataAccess.loadCards(file));
+        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperComChest(loadAccess.loadCards());
         return new ActionSpace(cards);
     }
 }
