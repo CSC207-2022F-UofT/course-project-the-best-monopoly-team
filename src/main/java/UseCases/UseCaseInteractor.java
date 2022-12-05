@@ -21,7 +21,6 @@ public class UseCaseInteractor{
 
     private GameLogicTree currentTree;
     private boolean menuTreeActive = true;
- //   private InitialTreeHandler treeHandler;
     private GameLogic logicInteractor;
     private LoadAccess loadAccess;
     private GameCreation gameCreation;
@@ -132,17 +131,7 @@ public class UseCaseInteractor{
 
         //makes the currentTree the root
         currentTree = (GameLogicTree) currentTree.getMaxParent();
-
         return currentTree.getUseCase().create_state(0);
-
-//        //mutates the state object with all of its properties
-//        currentState.setId(((InitialLogic)currentTree.getUseCase()).getName());
-//        currentState.setDescription(currentTree.getPrompt());
-//        for (MenuTree tree: currentTree.getChildren()){
-//            currentState.addOptions(((InitialLogic)((GameLogicTree)tree).getUseCase()).getName());
-//        }
-//        currentTree.setPreviousState(currentState);
-//        return currentState;
     }
 
 
