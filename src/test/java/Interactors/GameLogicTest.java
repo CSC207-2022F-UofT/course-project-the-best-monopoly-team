@@ -18,7 +18,7 @@ public class GameLogicTest {
         Player playerOne = new Player("Player One");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
-        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[6],
                 null, 50, 0, false);
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
@@ -33,7 +33,7 @@ public class GameLogicTest {
         Player playerOne = new Player("Player One");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
-        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[6],
                 null, 50, 0, false);
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
@@ -48,7 +48,7 @@ public class GameLogicTest {
         Player playerOne = new Player("Player One");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
-        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[6],
                 null, 50, 0, false);
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);

@@ -16,9 +16,9 @@ public class AuctionParentNodeTest {
         Player playerTwo = new Player("Player Two");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
-        Property test_property1 = new Property("Property One", "Blue", 100, 100, new int[5],
+        Property test_property1 = new Property("Property One", "Blue", 100, 100, new int[6],
                 playerOne, 50, 0, false);
-        Property test_property2 = new Property("Property One", "Blue", 100, 100, new int[5],
+        Property test_property2 = new Property("Property One", "Blue", 100, 100, new int[6],
                 null, 50, 0, false);
         playerOne.addProperty(test_property1);
         List<Cell> cells = new ArrayList<>();
@@ -30,7 +30,6 @@ public class AuctionParentNodeTest {
         State actual = auctionParentNode.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
         Assertions.assertEquals(actual.getPlayer(), playerOne);
-        Assertions.assertEquals(actual.getDescription(), "Player One");
         Assertions.assertEquals(actual.getBiddingPot(), 0);
         Assertions.assertEquals(actual.getBiddingProperty(), null);
     }

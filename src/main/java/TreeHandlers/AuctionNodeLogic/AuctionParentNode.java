@@ -18,7 +18,6 @@ public class AuctionParentNode extends AuctionTreeNodeLogic implements NodeLogic
         State currentState = new State();
         currentState.setId(((GeneralGameLogic)gameLogicInteractor.getCurrentTree().getUseCase()).getName());
         currentState.setPlayer(currentPlayer);
-        currentState.setDescription(currentPlayer.getName());
         currentState.addOptions(""+LOW_OPTION);
         currentState.addOptions(""+MEDIUM_OPTION);
         currentState.addOptions(""+HIGH_OPTION);

@@ -23,7 +23,6 @@ public class NoProperties extends MainTreeNodeLogic implements NodeLogic {
     public State create_state(int input) {
         State currentState = new State();
         currentState.setId(getName());
-        currentState.setDescription("You have no properties :(");
         currentState.addOptions("Ok");
 
         return currentState;

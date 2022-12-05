@@ -19,7 +19,7 @@ public class MainParentNodeTest {
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
         players.add(playerTwo);
-        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[6],
                 null, 50, 0, false);
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
@@ -37,8 +37,6 @@ public class MainParentNodeTest {
         options.add("Bankruptcy");
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
         Assertions.assertEquals(actual.getPlayer(), playerOne);
-        Assertions.assertEquals(actual.getDescription(), "Player One It's your turn! What do you want to do?" +
-                " You currently have 1500 dollars");
         Assertions.assertEquals(actual.getOptions(), options);
     }
 

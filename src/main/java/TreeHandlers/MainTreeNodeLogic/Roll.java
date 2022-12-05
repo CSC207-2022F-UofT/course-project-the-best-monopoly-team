@@ -1,8 +1,15 @@
 package TreeHandlers.MainTreeNodeLogic;
 
 import Entities.*;
+import Interactors.CornerTilePerformActionInteractor;
 import Interactors.GameLogic;
+import Interactors.PerformActionSpaceCardInteractor;
+import Interactors.PropertyPerformActionInteractor;
 import Interface.NodeLogic;
+import UseCases.CornerTilePerformActionUseCase;
+import UseCases.PerformActionSpaceUseCase;
+import UseCases.PlayerLogic;
+import UseCases.PropertyPerformActionUseCase;
 
 /**
  * This class represents the use case where the current player rolls the dice.
@@ -29,8 +36,8 @@ public class Roll extends MainTreeNodeLogic implements NodeLogic {
         currentState.setId(getName());
         if (mainStates[1] == 0) {
             //roll the dice and update the position
-            diceRoll = currentPlayer.rollDice(0);
-            board.updatePlayerPosition(currentPlayer);
+            PlayerLogic playerLogic = new PlayerLogic(currentPlayer);
+            diceRoll = playerLogic.rollDice(0);
 
             //get the space landed on
             Cell landedOnCell = board.getCell(currentPlayer.getPosition());
@@ -44,7 +51,24 @@ public class Roll extends MainTreeNodeLogic implements NodeLogic {
                 gameLogicInteractor.transverseCurrentTree(0);
             } else {
                 //perform the action on the space as well
-                setAnswer(landedOnCell.performAction(currentPlayer,board));
+                switch (landedOnCell.getType()) {
+                    case "Property":
+                        PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
+                        Property property = (Property) landedOnCell;
+                        setAnswer(propertyInteractor.performAction(property, currentPlayer));
+                        break;
+                    case "Corner Tile":
+                        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+                        assert landedOnCell instanceof CornerTiles;
+                        CornerTiles cornerTile = (CornerTiles) landedOnCell;
+
+                        setAnswer(cornerTileInteractor.performAction(currentPlayer, cornerTile));
+                        break;
+                    case "Action Space":
+                        PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
+                        ActionSpace actionSpace = (ActionSpace) landedOnCell;
+                        setAnswer(actionSpaceInteractor.performAction(actionSpace, currentPlayer, board));
+                }
                 gameLogicInteractor.transverseCurrentTree(1);
             }
             //perform the logic in the new node.

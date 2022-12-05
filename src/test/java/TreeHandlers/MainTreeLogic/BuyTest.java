@@ -6,7 +6,6 @@ import TreeHandlers.GeneralGameLogic;
 import TreeHandlers.MainTreeNodeLogic.Buy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +17,7 @@ public class BuyTest {
         Player playerOne = new Player("Player One");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
-        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[6],
                 null, 50, 0, false);
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);

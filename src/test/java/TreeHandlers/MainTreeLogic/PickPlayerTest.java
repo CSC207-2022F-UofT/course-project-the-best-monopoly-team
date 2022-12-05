@@ -32,9 +32,9 @@ public class PickPlayerTest {
     public void testPickPlayerCreateState(){
         Player playerOne = new Player("Player One");
         Player playerTwo = new Player("Player Two");
-        Property propertyOne = new Property("Property One", "Blue", 100, 100, new int[5],
+        Property propertyOne = new Property("Property One", "Blue", 100, 100, new int[6],
                 playerOne, 50, 0, false);
-        Property propertyTwo = new Property("Property Two", "Blue", 100, 100, new int[5],
+        Property propertyTwo = new Property("Property Two", "Blue", 100, 100, new int[6],
                 playerTwo, 50, 0, false);
         playerOne.addProperty(propertyOne);
         playerTwo.addProperty(propertyTwo);

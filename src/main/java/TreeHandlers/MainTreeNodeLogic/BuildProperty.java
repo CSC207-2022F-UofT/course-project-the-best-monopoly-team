@@ -5,6 +5,7 @@ import Entities.Property;
 import Entities.State;
 import Interactors.GameLogic;
 import Interface.NodeLogic;
+import UseCases.PlayerLogic;
 
 import java.util.HashMap;
 
@@ -34,7 +35,8 @@ public class BuildProperty extends MainTreeNodeLogic implements NodeLogic {
         Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("PropertySelected"));
 
         //builds a house on the chosen property
-        currentPlayer.buildHouse(targetProperty,1);
+        PlayerLogic playerLogic = new PlayerLogic(currentPlayer);
+        playerLogic.buildHouse(targetProperty,1);
         currentState.setCurrentPlayerProperty(targetProperty);
         currentState.addOptions("Ok");
         return currentState;

@@ -15,8 +15,6 @@ public class MainParentNode extends MainTreeNodeLogic implements NodeLogic {
         State currentState = new State();
         currentState.setId(getName());
         currentState.setPlayer(currentPlayer);
-        currentState.setDescription(currentPlayer.getName() + " It's your turn! What do you want to do? You currently " +
-                "have " + currentPlayer.getMoney() + " dollars");
         addSwitchOptions(currentState);
         return currentState;
     }

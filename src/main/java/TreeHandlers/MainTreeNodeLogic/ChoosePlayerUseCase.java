@@ -5,6 +5,7 @@ import Entities.Player;
 import Entities.State;
 import Interactors.GameLogic;
 import Interface.NodeLogic;
+import UseCases.PlayerLogic;
 
 import java.util.ArrayList;
 
@@ -35,8 +36,8 @@ public class ChoosePlayerUseCase extends MainTreeNodeLogic implements NodeLogic 
         //Steal from the target player
         playerCopy = new ArrayList<Player>(board.getPlayers());
         playerCopy.remove(currentPlayer);
-        String stealStatus = currentPlayer.steal(playerCopy.get(input));
-
+        PlayerLogic playerLogic = new PlayerLogic(currentPlayer);
+        String stealStatus = playerLogic.steal(playerCopy.get(input));
         currentState.setDescription(stealStatus);
         currentState.addOptions("Ok");
         return currentState;

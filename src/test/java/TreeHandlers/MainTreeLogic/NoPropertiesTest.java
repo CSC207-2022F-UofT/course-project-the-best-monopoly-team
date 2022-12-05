@@ -17,7 +17,6 @@ public class NoPropertiesTest {
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "User Has No Properties (Manage Properties)");
         Assertions.assertEquals(actual.getOptions(), options);
-        Assertions.assertEquals(actual.getDescription(), "You have no properties :(");
     }
 
 }
