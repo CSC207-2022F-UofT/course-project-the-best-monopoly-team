@@ -1,13 +1,12 @@
 package Entities;
+import Interactors.CornerTilePerformActionInteractor;
 import Interactors.GameCreation;
-import Interactors.TextFileTranslator;
-import org.junit.Test;
+import UseCases.CornerTilePerformActionUseCase;
+import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -31,7 +30,8 @@ public class CornerTilesTest {
         Board bo = creation.createNewGame(players, properties);
         CornerTiles t = new CornerTiles("jail");
         player1.setInJail(true);
-        assertEquals( "You are still in Jail", t.performAction(player1, bo));
+        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+        assertEquals( "You are still in Jail", cornerTileInteractor.performAction(player1, bo, t));
     }
 
     @Test
@@ -48,7 +48,8 @@ public class CornerTilesTest {
         Board bo = creation.createNewGame(players, properties);
         CornerTiles t = new CornerTiles("jail");
         player1.setInJail(false);
-        assertEquals("You're visiting Jail", t.performAction(player1, bo));
+        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+        assertEquals("You're visiting Jail", cornerTileInteractor.performAction(player1, bo, t));
     }
     @Test
     public void performActionTestFreeParking() throws IOException {
@@ -63,7 +64,8 @@ public class CornerTilesTest {
         ArrayList<String[]> strings = new ArrayList<>();
         Board bo = creation.createNewGame(players, properties);
         CornerTiles t = new CornerTiles("freeParking");
-        assertEquals("You landed on Free Parking!", t.performAction(player1, bo));
+        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+        assertEquals("You landed on Free Parking!", cornerTileInteractor.performAction(player1, bo, t));
     }
     @Test
     public void performActionGoToJail() throws IOException {
@@ -78,7 +80,8 @@ public class CornerTilesTest {
         ArrayList<String[]> strings = new ArrayList<>();
         Board bo = creation.createNewGame(players, properties);
         CornerTiles t = new CornerTiles("goToJail");
-        assertEquals("Go to Jail!", t.performAction(player1, bo));
+        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+        assertEquals("Go to Jail!", cornerTileInteractor.performAction(player1, bo, t));
         assertEquals(player1.getPosition(), 11);
         assertEquals(player1.isInJail(), true);
     }

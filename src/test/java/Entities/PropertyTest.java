@@ -1,6 +1,8 @@
 package Entities;
 
-import org.junit.Test;
+import Interactors.PropertyPerformActionInteractor;
+import UseCases.PropertyPerformActionUseCase;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,8 @@ public class PropertyTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(property1);
         Board board = new Board(players, cells);
-        String returnString = property1.performAction(player1, board);
+        PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
+        String returnString = propertyInteractor.performAction(property1, player1);
         assertEquals("Landed on a property you own", returnString);
         assertEquals(1500, player1.getMoney());
     }
@@ -37,7 +40,8 @@ public class PropertyTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(property1);
         Board board = new Board(players, cells);
-        String returnString = property1.performAction(player1, board);
+        PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
+        String returnString = propertyInteractor.performAction(property1, player1);
         assertEquals("Paid $3 to Player2", returnString);
         assertEquals(1497, player1.getMoney());
     }

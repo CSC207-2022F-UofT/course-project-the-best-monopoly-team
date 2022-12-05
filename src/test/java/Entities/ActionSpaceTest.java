@@ -2,7 +2,6 @@ package Entities;
 
 import org.junit.jupiter.api.Test;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +11,7 @@ import java.util.Objects;
 public class ActionSpaceTest {
 
     @Test
-    void testGetType() throws IOException {
+    public void testGetType() throws IOException {
         ActionSpace actionSpace1 = new ActionSpace("Jail");
         ActionSpace actionSpace2 = new ActionSpace("comchest");
         ActionSpace actionSpace3 = new ActionSpace("chance");
@@ -22,13 +21,13 @@ public class ActionSpaceTest {
     }
 
     @Test
-    void testGetCard() throws IOException {
+    public void testGetCard() throws IOException {
         ActionSpace actionSpace = new ActionSpace("Jail");
         assert actionSpace.getJailCards().containsKey("Pay child support($100)");
     }
 
     @Test
-    void testLoadFile() throws IOException {
+    public void testLoadFile() throws IOException {
         ActionSpace actionSpace = new ActionSpace("jail");
 
         HashMap<String, ArrayList<Object>> actual = new HashMap<>();
