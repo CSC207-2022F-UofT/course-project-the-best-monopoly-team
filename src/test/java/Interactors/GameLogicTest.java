@@ -14,80 +14,48 @@ import static org.junit.Assert.assertEquals;
 public class GameLogicTest {
 
     @Test
-    public void testSetCurrentTreeToMaxParent(){
-        Player playerOne = new Player("PlayerOne");
-        Player playerTwo = new Player("PlayerTwo");
-        List<Player> players = new ArrayList<Player>();
-        players.add(playerOne);
-        players.add(playerTwo);
-        int [] rentValues1 = new int[] {1,2,3,4,5};
-        int [] rentValues2 = new int[] {2,4,6,8,10};
-        Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
-                0, false);
-        Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
-                0, false);
-        List<Cell> cells = new ArrayList<Cell>();
-        cells.add(cellOne);
-        cells.add(cellTwo);
-        Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
-
-        GameLogicTree auctionTree = new GameLogicTree(new AuctionParentNode());
-        GameLogicTree lowOption = new GameLogicTree(new LowOption());
-        GameLogicTree mediumOption = new GameLogicTree(new MediumOption());
-        GameLogicTree highOption = new GameLogicTree(new HighOption());
-        GameLogicTree fold = new GameLogicTree(new Fold());
-
-        auctionTree.setIsSwitchBlock(true);
-        auctionTree.addChild(lowOption);
-        auctionTree.addChild(mediumOption);
-        auctionTree.addChild(highOption);
-        auctionTree.addChild(fold);
-
-        gameLogic.setCurrentTree(auctionTree);
-
-        GameLogicTree expected = (GameLogicTree) gameLogic.getCurrentTree().getMaxParent();
-        gameLogic.setCurrentTreeToMaxParent();
-        assertEquals(gameLogic.getCurrentTree(), expected);
-    }
-
-
-    @Test
-    public void testPerformInput(){
-        Player playerOne = new Player("PlayerOne");
-        Player playerTwo = new Player("PlayerTwo");
-        List<Player> players = new ArrayList<Player>();
-        players.add(playerOne);
-        players.add(playerTwo);
-        int [] rentValues1 = new int[] {1,2,3,4,5};
-        int [] rentValues2 = new int[] {2,4,6,8,10};
-        Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, playerOne, 0,
-                0, false);
-        Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
-                0, false);
-        List<Cell> cells = new ArrayList<Cell>();
-        cells.add(cellOne);
-        cells.add(cellTwo);
-        Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
-        GameLogic gameLogic1 = new GameLogic(playerOne, board);
-
-
-    }
-
-    @Test
     public void testTraverseCurrentTree(){
-
+        Player playerOne = new Player("Player One");
+        List<Player> players = new ArrayList<>();
+        players.add(playerOne);
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+                null, 50, 0, false);
+        List<Cell> cells = new ArrayList<>();
+        cells.add(test_property);
+        Board board = new Board(players, cells);
+        GameLogic gameLogic = new GameLogic(playerOne, board);
+        gameLogic.transverseCurrentTree(0);
+        Assertions.assertEquals(gameLogic.getCurrentTreeID(), 0);
     }
 
     @Test
     public void testHandleTree(){
-
+        Player playerOne = new Player("Player One");
+        List<Player> players = new ArrayList<>();
+        players.add(playerOne);
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+                null, 50, 0, false);
+        List<Cell> cells = new ArrayList<>();
+        cells.add(test_property);
+        Board board = new Board(players, cells);
+        GameLogic gameLogic = new GameLogic(playerOne, board);
+        State actual = gameLogic.handleTree(0);
+        Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }
 
     @Test
-    public void testSetupAuction(){
-
+    public void testGetCurrentTreeID(){
+        Player playerOne = new Player("Player One");
+        List<Player> players = new ArrayList<>();
+        players.add(playerOne);
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[5],
+                null, 50, 0, false);
+        List<Cell> cells = new ArrayList<>();
+        cells.add(test_property);
+        Board board = new Board(players, cells);
+        GameLogic gameLogic = new GameLogic(playerOne, board);
+        int actual = gameLogic.getCurrentTreeID();
+        Assertions.assertEquals(actual, 0);
     }
 
 }
