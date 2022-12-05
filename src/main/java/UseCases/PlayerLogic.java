@@ -38,7 +38,7 @@ public class PlayerLogic {
             }
         else if (!isInJail() && ! isConsecutive(roll1, roll2) ){
                 this.player.move(roll1 + roll2);
-                return (roll1 + " " + roll2 + "\n");
+                return (String.valueOf( roll1 + roll2));
             }
         else if (!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) < 3){
                 return this.rollDice((consecutive + 1));
@@ -46,9 +46,9 @@ public class PlayerLogic {
         else if(!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) == 3){
                 // the player goes to jail
                 this.player.setInJail(true);
-                return (roll1 + " " + roll2 + "\n" + "player goes to jail");
+                return (String.valueOf( roll1 + roll2) + "player goes to jail");
             }
-        return (roll1 + " " + roll2 + "\n");
+        return (String.valueOf( roll1 + roll2));
     }
 
     private static boolean isConsecutive(int roll1, int roll2) {

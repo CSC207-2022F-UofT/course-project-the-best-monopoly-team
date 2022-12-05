@@ -65,11 +65,19 @@ public class Player {
     }
 
     /**
+     * Set the player's position.
+     * This is useful when the player needs to move by a mean beside rolling the dice
+     * e.g. action cards, or when we need to load a previous game.
+     * @param position the position of the player on the board should be between 0 and 39 inclusive.
+     */
+    public void setPosition(int position){
+        this.position = position;}
+
+    /**
 
      * Sets the player's number of get out of jail free cards
      * @param num the number of jail cards the player has
      */
-    public void setJailCards(int num) { this.jailCards = num; }
 
 
     /**
@@ -173,17 +181,6 @@ public class Player {
         this.inJail = !this.inJail;
     }
 
-    /* UNCOMMENT THIS WHEN GameLogicTree IS MERGED INTO THE MAIN BRANCH
-    public StringBuilder getPossibleActions() {
-        StringBuilder actions = new StringBuilder();
-        List<MenuTree> actionList = GameLogicTree.getChildren();
-        for (MenuTree node: actionList) {
-            String concat = node.id + ", ";
-            actions.append(concat);
-        }
-        return actions;
-    }
-    */
 
     /**
      * Getter method for the name of the player
@@ -241,41 +238,12 @@ public class Player {
     }
 
     /**
-     * The method used to roll the dice for the player
-     * @param i
-     * @return returns the string of the number on the dice
-     */
-    public String rollDice(int i) {
-        int max = 6;
-        int min = 1;
-        int a = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        int b = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        if (this.inJail) {
-            if (a == b) {
-                this.inJail = false;
-                this.move(a + b);
-                return (a + "\n" + b);
-            }
-        } else {
-            if (a == b) {
-                this.move(a + b);
-                this.rollDice(b);
-            } else {
-                this.move(a + b);
-                return (a + "\n" + b);
-            }
-        }
-        this.move(a + b);
-        return (a + "\n" + b);
-    }
-
-    /**
      * Increases the amount of money owned by this player
      * @param change an integer indicating how much money will be added to the player's balance
      */
     public void changeMoney(int change) {
         this.money += change;
-
+    }
 
     /**
      * Decrease the money of the player

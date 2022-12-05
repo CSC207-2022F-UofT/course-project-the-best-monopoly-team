@@ -1,5 +1,7 @@
 package Entities;
 
+import UseCases.PlayerLogic;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -195,9 +197,10 @@ public class Property extends Cell {
      * @return a boolean determining whether the houses were built successfully
      */
     public String addHouse(Player currentPlayer, int houses) {
+        PlayerLogic logic = new PlayerLogic(currentPlayer);
         if (!currentPlayer.getProperties().contains(this)) {
             return ("not owned");
-        } else if (!currentPlayer.ownedPropertySets().contains(this.colour)) {
+        } else if (!logic.ownedPropertySets().contains(this.colour)) {
             return ("not owned set");
         } else if (currentPlayer.getMoney() < this.houseCost * houses) {
             return ("not enough money");
