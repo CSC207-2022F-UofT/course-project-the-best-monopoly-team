@@ -65,10 +65,9 @@ public class PropertyTest {
 
     @Test
     public void testSetOwner() {
-        Player player1 = new Player("Player1");
         Player player2 = new Player("Player2");
         Property property1 = new Property("property1", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, null,200,2,true);
         property1.setOwner(player2);
         assertEquals(player2, property1.getOwner());
     }
@@ -77,7 +76,7 @@ public class PropertyTest {
     public void testGetName() {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6, 6}, player1,200,2,true);
         assertEquals("property1", property1.getName());
     }
 
