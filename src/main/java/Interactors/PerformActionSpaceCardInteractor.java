@@ -36,7 +36,6 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
             String action = card.getAction();
             int randomNumberOfSteps = new Random().nextInt(39);
             player.move(randomNumberOfSteps);
-            board.updatePlayerPosition(player);
             action = new String(action + " " + randomNumberOfSteps + " steps.");
 
             if (player.getPosition() == 0 || player.getPosition() + randomNumberOfSteps > 40) {
