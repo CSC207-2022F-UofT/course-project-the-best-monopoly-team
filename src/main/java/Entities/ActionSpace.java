@@ -1,6 +1,5 @@
 package Entities;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -83,7 +82,7 @@ public class ActionSpace extends Cell {
         HashMap<String, ArrayList<Object>> chanceCards = new HashMap<>();
         List<HashMap<String, ArrayList<Object>>> list = Arrays.asList(jailCards, comChestCards, chanceCards);
 //      // Reading from the game files
-        List<String> actions = Files.readAllLines(Paths.get("src/save/chestcomjail.txt"));
+        List<String> actions = Files.readAllLines(Paths.get("src/save/cards.txt"));
         // load in from the GameFiles
         for (String lines: actions) {
             // String splitting each line's words and data with the : regrex

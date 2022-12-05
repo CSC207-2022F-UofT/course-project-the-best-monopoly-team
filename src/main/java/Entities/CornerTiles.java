@@ -13,6 +13,7 @@ public class CornerTiles extends Cell{
 
     @Override
     public String getType() {
-        return "Corner Tile";
+        return this.type;
     }
+
 }

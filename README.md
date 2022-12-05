@@ -50,8 +50,6 @@ This directory contains all the core business rules and is the lowest level. The
 ### Main
 - Main
     - Where the game is ran
-- PresenterDisplay
-    - Presents the information
 
 ### TreeHandlers
 Some aspects of the game also needs trees to decide and keep track of the options.
