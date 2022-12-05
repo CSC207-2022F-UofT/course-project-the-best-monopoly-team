@@ -10,6 +10,6 @@ public interface LoadAccess {
     ArrayList<ArrayList<String[]>> loadGame() throws FileNotFoundException;
     File[] checkSaves(String folderPath);
     ArrayList<String[]> loadProperties() throws FileNotFoundException;
-    List<String> loadCards(File file) throws IOException;
 
+    List<String> loadCards() throws IOException;
 }

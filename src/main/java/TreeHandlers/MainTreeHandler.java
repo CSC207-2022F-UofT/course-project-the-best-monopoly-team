@@ -2,10 +2,14 @@ package TreeHandlers;
 
 import Entities.*;
 import Interactors.CornerTilePerformActionInteractor;
+import Interactors.PerformActionSpaceCardInteractor;
 import Interactors.PropertyPerformActionInteractor;
 import UseCases.CornerTilePerformActionUseCase;
+import UseCases.PerformActionSpaceUseCase;
 import UseCases.PropertyPerformActionUseCase;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -177,9 +181,11 @@ public class MainTreeHandler extends TreeHandler {
                                 CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
                                 CornerTiles cornerTile = (CornerTiles) landedOnCell;
                                 answer = cornerTileInteractor.performAction(currentPlayer,board, cornerTile);
-
+                                break;
                             case "Action Space":
-                                // TODO add action space case
+                                PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
+                                ActionSpace actionSpace = (ActionSpace) landedOnCell;
+                                answer = actionSpaceInteractor.performAction(actionSpace, currentPlayer, board);
                         }
                         gameLogicInteractor.transverseCurrentTree(1);
                     }
