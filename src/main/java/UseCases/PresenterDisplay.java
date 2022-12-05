@@ -1,11 +1,13 @@
-package Main;
-import Interactors.IOController;
+package UseCases;
+import Interactors.InputInteractor;
+import Interactors.OutputInteractor;
+import Persistence.LoadFile;
 
 import java.io.File;
 import java.util.Scanner;
 
 /**
- * PresenterDisplay is a class that runs the game loop and presents the options of each turn to each
+ * UseCases.PresenterDisplay is a class that runs the game loop and presents the options of each turn to each
  * player in the game.
  **/
 public class PresenterDisplay {
@@ -15,7 +17,7 @@ public class PresenterDisplay {
     private static boolean isOver;
 
     /**
-     * This is the constructor for the PresenterDisplay Class
+     * This is the constructor for the UseCases.PresenterDisplay Class
      **/
     public PresenterDisplay(){
         isOver = false;
@@ -28,15 +30,17 @@ public class PresenterDisplay {
      * to further handle state changes based on their option choice.
      **/
     public void playGame(File file){
-        IOController controller = new IOController(file);
+        UseCaseInteractor interactor = new UseCaseInteractor(new LoadFile(file));
+        InputInteractor inputControl = new InputInteractor(interactor);
+        OutputInteractor outputControl = new OutputInteractor(interactor);
         Scanner userIn = new Scanner(System.in);
-        controller.displayOptions();
+        outputControl.setFinalOutput();
         while (!this.isOver){
-
-            System.out.println(controller.presentOutput());
+            System.out.println(outputControl.getOutput());
             int choice = userIn.nextInt();
-            controller.setInput(choice);
-            controller.connectLogic();
+            inputControl.getChoice(choice);
+            outputControl.updateState(inputControl.getUpdatedState());
+            outputControl.setFinalOutput();
             // TODO Create the ability for game to end by calling finishGame()
         }
         System.out.println("Thanks for playing!");

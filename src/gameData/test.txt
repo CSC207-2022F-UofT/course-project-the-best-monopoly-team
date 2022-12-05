@@ -1,0 +1,10 @@
+playerStart
+Player01,100,false,1,10
+Mediterranean Avenue,Brown,60,50,2,10,30,90,160,250,Player01,30,0,true
+Illinois Avenue,Red,240,150,20,100,300,750,925,1100,Player01,120,0,false
+Player02,200,true,0,10
+Boardwalk,Dark Blue,400,200,50,200,600,1400,1700,2000,Player02,200,0,false
+playerEnd
+treeStart
+1,2,3,4,5
+treeEnd

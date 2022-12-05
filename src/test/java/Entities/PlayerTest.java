@@ -1,6 +1,6 @@
 package Entities;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -111,11 +111,11 @@ public class PlayerTest {
     public void testBuildHouseSuccess() {
         Player player1 = new Player("Player1");
         Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         Property property4 = new Property("property4", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         player1.addProperty(property2);
         player1.addProperty(property3);
         player1.addProperty(property4);
@@ -128,11 +128,11 @@ public class PlayerTest {
     public void testBuildHouseHotel() {
         Player player1 = new Player("Player1");
         Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,2,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
         Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         Property property4 = new Property("property4", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         player1.addProperty(property2);
         player1.addProperty(property3);
         player1.addProperty(property4);
@@ -145,7 +145,7 @@ public class PlayerTest {
     public void testBuildHouseFailNotOwned() {
         Player player1 = new Player("Player1");
         Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         String returnString = player1.buildHouse(property2,1);
         assertEquals("Player does not own property2", returnString);
         assertEquals(0, property2.getHouses());
@@ -155,7 +155,7 @@ public class PlayerTest {
     public void testBuildHouseFailNotOwnedSet2() {
         Player player1 = new Player("Player1");
         Property property2 = new Property("property2", "Dark Blue",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         player1.addProperty(property2);
         String returnString = player1.buildHouse(property2,2);
         assertEquals("Player does not own the full colour set of property2", returnString);
@@ -166,9 +166,9 @@ public class PlayerTest {
     public void testBuildHouseFailNotOwnedSet3() {
         Player player1 = new Player("Player1");
         Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         player1.addProperty(property2);
         player1.addProperty(property3);
         String returnString = player1.buildHouse(property3,2);
@@ -180,11 +180,11 @@ public class PlayerTest {
     public void testBuildHouseFailMoney() {
         Player player1 = new Player("Player1");
         Property property2 = new Property("property2", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,2,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
         Property property3 = new Property("property3", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         Property property4 = new Property("property4", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5}, player1,200,0,true);
+                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,0,true);
         player1.addProperty(property2);
         player1.addProperty(property3);
         player1.addProperty(property4);
@@ -225,7 +225,7 @@ public class PlayerTest {
     public void testMortgage() {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "yellow",
-                3,4, new int[]{1, 2, 3, 4, 5}, player1,100,4,true);
+                3,4, new int[]{1, 2, 3, 4, 5, 6}, player1,100,4,true);
         player1.setMoney(100);
         player1.mortgage(property1);
         assertEquals(200, player1.getMoney());

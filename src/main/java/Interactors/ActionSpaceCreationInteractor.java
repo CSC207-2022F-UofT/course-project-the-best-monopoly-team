@@ -7,7 +7,7 @@ import java.util.List;
 
 import Entities.ActionSpace;
 import Entities.Card;
-import Persistence.DataAccess;
+import Persistence.LoadAccess;
 import UseCases.ActionSpaceCreationUseCase;
 
 /**
@@ -15,14 +15,14 @@ import UseCases.ActionSpaceCreationUseCase;
  */
 public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase {
 
-    private final DataAccess dataAccess;
+    private final LoadAccess loadAccess;
 
     /**
      *
-     * @param dataAccess the CardAccess object
+     * @param loadAccess the CardAccess object
      */
-    public ActionSpaceCreationInteractor(DataAccess dataAccess) {
-        this.dataAccess = dataAccess;
+    public ActionSpaceCreationInteractor(LoadAccess loadAccess) {
+        this.loadAccess = loadAccess;
 
     }
 
@@ -34,6 +34,7 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
         HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperJailCards(dataAccess.loadCards(file));
         return new ActionSpace(cards);
+
     }
 
     public ActionSpace loadChanceCards(File file) throws IOException {
