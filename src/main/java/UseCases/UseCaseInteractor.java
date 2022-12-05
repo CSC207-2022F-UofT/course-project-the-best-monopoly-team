@@ -159,11 +159,10 @@ public class UseCaseInteractor{
     /**
      * This method allows the user to create a game, new or loaded, by loading the files
      * that deal with the game
-     * @param newGame - whether we are creating a new game or old game
+     *
      */
-    public void createGame(boolean newGame){
+    public void createGame(){
         Board loadedBoard;
-        if (newGame){
             loadedBoard = loadFiles();
             if (loadedBoard == null){
                 //TODO: do something when it fails to load
@@ -173,13 +172,12 @@ public class UseCaseInteractor{
                 menuTreeActive = false;
             }
         }
-        else {
-            //TODO: DO SOMETHING IF ITS NOT A NEW GAME
 
-        }
+
+    public void createLoadedGame(Board board, int[] states){
+        //TODO: make the game
 
     }
-
     /**
      * This method loads the files used in the program and creates an object which contains all the necessary game
      * files to begin a game
