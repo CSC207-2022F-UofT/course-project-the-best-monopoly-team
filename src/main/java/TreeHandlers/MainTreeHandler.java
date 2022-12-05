@@ -161,7 +161,7 @@ public class MainTreeHandler extends TreeHandler {
                     //We can determine if a player lands on a property by checking if the position
 
                     diceroll = currentPlayer.rollDice(0);
-                    board.updatePlayerPosition(currentPlayer);
+                    currentPlayer.move(Integer.parseInt(diceroll));
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
                     if (landedOnCell instanceof Property &&
                             ((Property) landedOnCell).getOwner() == null) {

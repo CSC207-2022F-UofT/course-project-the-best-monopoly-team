@@ -112,7 +112,6 @@ public class TreeHandler {
         Object[] boardArray = new Object[4];
         boardArray[0] = board.getPlayers();
         boardArray[1] = board.getCells();
-        boardArray[2] = board.getPlayerPositions();
         return boardArray;
     }
 
@@ -127,7 +126,6 @@ public class TreeHandler {
             currentPlayer.setMoney(currentPlayer.getMoney() + 200);
         }
         currentPlayer.setPosition(cell_number);
-        board.updatePlayerPosition(currentPlayer);
     }
 
     /**
