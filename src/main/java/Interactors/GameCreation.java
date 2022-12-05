@@ -7,7 +7,6 @@ import Persistence.LoadFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 public class GameCreation {
@@ -112,15 +111,17 @@ public class GameCreation {
      */
     public List<Cell> createCells(ArrayList<Cell> propertiesSoFar, ArrayList<Cell> standardProperties) throws IOException {
 
-        CornerTiles go = new CornerTiles("Go");
-        CornerTiles jail = new CornerTiles("jail");
-        CornerTiles freeParking = new CornerTiles("freeParking");
-        CornerTiles goJail = new CornerTiles("goToJail");
-        LoadAccess loadAccess = new LoadFile(new File(""));
+        CornerTiles go = new PassGo();
+        CornerTiles jail = new JailSpace();
+        CornerTiles freeParking = new FreeParking();
+        CornerTiles goJail = new GoToJail();
+        LoadAccess loadAccess = new LoadFile(new File("src/save/cards.txt"));
+        loadAccess.loadCards();
         ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(loadAccess);
-        ActionSpace2 communityChest = actionSpaceCreationInteractor.loadComChestCards(new File("src/save/cards.txt"));
-        ActionSpace2 chance = actionSpaceCreationInteractor.loadChanceCards(new File("src/save/cards.txt"));
-
+        ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards();
+        ActionSpace chance = actionSpaceCreationInteractor.loadChanceCards();
+        // TODO: determine when to call jail ActionSpaces
+        // ActionSpace jail = new ActionSpace("jail");
 
         ArrayList<Cell> cells = standardProperties;
         cells.add(0, go);

@@ -100,6 +100,7 @@ class LoadFileTest {
         // call loadCards
         // assert that the return string matches expect strings
         // (a hardcoded string of all card values)
+        LoadAccess loadAccess = new LoadFile(new File("src/save/cards.txt"));
         List<String> expected = new ArrayList<>();
         expected.add("chance:Advance:advance:0");
         expected.add("chance:Bank pays you $50 dividend:getPaid:50");
@@ -129,7 +130,7 @@ class LoadFileTest {
         expected.add("jail:Pay for your mom's living expenses($100):pay:100");
         expected.add("jail:Pay for extra benefits in jail($25):pay:25");
 
-        List<String> returnedCards = load.loadCards(cards);
+        List<String> returnedCards = loadAccess.loadCards();
         for (int i = 0; i < returnedCards.size(); i++) {
             assert returnedCards.get(i).equals(expected.get(i));
         }

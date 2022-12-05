@@ -3,12 +3,12 @@ package UseCases;
 import java.io.File;
 import java.io.IOException;
 
-import Entities.ActionSpace2;
+import Entities.ActionSpace;
 
 public interface    ActionSpaceCreationUseCase {
 
-    ActionSpace2 loadJailCards(File file) throws IOException;
-    ActionSpace2 loadChanceCards(File file) throws IOException;
-    ActionSpace2 loadComChestCards(File file) throws IOException;
+    ActionSpace loadJailCards() throws IOException;
+    ActionSpace loadChanceCards() throws IOException;
+    ActionSpace loadComChestCards() throws IOException;
 
 }

@@ -2,12 +2,15 @@ package TreeHandlers;
 
 import Entities.*;
 import Interactors.CornerTilePerformActionInteractor;
+import Interactors.PerformActionSpaceCardInteractor;
 import Interactors.PropertyPerformActionInteractor;
 import UseCases.CornerTilePerformActionUseCase;
+import UseCases.PerformActionSpaceUseCase;
 import UseCases.PropertyPerformActionUseCase;
 
+import javax.swing.*;
+import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainTreeHandler extends TreeHandler {
     //mainStates[0]: reserved for confirmation node
@@ -161,7 +164,7 @@ public class MainTreeHandler extends TreeHandler {
                     //We can determine if a player lands on a property by checking if the position
 
                     diceroll = currentPlayer.rollDice(0);
-                    board.updatePlayerPosition(currentPlayer);
+                    currentPlayer.move(Integer.parseInt(diceroll));
                     Cell landedOnCell = board.getCell(currentPlayer.getPosition());
                     if (landedOnCell instanceof Property &&
                             ((Property) landedOnCell).getOwner() == null) {
@@ -175,11 +178,15 @@ public class MainTreeHandler extends TreeHandler {
                                 break;
                             case "Corner Tile":
                                 CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+                                assert landedOnCell instanceof CornerTiles;
                                 CornerTiles cornerTile = (CornerTiles) landedOnCell;
-                                answer = cornerTileInteractor.performAction(currentPlayer,board, cornerTile);
 
+                                answer = cornerTileInteractor.performAction(currentPlayer, cornerTile);
+                                break;
                             case "Action Space":
-                                // TODO add action space case
+                                PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
+                                ActionSpace actionSpace = (ActionSpace) landedOnCell;
+                                answer = actionSpaceInteractor.performAction(actionSpace, currentPlayer, board);
                         }
                         gameLogicInteractor.transverseCurrentTree(1);
                     }

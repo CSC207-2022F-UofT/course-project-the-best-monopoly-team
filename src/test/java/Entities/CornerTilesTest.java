@@ -17,72 +17,88 @@ public class CornerTilesTest {
 
     private Player player1 = new Player("Player1");
     @Test
-    public void performActionTestInJail() throws IOException {
-        ArrayList<String> players = new ArrayList<String>(Arrays.asList("1", "2", "3", "4"));
+    public void performActionInJailTest() throws IOException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         GameCreation creation = new GameCreation();
         String[] property = {"0", "1", "2",
                 "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        ArrayList<String[]> properties = new ArrayList<String[]>();
+        ArrayList<String[]> properties = new ArrayList<>();
         for (int i = 0; i < 40; i++){
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
         Board bo = creation.createNewGame(players, properties);
-        CornerTiles t = new CornerTiles("jail");
+        CornerTiles t = new JailSpace();
         player1.setInJail(true);
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
-        assertEquals( "You are still in Jail", cornerTileInteractor.performAction(player1, bo, t));
+        assertEquals( "You are still in Jail", cornerTileInteractor.performAction(player1, t));
     }
 
     @Test
-    public void performActionTestNotInJail() throws IOException {
-        ArrayList<String> players = new ArrayList<String>(Arrays.asList("1", "2", "3", "4"));
+    public void performActionNotInJailTest() throws IOException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         GameCreation creation = new GameCreation();
         String[] property = {"0", "1", "2",
                 "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        ArrayList<String[]> properties = new ArrayList<String[]>();
+        ArrayList<String[]> properties = new ArrayList<>();
         for (int i = 0; i < 40; i++){
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
         Board bo = creation.createNewGame(players, properties);
-        CornerTiles t = new CornerTiles("jail");
+        CornerTiles t = new JailSpace();
         player1.setInJail(false);
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
-        assertEquals("You're visiting Jail", cornerTileInteractor.performAction(player1, bo, t));
+        assertEquals("You're visiting Jail", cornerTileInteractor.performAction(player1, t));
     }
     @Test
-    public void performActionTestFreeParking() throws IOException {
-        ArrayList<String> players = new ArrayList<String>(Arrays.asList("1", "2", "3", "4"));
+    public void performActionFreeParkingTest() throws IOException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         GameCreation creation = new GameCreation();
         String[] property = {"0", "1", "2",
                 "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        ArrayList<String[]> properties = new ArrayList<String[]>();
+        ArrayList<String[]> properties = new ArrayList<>();
         for (int i = 0; i < 40; i++){
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
         Board bo = creation.createNewGame(players, properties);
-        CornerTiles t = new CornerTiles("freeParking");
+        CornerTiles t = new FreeParking();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
-        assertEquals("You landed on Free Parking!", cornerTileInteractor.performAction(player1, bo, t));
+        assertEquals("You landed on Free Parking!", cornerTileInteractor.performAction(player1, t));
     }
     @Test
-    public void performActionGoToJail() throws IOException {
-        ArrayList<String> players = new ArrayList<String>(Arrays.asList("1", "2", "3", "4"));
+    public void performActionGoToJailTest() throws IOException {
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
         GameCreation creation = new GameCreation();
         String[] property = {"0", "1", "2",
                 "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
-        ArrayList<String[]> properties = new ArrayList<String[]>();
+        ArrayList<String[]> properties = new ArrayList<>();
         for (int i = 0; i < 40; i++){
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
         Board bo = creation.createNewGame(players, properties);
-        CornerTiles t = new CornerTiles("goToJail");
+        CornerTiles t = new GoToJail();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
-        assertEquals("Go to Jail!", cornerTileInteractor.performAction(player1, bo, t));
+        assertEquals("Go to Jail!", cornerTileInteractor.performAction(player1, t));
         assertEquals(player1.getPosition(), 11);
         assertEquals(player1.isInJail(), true);
+    }
+    @Test
+    public void performActionPassGoTest() throws IOException{
+        ArrayList<String> players = new ArrayList<>(Arrays.asList("1", "2", "3", "4"));
+        GameCreation creation = new GameCreation();
+        String[] property = {"0", "1", "2",
+                "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"};
+        ArrayList<String[]> properties = new ArrayList<>();
+        for (int i = 0; i < 40; i++){
+            properties.add(property);
+        }
+        ArrayList<String[]> strings = new ArrayList<>();
+        Board bo = creation.createNewGame(players, properties);
+        CornerTiles t = new PassGo();
+        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+        assertEquals("Passed Go!, Collected 200", cornerTileInteractor.performAction(player1, t));
     }
 }
