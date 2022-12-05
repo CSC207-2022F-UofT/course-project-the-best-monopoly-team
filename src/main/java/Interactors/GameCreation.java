@@ -115,11 +115,13 @@ public class GameCreation {
         CornerTiles jail = new JailSpace();
         CornerTiles freeParking = new FreeParking();
         CornerTiles goJail = new GoToJail();
-        LoadAccess loadAccess = new LoadFile(new File(""));
+        LoadAccess loadAccess = new LoadFile(new File("src/save/cards.txt"));
+        loadAccess.loadCards();
         ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(loadAccess);
-        ActionSpace2 communityChest = actionSpaceCreationInteractor.loadComChestCards(new File("src/save/cards.txt"));
-        ActionSpace2 chance = actionSpaceCreationInteractor.loadChanceCards(new File("src/save/cards.txt"));
-
+        ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards();
+        ActionSpace chance = actionSpaceCreationInteractor.loadChanceCards();
+        // TODO: determine when to call jail ActionSpaces
+        // ActionSpace jail = new ActionSpace("jail");
 
         ArrayList<Cell> cells = standardProperties;
         cells.add(0, go);

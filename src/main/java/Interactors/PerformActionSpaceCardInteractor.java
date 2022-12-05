@@ -1,8 +1,9 @@
 package Interactors;
 
+import java.util.Objects;
 import java.util.Random;
 
-import Entities.ActionSpace2;
+import Entities.ActionSpace;
 import Entities.Board;
 import Entities.Card;
 import Entities.Player;
@@ -15,12 +16,12 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     
     /**
      * Generates a random card from the action space
-     * @param actionSpace2 the action space
+     * @param actionSpace the action space
      * @return the card
      */
-    private Card generateRandomCard(ActionSpace2 actionSpace2) {
-        int random_index = new Random().nextInt(actionSpace2.getCards().size());
-        return actionSpace2.getCards().get(random_index);
+    private Card generateRandomCard(ActionSpace actionSpace) {
+        int random_index = new Random().nextInt(actionSpace.getCards().size());
+        return actionSpace.getCards().get(random_index);
         
     }
 
@@ -113,18 +114,18 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @param board the board
      * @return the message
      */
-    public String performAction(ActionSpace2 actionSpace2, Player player, Board board) {
-        Card card = generateRandomCard(actionSpace2);
+    public String performAction(ActionSpace actionSpace, Player player, Board board) {
+        Card card = generateRandomCard(actionSpace);
         String actionType = card.getActionType();
-        if (actionType == "advance") {
+        if (Objects.equals(actionType, "advance")) {
             return advanceAction(player, board, card);
-        } else if (actionType == "getPaid") {
+        } else if (Objects.equals(actionType, "getPaid")) {
             return getPaidAction(player, card);
-        } else if (actionType == "pay") {
+        } else if (Objects.equals(actionType, "pay")) {
             return payAction(player, card);
-        } else if (actionType == "payAll") {
+        } else if (Objects.equals(actionType, "payAll")) {
             return payAllAction(player, board, card);
-        } else if (actionType == "goToJail") {
+        } else if (Objects.equals(actionType, "goToJail")) {
             return goToJailAction(player, card);
         } else {
             return getOutOfJailAction(player, card);
