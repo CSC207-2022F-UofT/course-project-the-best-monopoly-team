@@ -131,9 +131,9 @@ public class LoadFile implements LoadAccess{
      *
      */
     @Override
-    public List<String> loadCards(File file) throws IOException {
+    public List<String> loadCards() throws IOException {
 
-        return Files.readAllLines(file.toPath());
+        return Files.readAllLines(this.file.toPath());
 
     }
 }

@@ -1,11 +1,10 @@
 package Interactors;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
-import Entities.ActionSpace2;
+import Entities.ActionSpace;
 import Entities.Card;
 import Persistence.LoadAccess;
 import UseCases.ActionSpaceCreationUseCase;
@@ -30,21 +29,22 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
      * 
      * @return the action space
      */
-    public ActionSpace2 loadJailCards(File file) throws IOException {
+    public ActionSpace loadJailCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
-        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperJailCards(loadAccess.loadCards(file));
-        return new ActionSpace2(cards);
+        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperJailCards(loadAccess.loadCards());
+        return new ActionSpace(cards);
+
     }
 
-    public ActionSpace2 loadChanceCards(File file) throws IOException {
+    public ActionSpace loadChanceCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
-        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperChanceCards(loadAccess.loadCards(file));
-        return new ActionSpace2(cards);
+        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperChanceCards(loadAccess.loadCards());
+        return new ActionSpace(cards);
     }
 
-    public ActionSpace2 loadComChestCards(File file) throws IOException {
+    public ActionSpace loadComChestCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
-        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperComChest(loadAccess.loadCards(file));
-        return new ActionSpace2(cards);
+        HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperComChest(loadAccess.loadCards());
+        return new ActionSpace(cards);
     }
 }
