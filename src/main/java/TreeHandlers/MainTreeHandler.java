@@ -11,7 +11,6 @@ import UseCases.PropertyPerformActionUseCase;
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class MainTreeHandler extends TreeHandler {
     //mainStates[0]: reserved for confirmation node
@@ -179,8 +178,10 @@ public class MainTreeHandler extends TreeHandler {
                                 break;
                             case "Corner Tile":
                                 CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
+                                assert landedOnCell instanceof CornerTiles;
                                 CornerTiles cornerTile = (CornerTiles) landedOnCell;
-                                answer = cornerTileInteractor.performAction(currentPlayer,board, cornerTile);
+
+                                answer = cornerTileInteractor.performAction(currentPlayer, cornerTile);
                                 break;
                             case "Action Space":
                                 PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
