@@ -48,7 +48,8 @@ class LoadFileTest {
 
         String path = new File("src/save").getAbsolutePath();
         File save = new File(path);
-        String[] actualReturn = save.list();
+        LoadAccess folder = new LoadFile(save);
+        String[] actualReturn = folder.checkSaves(path);
         assert actualReturn != null;
         for (String i: actualReturn){
             assert Arrays.asList(expectedReturn).contains(i);

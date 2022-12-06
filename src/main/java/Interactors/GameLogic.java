@@ -27,6 +27,17 @@ public class GameLogic {
     }
 
     /**
+     * This is the constructor for creating a GameLogic instance.
+     * @param board A board instance that the GameLogic instance will help govern.
+     * @param states array of integers containing what is needed to create the game
+     */
+    public GameLogic(Board board, int[] states){
+        //AuctionTreeNodeLogic.array_init(board.getPlayers().size());
+        //GeneralGameLogic.initialize(currentPlayer,board, this);
+        // createTrees();
+    }
+
+    /**
      * This method returns a State object which represents the state of the game.
      * @return A State object representing the state of the game.
      */

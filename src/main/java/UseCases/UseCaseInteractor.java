@@ -3,13 +3,13 @@ package UseCases;
 
 import Entities.Board;
 import Entities.GameLogicTree;
-import Entities.MenuTree;
 import Entities.State;
 import Persistence.LoadAccess;
 import Interactors.GameCreation;
 import Interactors.GameLogic;
 import UseCases.InitialNodeLogic.*;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -162,11 +162,17 @@ public class UseCaseInteractor{
             }
         }
 
-
+    /**
+     * This method allows the user to create a loaded game
+     * @param board is the Board instance containing the save file information
+     * @param states is an int[] containing save file information
+     */
     public void createLoadedGame(Board board, int[] states){
         //TODO: make the game
-
+        logicInteractor = new GameLogic(board, states);
+        menuTreeActive = false;
     }
+
     /**
      * This method loads the files used in the program and creates an object which contains all the necessary game
      * files to begin a game
@@ -200,6 +206,17 @@ public class UseCaseInteractor{
 
         Board savedGame = this.gameCreation.createSavedGame(loadedGame, newProperties);
         return savedGame;
+    }
+
+    /**
+     * This method loads the save file and returns the initial states required for the
+     * Tree when creating a game
+     * @return an Integer[] of initial states
+     * @throws FileNotFoundException
+     */
+    public int[] loadInitialStates() throws FileNotFoundException {
+        ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame();
+        return this.gameCreation.getInitialStates(loadedGame);
     }
 
     /**

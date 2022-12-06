@@ -17,6 +17,7 @@ public class NewGame extends InitialLogic implements NodeLogic {
 
         //options associated with the next node
         state.addOptions("Normal mode");
+        state.addOptions("Rich mode");
         return afterLogic(state);
     }
 }

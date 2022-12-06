@@ -24,7 +24,7 @@ public class LoadFile implements LoadAccess{
      * @return  an array of the user's save files.
      */
 
-    public File[] checkSaves(String folderPath){
+    public String[] checkSaves(String folderPath){
         // TODO test in the future, list.Files() may not return as expected for src/save
         // checkSaves searches the given folder and returns an array of file names
         // the user selects the save file from the list of file names
@@ -33,7 +33,7 @@ public class LoadFile implements LoadAccess{
         // the GameCreationInteractor will handle creating the class instances
 
         File folder = new File(folderPath);
-        return folder.listFiles();
+        return folder.list();
     }
 
 
