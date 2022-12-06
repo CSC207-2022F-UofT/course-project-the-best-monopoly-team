@@ -9,6 +9,9 @@ import TreeHandlers.GeneralGameLogic;
 
 import java.util.List;
 
+/**
+ * This class handles the logic for the auction tree nodes.
+ */
 public class AuctionTreeNodeLogic extends GeneralGameLogic {
     final int LOW_OPTION = 20;
     final int MEDIUM_OPTION = 80;
@@ -27,8 +30,6 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
     public static void array_init(int playerLength){
         auctionStates = new int[playerLength + 1];
     }
-
-
 
     /**
      * Gets the current state object of the tree when the auction is not yet complete
