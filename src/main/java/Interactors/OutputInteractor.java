@@ -45,29 +45,30 @@ public class OutputInteractor {
      * @param state: the current state that game is in
      */
     public void updateLogicStates(String state){
-        StringBuilder currString = new StringBuilder();
         switch (state) {
-            case "MainTree":
+            case "Main Tree Parent Node":
                 updateMainTree();
                 break;
-            case "SendTrade":
+            case "Send The Trade":
                 updateSendTrade();
                 break;
-            case "BuildProperty":
+            case "Build House/Hotel":
                 updateBuildProperty();
                 break;
-            case "CallAction":
+            case "Perform Action":
                 updateCallAction();
                 break;
-            case "EmptyPropertySpace":
+            case "Property Unowned":
                 updateEmptyPropertySpace();
                 break;
-            case "AuctionTree":
+            case "Auction Tree Parent Node":
                 updateAuctionTree();
                 break;
             case "Fold":
                 updateFold();
                 break;
+            case "Choose Player (Steal)":
+                updateSteal();
         }
     }
 
@@ -77,34 +78,37 @@ public class OutputInteractor {
     public void updateMainTree(){
         String currString = this.currentState.getPlayer().getName() + " It's your turn! What do you want to do? You currently have " +
                 this.currentState.getPlayer().getMoney() + " dollars";
-        this.output.modifyStateOutput("MainTree", currString);
+        this.output.modifyStateOutput("Main Tree Parent Node", currString);
     }
-
+    public void updateSteal(){
+        String currString = this.currentState.getDescription();
+        this.output.modifyStateOutput("Choose Player (Steal)", currString);
+    }
     public void updateSendTrade(){
         String currString = currentState.getTradingOpponent().getName() + ", Incoming trade from player " +
                 currentState.getPlayer().getName() + " requesting for " + currentState.getTradingPlayerProperty().getName() +
                 " in return for " + currentState.getCurrentPlayerProperty().getName();
-        this.output.modifyStateOutput("SendTrade", currString);
+        this.output.modifyStateOutput("Send The Trade", currString);
     }
     public void updateBuildProperty(){
         String currString = currentState.getCurrentPlayerProperty().getHouses() + " houses built on this property";
-        this.output.modifyStateOutput("BuildProperty", currString);
+        this.output.modifyStateOutput("Build House/Hotel", currString);
     }
 
     public void updateCallAction(){
         String currString =  "You rolled a " + currentState.getRoll()+ currentState.getDescription();
-        this.output.modifyStateOutput("CallAction", currString);
+        this.output.modifyStateOutput("Perform Action", currString);
     }
     public void updateEmptyPropertySpace(){
         String currString = "You rolled a " + currentState.getRoll() + " You have landed on " +
                 currentState.getCurrentPlayerProperty().getName() + " and no ones owns this. It costs " +
                 currentState.getCurrentPlayerProperty().getPrice() + " What do you want to do?";
-        this.output.modifyStateOutput("EmptyPropertySpace", currString);
+        this.output.modifyStateOutput("Property Unowned", currString);
     }
     public void updateAuctionTree(){
         String currString = currentState.getPlayer().getName() + ", we are bidding on " + currentState.getBiddingProperty().getName() +
                 " with the current pot being " + currentState.getBiddingPot();
-        this.output.modifyStateOutput("AuctionTree", currString);
+        this.output.modifyStateOutput("Auction Tree Parent Node", currString);
     }
     public void updateFold(){
         String currString = currentState.getPlayer().getName() + " won the auction for " + currentState.getBiddingPot() + " dollars";

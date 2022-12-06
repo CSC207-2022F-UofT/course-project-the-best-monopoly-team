@@ -1,5 +1,6 @@
 package Entities;
 
+import UseCases.InitialNodeLogic.*;
 import org.junit.jupiter.api.Test;
 
 class GameLogicTreeTest {
@@ -14,22 +15,22 @@ class GameLogicTreeTest {
 
     @Test
     void getName() {
-        assert tree.getName().equals("InitialMenu");
+
     }
 
 
     private GameLogicTree createTree(){
-        GameLogicTree gameLength = new GameLogicTree("GameLength");
-        GameLogicTree gameType = new GameLogicTree("GameType");
+        GameLogicTree gameLength = new GameLogicTree(new GameLength());
+        GameLogicTree gameType = new GameLogicTree(new ChooseGameMode());
         gameType.addChild(gameLength);
 
-        GameLogicTree numPlayers = new GameLogicTree("NumberOfPlayers");
-        GameLogicTree newGame = new GameLogicTree("StartMenu");
+        GameLogicTree numPlayers = new GameLogicTree(new NumberOfPlayers());
+        GameLogicTree newGame = new GameLogicTree(new NewGame());
         newGame.addChild(numPlayers);
         newGame.addChild(gameType);
 
-        GameLogicTree loadGame = new GameLogicTree("LoadGame");
-        GameLogicTree startMenu = new GameLogicTree("InitialMenu");
+        GameLogicTree loadGame = new GameLogicTree(new LoadGame());
+        GameLogicTree startMenu = new GameLogicTree(new InitialParentNode());
         startMenu.addChild(loadGame);
         startMenu.addChild(newGame);
 
