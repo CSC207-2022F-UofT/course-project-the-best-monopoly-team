@@ -45,27 +45,29 @@ public class OutputInteractor {
      */
     public void updateLogicStates(String state){
         switch (state) {
-            case "MainTree":
+            case "Main Tree Parent Node":
                 updateMainTree();
                 break;
-            case "SendTrade":
+            case "Send The Trade":
                 updateSendTrade();
                 break;
-            case "BuildProperty":
+            case "Build House/Hotel":
                 updateBuildProperty();
                 break;
-            case "CallAction":
+            case "Perform Action":
                 updateCallAction();
                 break;
-            case "EmptyPropertySpace":
+            case "Property Unowned":
                 updateEmptyPropertySpace();
                 break;
-            case "AuctionTree":
+            case "Auction Tree Parent Node":
                 updateAuctionTree();
                 break;
             case "Fold":
                 updateFold();
                 break;
+            case "Choose Player (Steal)":
+                updateSteal();
         }
     }
 
@@ -75,9 +77,12 @@ public class OutputInteractor {
     public void updateMainTree(){
         String currString = this.currentState.getPlayer().getName() + " It's your turn! What do you want to do? You currently have " +
                 this.currentState.getPlayer().getMoney() + " dollars";
-        this.output.modifyStateOutput("MainTree", currString);
+        this.output.modifyStateOutput("Main Tree Parent Node", currString);
     }
-
+    public void updateSteal(){
+        String currString = this.currentState.getDescription();
+        this.output.modifyStateOutput("Choose Player (Steal)", currString);
+    }
     public void updateSendTrade(){
         String currString = this.currentState.getTradingOpponent().getName() + ", Incoming trade from player " +
                 this.currentState.getPlayer().getName() + " requesting for " +
@@ -89,7 +94,6 @@ public class OutputInteractor {
         String currString = this.currentState.getCurrentPlayerProperty().getHouses() + " houses built on this property";
         this.output.modifyStateOutput("BuildProperty", currString);
     }
-
     public void updateCallAction(){
         String currString =  "You rolled a " + this.currentState.getRoll()+ this.currentState.getDescription();
         this.output.modifyStateOutput("CallAction", currString);
