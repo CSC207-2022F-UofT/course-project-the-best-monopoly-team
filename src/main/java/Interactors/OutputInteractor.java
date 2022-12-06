@@ -31,13 +31,12 @@ public class OutputInteractor {
     }
 
     /**
-     * setFinalOutput updates the string to be presented to the user by updating all the output strings that should
-     * be presented to the user based on the state and presented all the options based on the state
+     * Function to return the current Output message for context to the user
+     * @return the context String
      */
-    public void setFinalOutput(){
+    public String getOutputMessage(){
         updateLogicStates(this.currentState.getId());
-        this.output.setFinalOutput(this.output.getStateOutput(this.currentState.getId()));
-        addOptionStrings();
+        return this.output.getStateOutput(this.currentState.getId());
     }
 
     /**
@@ -45,7 +44,6 @@ public class OutputInteractor {
      * @param state: the current state that game is in
      */
     public void updateLogicStates(String state){
-        StringBuilder currString = new StringBuilder();
         switch (state) {
             case "MainTree":
                 updateMainTree();
@@ -81,47 +79,48 @@ public class OutputInteractor {
     }
 
     public void updateSendTrade(){
-        String currString = currentState.getTradingOpponent().getName() + ", Incoming trade from player " +
-                currentState.getPlayer().getName() + " requesting for " + currentState.getTradingPlayerProperty().getName() +
-                " in return for " + currentState.getCurrentPlayerProperty().getName();
+        String currString = this.currentState.getTradingOpponent().getName() + ", Incoming trade from player " +
+                this.currentState.getPlayer().getName() + " requesting for " +
+                this.currentState.getTradingPlayerProperty().getName() +
+                " in return for " + this.currentState.getCurrentPlayerProperty().getName();
         this.output.modifyStateOutput("SendTrade", currString);
     }
     public void updateBuildProperty(){
-        String currString = currentState.getCurrentPlayerProperty().getHouses() + " houses built on this property";
+        String currString = this.currentState.getCurrentPlayerProperty().getHouses() + " houses built on this property";
         this.output.modifyStateOutput("BuildProperty", currString);
     }
 
     public void updateCallAction(){
-        String currString =  "You rolled a " + currentState.getRoll()+ currentState.getDescription();
+        String currString =  "You rolled a " + this.currentState.getRoll()+ this.currentState.getDescription();
         this.output.modifyStateOutput("CallAction", currString);
     }
     public void updateEmptyPropertySpace(){
-        String currString = "You rolled a " + currentState.getRoll() + " You have landed on " +
-                currentState.getCurrentPlayerProperty().getName() + " and no ones owns this. It costs " +
-                currentState.getCurrentPlayerProperty().getPrice() + " What do you want to do?";
+        String currString = "You rolled a " + this.currentState.getRoll() + " You have landed on " +
+                this.currentState.getCurrentPlayerProperty().getName() + " and no ones owns this. It costs " +
+                this.currentState.getCurrentPlayerProperty().getPrice() + " What do you want to do?";
         this.output.modifyStateOutput("EmptyPropertySpace", currString);
     }
     public void updateAuctionTree(){
-        String currString = currentState.getPlayer().getName() + ", we are bidding on " + currentState.getBiddingProperty().getName() +
-                " with the current pot being " + currentState.getBiddingPot();
+        String currString = this.currentState.getPlayer().getName() + ", we are bidding on " +
+                this.currentState.getBiddingProperty().getName() +
+                " with the current pot being " + this.currentState.getBiddingPot();
         this.output.modifyStateOutput("AuctionTree", currString);
     }
     public void updateFold(){
-        String currString = currentState.getPlayer().getName() + " won the auction for " + currentState.getBiddingPot() + " dollars";
+        String currString = this.currentState.getPlayer().getName() + " won the auction for " +
+                this.currentState.getBiddingPot() + " dollars";
         this.output.modifyStateOutput("Fold", currString.toString());
     }
 
     /**
-     * Function to get the options the user has based on the state and concatenate those options to present to the user
+     * Function to get the options the user has based on the state
+     * @return the ArrayList of options in the current state
      */
-    public void addOptionStrings(){
-        StringBuilder currOptions = new StringBuilder("\n");
-        ArrayList<String> options = this.currentState.getOptions();
-        for (int i = 0; i < options.size(); i++)
-            currOptions.append(options.get(i)).append("(").append(i).append("), ");
+    public ArrayList<String> getStateOptions(){
+        ArrayList<String> currOptions = this.currentState.getOptions();
         if (this.currentState.isBackEnable())
-            currOptions.append("back").append("(").append(options.size()).append(")");
-        this.output.addToFinalOutput(currOptions.toString());
+            currOptions.add("back");
+        return currOptions;
     }
 
     /**
