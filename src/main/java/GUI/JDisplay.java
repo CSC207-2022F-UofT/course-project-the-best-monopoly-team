@@ -1,7 +1,6 @@
 package GUI;
 
-import ButtonMappings.Button1;
-import ButtonMappings.Button2;
+import Entities.GameScreen;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,7 +20,7 @@ public class JDisplay {
      * InstanceVar selectedOutput: The String of the button that
      * is clicked by the user
      */
-    private JFrame gameFrame;
+    private GameScreen gameFrame;
     private JDisplayOutputHandler labelSegments;
     private JDisplayInputHandler inputHandler;
     private String selectedOutput;
@@ -31,19 +30,7 @@ public class JDisplay {
      * background and fixes all its size and other properties
      */
     public JDisplay(){
-        this.gameFrame = new JFrame("Monopoly++");
-        this.gameFrame.setLayout(null);
-        this.gameFrame.setResizable(false);
-        this.gameFrame.setSize(900, 630);
-        ImageIcon board = new ImageIcon("src/main/java/GUI/monopolyboard.jpg");
-        Image temp = board.getImage();
-        Image temp2 = temp.getScaledInstance(600, 600, Image.SCALE_SMOOTH);
-        board = new ImageIcon(temp2);
-        JLabel boardLabel = new JLabel(board);
-        this.gameFrame.add(boardLabel);
-        boardLabel.setBounds(0, 0, 600, 600);
-        boardLabel.repaint();
-
+        this.gameFrame = new GameScreen();
         this.labelSegments = new JDisplayOutputHandler();
         this.inputHandler = new JDisplayInputHandler();
         this.selectedOutput = "";
@@ -55,7 +42,7 @@ public class JDisplay {
      * @param outputText: The String of Text shown to the user to
      *                  explain the current context of the game
      */
-    public void addLabelSegments(ArrayList<String> options, String outputText){
+    public void setOutputs(ArrayList<String> options, String outputText){
         this.labelSegments.setOptions(options);
         this.labelSegments.createOptionSegment();
         this.labelSegments.createTextSegment(outputText);
@@ -95,17 +82,17 @@ public class JDisplay {
      * is closed
      */
     public void displayScreen(){
-        this.gameFrame.setVisible(true);
-        this.gameFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.gameFrame.display();
     }
 
     /**
      * Refresh the screen for the next set of outputs
      */
     public void refreshScreen(){
+        clearLabels();
         this.gameFrame.remove(this.labelSegments.getTextSegment());
         this.gameFrame.remove(this.labelSegments.getOptionSegment());
-        this.gameFrame.repaint();
+        this.gameFrame.refresh();
     }
 
     /**

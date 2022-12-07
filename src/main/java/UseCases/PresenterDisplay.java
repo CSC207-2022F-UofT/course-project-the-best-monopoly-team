@@ -36,7 +36,7 @@ public class PresenterDisplay {
         OutputInteractor outputControl = new OutputInteractor(interactor);
         JDisplay gameFrame = new JDisplay();
 
-        gameFrame.addLabelSegments(outputControl.getStateOptions(), outputControl.getOutputMessage());
+        gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
         gameFrame.displayScreen();
         while (!isOver){
             boolean didInput = false;
@@ -45,9 +45,8 @@ public class PresenterDisplay {
             }
             inputControl.getChoice(gameFrame.getInput());
             outputControl.updateState(inputControl.getUpdatedState());
-            gameFrame.clearLabels();
             gameFrame.refreshScreen();
-            gameFrame.addLabelSegments(outputControl.getStateOptions(), outputControl.getOutputMessage());
+            gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
         }
 
     }

@@ -121,9 +121,10 @@ public class OutputInteractor {
      * @return the ArrayList of options in the current state
      */
     public ArrayList<String> getStateOptions(){
-        ArrayList<String> currOptions = this.currentState.getOptions();
-        if (this.currentState.isBackEnable())
+        ArrayList<String> currOptions = new ArrayList<>(this.currentState.getOptions());
+        if (this.currentState.isBackEnable()){
             currOptions.add("back");
+        }
         return currOptions;
     }
 
