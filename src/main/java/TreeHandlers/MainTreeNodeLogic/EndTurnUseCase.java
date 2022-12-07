@@ -1,6 +1,7 @@
 package TreeHandlers.MainTreeNodeLogic;
 
 import Entities.*;
+import Interactors.GameLogic;
 import Interface.NodeLogic;
 
 /**
@@ -22,13 +23,19 @@ public class EndTurnUseCase extends MainTreeNodeLogic implements NodeLogic {
      */
     public State create_state(int input){
         State currentState = new State();
-
+        GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
 
         currentState.setId(getName());
         //end the turn if the person is not in debt
         if (currentPlayer.getMoney()  >= 0){
             mainStates[3] += 1;
+            if (mainStates[3] == mainStates[4]){
+                gameLogicInteractor.transverseCurrentTree(1);
+                currentState = gameLogicInteractor.handleTree(0);
+                return currentState;
+            }
+
             //changing the player and turning the state back to normal
             changePlayers();
             mainStates[0] = 0;
