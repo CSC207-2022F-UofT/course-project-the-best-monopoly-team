@@ -85,6 +85,22 @@ public class GameCreation {
         return savedBoard;
     }
 
+    /**
+     * Loads the initial states stored in a save file
+     * @param gameData an ArrayList containing 2 sub ArrayLists;
+     *                 the first of Players and their owned Properties
+     *                 the second of initial states required for the Tree
+     * @return an Integer[] of all the saved initial states
+     */
+    public int[] getInitialStates(ArrayList<ArrayList<String[]>> gameData) {
+        int[] initialStates = new int[gameData.get(1).get(0).length];
+        for (int i = 0; i < initialStates.length; i++) {
+            initialStates[i] = Integer.parseInt(gameData.get(1).get(0)[i]);
+        }
+
+        return initialStates;
+    }
+
     /** Gets the Player instance based on a String of a Player's name.
      *
      * @param players an Arraylist of Player instances.
