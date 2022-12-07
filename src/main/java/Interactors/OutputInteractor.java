@@ -84,35 +84,33 @@ public class OutputInteractor {
         this.output.modifyStateOutput("Choose Player (Steal)", currString);
     }
     public void updateSendTrade(){
-        String currString = this.currentState.getTradingOpponent().getName() + ", Incoming trade from player " +
-                this.currentState.getPlayer().getName() + " requesting for " +
-                this.currentState.getTradingPlayerProperty().getName() +
-                " in return for " + this.currentState.getCurrentPlayerProperty().getName();
-        this.output.modifyStateOutput("SendTrade", currString);
+        String currString = currentState.getTradingOpponent().getName() + ", Incoming trade from player " +
+                currentState.getPlayer().getName() + " requesting for " + currentState.getTradingPlayerProperty().getName() +
+                " in return for " + currentState.getCurrentPlayerProperty().getName();
+        this.output.modifyStateOutput("Send The Trade", currString);
     }
     public void updateBuildProperty(){
-        String currString = this.currentState.getCurrentPlayerProperty().getHouses() + " houses built on this property";
-        this.output.modifyStateOutput("BuildProperty", currString);
+        String currString = currentState.getCurrentPlayerProperty().getHouses() + " houses built on this property";
+        this.output.modifyStateOutput("Build House/Hotel", currString);
     }
+
     public void updateCallAction(){
-        String currString =  "You rolled a " + this.currentState.getRoll()+ this.currentState.getDescription();
-        this.output.modifyStateOutput("CallAction", currString);
+        String currString =  "You rolled a " + currentState.getRoll()+ currentState.getDescription();
+        this.output.modifyStateOutput("Perform Action", currString);
     }
     public void updateEmptyPropertySpace(){
-        String currString = "You rolled a " + this.currentState.getRoll() + " You have landed on " +
-                this.currentState.getCurrentPlayerProperty().getName() + " and no ones owns this. It costs " +
-                this.currentState.getCurrentPlayerProperty().getPrice() + " What do you want to do?";
-        this.output.modifyStateOutput("EmptyPropertySpace", currString);
+        String currString = "You rolled a " + currentState.getRoll() + " You have landed on " +
+                currentState.getCurrentPlayerProperty().getName() + " and no ones owns this. It costs " +
+                currentState.getCurrentPlayerProperty().getPrice() + " What do you want to do?";
+        this.output.modifyStateOutput("Property Unowned", currString);
     }
     public void updateAuctionTree(){
-        String currString = this.currentState.getPlayer().getName() + ", we are bidding on " +
-                this.currentState.getBiddingProperty().getName() +
-                " with the current pot being " + this.currentState.getBiddingPot();
-        this.output.modifyStateOutput("AuctionTree", currString);
+        String currString = currentState.getPlayer().getName() + ", we are bidding on " + currentState.getBiddingProperty().getName() +
+                " with the current pot being " + currentState.getBiddingPot();
+        this.output.modifyStateOutput("Auction Tree Parent Node", currString);
     }
     public void updateFold(){
-        String currString = this.currentState.getPlayer().getName() + " won the auction for " +
-                this.currentState.getBiddingPot() + " dollars";
+        String currString = currentState.getPlayer().getName() + " won the auction for " + currentState.getBiddingPot() + " dollars";
         this.output.modifyStateOutput("Fold", currString.toString());
     }
 
