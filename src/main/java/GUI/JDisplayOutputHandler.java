@@ -1,5 +1,7 @@
 package GUI;
 
+import Entities.Description;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,7 +19,7 @@ public class JDisplayOutputHandler {
      * InstanceVar options: an ArrayList of all the options on this state
      * InstanceVar buttons: the ButtonFactory that creates the buttons for each state
      */
-    private JLabel textSegment;
+    private Description description;
     private JLabel optionSegment;
     private HashMap<String, Integer> buttonList;
     private ArrayList<String> options;
@@ -29,8 +31,7 @@ public class JDisplayOutputHandler {
     public JDisplayOutputHandler(){
         this.optionSegment = new JLabel();
         this.optionSegment.setLayout(new FlowLayout());
-        this.textSegment = new JLabel();
-        this.textSegment.setLayout(new FlowLayout());
+        this.description = new Description();
         this.buttonList = new HashMap<>();
         this.options = new ArrayList<>();
     }
@@ -84,7 +85,7 @@ public class JDisplayOutputHandler {
      * @param textOutput the context String
      */
     public void createTextSegment(String textOutput) {
-        this.textSegment.setText("<HTML>" + textOutput + "<HTML>");
+        this.description.setDescription(textOutput);
     }
 
     /**
@@ -92,23 +93,22 @@ public class JDisplayOutputHandler {
      * @return the JLabel that contains the context of the state
      */
     public JLabel getTextSegment(){
-        return this.textSegment;
+        return this.description.getDescription();
     }
 
     /**
      * Function that clears the text segment for the next state
      */
     public void clearTextSegment(){
-        this.optionSegment.setText("");
+        this.description.clear();
     }
 
     /**
      * Sets the positions for the segments with respect to the display
      */
     public void drawSegments(){
-        this.textSegment.setBounds(625, 25, 250, 225);
+        this.description.setDescriptionBounds();
         this.optionSegment.setBounds(600, 250, 300, 400);
-        this.textSegment.repaint();
         this.optionSegment.repaint();
     }
 

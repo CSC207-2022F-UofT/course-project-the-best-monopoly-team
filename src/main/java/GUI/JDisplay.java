@@ -22,7 +22,6 @@ public class JDisplay {
      */
     private GameScreen gameFrame;
     private JDisplayOutputHandler labelSegments;
-    private JDisplayInputHandler inputHandler;
     private String selectedOutput;
 
     /**
@@ -32,7 +31,6 @@ public class JDisplay {
     public JDisplay(){
         this.gameFrame = new GameScreen();
         this.labelSegments = new JDisplayOutputHandler();
-        this.inputHandler = new JDisplayInputHandler();
         this.selectedOutput = "";
     }
 
@@ -99,7 +97,7 @@ public class JDisplay {
      * @return the input based on the button clicked
      */
     public Integer getInput(){
-        return this.inputHandler.getInputMapValue(this.selectedOutput);
+        return new JDisplayInputHandler().getInputMapValue(this.selectedOutput);
     }
 
 }
