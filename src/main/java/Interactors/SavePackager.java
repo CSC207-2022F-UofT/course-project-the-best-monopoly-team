@@ -11,6 +11,11 @@ import TreeHandlers.MainTreeNodeLogic.MainTreeNodeLogic;
  */
 public class SavePackager {
 
+    /**
+     * This method converts the states array into the form needed for saving
+     * in the SaveAccess interface
+     * @return an int array which is formatted correctly for the SaveAccess interface
+     */
     public int[] getStates(){
         int[] saveStates = new int[6];
         int[] gameStates = MainTreeNodeLogic.getStates();
@@ -23,6 +28,12 @@ public class SavePackager {
 
         return saveStates;
     }
+
+    /**
+     * This method converts the board in the program to an array of strings for the saving function in the
+     * SaveAccess interface
+     * @return an array of strings which is in the correct format to be passed into a SaveAccess interface.
+     */
     public String[][] getPlayerPropertyData(){
         int numberOfLines = 0;
         for (Player player: GeneralGameLogic.getBoard().getPlayers()){
