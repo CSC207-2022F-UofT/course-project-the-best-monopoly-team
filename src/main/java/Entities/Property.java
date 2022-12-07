@@ -2,12 +2,6 @@ package Entities;
 
 import UseCases.PlayerLogic;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.Scanner;
-
 public class Property extends Cell {
     private String name;
     private String colour;

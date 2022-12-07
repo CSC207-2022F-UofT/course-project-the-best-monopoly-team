@@ -164,21 +164,6 @@ public class UseCaseInteractor{
 
     }
 
-
-
-
-
-//    /**
-//     * This method allows the user to create a game, new or loaded, by loading the files
-//     * that deal with the game
-//     *
-//     */
-//    public void createGame(int[] initialStates){
-//        Board loadedBoard;
-//            loadedBoard = loadFiles(initialStates[0], initialStates[2]);
-//            logicInteractor = new GameLogic(loadedBoard.getPlayers().get(0), loadedBoard);
-//            menuTreeActive = false;
-//        }
     public void createNewGame(int[] states){
         Board loadedBoard;
         loadedBoard = loadFiles(states[0], states[2]);
@@ -192,7 +177,6 @@ public class UseCaseInteractor{
      * @param states is an int[] containing save file information
      */
     public void createGame(Board board, int[] states){
-        //TODO: make the game
         logicInteractor = new GameLogic(board, states);
         menuTreeActive = false;
     }
@@ -227,8 +211,7 @@ public class UseCaseInteractor{
         ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame();
         ArrayList<String[]> newProperties = this.loadAccess.loadProperties();
 
-        Board savedGame = this.gameCreation.createSavedBoard(loadedGame, newProperties);
-        return savedGame;
+        return this.gameCreation.createSavedBoard(loadedGame, newProperties);
     }
 
     /**
@@ -258,12 +241,6 @@ public class UseCaseInteractor{
         return logicInteractor;
     }
 
-    /**
-     * Sets the current tree of the class
-     * @param currentTree - the current tree to set
-     */
-    public void setCurrentTree(GameLogicTree currentTree) {
-        this.currentTree = currentTree;
-    }
+
 
 }

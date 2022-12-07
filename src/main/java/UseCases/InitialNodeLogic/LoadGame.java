@@ -17,7 +17,6 @@ public class LoadGame extends InitialLogic implements NodeLogic {
         State state = beforeLogic();
 
         //options associated with the next node
-        //TODO provide lists of saves
         File file = new File("src/gameData");
         LoadAccess load = new LoadFile(file);
 
