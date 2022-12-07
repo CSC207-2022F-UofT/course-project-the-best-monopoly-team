@@ -26,13 +26,17 @@ public class CreateLoadedGame extends InitialLogic implements NodeLogic {
                 String[] allSaves = load.checkSaves("src/gameData");
 
                 int integerFile = selectedOptions.get("SaveChoice");
-                Board board = caseInteractor.loadSavedGame(allSaves[integerFile]);
+                Board board = caseInteractor.loadSavedBoard(allSaves[integerFile]);
                 int[] initialStates = caseInteractor.loadInitialStates();
 
-                caseInteractor.createLoadedGame(board, initialStates);
+                caseInteractor.createGame(board, initialStates);
+                state = caseInteractor.getLogicInteractor().getCurrentState();
             } catch (Exception IOException){
                 return null;
             }
+        }
+        else{
+            state = caseInteractor.getInitialState();
         }
 
         return afterLogic(state);

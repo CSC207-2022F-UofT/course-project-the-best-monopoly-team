@@ -6,5 +6,5 @@ Player02,200,true,0,10
 Boardwalk,Dark Blue,400,200,50,200,600,1400,1700,2000,Player02,200,0,false
 playerEnd
 treeStart
-1,2,3,4,5
+2,2,1,1,1,1
 treeEnd

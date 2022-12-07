@@ -9,14 +9,9 @@ import Persistence.LoadFile;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class GameCreationTest {
 
@@ -35,7 +30,7 @@ class GameCreationTest {
         ArrayList<String[]> properties = load.loadProperties();
 
         GameCreation gameCreator = new GameCreation();
-        Board newGame = gameCreator.createNewGame(playerNames, properties);
+        Board newGame = gameCreator.createNewBoard(playerNames, properties);
 
         List<Player> returnedPlayers = newGame.getPlayers();
         List<Cell> returnedCells = newGame.getCells();
@@ -89,7 +84,7 @@ class GameCreationTest {
         ArrayList<String[]> properties = load.loadProperties();
 
         GameCreation gameCreator = new GameCreation();
-        Board savedGame = gameCreator.createSavedGame(gameData, properties);
+        Board savedGame = gameCreator.createSavedBoard(gameData, properties);
 
         List<Player> returnedPlayers = savedGame.getPlayers();
         List<Cell> returnedCells = savedGame.getCells();

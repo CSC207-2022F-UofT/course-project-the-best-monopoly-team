@@ -128,17 +128,26 @@ public class Property extends Cell {
             case "Utility":
                 return 50;
             default:
-                return this.getHousesRent();
+                return this.getHousesRent(this.houses);
         }
     }
 
+    /**
+     * Gets the current rent for this property based on the given amount of houses. Method specifically
+     * used for saving function.
+     * @param houses amount of houses on this property
+     * @return a number indicating the rent cost
+     */
+    public int getRentSave(int houses){
+        return getHousesRent(houses);
+    }
     /**
      * Gets the current rent for this property, where this property isn't a Railroad or Utility property
      * @return the current rent players (beside the owner) need to pay when landing on this property, based on the
      * number of houses built on it
      */
-    private int getHousesRent() {
-        switch (this.houses) {
+    private int getHousesRent(int house) {
+        switch (house) {
             case 1:
                 return this.rent1H;
             case 2:

@@ -30,6 +30,16 @@ public class SaveFile implements SaveAccess {
         return this.file.isFile();
     }
 
+
+
+    public void saveGameNewFile(String[][] playerData, int[] mainStates) throws IOException{
+        LoadAccess load = new LoadFile(new File(""));
+        String[] allSaves = load.checkSaves("src/gameData");
+        int numberOfFiles = allSaves.length;
+        String path = "src/gameData/save" + numberOfFiles +".txt";
+        file = new File(path);
+        saveGame(playerData, mainStates);
+    }
     /**
      * Given game data to save, save the information to txt file this.file.
      *
@@ -45,7 +55,8 @@ public class SaveFile implements SaveAccess {
      * @param mainStates an Integer[] array of ints representing main states for Trees
      * @throws IOException in the case that there was an error writing the data in the subarrays to the file
      */
-    public void saveGame(String[][] playerData, Integer[] mainStates) throws IOException {
+    public void saveGame(String[][] playerData, int[] mainStates) throws IOException {
+
         FileWriter writer = new FileWriter(file.getPath());
 
         writer.write("playerStart\n");

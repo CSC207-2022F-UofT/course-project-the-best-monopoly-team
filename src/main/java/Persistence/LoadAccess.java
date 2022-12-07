@@ -9,6 +9,7 @@ import java.util.List;
 public interface LoadAccess {
     ArrayList<ArrayList<String[]>> loadGame() throws FileNotFoundException;
     String[] checkSaves(String folderPath);
+    void setFile(String newFile);
     ArrayList<String[]> loadProperties() throws FileNotFoundException;
 
     List<String> loadCards() throws IOException;

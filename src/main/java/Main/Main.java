@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         PresenterDisplay display = new PresenterDisplay();
         //TODO GIVE A CORRECT FILEPATH
-        File file = new File("");
+        File file = new File("src/gameData/");
         display.playGame(file);
     }
 }
