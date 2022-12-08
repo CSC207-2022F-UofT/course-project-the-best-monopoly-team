@@ -2,10 +2,8 @@ package Entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
-import static UseCases.PlayerLogic.*;
 
 public class Player {
     // Represents a player in the game
@@ -71,14 +69,8 @@ public class Player {
      * @param position the position of the player on the board should be between 0 and 39 inclusive.
      */
     public void setPosition(int position){
-        this.position = position;}
-
-    /**
-
-     * Sets the player's number of get out of jail free cards
-     * @param num the number of jail cards the player has
-     */
-
+        this.position = position;
+    }
 
     /**
      * This sets the number of get out of jail free cards the player has that was drawn from the community chest or
@@ -160,20 +152,6 @@ public class Player {
         return sets;
     }
 
-    public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
-        if (money > this.money) {
-            return "Inadequate amount of money";
-        } else {
-            this.money -= money;
-            tradee.money += money;
-            tradee.properties.addAll(properties);
-            this.properties.removeAll(properties);
-            this.jailCards -= jailcards;
-            tradee.jailCards += jailCards;
-            return "Trade successful";
-        }
-    }
-
     /**
      * Changes the jail status of the player
      */
@@ -229,7 +207,7 @@ public class Player {
 
     /**
      * Rigged roll for testing purposes
-     * @param rig
+     * @param rig - number to change the roll to
      * @return
      */
     public String riggedRoll(int rig) {
@@ -261,15 +239,6 @@ public class Player {
     public void pay(Player player, int money) {
         this.money -= money;
         player.money += money;
-    }
-
-    /**
-     * Placing the property for mortgage
-     * @param property the property to remove and to add the money to the current players balance
-     */
-    public void mortgage(Property property) {
-        this.properties.remove(property);
-        this.money += property.getMortgageValue();
     }
 
     /**

@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class OutputInteractor {
     /**
-     *  InsatanceVar output: an Output object that keeps track and updates the output depending on the state of the game
+     *  InstanceVar output: an Output object that keeps track and updates the output depending on the state of the game
      *  InstanceVar currentState: a State object that helps with determining the output that should be presented to the user
      */
     private Output output;
@@ -34,10 +34,19 @@ public class OutputInteractor {
      * Function to return the current Output message for context to the user
      * @return the context String
      */
-    public String getOutputMessage(){
+    public String getOutputMessage() {
         updateLogicStates(this.currentState.getId());
         return this.output.getStateOutput(this.currentState.getId());
     }
+    public State getCurrentState(){
+        return this.currentState;
+    }
+
+    /**
+     * setFinalOutput updates the string to be presented to the user by updating all the output strings that should
+     * be presented to the user based on the state and presented all the options based on the state
+     */
+
 
     /**
      * This function deals with all the states that need to be updated periodically based on the current state of the game
@@ -132,5 +141,10 @@ public class OutputInteractor {
      */
     public void updateState(State state){
         this.currentState = state;
+    }
+
+    public String getOutput() {
+        updateLogicStates(this.currentState.getId());
+        return this.output.getStateOutput(this.currentState.getId());
     }
 }

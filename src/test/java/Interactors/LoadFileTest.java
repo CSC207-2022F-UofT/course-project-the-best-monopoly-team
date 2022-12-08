@@ -31,7 +31,7 @@ class LoadFileTest {
         expectedPlayer.add(new String[] {"Player02", "200", "true", "0", "10"});
         expectedPlayer.add(new String[] {"Boardwalk","Dark Blue","400","200","50","200","600","1400","1700","2000","Player02","200","0","false"});
         ArrayList<String[]> expectedStates = new ArrayList<>();
-        expectedStates.add(new String[] {"1", "2", "3", "4", "5"});
+        expectedStates.add(new String[] {"2","2","1","1","1","1"});
 
         for (int i = 0; i < playerData.size(); i++){
             assert Arrays.equals(playerData.get(i), expectedPlayer.get(i));

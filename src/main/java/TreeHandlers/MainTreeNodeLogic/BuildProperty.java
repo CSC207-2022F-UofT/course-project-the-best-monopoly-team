@@ -3,7 +3,6 @@ package TreeHandlers.MainTreeNodeLogic;
 import Entities.Player;
 import Entities.Property;
 import Entities.State;
-import Interactors.GameLogic;
 import Interface.NodeLogic;
 import UseCases.PlayerLogic;
 

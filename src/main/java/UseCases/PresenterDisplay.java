@@ -3,6 +3,7 @@ import Entities.State;
 import Interactors.InputInteractor;
 import Interactors.OutputInteractor;
 import Persistence.LoadFile;
+import Persistence.SaveFile;
 
 import GUI.JDisplay;
 import java.io.File;
@@ -20,7 +21,7 @@ public class PresenterDisplay {
      * to further handle state changes based on their option choice.
      **/
     public void playGame(File file){
-        UseCaseInteractor interactor = new UseCaseInteractor(new LoadFile(file));
+        UseCaseInteractor interactor = new UseCaseInteractor(new LoadFile(file), new SaveFile(file));
         InputInteractor inputControl = new InputInteractor(interactor);
         OutputInteractor outputControl = new OutputInteractor(interactor);
         JDisplay gameFrame = new JDisplay();
