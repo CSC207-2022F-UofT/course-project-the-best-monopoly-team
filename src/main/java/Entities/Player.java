@@ -69,14 +69,8 @@ public class Player {
      * @param position the position of the player on the board should be between 0 and 39 inclusive.
      */
     public void setPosition(int position){
-        this.position = position;}
-
-    /**
-
-     * Sets the player's number of get out of jail free cards
-     * @param num the number of jail cards the player has
-     */
-
+        this.position = position;
+    }
 
     /**
      * This sets the number of get out of jail free cards the player has that was drawn from the community chest or
@@ -156,20 +150,6 @@ public class Player {
         sets.put("Green", 0);
         sets.put("Dark Blue", 0);
         return sets;
-    }
-
-    public String trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
-        if (money > this.money) {
-            return "Inadequate amount of money";
-        } else {
-            this.money -= money;
-            tradee.money += money;
-            tradee.properties.addAll(properties);
-            this.properties.removeAll(properties);
-            this.jailCards -= jailcards;
-            tradee.jailCards += jailCards;
-            return "Trade successful";
-        }
     }
 
     /**

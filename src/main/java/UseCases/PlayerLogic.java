@@ -60,10 +60,6 @@ public class PlayerLogic {
         player.move(rig);
     }
 
-    public void moveTo(Property property) {
-
-    }
-
     private static boolean isConsecutive(int roll1, int roll2) {
         return roll1 == roll2;
     }
@@ -186,7 +182,6 @@ public class PlayerLogic {
      * @param property the property to remove and to add the money to the current players balance
      */
     public void mortgage(Property property) {
-        player.getProperties().remove(property);
         player.changeMoney(property.getMortgageValue());
         property.setMortgageStatus(true);
     }
@@ -196,7 +191,6 @@ public class PlayerLogic {
      * @param property the property to be unmortgaged
      */
     public void unmortgage(Property property) {
-        player.getProperties().add(property);
         player.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));
         property.setMortgageStatus(false);
     }

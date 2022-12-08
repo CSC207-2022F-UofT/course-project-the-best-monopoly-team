@@ -80,7 +80,6 @@ public class PlayerLogicTest {
         PlayerLogic pl1 = new PlayerLogic(player1);
         pl1.mortgage(property2);
         Assert.assertTrue(property2.getMortgageStatus());
-        Assert.assertTrue(player1.getProperties().isEmpty());
     }
 
     @Test
@@ -89,7 +88,7 @@ public class PlayerLogicTest {
         LoadAccess load = new LoadFile(gamefile);
         ArrayList<String[]> propertylist = load.loadProperties();
         GameCreation gameCreator = new GameCreation();
-        Board board = gameCreator.createNewGame(new ArrayList<String>(Arrays.asList("player1", "player2")), propertylist);
+        Board board = gameCreator.createNewBoard(new ArrayList<String>(Arrays.asList("player1", "player2")), propertylist);
         Player player1 = board.getPlayers().get(0);
         Player player2 = board.getPlayers().get(1);
         Property property1 = (Property) board.getCells().get(1);
@@ -108,7 +107,7 @@ public class PlayerLogicTest {
         LoadAccess load = new LoadFile(gamefile);
         ArrayList<String[]> propertylist = load.loadProperties();
         GameCreation gameCreator = new GameCreation();
-        Board board = gameCreator.createNewGame(new ArrayList<String>(Arrays.asList("player1", "player2")), propertylist);
+        Board board = gameCreator.createNewBoard(new ArrayList<String>(Arrays.asList("player1", "player2")), propertylist);
         Player player1 = board.getPlayers().get(0);
         Property property1 = (Property) board.getCells().get(1);
         player1.addProperty(property1);
