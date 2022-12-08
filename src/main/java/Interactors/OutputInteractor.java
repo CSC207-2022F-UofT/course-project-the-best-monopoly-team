@@ -127,13 +127,6 @@ public class OutputInteractor {
     }
 
     /**
-     * @return the final output string that is to be presented to the user
-     */
-    public String getOutput(){
-        return this.output.getFinalOutput();
-    }
-
-    /**
      * Update the current state based on changes on the previous state from the user's input
      * @param state: the updated state
      */

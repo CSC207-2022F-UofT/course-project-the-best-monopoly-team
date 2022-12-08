@@ -13,12 +13,11 @@ import java.util.HashMap;
  */
 public class JDisplayOutputHandler {
     /**
-     * InstanceVar textSegment: the section for the text that explains context
+     * InstanceVar description: the section for the context shown to the user
      * InstanceVar optionSegment: the section for all the option buttons
-     * InstanceVar buttonList: a mapping between the buttons and how many times
-     * they were pressed
+     *
      * InstanceVar options: an ArrayList of all the options on this state
-     * InstanceVar buttons: the ButtonFactory that creates the buttons for each state
+     * InstanceVar buttonDisplayHandler: the handler of the buttons on the display
      */
     private Description description;
     private Options optionSegment;
@@ -123,6 +122,9 @@ public class JDisplayOutputHandler {
         this.buttonDisplayHandler.updateClicks();
     }
 
+    /**
+     * Clear the mapping between the buttons and number of times pressed for the next state
+     */
     public void clearInput(){
         this.buttonDisplayHandler.resetInputs();
     }

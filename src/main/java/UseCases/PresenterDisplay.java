@@ -12,18 +12,6 @@ import java.io.File;
  * player in the game.
  **/
 public class PresenterDisplay {
-    /**
-     * InstanceVar isOver: variable to check if the game is over
-     **/
-    private static boolean isOver;
-
-    /**
-     * This is the constructor for the UseCases.PresenterDisplay Class
-     **/
-    public PresenterDisplay(){
-        isOver = false;
-    }
-
 
     /**
      * Function that runs the game loop by getting game data from the OutputInteractor and presenting that to the
@@ -39,24 +27,21 @@ public class PresenterDisplay {
 
         gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
         gameFrame.displayScreen();
-        while (!isOver){
-            boolean didInput = false;
-            while (!didInput){
-                didInput = gameFrame.waitForInput();
-            }
-            inputControl.getChoice(gameFrame.getInput());
-            State currentState = inputControl.getUpdatedState();
-            outputControl.updateState(currentState);
-            gameFrame.refreshScreen();
-            gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
+         while (true){
+             try {
+                 boolean didInput = false;
+                 while (!didInput) {
+                     didInput = gameFrame.waitForInput();
+                 }
+                 inputControl.getChoice(gameFrame.getInput());
+                 State currentState = inputControl.getUpdatedState();
+                 outputControl.updateState(currentState);
+                 gameFrame.refreshScreen();
+                 gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
+             }
+             catch (Exception e){
+                 System.out.println(e.getMessage());
+             }
         }
-
-    }
-
-    /**
-     * Static function to update that the game is over to exit the game loop
-     */
-    public static void finishGame(){
-        isOver = true;
     }
 }

@@ -32,17 +32,6 @@ public class ButtonFactory {
         this.buttonMappings = new ArrayList<>();
         addButtons();
     }
-    /**
-     * Constructor with options parameter for this class
-     * @param options: The options the user has on this turn
-     */
-    public ButtonFactory (ArrayList<String> options){
-        this.buttonStrings = options;
-        this.actionPerformed = new HashMap<>();
-        this.buttonMappings = new ArrayList<>();
-        addButtons();
-    }
-
     public void addStrings(ArrayList<String> options){
         this.buttonStrings = options;
     }
