@@ -1,8 +1,8 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Logic.GameLogic;
-import Logic.MainTreeNodeLogic.ExitGameUseCase;
+import UseCases.Logic.GameLogic;
+import UseCases.Logic.MainTreeNodeLogic.ExitGameUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

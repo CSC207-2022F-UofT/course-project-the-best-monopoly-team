@@ -6,7 +6,6 @@ import Entities.Player;
 import Entities.Property;
 import Persistence.LoadAccess;
 import Persistence.LoadFile;
-import UseCases.GameCreation;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;

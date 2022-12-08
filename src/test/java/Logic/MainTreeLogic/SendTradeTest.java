@@ -2,9 +2,9 @@ package Logic.MainTreeLogic;
 
 
 import Entities.*;
-import Logic.GameLogic;
-import Logic.GeneralGameLogic;
-import Logic.MainTreeNodeLogic.SendTradeUseCase;
+import UseCases.Logic.GameLogic;
+import UseCases.Logic.GeneralGameLogic;
+import UseCases.Logic.MainTreeNodeLogic.SendTradeUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

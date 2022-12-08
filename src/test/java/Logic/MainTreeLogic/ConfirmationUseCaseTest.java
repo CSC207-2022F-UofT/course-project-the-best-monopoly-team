@@ -4,9 +4,9 @@ import Entities.Board;
 import Entities.Cell;
 import Entities.Player;
 import Entities.State;
-import Logic.GameLogic;
-import Logic.GeneralGameLogic;
-import Logic.MainTreeNodeLogic.ConfirmationUseCase;
+import UseCases.Logic.GameLogic;
+import UseCases.Logic.GeneralGameLogic;
+import UseCases.Logic.MainTreeNodeLogic.ConfirmationUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

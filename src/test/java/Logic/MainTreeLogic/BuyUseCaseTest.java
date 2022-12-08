@@ -1,8 +1,8 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Logic.GameLogic;
-import Logic.MainTreeNodeLogic.BuyUseCase;
+import UseCases.Logic.GameLogic;
+import UseCases.Logic.MainTreeNodeLogic.BuyUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

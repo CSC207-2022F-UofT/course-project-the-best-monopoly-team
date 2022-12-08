@@ -1,8 +1,8 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Logic.GeneralGameLogic;
-import Logic.MainTreeNodeLogic.CallActionUseCase;
+import UseCases.Logic.GeneralGameLogic;
+import UseCases.Logic.MainTreeNodeLogic.CallActionUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

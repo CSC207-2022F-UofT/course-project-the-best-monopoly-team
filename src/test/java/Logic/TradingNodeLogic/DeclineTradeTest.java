@@ -1,8 +1,9 @@
 package Logic.TradingNodeLogic;
 
 import Entities.*;
-import Logic.GameLogic;
-import Logic.GeneralGameLogic;
+import UseCases.Logic.GameLogic;
+import UseCases.Logic.GeneralGameLogic;
+import UseCases.Logic.TradingNodeLogic.DeclineTradeUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

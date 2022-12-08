@@ -1,6 +1,6 @@
 package Entities;
 import Interactors.CornerTilePerformActionInteractor;
-import UseCases.GameCreation;
+import Interactors.GameCreation;
 import UseCases.CornerTilePerformActionUseCase;
 import org.junit.jupiter.api.Test;
 

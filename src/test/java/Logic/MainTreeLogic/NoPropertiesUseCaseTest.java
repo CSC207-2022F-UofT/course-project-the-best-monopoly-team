@@ -1,7 +1,7 @@
 package Logic.MainTreeLogic;
 
 import Entities.State;
-import Logic.MainTreeNodeLogic.NoPropertiesUseCase;
+import UseCases.Logic.MainTreeNodeLogic.NoPropertiesUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

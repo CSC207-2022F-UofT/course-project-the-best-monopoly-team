@@ -1,15 +1,14 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Logic.GameLogic;
-import Logic.GeneralGameLogic;
-import Logic.MainTreeNodeLogic.MainTreeNodeLogic;
-import Logic.MainTreeNodeLogic.MortgageUseCase;
+import UseCases.Logic.GameLogic;
+import UseCases.Logic.GeneralGameLogic;
+import UseCases.Logic.MainTreeNodeLogic.MainTreeNodeLogic;
+import UseCases.Logic.MainTreeNodeLogic.MortgageUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MortgageTest {
