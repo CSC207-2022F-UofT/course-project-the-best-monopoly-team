@@ -80,7 +80,7 @@ public class SaveFileTest {
                 {"Illinois Avenue","Red","240","150","20","100","300","750","925","1100","Player01","120","0","false"},
                 {"Player02", "200", "true", "0", "10"},
                 {"Boardwalk","Dark Blue","400","200","50","200","600","1400","1700","2000","Player02","200","0","false"}};
-        Integer[] mainStates = new Integer[]{1, 2, 3, 4, 5};
+        int[] mainStates = new int[]{1, 2, 3, 4, 5};
         save.saveGame(playerData, mainStates);
 
         List<String> allLines = Files.readAllLines(saveFile.toPath());

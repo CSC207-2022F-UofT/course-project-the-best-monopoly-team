@@ -21,9 +21,29 @@ public class GameLogic {
      * @param board A board instance that the GameLogic instance will help govern.
      */
     public GameLogic(Player currentPlayer, Board board){
+        initialize(currentPlayer, board);
+    }
+    public void initialize(Player currentPlayer, Board board){
         AuctionTreeNodeLogic.array_init(board.getPlayers().size());
         GeneralGameLogic.initialize(currentPlayer,board, this);
         createTrees();
+    }
+
+    /**
+     * This is the constructor for creating a GameLogic instance.
+     * @param board A board instance that the GameLogic instance will help govern.
+     * @param states array of integers containing what is needed to create the game
+     */
+    public GameLogic(Board board, int[] states){
+        Player currentPlayer = board.getPlayers().get(states[4]);
+        initialize(currentPlayer,board);
+        int [] gameStates = new int[5];
+        gameStates[0] = 0;
+        gameStates[1] = states[5];
+        gameStates[2] = states[2];
+        gameStates[3] = states[3];
+        gameStates[4] = states[1];
+        MainTreeNodeLogic.initializeStates(gameStates);
     }
 
     /**
@@ -245,7 +265,6 @@ public class GameLogic {
             return returnState;
 
     }
-
     /**
      * This method returns the currentTree instance attribute's ID.
      * @return an int value representing the currentTree's ID. It will return -1 if the ID failed to be retrieved.

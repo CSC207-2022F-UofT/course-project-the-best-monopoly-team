@@ -118,7 +118,6 @@ public class PlayerLogic {
      * @param money any sufficient amount of money this player wants to offer the tradee
      * @param properties properties owned by this player that they would like to offer the tradee
      * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
-     * @return a String indicating whether the player has an insufficient amount of money or if the trade was successful
      */
     public void trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
         player.pay(tradee, money);

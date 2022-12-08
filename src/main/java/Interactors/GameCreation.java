@@ -10,14 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GameCreation {
-    /** Create a new game by initializing a Board instance with default values.
+    /** Initializing a Board instance with default values.
      *
      * @param playersName an Arraylist of Strings which denote each player's name.
      * @param properties  an Arraylist of String[] arrays, each subarray contains the default instance attributes of a Property.
      * @return a Board instance initialized with default Properties and Players with names given by playersName.
      * @throws IOException in case there was an error with creating an ActionSpace in createCells
      */
-    public Board createNewGame(ArrayList<String> playersName, ArrayList<String[]> properties) throws IOException {
+    public Board createNewBoard(ArrayList<String> playersName, ArrayList<String[]> properties) throws IOException {
         // This method is to create a brand-new game and initialize a new Board.
 
         ArrayList<Player> players = new ArrayList<>();
@@ -34,6 +34,21 @@ public class GameCreation {
         return new Board(players, cells);
     }
 
+    /**
+     * Based on the given integer and board, mutate the board's objects.
+     * That is, change the objects relevant to the board to fit the specific mode.
+     * @param board the board to be altered
+     * @param mode the mode of the board
+     */
+    public void initializeMode(Board board, int mode){
+        if (mode == 1){
+            for (Player player: board.getPlayers()){
+                player.changeMoney(1000);
+            }
+        }
+    }
+
+
     /** Loads a saved game by creating a Board instance with save data from gameData
      *
      * @param gameData an Arraylist with a sub Arraylists of String[] arrays where each array represents Player or Property instance data
@@ -41,7 +56,7 @@ public class GameCreation {
      * @return a Board instance initialized with gameData represented as their respective Entities
      * @throws IOException in case there was an error with creating an ActionSpace in createCells
      */
-    public Board createSavedGame(ArrayList<ArrayList<String[]>> gameData, ArrayList<String[]> newProperties) throws IOException {
+    public Board createSavedBoard(ArrayList<ArrayList<String[]>> gameData, ArrayList<String[]> newProperties) throws IOException {
         ArrayList<Player> players = new ArrayList<>();
         ArrayList<Cell> properties = new ArrayList<>();
         ArrayList<Cell> standardProperties = parsePropertyData(newProperties);
@@ -83,6 +98,22 @@ public class GameCreation {
         List<Cell> cells = createCells(properties, standardProperties);
         Board savedBoard = new Board(players, cells);
         return savedBoard;
+    }
+
+    /**
+     * Loads the initial states stored in a save file
+     * @param gameData an ArrayList containing 2 sub ArrayLists;
+     *                 the first of Players and their owned Properties
+     *                 the second of initial states required for the Tree
+     * @return an Integer[] of all the saved initial states
+     */
+    public int[] getInitialStates(ArrayList<ArrayList<String[]>> gameData) {
+        int[] initialStates = new int[gameData.get(1).get(0).length];
+        for (int i = 0; i < initialStates.length; i++) {
+            initialStates[i] = Integer.parseInt(gameData.get(1).get(0)[i]);
+        }
+
+        return initialStates;
     }
 
     /** Gets the Player instance based on a String of a Player's name.

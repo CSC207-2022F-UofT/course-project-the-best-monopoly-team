@@ -3,6 +3,7 @@ package Persistence;
 import java.io.IOException;
 
 public interface SaveAccess {
-    void saveGame(String[][] playerData, Integer[] mainStates) throws IOException;
+    void saveGameNewFile(String[][] playerData, int[] mainStates) throws IOException;
+    void saveGame(String[][] playerData, int[] mainStates) throws IOException;
     boolean checkFile();
 }

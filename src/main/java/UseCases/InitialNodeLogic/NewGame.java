@@ -13,10 +13,10 @@ public class NewGame extends InitialLogic implements NodeLogic {
         State state = beforeLogic();
         //getting if the user wants to play a new game
         state.setBackEnable(true);
-        selectedOptions.put("NewOrLoad",1);
 
         //options associated with the next node
         state.addOptions("Normal mode");
+        state.addOptions("Rich mode");
         return afterLogic(state);
     }
 }

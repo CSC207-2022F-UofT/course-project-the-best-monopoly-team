@@ -13,7 +13,7 @@ public class NumberOfPlayers extends InitialLogic implements NodeLogic {
         State state = beforeLogic();
         //getting the number of players the user wants
         state.setBackEnable(true);
-        selectedOptions.put("NumOfPlayers",input);
+        selectedOptions.put("NumOfPlayers", input + 2);
         //options associated with the next node
         state.addOptions("30 rounds");
         state.addOptions("60 rounds");

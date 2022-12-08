@@ -2,10 +2,8 @@ package Entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
-import static UseCases.PlayerLogic.*;
 
 public class Player {
     // Represents a player in the game
@@ -229,7 +227,7 @@ public class Player {
 
     /**
      * Rigged roll for testing purposes
-     * @param rig
+     * @param rig - number to change the roll to
      * @return
      */
     public String riggedRoll(int rig) {
