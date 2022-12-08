@@ -34,9 +34,9 @@ public class SaveFile implements SaveAccess {
 
     public void saveGameNewFile(String[][] playerData, int[] mainStates) throws IOException{
         LoadAccess load = new LoadFile(new File(""));
-        String[] allSaves = load.checkSaves("src/gameData");
+        String[] allSaves = load.checkSaves(file.getAbsolutePath());
         int numberOfFiles = allSaves.length;
-        String path = "src/gameData/save" + numberOfFiles +".txt";
+        String path = file.getAbsolutePath()+ "/save" + numberOfFiles +".txt";
         file = new File(path);
         saveGame(playerData, mainStates);
     }

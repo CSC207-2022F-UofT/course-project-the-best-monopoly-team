@@ -49,7 +49,7 @@ public class CornerTilesTest {
         CornerTiles t = new JailSpace();
         player1.setInJail(false);
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
-        assertEquals("You're visiting Jail", cornerTileInteractor.performAction(player1, t));
+        assertEquals(" You're visiting Jail", cornerTileInteractor.performAction(player1, t));
     }
     @Test
     public void performActionFreeParkingTest() throws IOException {
@@ -65,7 +65,7 @@ public class CornerTilesTest {
         Board bo = creation.createNewBoard(players, properties);
         CornerTiles t = new FreeParking();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
-        assertEquals("You landed on Free Parking!", cornerTileInteractor.performAction(player1, t));
+        assertEquals(" You landed on Free Parking!", cornerTileInteractor.performAction(player1, t));
     }
     @Test
     public void performActionGoToJailTest() throws IOException {
@@ -99,6 +99,6 @@ public class CornerTilesTest {
         Board bo = creation.createNewBoard(players, properties);
         CornerTiles t = new PassGo();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
-        assertEquals("Passed Go!, Collected 200", cornerTileInteractor.performAction(player1, t));
+        assertEquals(" Passed Go!, Collected 200", cornerTileInteractor.performAction(player1, t));
     }
 }

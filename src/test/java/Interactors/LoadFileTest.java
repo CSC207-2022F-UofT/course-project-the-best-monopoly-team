@@ -19,8 +19,8 @@ class LoadFileTest {
     void testLoadGame() throws FileNotFoundException {
         // create a savedGame
         // assert that the values of the return arraylist matches expected string
-        LoadAccess load = new LoadFile(new File("src/gameData/test.txt"));
-        ArrayList<ArrayList<String[]>> loadedData = load.loadGame();
+        LoadAccess load = new LoadFile(new File("src/gameData/"));
+        ArrayList<ArrayList<String[]>> loadedData = load.loadGame("test.txt");
         ArrayList<String[]> playerData = loadedData.get(0);
         ArrayList<String[]> mainStates = loadedData.get(1);
 

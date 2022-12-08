@@ -32,6 +32,7 @@ public class UseCaseInteractor{
     private SavePackager savePackager;
     private State currentState;
 
+
     /**
      * Constructor for the UseCaseInteractor.
      */
@@ -42,6 +43,9 @@ public class UseCaseInteractor{
         this.gameCreation = new GameCreation();
         this.savePackager = new SavePackager();
         InitialLogic.setCaseInteractor(this);
+    }
+    public LoadAccess getLoadAccess(){
+        return loadAccess;
     }
 
     /**
@@ -213,9 +217,8 @@ public class UseCaseInteractor{
      * an object which contains all the necessary game files to load a previous game
      * @return the object which will supply the data to create the game
      */
-    public Board loadSavedBoard(String filepath) throws IOException{
-        loadAccess.setFile(filepath);
-        ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame();
+    public Board loadSavedBoard(String file) throws IOException{
+        ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame(file);
         ArrayList<String[]> newProperties = this.loadAccess.loadProperties();
 
         return this.gameCreation.createSavedBoard(loadedGame, newProperties);
@@ -227,8 +230,8 @@ public class UseCaseInteractor{
      * @return an Integer[] of initial states
      * @throws FileNotFoundException
      */
-    public int[] loadInitialStates() throws FileNotFoundException {
-        ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame();
+    public int[] loadInitialStates(String file) throws FileNotFoundException {
+        ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame(file);
         return this.gameCreation.getInitialStates(loadedGame);
     }
 

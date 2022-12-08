@@ -6,6 +6,6 @@ public class JailSpace extends CornerTiles {
         if (player.isInJail())
             return "You are still in Jail";
         else
-            return "You're visiting Jail";
+            return " You're visiting Jail";
     }
 }
