@@ -21,9 +21,9 @@ public class JDisplayOutputHandler {
      */
     private Description description;
     private JLabel optionSegment;
-    private HashMap<String, Integer> buttonList;
     private ArrayList<String> options;
-    private ButtonFactory buttons;
+
+    private ButtonDisplayHandler buttonDisplayHandler;
 
     /**
      * The constructor for this class
@@ -32,8 +32,8 @@ public class JDisplayOutputHandler {
         this.optionSegment = new JLabel();
         this.optionSegment.setLayout(new FlowLayout());
         this.description = new Description();
-        this.buttonList = new HashMap<>();
         this.options = new ArrayList<>();
+        this.buttonDisplayHandler = new ButtonDisplayHandler();
     }
 
     /**
@@ -56,12 +56,10 @@ public class JDisplayOutputHandler {
      * buttons
      */
     public void createOptionSegment(){
-        this.buttons = new ButtonFactory(this.options);
-        ArrayList<JButton> optionButtons = this.buttons.getButtons();
-        for (JButton button: optionButtons){
+        this.buttonDisplayHandler.setButtonFactory(this.options);
+        for (JButton button: this.buttonDisplayHandler.getButtons()){
             this.optionSegment.add(button);
         }
-        this.buttonList = this.buttons.getActionPerformed();
     }
 
     /**
@@ -117,13 +115,13 @@ public class JDisplayOutputHandler {
      * @return the mapping
      */
     public HashMap<String, Integer> getButtonList(){
-        return this.buttonList;
+        return this.buttonDisplayHandler.getButtonList();
     }
 
     /**
      * Function to update the current status of how many times each button was pressed
      */
     public void updateButtonList(){
-        this.buttonList = this.buttons.getActionPerformed();
+        this.buttonDisplayHandler.updateClicks();
     }
 }

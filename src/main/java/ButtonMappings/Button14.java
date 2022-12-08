@@ -1,8 +1,8 @@
 package ButtonMappings;
 
-import GUI.ButtonHandler;
+import GUI.ButtonMapping;
 
-public class Button14 extends ButtonHandler {
+public class Button14 extends ButtonMapping {
     public String pressedButton() {
         return "B14";
     }
