@@ -19,6 +19,11 @@ public class InitialLogic {
     public InitialLogic(String name){
         this.name = name;
     }
+
+    /**
+     * This method returns a State object before logic has been applied.
+     * @return a State object before logic has been applied.
+     */
     public State beforeLogic(){
         currentTree = caseInteractor.getCurrentTree();
         State state = new State();
@@ -26,14 +31,28 @@ public class InitialLogic {
         return state;
     }
 
+    /**
+     * This method returns a String stored in the name instance attribute.
+     * @return a String stored in the name instance attribute.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * This method returns a State object after logic has been applied.
+     * @param state a State object representing a state before logic is applied.
+     * @return a State object after logic has been applied.
+     */
     public State afterLogic(State state){
         currentTree.setPreviousState(state);
         return state;
     }
+
+    /**
+     * This method returns a HashMap object stored in the selectedOptions instance attribute.
+     * @return a HashMap object stored in the selectedOptions instance attribute.
+     */
     public HashMap<String, Integer> getSelectedOptions(){
         return selectedOptions;
     }
