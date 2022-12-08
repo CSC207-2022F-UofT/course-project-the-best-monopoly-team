@@ -57,8 +57,9 @@ public class Roll extends MainTreeNodeLogic implements NodeLogic {
                         Property property = (Property) landedOnCell;
                         if (property.getMortgageStatus()) {
                             setAnswer("This property is mortgaged, don't need to pay rent.");
+                        } else {
+                            setAnswer(propertyInteractor.performAction(property, currentPlayer));
                         }
-                        setAnswer(propertyInteractor.performAction(property, currentPlayer));
                         break;
                     case "Corner Tile":
                         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
