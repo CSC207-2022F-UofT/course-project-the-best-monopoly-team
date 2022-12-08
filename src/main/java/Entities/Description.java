@@ -19,6 +19,7 @@ public class Description {
     }
     public void clear(){
         this.description.removeAll();
+        this.description.setLayout(new FlowLayout());
     }
     public void setDescriptionBounds(){
         this.description.setBounds(625, 25, 250, 225);

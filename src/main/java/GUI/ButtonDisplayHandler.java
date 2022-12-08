@@ -27,4 +27,8 @@ public class ButtonDisplayHandler {
     public void updateClicks(){
         this.buttonList = this.buttonFactory.getActionPerformed();
     }
+
+    public void resetInputs() {
+        this.buttonList.clear();
+    }
 }

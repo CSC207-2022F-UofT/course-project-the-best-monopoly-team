@@ -1,6 +1,7 @@
 package GUI;
 
 import Entities.Description;
+import Entities.Options;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,7 +21,7 @@ public class JDisplayOutputHandler {
      * InstanceVar buttons: the ButtonFactory that creates the buttons for each state
      */
     private Description description;
-    private JLabel optionSegment;
+    private Options optionSegment;
     private ArrayList<String> options;
 
     private ButtonDisplayHandler buttonDisplayHandler;
@@ -29,8 +30,7 @@ public class JDisplayOutputHandler {
      * The constructor for this class
      */
     public JDisplayOutputHandler(){
-        this.optionSegment = new JLabel();
-        this.optionSegment.setLayout(new FlowLayout());
+        this.optionSegment = new Options();
         this.description = new Description();
         this.options = new ArrayList<>();
         this.buttonDisplayHandler = new ButtonDisplayHandler();
@@ -67,15 +67,14 @@ public class JDisplayOutputHandler {
      * @return the JLabel that contains all the option buttons for the current state
      */
     public JLabel getOptionSegment(){
-        return this.optionSegment;
+        return this.optionSegment.getOptions();
     }
 
     /**
      * Clear the option segment for the next state
      */
     public void clearOptionSegment(){
-        this.optionSegment.removeAll();
-        this.optionSegment.setLayout(new FlowLayout());
+        this.optionSegment.clearOptions();
     }
 
     /**
@@ -106,8 +105,7 @@ public class JDisplayOutputHandler {
      */
     public void drawSegments(){
         this.description.setDescriptionBounds();
-        this.optionSegment.setBounds(600, 250, 300, 400);
-        this.optionSegment.repaint();
+        this.optionSegment.setOptionsBounds();
     }
 
     /**
@@ -123,5 +121,9 @@ public class JDisplayOutputHandler {
      */
     public void updateButtonList(){
         this.buttonDisplayHandler.updateClicks();
+    }
+
+    public void clearInput(){
+        this.buttonDisplayHandler.resetInputs();
     }
 }

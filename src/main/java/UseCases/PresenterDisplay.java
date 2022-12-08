@@ -1,4 +1,5 @@
 package UseCases;
+import Entities.State;
 import Interactors.InputInteractor;
 import Interactors.OutputInteractor;
 import Persistence.LoadFile;
@@ -44,7 +45,8 @@ public class PresenterDisplay {
                 didInput = gameFrame.waitForInput();
             }
             inputControl.getChoice(gameFrame.getInput());
-            outputControl.updateState(inputControl.getUpdatedState());
+            State currentState = inputControl.getUpdatedState();
+            outputControl.updateState(currentState);
             gameFrame.refreshScreen();
             gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
         }
