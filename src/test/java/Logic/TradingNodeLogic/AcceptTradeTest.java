@@ -1,7 +1,7 @@
 package Logic.TradingNodeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.GeneralGameLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -36,7 +36,7 @@ public class AcceptTradeTest {
         generalGameLogic.setCurrentPlayer(playerTwo);
         generalGameLogic.getSelectedOptions().put("PickItemOp", 0);
         generalGameLogic.getSelectedOptions().put("PickItemSelf", 0);
-        AcceptTrade acceptTrade = new AcceptTrade();
+        AcceptTradeUseCase acceptTrade = new AcceptTradeUseCase();
         State actual = acceptTrade.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Ok");

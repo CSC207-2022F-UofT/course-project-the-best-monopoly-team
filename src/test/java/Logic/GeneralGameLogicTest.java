@@ -1,8 +1,7 @@
 package Logic;
 
 import Entities.*;
-import Interactors.GameLogic;
-import Logic.MainTreeNodeLogic.MainParentNode;
+import Logic.MainTreeNodeLogic.MainParentNodeUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ public class GeneralGameLogicTest {
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        MainParentNode mainParentNode = new MainParentNode();
+        MainParentNodeUseCase mainParentNode = new MainParentNodeUseCase();
         State test_state = mainParentNode.create_state(0);
         generalGameLogic.addSwitchOptions(test_state);
         ArrayList<String> options = new ArrayList<String>();
@@ -111,7 +110,7 @@ public class GeneralGameLogicTest {
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        MainParentNode mainParentNode = new MainParentNode();
+        MainParentNodeUseCase mainParentNode = new MainParentNodeUseCase();
         State test_state = mainParentNode.create_state(0);
         generalGameLogic.addPlayersState(test_state);
         ArrayList<String> options = new ArrayList<String>();

@@ -1,9 +1,9 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.GeneralGameLogic;
-import Logic.MainTreeNodeLogic.UnMortgage;
+import Logic.MainTreeNodeLogic.UnMortgageUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -28,7 +28,7 @@ public class UnMortgageTest {
         generalGameLogic.setGameLogicInteractor(gameLogic);
         generalGameLogic.setCurrentPlayer(playerOne);
         generalGameLogic.getSelectedOptions().put("PropertySelected", 0);
-        UnMortgage unMortgage = new UnMortgage();
+        UnMortgageUseCase unMortgage = new UnMortgageUseCase();
         State actual = unMortgage.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }

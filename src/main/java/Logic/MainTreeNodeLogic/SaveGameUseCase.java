@@ -23,7 +23,7 @@ public class SaveGameUseCase extends MainTreeNodeLogic implements NodeLogic {
     public State create_state(int input){
 
         State currentState = new State();
-        //options for saving the game
+
         currentState.setId(getName());
         currentState.addOptions("Ok");
         currentState.setSaveGame(true);

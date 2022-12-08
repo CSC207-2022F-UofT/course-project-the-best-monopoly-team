@@ -2,9 +2,9 @@ package Logic.MainTreeLogic;
 
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.GeneralGameLogic;
-import Logic.MainTreeNodeLogic.SendTrade;
+import Logic.MainTreeNodeLogic.SendTradeUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -37,7 +37,7 @@ public class SendTradeTest {
         generalGameLogic.setCurrentPlayer(playerOne);
         generalGameLogic.getSelectedOptions().put("PickItemSelf", 0);
         generalGameLogic.getSelectedOptions().put("PickItemOp", 0);
-        SendTrade sendTrade = new SendTrade();
+        SendTradeUseCase sendTrade = new SendTradeUseCase();
         State actual = sendTrade.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Accept The Trade");
@@ -68,7 +68,7 @@ public class SendTradeTest {
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        SendTrade sendTrade = new SendTrade();
+        SendTradeUseCase sendTrade = new SendTradeUseCase();
         State actual = sendTrade.create_state(1);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }

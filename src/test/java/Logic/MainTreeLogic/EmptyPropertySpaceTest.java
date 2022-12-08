@@ -1,8 +1,8 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
-import Logic.MainTreeNodeLogic.EmptyPropertySpace;
+import Logic.GameLogic;
+import Logic.MainTreeNodeLogic.EmptyPropertySpaceUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -29,7 +29,7 @@ public class EmptyPropertySpaceTest {
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        EmptyPropertySpace emptyPropertySpace = new EmptyPropertySpace();
+        EmptyPropertySpaceUseCase emptyPropertySpace = new EmptyPropertySpaceUseCase();
         State actual = emptyPropertySpace.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Trade");

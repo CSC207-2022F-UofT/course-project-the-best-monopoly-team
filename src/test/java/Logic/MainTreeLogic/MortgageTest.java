@@ -1,10 +1,10 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.GeneralGameLogic;
 import Logic.MainTreeNodeLogic.MainTreeNodeLogic;
-import Logic.MainTreeNodeLogic.Mortgage;
+import Logic.MainTreeNodeLogic.MortgageUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -31,7 +31,7 @@ public class MortgageTest {
         int[] main_states = new int[4];
         main_states[0] = 1;
         MainTreeNodeLogic.initializeStates(main_states);
-        Mortgage mortgage = new Mortgage();
+        MortgageUseCase mortgage = new MortgageUseCase();
         State actual = mortgage.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }
@@ -53,7 +53,7 @@ public class MortgageTest {
         int[] main_states = new int[4];
         main_states[0] = 0;
         MainTreeNodeLogic.initializeStates(main_states);
-        Mortgage mortgage = new Mortgage();
+        MortgageUseCase mortgage = new MortgageUseCase();
         State actual = mortgage.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Yes");

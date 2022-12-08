@@ -31,7 +31,7 @@ Choose Player (Steal),
 End Turn,You can't end your turn, you have negative money
 Settings Menu,Welcome to the settings menu!
 Exit Game,Are you sure you want to exit?
-Save The Game,Game saved!
+Save The Game,
 Bankruptcy,Confirm bankruptcy?
 Confirm Action,
 Information Node,

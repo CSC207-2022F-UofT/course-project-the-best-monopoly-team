@@ -1,7 +1,7 @@
 package Logic.TradingNodeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.GeneralGameLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -32,7 +32,7 @@ public class DeclineTradeTest {
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
         generalGameLogic.setReturnPlayerIndex(0);
         generalGameLogic.setCurrentPlayer(playerTwo);
-        DeclineTrade declineTrade = new DeclineTrade();
+        DeclineTradeUseCase declineTrade = new DeclineTradeUseCase();
         State actual = declineTrade.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Ok");

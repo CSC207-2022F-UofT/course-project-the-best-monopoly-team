@@ -140,8 +140,8 @@ public class UseCaseInteractor{
     }
     public void saveGame(){
         try{
-            saveAccess.saveGameNewFile(savePackager.getPlayerPropertyData(), savePackager.getStates());
-            currentState.setDescription("Successful save");
+            String saveReturn = saveAccess.saveGameNewFile(savePackager.getPlayerPropertyData(), savePackager.getStates());
+            currentState.setDescription("Successful save in file: "+ saveReturn);
         }
         catch (Exception IOException){
             currentState.setDescription("Save failed");
