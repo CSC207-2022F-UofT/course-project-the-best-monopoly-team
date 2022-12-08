@@ -9,6 +9,9 @@ import Logic.GeneralGameLogic;
 
 import java.util.List;
 
+/**
+ * This class handles the logic for the auction tree nodes.
+ */
 public class AuctionTreeNodeLogic extends GeneralGameLogic {
     final int LOW_OPTION = 20;
     final int MEDIUM_OPTION = 80;
@@ -28,15 +31,10 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
         auctionStates = new int[playerLength + 1];
     }
 
-
-
-//    /**
-//     * Gets the current state object of the tree when the auction is not yet complete
-//     * @return a state object representing the program
-//     */
-//    public State getState(){
-//
-//    }
+    /**
+     * Gets the current state object of the tree when the auction is not yet complete
+     * @return a state object representing the program
+     */
     public State beforeLogic(){
         State currentState = new State();
         GameLogic gameLogicInteractor = getGameLogicInteractor();
@@ -49,6 +47,11 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
         return currentState;
     }
 
+    /**
+     * Gets the current state object of the tree when the auction bidding process has finished.
+     * @param currentState a State object representing the current state of the game.
+     * @return a State object of the tree when the auction bidding process has finished.
+     */
     public State afterLogic(State currentState){
         //if the auction is still going, go back to the beginning of the tree
         GameLogic gameLogicInteractor = getGameLogicInteractor();

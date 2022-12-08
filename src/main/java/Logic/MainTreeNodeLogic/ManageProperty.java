@@ -7,7 +7,7 @@ import Logic.NodeLogic;
 import java.util.ArrayList;
 
 /**
- * This method represents the use case where the users want to manage a property.
+ * This class represents the use case where the users want to manage a property.
  */
 public class ManageProperty extends MainTreeNodeLogic implements NodeLogic {
     public ManageProperty() {

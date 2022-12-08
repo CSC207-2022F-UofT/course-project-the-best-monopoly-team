@@ -166,10 +166,20 @@ public class GeneralGameLogic {
      * Sets the tree back to its top position and returns the current state of the tree
      * @return state object
      */
+
+    /**
+     * Method returning the current state after the bottom node has been reached.
+     * @return a State object representing the current state after the bottom node has been reached.
+     */
     public State afterBottomNode(){
         gameLogicInteractor.setCurrentTreeToMaxParent();
         return getCurrentState();
     }
+
+    /**
+     * This method adds players other than the current player to the list of options in a State object.
+     * @param currentState a State object that we want to add the players as options to.
+     */
     public void addPlayersState(State currentState){
         ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
         playerCopy.remove(currentPlayer);
@@ -178,6 +188,11 @@ public class GeneralGameLogic {
         }
 
     }
+
+    /**
+     * This method returns a String representing the name of the node.
+     * @return a String representing the name of the node.
+     */
     public String getName() {
         return name;
     }
