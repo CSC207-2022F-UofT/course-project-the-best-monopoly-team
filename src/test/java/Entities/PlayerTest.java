@@ -90,14 +90,4 @@ public class PlayerTest {
         assertEquals(130, player1.getMoney());
     }
 
-    @Test
-    public void testMortgage() {
-        Player player1 = new Player("Player1");
-        Property property1 = new Property("property1", "yellow",
-                3,4, new int[]{1, 2, 3, 4, 5, 6}, player1,100,4,true);
-        player1.setMoney(100);
-        player1.mortgage(property1);
-        assertEquals(200, player1.getMoney());
-        assertEquals(new ArrayList<Property>(), player1.getProperties());
-    }
 }

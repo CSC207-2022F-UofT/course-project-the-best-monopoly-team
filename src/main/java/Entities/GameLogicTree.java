@@ -8,7 +8,7 @@ import java.util.List;
 public class GameLogicTree extends MenuTree{
 
     private boolean switchBlock = false;
-    private String prompt;
+
     private State previousState;
     private NodeLogic useCase;
 
@@ -26,22 +26,6 @@ public class GameLogicTree extends MenuTree{
      */
     public NodeLogic getUseCase(){
         return useCase;
-    }
-
-    /**
-     * This method sets the prompt instance attribute.
-     * @param prompt a String which will be stored in the prompt instance attribute.
-     */
-    public void setPrompt(String prompt){
-        this.prompt = prompt;
-    }
-
-    /**
-     * This method returns a String stored in the prompt instance attribute.
-     * @return a String which is stored in the prompt instance attribute.
-     */
-    public String getPrompt(){
-        return prompt;
     }
 
     /**

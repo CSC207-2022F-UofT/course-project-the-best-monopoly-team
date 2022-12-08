@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public class OutputInteractor {
     /**
-     *  InsatanceVar output: an Output object that keeps track and updates the output depending on the state of the game
+     *  InstanceVar output: an Output object that keeps track and updates the output depending on the state of the game
      *  InstanceVar currentState: a State object that helps with determining the output that should be presented to the user
      */
     private Output output;
@@ -31,14 +31,22 @@ public class OutputInteractor {
     }
 
     /**
+     * Function to return the current Output message for context to the user
+     * @return the context String
+     */
+    public String getOutputMessage() {
+        updateLogicStates(this.currentState.getId());
+        return this.output.getStateOutput(this.currentState.getId());
+    }
+    public State getCurrentState(){
+        return this.currentState;
+    }
+
+    /**
      * setFinalOutput updates the string to be presented to the user by updating all the output strings that should
      * be presented to the user based on the state and presented all the options based on the state
      */
-    public void setFinalOutput(){
-        updateLogicStates(this.currentState.getId());
-        this.output.setFinalOutput(this.output.getStateOutput(this.currentState.getId()));
-        addOptionStrings();
-    }
+
 
     /**
      * This function deals with all the states that need to be updated periodically based on the current state of the game
@@ -69,6 +77,8 @@ public class OutputInteractor {
                 break;
             case "Choose Player (Steal)":
                 updateSteal();
+            case "Game Complete":
+                updateEnding();
         }
     }
 
@@ -79,6 +89,10 @@ public class OutputInteractor {
         String currString = this.currentState.getPlayer().getName() + " It's your turn! What do you want to do? You currently have " +
                 this.currentState.getPlayer().getMoney() + " dollars";
         this.output.modifyStateOutput("Main Tree Parent Node", currString);
+    }
+    public void updateEnding(){
+        String currString = this.currentState.getDescription();
+        this.output.modifyStateOutput("Game Complete", currString);
     }
     public void updateSteal(){
         String currString = this.currentState.getDescription();
@@ -116,23 +130,15 @@ public class OutputInteractor {
     }
 
     /**
-     * Function to get the options the user has based on the state and concatenate those options to present to the user
+     * Function to get the options the user has based on the state
+     * @return the ArrayList of options in the current state
      */
-    public void addOptionStrings(){
-        StringBuilder currOptions = new StringBuilder("\n");
-        ArrayList<String> options = this.currentState.getOptions();
-        for (int i = 0; i < options.size(); i++)
-            currOptions.append(options.get(i)).append("(").append(i).append("), ");
-        if (this.currentState.isBackEnable())
-            currOptions.append("back").append("(").append(options.size()).append(")");
-        this.output.addToFinalOutput(currOptions.toString());
-    }
-
-    /**
-     * @return the final output string that is to be presented to the user
-     */
-    public String getOutput(){
-        return this.output.getFinalOutput();
+    public ArrayList<String> getStateOptions(){
+        ArrayList<String> currOptions = new ArrayList<>(this.currentState.getOptions());
+        if (this.currentState.isBackEnable()){
+            currOptions.add("back");
+        }
+        return currOptions;
     }
 
     /**
@@ -141,5 +147,10 @@ public class OutputInteractor {
      */
     public void updateState(State state){
         this.currentState = state;
+    }
+
+    public String getOutput() {
+        updateLogicStates(this.currentState.getId());
+        return this.output.getStateOutput(this.currentState.getId());
     }
 }

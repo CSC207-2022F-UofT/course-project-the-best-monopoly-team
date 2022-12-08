@@ -15,6 +15,7 @@ public class PlayerLogic {
     public static final double STEAL_CHANCE = 0.3;
     public static final double STEAL_JAIL_CHANCE = 0.6;
     public static final int STEAL_MONEY = 100;
+    static final double MORTGAGE_INTEREST = 1.1;
 
     public PlayerLogic(Player player) {
         this.player = player;
@@ -49,6 +50,14 @@ public class PlayerLogic {
                 return (String.valueOf( roll1 + roll2) + "player goes to jail");
             }
         return (String.valueOf( roll1 + roll2));
+    }
+
+    /**
+     * Rigged roll for testing purposes
+     * @param rig
+     */
+    public void riggedRoll(int rig) {
+        player.move(rig);
     }
 
     private static boolean isConsecutive(int roll1, int roll2) {
@@ -112,20 +121,6 @@ public class PlayerLogic {
         return ownedSets;
     }
 
-    /**
-     * Method allowing this player to trade assets with another player
-     * @param tradee the player this player wants to trade with
-     * @param money any sufficient amount of money this player wants to offer the tradee
-     * @param properties properties owned by this player that they would like to offer the tradee
-     * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
-     */
-    public void trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
-        player.pay(tradee, money);
-        tradee.getProperties().addAll(properties);
-        player.getProperties().removeAll(properties);
-        tradee.addJailCards(jailcards);
-        player.removeJailCards(jailcards);
-    }
 
     /**
      * A helper function for steal that deals with the stealSuccessful situation.
@@ -166,6 +161,24 @@ public class PlayerLogic {
         } else {
             return stealUnsuccessful();
         }
+    }
+
+    /**
+     * Placing the property for mortgage
+     * @param property the property to remove and to add the money to the current players balance
+     */
+    public void mortgage(Property property) {
+        player.changeMoney(property.getMortgageValue());
+        property.setMortgageStatus(true);
+    }
+
+    /**
+     * Unmortgaging a property
+     * @param property the property to be unmortgaged
+     */
+    public void unmortgage(Property property) {
+        player.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));
+        property.setMortgageStatus(false);
     }
 
     /**

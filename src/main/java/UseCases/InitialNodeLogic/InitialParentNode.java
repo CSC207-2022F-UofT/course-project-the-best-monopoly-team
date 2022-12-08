@@ -14,7 +14,6 @@ public class InitialParentNode extends InitialLogic implements NodeLogic {
     public State create_state(int input) {
         State currentState = beforeLogic();
         currentState.setId(getName());
-        currentState.setDescription(currentTree.getPrompt());
         for (MenuTree tree: currentTree.getChildren()){
             currentState.addOptions(((InitialLogic)((GameLogicTree)tree).getUseCase()).getName());
         }

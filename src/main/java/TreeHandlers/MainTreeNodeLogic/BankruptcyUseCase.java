@@ -44,8 +44,15 @@ public class BankruptcyUseCase extends MainTreeNodeLogic implements NodeLogic {
             changePlayers();
             board.removePlayer(currentPlayer);
 
+            if (board.getPlayers().size() == 1){
+                gameLogicInteractor.transverseCurrentTree(1);
+                currentState = gameLogicInteractor.handleTree(0);
+                return currentState;
+            }
+
             //changing the player and turning the state back to normal
-            mainStates = new int[2];
+            mainStates[0] = 0;
+            mainStates[1] = 0;
             currentState = afterBottomNode();
         } else {
             //confirmation node setup

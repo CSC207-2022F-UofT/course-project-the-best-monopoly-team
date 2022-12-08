@@ -2,6 +2,9 @@ package TreeHandlers.MainTreeNodeLogic;
 
 import Entities.*;
 import Interface.NodeLogic;
+import UseCases.PlayerLogic;
+
+import java.util.HashMap;
 
 /**
  * This class represents the use case where the current player chooses to unmortgage a chosen property.
@@ -15,10 +18,14 @@ public class UnMortgage extends MainTreeNodeLogic implements NodeLogic {
     @Override
     public State create_state(int input) {
 
+        Player currentPlayer = getCurrentPlayer();
+        HashMap<String, Integer> selectedOptions = getSelectedOptions();
+        PlayerLogic currentPlayerLogic = new PlayerLogic(currentPlayer);
         State currentState = new State();
         currentState.setId(getName());
-        //TODO ADD FUNCTIONALITY
-
+        Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("PropertySelected"));
+        currentPlayerLogic.unmortgage(targetProperty);
+        currentState = afterBottomNode();
         return currentState;
     }
 }
