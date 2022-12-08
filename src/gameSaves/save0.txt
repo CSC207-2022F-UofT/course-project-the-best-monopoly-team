@@ -1,0 +1,9 @@
+playerStart
+Player 0,1500,false,0,0
+Player 1,1500,false,0,0
+Player 2,1500,false,0,0
+Player 3,1500,false,0,0
+playerEnd
+treeStart
+4,-1,0,0,0,0
+treeEnd
