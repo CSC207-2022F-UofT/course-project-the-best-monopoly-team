@@ -51,6 +51,9 @@ public class SaveFileTest {
         }
 
         assert check;
+        File delete = new File(directory.getAbsolutePath() + "/" + saveName);
+        boolean deleteTestFile = delete.delete();
+        assert deleteTestFile;
     }
 
     @Test
