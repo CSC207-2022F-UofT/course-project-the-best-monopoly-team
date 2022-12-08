@@ -34,8 +34,7 @@ public class PresenterDisplay {
                      didInput = gameFrame.waitForInput();
                  }
                  inputControl.getChoice(gameFrame.getInput());
-                 State currentState = inputControl.getUpdatedState();
-                 outputControl.updateState(currentState);
+                 outputControl.updateState(inputControl.getUpdatedState());
                  gameFrame.refreshScreen();
                  gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
              }
