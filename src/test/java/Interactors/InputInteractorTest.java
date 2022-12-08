@@ -54,12 +54,9 @@ public class InputInteractorTest {
 
         ArrayList<String> test = inputInteractor.getCurrentState().getOptions();
 
-        ArrayList<String> options = new ArrayList<>();
-        options.add("input_test.txt");
-        options.add("test.txt");
-        options.add("test01.txt");
-
-        assert test.equals(options);
+        assert test.contains("input_test.txt");
+        assert test.contains("test.txt");
+        assert test.contains("test01.txt");
     }
 
     @Test
