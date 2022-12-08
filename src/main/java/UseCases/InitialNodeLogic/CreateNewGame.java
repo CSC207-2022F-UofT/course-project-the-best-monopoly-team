@@ -13,7 +13,14 @@ public class CreateNewGame extends InitialLogic implements NodeLogic {
         State state;
         //creating the game if confirmed
         if (input == 0) {
-            caseInteractor.createGame();
+            int[] states = new int[6];
+            states[0] = selectedOptions.get("NumOfPlayers");
+            states[1] = selectedOptions.get("GameLength");
+            states[2] = selectedOptions.get("GameMode");
+            states[3] = 0;
+            states[4] = 0;
+            states[5] = 0;
+            caseInteractor.createNewGame(states);
             state = caseInteractor.getLogicInteractor().getCurrentState();
         }
         else{

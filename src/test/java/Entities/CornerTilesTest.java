@@ -27,7 +27,7 @@ public class CornerTilesTest {
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
-        Board bo = creation.createNewGame(players, properties);
+        Board bo = creation.createNewBoard(players, properties);
         CornerTiles t = new JailSpace();
         player1.setInJail(true);
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
@@ -45,7 +45,7 @@ public class CornerTilesTest {
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
-        Board bo = creation.createNewGame(players, properties);
+        Board bo = creation.createNewBoard(players, properties);
         CornerTiles t = new JailSpace();
         player1.setInJail(false);
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
@@ -62,7 +62,7 @@ public class CornerTilesTest {
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
-        Board bo = creation.createNewGame(players, properties);
+        Board bo = creation.createNewBoard(players, properties);
         CornerTiles t = new FreeParking();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
         assertEquals("You landed on Free Parking!", cornerTileInteractor.performAction(player1, t));
@@ -78,7 +78,7 @@ public class CornerTilesTest {
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
-        Board bo = creation.createNewGame(players, properties);
+        Board bo = creation.createNewBoard(players, properties);
         CornerTiles t = new GoToJail();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
         assertEquals("Go to Jail!", cornerTileInteractor.performAction(player1, t));
@@ -96,7 +96,7 @@ public class CornerTilesTest {
             properties.add(property);
         }
         ArrayList<String[]> strings = new ArrayList<>();
-        Board bo = creation.createNewGame(players, properties);
+        Board bo = creation.createNewBoard(players, properties);
         CornerTiles t = new PassGo();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
         assertEquals("Passed Go!, Collected 200", cornerTileInteractor.performAction(player1, t));

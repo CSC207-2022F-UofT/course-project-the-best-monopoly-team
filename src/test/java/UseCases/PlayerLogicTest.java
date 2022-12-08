@@ -2,25 +2,11 @@ package UseCases;
 
 import Entities.Player;
 import Entities.Property;
-import UseCases.PlayerLogic;
 import org.junit.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.assertEquals;
-
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-import Entities.Player;
-import Entities.Property;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-
 import org.junit.Assert;
-import org.junit.Test;
 
 public class PlayerLogicTest {
     public PlayerLogicTest() {

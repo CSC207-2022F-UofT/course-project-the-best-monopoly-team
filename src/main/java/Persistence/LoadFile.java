@@ -15,6 +15,11 @@ public class LoadFile implements LoadAccess{
         this.file = file;
     }
 
+    public void setFile(String newFile){
+        String filePath = file.getPath() + "/" + newFile;
+        file = new File(filePath);
+    }
+
     /**
      * Searches the given folder denoted by folderPath and returns an array
      * of Files inside the given folder. Used by UseCaseInteractor to display
