@@ -1,8 +1,8 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import UseCases.Logic.GameLogic;
-import UseCases.Logic.MainTreeNodeLogic.EmptyPropertySpaceUseCase;
+import Logic.GameLogic;
+import Logic.MainTreeNodeLogic.EmptyPropertySpaceUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

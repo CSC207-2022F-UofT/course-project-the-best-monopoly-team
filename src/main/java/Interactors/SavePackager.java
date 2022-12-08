@@ -2,8 +2,8 @@ package Interactors;
 
 import Entities.Player;
 import Entities.Property;
-import UseCases.Logic.GeneralGameLogic;
-import UseCases.Logic.MainTreeNodeLogic.MainTreeNodeLogic;
+import Logic.GeneralGameLogic;
+import Logic.MainTreeNodeLogic.MainTreeNodeLogic;
 
 /***
  * This class turns the objects of the game needed for data persistence into their needed forms for

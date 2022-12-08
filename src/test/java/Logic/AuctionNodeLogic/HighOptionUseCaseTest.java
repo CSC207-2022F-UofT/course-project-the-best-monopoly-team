@@ -1,8 +1,7 @@
 package Logic.AuctionNodeLogic;
 
 import Entities.*;
-import UseCases.Logic.AuctionNodeLogic.HighOptionUseCase;
-import UseCases.Logic.GameLogic;
+import Logic.GameLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

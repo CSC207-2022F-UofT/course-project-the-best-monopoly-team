@@ -1,6 +1,7 @@
 package UseCases.Logic.MainTreeNodeLogic;
 
 import Entities.State;
+import Logic.MainTreeNodeLogic.RollUseCase;
 import Persistence.LoadAccess;
 import Persistence.LoadFile;
 import Persistence.SaveAccess;

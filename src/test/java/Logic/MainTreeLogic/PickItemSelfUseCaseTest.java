@@ -1,8 +1,8 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import UseCases.Logic.GameLogic;
-import UseCases.Logic.MainTreeNodeLogic.PickItemSelfUseCase;
+import Logic.GameLogic;
+import Logic.MainTreeNodeLogic.PickItemSelfUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

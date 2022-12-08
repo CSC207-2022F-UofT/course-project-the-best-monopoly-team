@@ -1,7 +1,7 @@
 package UseCases;
 
 import Interactors.GameCreation;
-import UseCases.Logic.PlayerLogic;
+import Logic.PlayerLogic;
 import Persistence.LoadAccess;
 import Persistence.LoadFile;
 import Entities.*;

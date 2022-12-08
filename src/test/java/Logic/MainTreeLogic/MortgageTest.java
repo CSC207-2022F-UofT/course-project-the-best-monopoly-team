@@ -1,10 +1,10 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import UseCases.Logic.GameLogic;
-import UseCases.Logic.GeneralGameLogic;
-import UseCases.Logic.MainTreeNodeLogic.MainTreeNodeLogic;
-import UseCases.Logic.MainTreeNodeLogic.MortgageUseCase;
+import Logic.GameLogic;
+import Logic.GeneralGameLogic;
+import Logic.MainTreeNodeLogic.MainTreeNodeLogic;
+import Logic.MainTreeNodeLogic.MortgageUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

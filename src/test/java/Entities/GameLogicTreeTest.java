@@ -1,6 +1,6 @@
 package Entities;
 
-import UseCases.Logic.InitialNodeLogic.*;
+import Logic.InitialNodeLogic.*;
 import org.junit.jupiter.api.Test;
 
 class GameLogicTreeTest {

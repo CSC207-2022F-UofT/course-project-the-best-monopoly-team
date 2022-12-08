@@ -6,10 +6,10 @@ import Entities.GameLogicTree;
 import Entities.State;
 import Interactors.GameCreation;
 import Interactors.SavePackager;
+import Logic.InitialNodeLogic.*;
 import Persistence.LoadAccess;
-import UseCases.Logic.GameLogic;
+import Logic.GameLogic;
 import Persistence.SaveAccess;
-import UseCases.Logic.InitialNodeLogic.*;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

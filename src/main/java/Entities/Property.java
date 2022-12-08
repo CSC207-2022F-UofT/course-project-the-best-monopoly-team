@@ -1,6 +1,6 @@
 package Entities;
 
-import UseCases.Logic.PlayerLogic;
+import Logic.PlayerLogic;
 
 public class Property extends Cell {
     private String name;

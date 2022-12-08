@@ -1,5 +1,5 @@
 package Entities;
-import UseCases.Logic.NodeLogic;
+import Logic.NodeLogic;
 import java.util.List;
 
 /**
