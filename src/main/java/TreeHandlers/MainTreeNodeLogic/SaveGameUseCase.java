@@ -26,7 +26,6 @@ public class SaveGameUseCase extends MainTreeNodeLogic implements NodeLogic {
         //options for saving the game
         currentState.setId(getName());
         currentState.addOptions("Ok");
-        //TODO: make this option save the game in use case interactor
         currentState.setSaveGame(true);
         return currentState;
     }

@@ -17,10 +17,9 @@ public class LoadGame extends InitialLogic implements NodeLogic {
         State state = beforeLogic();
 
         //options associated with the next node
-        File file = new File("src/gameData");
-        LoadAccess load = new LoadFile(file);
+        LoadAccess load = caseInteractor.getLoadAccess();
 
-        String[] allSaves = load.checkSaves("src/gameData");
+        String[] allSaves = load.checkSaves(load.getFile().getAbsolutePath());
         // add save file name to state
         for (String save : allSaves) {
             state.addOptions(save);
