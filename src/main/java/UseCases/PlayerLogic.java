@@ -15,6 +15,7 @@ public class PlayerLogic {
     public static final double STEAL_CHANCE = 0.3;
     public static final double STEAL_JAIL_CHANCE = 0.6;
     public static final int STEAL_MONEY = 100;
+    static final double MORTGAGE_INTEREST = 1.1;
 
     public PlayerLogic(Player player) {
         this.player = player;
@@ -49,6 +50,18 @@ public class PlayerLogic {
                 return (String.valueOf( roll1 + roll2) + "player goes to jail");
             }
         return (String.valueOf( roll1 + roll2));
+    }
+
+    /**
+     * Rigged roll for testing purposes
+     * @param rig
+     */
+    public void riggedRoll(int rig) {
+        player.move(rig);
+    }
+
+    public void moveTo(Property property) {
+
     }
 
     private static boolean isConsecutive(int roll1, int roll2) {
@@ -167,6 +180,26 @@ public class PlayerLogic {
         } else {
             return stealUnsuccessful();
         }
+    }
+
+    /**
+     * Placing the property for mortgage
+     * @param property the property to remove and to add the money to the current players balance
+     */
+    public void mortgage(Property property) {
+        player.getProperties().remove(property);
+        player.changeMoney(property.getMortgageValue());
+        property.setMortgageStatus(true);
+    }
+
+    /**
+     * Unmortgaging a property
+     * @param property the property to be unmortgaged
+     */
+    public void unmortgage(Property property) {
+        player.getProperties().add(property);
+        player.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));
+        property.setMortgageStatus(false);
     }
 
     /**

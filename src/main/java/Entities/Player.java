@@ -23,7 +23,6 @@ public class Player {
     static final int GO_MONEY = 200;
     static final int LAST_POSITION_INDEX = 39;
     static final int BOARD_SIZE = 40;
-    static final double MORTGAGE_INTEREST = 1.1;
 
 
     /**
@@ -229,16 +228,6 @@ public class Player {
     }
 
     /**
-     * Rigged roll for testing purposes
-     * @param rig
-     * @return
-     */
-    public String riggedRoll(int rig) {
-        this.move(rig);
-        return (""+rig);
-    }
-
-    /**
      * Increases the amount of money owned by this player
      * @param change an integer indicating how much money will be added to the player's balance
      */
@@ -262,20 +251,6 @@ public class Player {
     public void pay(Player player, int money) {
         this.money -= money;
         player.money += money;
-    }
-
-    /**
-     * Placing the property for mortgage
-     * @param property the property to remove and to add the money to the current players balance
-     */
-    public void mortgage(Property property) {
-        this.properties.remove(property);
-        this.changeMoney(property.getMortgageValue());
-    }
-
-    public void unmortgage(Property property) {
-        this.properties.add(property);
-        this.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));
     }
 
     /**
