@@ -21,9 +21,10 @@ public class Player {
     static final int STARTING_JAILCARDS = 0;
     static final int STARTING_POSITION = 0;
     static final int GO_MONEY = 200;
-
     static final int LAST_POSITION_INDEX = 39;
     static final int BOARD_SIZE = 40;
+    static final double MORTGAGE_INTEREST = 1.1;
+
 
     /**
      * This is the constructor method for new player instances
@@ -269,7 +270,12 @@ public class Player {
      */
     public void mortgage(Property property) {
         this.properties.remove(property);
-        this.money += property.getMortgageValue();
+        this.changeMoney(property.getMortgageValue());
+    }
+
+    public void unmortgage(Property property) {
+        this.properties.add(property);
+        this.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));
     }
 
     /**
