@@ -38,49 +38,11 @@ public class OutputInteractorTest {
         inputTest.getChoice(0);
         inputTest.sendInput();
 
-        //outputTest.updateLogicStates(inputTest.getCurrentState().getId());
-        //outputTest.setFinalOutput();
         String testString = "Player 0 It's your turn! What do you want to do? You currently have 1500 dollars";
-        assert testString.equals(useCaseTest.getInitialState().getPlayer().getName() +
+        assert testString.equals(useCaseTest.getCurrentState().getPlayer().getName() +
                 " It's your turn! What do you want to do? You currently have " +
-                useCaseTest.getInitialState().getPlayer().getMoney() + " dollars");
+                useCaseTest.getCurrentState().getPlayer().getMoney() + " dollars");
     }
-
-//    @Test
-//    public void testUpdateSendTrade() {
-//        LoadAccess game = new LoadFile(new File("src/gameData/input_test.txt"));
-//        SaveAccess save = new SaveFile(new File("src/gameData/input_test.txt"));
-//        UseCaseInteractor useCaseTest = new UseCaseInteractor(game, save);
-//        OutputInteractor outputTest = new OutputInteractor(useCaseTest);
-//        InputInteractor inputTest = new InputInteractor(useCaseTest);
-//
-//        inputTest.getChoice(0);
-//        inputTest.sendInput();
-//
-//        inputTest.getChoice(0);
-//        inputTest.sendInput();
-//
-//        inputTest.getChoice(4);
-//        inputTest.sendInput();
-//
-//        inputTest.getChoice(3);
-//        inputTest.sendInput();
-//
-//        inputTest.getChoice(0);
-//        inputTest.sendInput();
-//
-//        inputTest.getChoice(0);
-//        inputTest.sendInput();
-//
-//        inputTest.getChoice(0);
-//        inputTest.sendInput();
-//
-//        outputTest.updateLogicStates("Send The Trade");
-//        String testString = "Player02 It's your turn! What do you want to do? You currently have 100 dollars";
-//        assert testString.equals(useCaseTest.getInitialState().getTradingOpponent().getName() + ", Incoming trade from player " +
-//                useCaseTest.getInitialState().getPlayer().getName() + " requesting for " + useCaseTest.getInitialState().getTradingPlayerProperty().getName() +
-//                " in return for " + useCaseTest.getInitialState().getCurrentPlayerProperty().getName());
-//    }
 
     @Test
     public void testAddOptionStrings() {
@@ -127,7 +89,7 @@ public class OutputInteractorTest {
         inputTest.sendInput();
 
         String testString = "Player 0 It's your turn! What do you want to do? You currently have 1500 dollars";
-
+        outputTest.setFinalOutput();
         assert testString.equals(outputTest.getOutput());
     }
 

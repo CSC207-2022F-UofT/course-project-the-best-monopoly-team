@@ -45,6 +45,13 @@ public class UseCaseInteractor{
     }
 
     /**
+     * This method returns the state that the game is in
+     * @return the state that the game is in
+     */
+    public State getCurrentState() {
+        return this.currentState;
+    }
+    /**
      * This method handles the input of the user. <br>It moves through the current tree with the user's input,
      * and uses helper methods to deal with the logic afterwards.
      * @param input the translated input of the user from the input interface
