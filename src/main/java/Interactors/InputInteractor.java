@@ -10,11 +10,11 @@ import UseCases.UseCaseInteractor;
  */
 public class InputInteractor {
     /**
-     * InstanceVar input: the Input object which represnts the users current input
+     * InstanceVar input: the Input object which represents the users current input
      * InstanceVar interactor: the UseCaseInteractor object that takes in the input for processing
-     * InstanceVar currentState: the State  object used in processing to obtain the new state
+     * InstanceVar currentState: the State object used in processing to obtain the new state
      */
-    private Input input;
+    Input input;
     private UseCaseInteractor interactor;
     private State currentState;
 
@@ -26,6 +26,14 @@ public class InputInteractor {
         this.input = new Input();
         this.interactor = interactor;
         this.currentState = interactor.getInitialState();
+    }
+
+    /**
+     * Function returns the state that the game is in
+     * @return the state that the game is in
+     */
+    public State getCurrentState() {
+        return this.currentState;
     }
 
     /**
