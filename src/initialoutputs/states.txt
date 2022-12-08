@@ -42,4 +42,4 @@ Fold,""
 Trading Parent Node,
 Accept The Trade,Trade success
 Decline The Trade,Trade failure
-Game Complete,Game is over
+Game Complete,
