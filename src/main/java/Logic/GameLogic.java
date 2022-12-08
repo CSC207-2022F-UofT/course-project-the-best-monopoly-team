@@ -162,7 +162,7 @@ public class GameLogic {
         finishGameNode.addChild(exitGame);
 
         temp = new MenuTree[]{choosePlayer, callAction, buildProperty, alreadyRolled,
-        saveGame, endTurn, auction, noProperties, nothingToTrade};
+        saveGame, endTurn, auction, noProperties, nothingToTrade, sendTrade};
         addChildToMultiple(temp,informationNode);
 
         temp = new MenuTree[]{mortgage, exitGame, bankruptcy};
