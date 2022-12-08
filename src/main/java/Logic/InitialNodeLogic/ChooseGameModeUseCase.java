@@ -3,8 +3,8 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
-public class ChooseGameMode extends InitialLogic implements NodeLogic {
-    public ChooseGameMode() {
+public class ChooseGameModeUseCase extends InitialLogic implements NodeLogic {
+    public ChooseGameModeUseCase() {
         super("Choose Game Mode");
     }
 

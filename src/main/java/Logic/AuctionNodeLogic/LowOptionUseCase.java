@@ -6,8 +6,8 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case when a player chooses to bid low in an auction.
  */
-public class LowOption extends AuctionTreeNodeLogic implements NodeLogic {
-    public LowOption() {
+public class LowOptionUseCase extends AuctionTreeNodeLogic implements NodeLogic {
+    public LowOptionUseCase() {
         super("Low Option");
     }
 

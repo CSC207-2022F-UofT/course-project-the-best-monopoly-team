@@ -3,6 +3,8 @@ package Logic.MainTreeNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
+public class CallActionUseCase extends MainTreeNodeLogic implements NodeLogic {
+    public CallActionUseCase() {
 /**
  * This class represents a use case after an action card is drawn.
  */

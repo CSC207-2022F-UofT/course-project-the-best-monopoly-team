@@ -6,9 +6,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case when a player chooses to bid high in an auction.
  */
-public class HighOption extends AuctionTreeNodeLogic implements NodeLogic {
+public class HighOptionUseCase extends AuctionTreeNodeLogic implements NodeLogic {
 
-    public HighOption() {
+    public HighOptionUseCase() {
         super("High Option");
     }
 

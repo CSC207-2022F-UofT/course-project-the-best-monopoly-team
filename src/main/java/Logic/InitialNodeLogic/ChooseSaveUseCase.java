@@ -3,8 +3,8 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
-public class ChooseSave extends InitialLogic implements NodeLogic {
-    public ChooseSave() {
+public class ChooseSaveUseCase extends InitialLogic implements NodeLogic {
+    public ChooseSaveUseCase() {
         super("Choose Save");
     }
 

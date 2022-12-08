@@ -7,7 +7,7 @@ import Entities.State;
 import Interactors.SavePackager;
 import Logic.InitialNodeLogic.*;
 import Persistence.LoadAccess;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Persistence.SaveAccess;
 
 import java.io.FileNotFoundException;
@@ -109,14 +109,14 @@ public class UseCaseInteractor{
     public void createTrees(){
         //creating first tree
         GameLogicTree initialMenu = new GameLogicTree(new InitialParentNode());
-        GameLogicTree newGame = new GameLogicTree(new NewGame());
-        GameLogicTree chooseGameMode = new GameLogicTree(new ChooseGameMode());
-        GameLogicTree numPlayers = new GameLogicTree( new NumberOfPlayers());
-        GameLogicTree gameLength = new GameLogicTree(new GameLength());
-        GameLogicTree createNewGame = new GameLogicTree(new CreateNewGame());
-        GameLogicTree loadGame = new GameLogicTree(new LoadGame());
-        GameLogicTree chooseSave = new GameLogicTree(new ChooseSave());
-        GameLogicTree createLoadedGame = new GameLogicTree(new CreateLoadedGame());
+        GameLogicTree newGame = new GameLogicTree(new NewGameUseCase());
+        GameLogicTree chooseGameMode = new GameLogicTree(new ChooseGameModeUseCase());
+        GameLogicTree numPlayers = new GameLogicTree( new NumberOfPlayersUseCase());
+        GameLogicTree gameLength = new GameLogicTree(new GameLengthUseCase());
+        GameLogicTree createNewGame = new GameLogicTree(new CreateNewGameUseCase());
+        GameLogicTree loadGame = new GameLogicTree(new LoadGameUseCase());
+        GameLogicTree chooseSave = new GameLogicTree(new ChooseSaveUseCase());
+        GameLogicTree createLoadedGame = new GameLogicTree(new CreateLoadedGameUseCase());
 
         //creating the tree structure
         gameLength.addChild(createNewGame);
@@ -154,7 +154,6 @@ public class UseCaseInteractor{
      * @return state object
      */
     public State getInitialState(){
-        //State currentState = new State();
 
         //makes the currentTree the root
         currentTree = (GameLogicTree) currentTree.getMaxParent();

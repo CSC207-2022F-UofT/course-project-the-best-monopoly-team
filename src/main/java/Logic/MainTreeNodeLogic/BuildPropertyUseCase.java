@@ -11,9 +11,9 @@ import java.util.HashMap;
 /**
  * This class represents the use case when a building is to be built on a property.
  */
-public class BuildProperty extends MainTreeNodeLogic implements NodeLogic {
+public class BuildPropertyUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public BuildProperty() {
+    public BuildPropertyUseCase() {
         super("Build House/Hotel");
     }
 

@@ -1,7 +1,7 @@
 package Logic.MainTreeNodeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.NodeLogic;
 
 import java.util.ArrayList;

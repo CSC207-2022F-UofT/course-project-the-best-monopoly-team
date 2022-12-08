@@ -2,7 +2,7 @@ package Logic.AuctionNodeLogic;
 
 import Entities.Player;
 import Entities.State;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.NodeLogic;
 import Logic.GeneralGameLogic;
 

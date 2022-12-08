@@ -3,8 +3,8 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
-public class NewGame extends InitialLogic implements NodeLogic {
-    public NewGame() {
+public class NewGameUseCase extends InitialLogic implements NodeLogic {
+    public NewGameUseCase() {
         super("New Game");
     }
 

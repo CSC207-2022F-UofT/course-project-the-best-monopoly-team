@@ -2,14 +2,14 @@ package Logic.MainTreeNodeLogic;
 
 import Entities.GameLogicTree;
 import Entities.State;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.NodeLogic;
 
 /**
  * This class represents the use case of when an auction is to be started.
  */
-public class Auction extends MainTreeNodeLogic implements NodeLogic {
-    public Auction() {
+public class AuctionUseCase extends MainTreeNodeLogic implements NodeLogic {
+    public AuctionUseCase() {
         super("Auction");
     }
 

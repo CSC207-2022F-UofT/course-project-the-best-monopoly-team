@@ -6,9 +6,9 @@ import Logic.NodeLogic;
 /**
  * This use case represents when the current user lands on an empty property space.
  */
-public class EmptyPropertySpace extends MainTreeNodeLogic implements NodeLogic {
+public class EmptyPropertySpaceUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public EmptyPropertySpace() {
+    public EmptyPropertySpaceUseCase() {
         super("Property Unowned");
     }
 

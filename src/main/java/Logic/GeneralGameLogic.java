@@ -1,7 +1,6 @@
 package Logic;
 
 import Entities.*;
-import Interactors.GameLogic;
 
 import java.util.ArrayList;
 import java.util.HashMap;

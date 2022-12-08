@@ -1,17 +1,17 @@
 package Logic.AuctionNodeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HighOptionTest {
+public class LowOptionUseCaseTest {
 
     @Test
-    public void testHighOptionCreateState(){
+    public void testLowOptionCreateState(){
         Player playerOne = new Player("Player One");
         Player playerTwo = new Player("Player Two");
         List<Player> players = new ArrayList<>();
@@ -26,8 +26,8 @@ public class HighOptionTest {
         cells.add(test_property2);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        HighOption highOption = new HighOption();
-        State actual = highOption.create_state(0);
+        LowOptionUseCase lowOptionUseCase = new LowOptionUseCase();
+        State actual = lowOptionUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }
 

@@ -4,8 +4,8 @@ import Entities.State;
 import Logic.NodeLogic;
 import Persistence.LoadAccess;
 
-public class LoadGame extends InitialLogic implements NodeLogic {
-    public LoadGame() {
+public class LoadGameUseCase extends InitialLogic implements NodeLogic {
+    public LoadGameUseCase() {
         super("Load Game");
     }
 

@@ -9,9 +9,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case for when the current player wants to buy a property.
  */
-public class Buy extends MainTreeNodeLogic implements NodeLogic {
+public class BuyUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public Buy() {
+    public BuyUseCase() {
         super("Buy Property");
     }
 

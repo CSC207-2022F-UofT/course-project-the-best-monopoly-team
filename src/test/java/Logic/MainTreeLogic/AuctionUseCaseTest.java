@@ -1,15 +1,15 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
-import Logic.MainTreeNodeLogic.Auction;
+import Logic.GameLogic;
+import Logic.MainTreeNodeLogic.AuctionUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuctionTest {
+public class AuctionUseCaseTest {
 
     @Test
     public void testAuctionTestCreateState(){
@@ -22,8 +22,8 @@ public class AuctionTest {
         cells.add(test_property);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        Auction auction = new Auction();
-        State actual = auction.create_state(0);
+        AuctionUseCase auctionUseCase = new AuctionUseCase();
+        State actual = auctionUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Auction Tree Parent Node");
     }
 

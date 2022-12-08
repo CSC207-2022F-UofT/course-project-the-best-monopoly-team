@@ -2,14 +2,14 @@ package Logic.MainTreeLogic;
 
 import Entities.*;
 import Logic.GeneralGameLogic;
-import Logic.MainTreeNodeLogic.CallAction;
+import Logic.MainTreeNodeLogic.CallActionUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CallActionTest {
+public class CallActionUseCaseTest {
 
     @Test
     public void testCallActionCreateState(){
@@ -22,8 +22,8 @@ public class CallActionTest {
         cells.add(test_property);
         Board board = new Board(players, cells);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        CallAction callAction = new CallAction();
-        State actual = callAction.create_state(0);
+        CallActionUseCase callActionUseCase = new CallActionUseCase();
+        State actual = callActionUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Ok");
         Assertions.assertEquals(actual.getOptions(), options);

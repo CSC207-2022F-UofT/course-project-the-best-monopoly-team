@@ -6,9 +6,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case when a player chooses to make a middle bid in an auction.
  */
-public class MediumOption extends AuctionTreeNodeLogic implements NodeLogic {
+public class MediumOptionUseCase extends AuctionTreeNodeLogic implements NodeLogic {
 
-    public MediumOption() {
+    public MediumOptionUseCase() {
         super("Medium Option");
     }
 

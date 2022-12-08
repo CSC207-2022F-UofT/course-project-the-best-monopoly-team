@@ -2,7 +2,7 @@ package Logic.MainTreeNodeLogic;
 
 import Entities.*;
 import Interactors.CornerTilePerformActionInteractor;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Interactors.PerformActionSpaceCardInteractor;
 import Interactors.PropertyPerformActionInteractor;
 import Logic.NodeLogic;

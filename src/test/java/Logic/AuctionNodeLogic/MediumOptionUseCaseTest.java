@@ -1,14 +1,14 @@
 package Logic.AuctionNodeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MediumOptionTest {
+public class MediumOptionUseCaseTest {
 
     @Test
     public void testHighOptionCreateState(){
@@ -26,8 +26,8 @@ public class MediumOptionTest {
         cells.add(test_property2);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        MediumOption mediumOption = new MediumOption();
-        State actual = mediumOption.create_state(0);
+        MediumOptionUseCase mediumOptionUseCase = new MediumOptionUseCase();
+        State actual = mediumOptionUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }
 

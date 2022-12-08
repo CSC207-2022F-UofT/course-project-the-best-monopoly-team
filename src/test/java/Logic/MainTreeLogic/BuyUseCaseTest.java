@@ -1,14 +1,14 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
-import Logic.MainTreeNodeLogic.Buy;
+import Logic.GameLogic;
+import Logic.MainTreeNodeLogic.BuyUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuyTest {
+public class BuyUseCaseTest {
 
     @Test
     public void testBuyCreateState(){
@@ -21,8 +21,8 @@ public class BuyTest {
         cells.add(test_property);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        Buy buy = new Buy();
-        State actual = buy.create_state(0);
+        BuyUseCase buyUseCase = new BuyUseCase();
+        State actual = buyUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }
 }

@@ -6,9 +6,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case where the player has already rolled the dice.
  */
-public class AlreadyRolled extends MainTreeNodeLogic implements NodeLogic {
+public class AlreadyRolledUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public AlreadyRolled() {
+    public AlreadyRolledUseCase() {
         super("Already Rolled");
     }
 

@@ -1,7 +1,7 @@
 package Logic.MainTreeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.MainTreeNodeLogic.Trade;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;

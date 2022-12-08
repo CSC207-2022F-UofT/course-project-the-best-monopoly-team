@@ -1,7 +1,7 @@
 package Logic.TradingNodeLogic;
 
 import Entities.*;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.NodeLogic;
 
 /**

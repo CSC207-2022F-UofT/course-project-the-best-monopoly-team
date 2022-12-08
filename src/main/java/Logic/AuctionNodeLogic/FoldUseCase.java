@@ -2,7 +2,7 @@ package Logic.AuctionNodeLogic;
 
 import Entities.Player;
 import Entities.State;
-import Interactors.GameLogic;
+import Logic.GameLogic;
 import Logic.NodeLogic;
 
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.List;
 /**
  * This class represents a use case when a player folds during an auction.
  */
-public class Fold extends AuctionTreeNodeLogic implements NodeLogic {
+public class FoldUseCase extends AuctionTreeNodeLogic implements NodeLogic {
 
-    public Fold() {
+    public FoldUseCase() {
         super("Fold");
     }
 

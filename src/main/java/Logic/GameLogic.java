@@ -1,11 +1,10 @@
-package Interactors;
+package Logic;
 
 import Entities.*;
 import Logic.AuctionNodeLogic.*;
 import Logic.MainTreeNodeLogic.*;
 import Logic.TradingNodeLogic.AcceptTrade;
 import Logic.TradingNodeLogic.DeclineTrade;
-import Logic.GeneralGameLogic;
 import Logic.TradingNodeLogic.TradingParentNode;
 
 /**
@@ -120,7 +119,7 @@ public class GameLogic {
         GameLogicTree selectProperty = new GameLogicTree(new SelectProperty());
         GameLogicTree mortgage = new GameLogicTree(new Mortgage());
         GameLogicTree unMortgage = new GameLogicTree(new UnMortgage());
-        GameLogicTree buildProperty = new GameLogicTree(new BuildProperty());
+        GameLogicTree buildProperty = new GameLogicTree(new BuildPropertyUseCase());
 
         GameLogicTree noProperties = new GameLogicTree(new NoProperties());
 
@@ -131,11 +130,11 @@ public class GameLogic {
         addParentToMultiple(manageProperty,temp);
 
         GameLogicTree roll = new GameLogicTree(new Roll());
-        GameLogicTree callAction = new GameLogicTree(new CallAction());
-        GameLogicTree emptyPropertySpace = new GameLogicTree(new EmptyPropertySpace());
-        GameLogicTree buy = new GameLogicTree(new Buy());
-        GameLogicTree auction = new GameLogicTree(new Auction());
-        GameLogicTree alreadyRolled = new GameLogicTree(new AlreadyRolled());
+        GameLogicTree callAction = new GameLogicTree(new CallActionUseCase());
+        GameLogicTree emptyPropertySpace = new GameLogicTree(new EmptyPropertySpaceUseCase());
+        GameLogicTree buy = new GameLogicTree(new BuyUseCase());
+        GameLogicTree auction = new GameLogicTree(new AuctionUseCase());
+        GameLogicTree alreadyRolled = new GameLogicTree(new AlreadyRolledUseCase());
 
         temp = new MenuTree[]{emptyPropertySpace, callAction, alreadyRolled};
         addParentToMultiple(roll, temp);
@@ -196,10 +195,10 @@ public class GameLogic {
 
         //Creating the auction tree
         GameLogicTree auctionTree = new GameLogicTree(new AuctionParentNode());
-        GameLogicTree lowOption = new GameLogicTree(new LowOption());
-        GameLogicTree mediumOption = new GameLogicTree(new MediumOption());
-        GameLogicTree highOption = new GameLogicTree(new HighOption());
-        GameLogicTree fold = new GameLogicTree(new Fold());
+        GameLogicTree lowOption = new GameLogicTree(new LowOptionUseCase());
+        GameLogicTree mediumOption = new GameLogicTree(new MediumOptionUseCase());
+        GameLogicTree highOption = new GameLogicTree(new HighOptionUseCase());
+        GameLogicTree fold = new GameLogicTree(new FoldUseCase());
 
         auctionTree.setIsSwitchBlock(true);
 

@@ -3,8 +3,8 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
-public class NumberOfPlayers extends InitialLogic implements NodeLogic {
-    public NumberOfPlayers() {
+public class NumberOfPlayersUseCase extends InitialLogic implements NodeLogic {
+    public NumberOfPlayersUseCase() {
         super("Number of Players");
     }
 
