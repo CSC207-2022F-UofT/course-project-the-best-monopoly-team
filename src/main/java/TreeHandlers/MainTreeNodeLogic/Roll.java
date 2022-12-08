@@ -55,6 +55,9 @@ public class Roll extends MainTreeNodeLogic implements NodeLogic {
                     case "Property":
                         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
                         Property property = (Property) landedOnCell;
+                        if (property.getMortgageStatus()) {
+                            setAnswer("This property is mortgaged, don't need to pay rent.");
+                        }
                         setAnswer(propertyInteractor.performAction(property, currentPlayer));
                         break;
                     case "Corner Tile":
@@ -68,7 +71,14 @@ public class Roll extends MainTreeNodeLogic implements NodeLogic {
                         PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
                         ActionSpace actionSpace = (ActionSpace) landedOnCell;
                         setAnswer(actionSpaceInteractor.performAction(actionSpace, currentPlayer, board));
+
+                        if (currentPlayer.isInJail()) {
+                            ActionSpace jail = (ActionSpace) landedOnCell;
+                            setAnswer(actionSpaceInteractor.performAction(jail, currentPlayer, board));
+                        }
+
                 }
+
                 gameLogicInteractor.transverseCurrentTree(1);
             }
             //perform the logic in the new node.
