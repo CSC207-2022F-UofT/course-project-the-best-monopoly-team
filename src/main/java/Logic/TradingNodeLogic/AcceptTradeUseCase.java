@@ -7,9 +7,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case where a player accepts a trade proposal from another player.
  */
-public class AcceptTrade extends TradingTreeNodeLogic implements NodeLogic {
+public class AcceptTradeUseCase extends TradingTreeNodeLogic implements NodeLogic {
 
-    public AcceptTrade() {
+    public AcceptTradeUseCase() {
         super("Accept The Trade");
     }
 

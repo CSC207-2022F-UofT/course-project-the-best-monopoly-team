@@ -7,9 +7,9 @@ import Logic.NodeLogic;
 /**
  * This class represents a use case where a Player instance chooses to steal money from another Player instance.
  */
-public class Steal extends MainTreeNodeLogic implements NodeLogic {
+public class StealUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public Steal() {
+    public StealUseCase() {
         super("Steal");
     }
 

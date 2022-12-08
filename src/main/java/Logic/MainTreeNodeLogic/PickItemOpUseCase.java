@@ -10,8 +10,8 @@ import java.util.HashMap;
  * This class represents the use case where the current player has to choose an item of a targeted opponent's
  * inventory.
  */
-public class PickItemOp extends MainTreeNodeLogic implements NodeLogic {
-    public PickItemOp() {
+public class PickItemOpUseCase extends MainTreeNodeLogic implements NodeLogic {
+    public PickItemOpUseCase() {
         super("Pick Item Of Opponent");
     }
 

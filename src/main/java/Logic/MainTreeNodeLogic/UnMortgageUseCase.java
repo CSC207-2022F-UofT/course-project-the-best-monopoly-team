@@ -9,8 +9,9 @@ import java.util.HashMap;
 /**
  * This class represents the use case where the current player chooses to un-mortgage a chosen property.
  */
-public class UnMortgage extends MainTreeNodeLogic implements NodeLogic {
-    public UnMortgage() {
+
+public class UnMortgageUseCase extends MainTreeNodeLogic implements NodeLogic {
+    public UnMortgageUseCase() {
         super("Un-Mortgage property");
     }
 

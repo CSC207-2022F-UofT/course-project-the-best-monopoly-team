@@ -5,8 +5,8 @@ import Entities.MenuTree;
 import Entities.State;
 import Logic.NodeLogic;
 
-public class InitialParentNode extends InitialLogic implements NodeLogic {
-    public InitialParentNode() {
+public class InitialParentNodeUseCase extends InitialLogic implements NodeLogic {
+    public InitialParentNodeUseCase() {
         super("Initial Menu Parent Node");
     }
 

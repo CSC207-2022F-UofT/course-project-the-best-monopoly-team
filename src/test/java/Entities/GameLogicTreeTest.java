@@ -30,7 +30,7 @@ class GameLogicTreeTest {
         newGame.addChild(gameType);
 
         GameLogicTree loadGame = new GameLogicTree(new LoadGameUseCase());
-        GameLogicTree startMenu = new GameLogicTree(new InitialParentNode());
+        GameLogicTree startMenu = new GameLogicTree(new InitialParentNodeUseCase());
         startMenu.addChild(loadGame);
         startMenu.addChild(newGame);
 

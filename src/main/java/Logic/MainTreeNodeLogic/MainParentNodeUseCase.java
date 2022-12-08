@@ -7,8 +7,8 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case where the game is in a non-auction or non-trading state.
  */
-public class MainParentNode extends MainTreeNodeLogic implements NodeLogic {
-    public MainParentNode() {
+public class MainParentNodeUseCase extends MainTreeNodeLogic implements NodeLogic {
+    public MainParentNodeUseCase() {
         super("Main Tree Parent Node");
     }
 

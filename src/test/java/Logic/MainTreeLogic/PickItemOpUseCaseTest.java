@@ -2,14 +2,14 @@ package Logic.MainTreeLogic;
 
 import Entities.*;
 import Logic.GameLogic;
-import Logic.MainTreeNodeLogic.PickItemOp;
+import Logic.MainTreeNodeLogic.PickItemOpUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PickItemOpTest {
+public class PickItemOpUseCaseTest {
 
     @Test
     public void testPickItemOpCreateState(){
@@ -28,8 +28,8 @@ public class PickItemOpTest {
         cells.add(test_property2);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        PickItemOp pickItemOp = new PickItemOp();
-        State actual = pickItemOp.create_state(0);
+        PickItemOpUseCase pickItemOpUseCase = new PickItemOpUseCase();
+        State actual = pickItemOpUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Property One");
         Assertions.assertEquals(actual.isBackEnable(), true);

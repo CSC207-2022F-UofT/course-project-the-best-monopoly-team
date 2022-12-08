@@ -6,8 +6,8 @@ import Logic.NodeLogic;
 /**
  *  This class represents a use case where the current player has nothing to trade.
  */
-public class NothingToTrade extends MainTreeNodeLogic implements NodeLogic{
-    public NothingToTrade() {
+public class NothingToTradeUseCase extends MainTreeNodeLogic implements NodeLogic{
+    public NothingToTradeUseCase() {
         super("Trader/Tradee Has No Properties");
     }
 

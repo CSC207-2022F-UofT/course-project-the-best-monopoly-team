@@ -14,9 +14,9 @@ import UseCases.PropertyPerformActionUseCase;
 /**
  * This class represents the use case where the current player rolls the dice.
  */
-public class Roll extends MainTreeNodeLogic implements NodeLogic {
+public class RollUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public Roll() {
+    public RollUseCase() {
         super("Roll The Dice");
     }
 

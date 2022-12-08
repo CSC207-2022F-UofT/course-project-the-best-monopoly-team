@@ -9,9 +9,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case when a player declines a trade proposal from another player.
  */
-public class DeclineTrade extends TradingTreeNodeLogic implements NodeLogic {
+public class DeclineTradeUseCase extends TradingTreeNodeLogic implements NodeLogic {
 
-    public DeclineTrade() {
+    public DeclineTradeUseCase() {
         super("Decline The Trade");
     }
 

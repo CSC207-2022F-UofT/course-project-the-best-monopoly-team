@@ -8,9 +8,9 @@ import java.util.HashMap;
 /**
  * This class represents the use case where the current player has to choose an item that it owns.
  */
-public class PickItemSelf extends MainTreeNodeLogic implements NodeLogic {
+public class PickItemSelfUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public PickItemSelf() {
+    public PickItemSelfUseCase() {
         super("Pick Item Of Self");
     }
 

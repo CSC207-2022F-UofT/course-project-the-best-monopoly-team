@@ -9,8 +9,8 @@ import java.util.ArrayList;
 /**
  * This class represents the use case where the users want to manage a property.
  */
-public class ManageProperty extends MainTreeNodeLogic implements NodeLogic {
-    public ManageProperty() {
+public class ManagePropertyUseCase extends MainTreeNodeLogic implements NodeLogic {
+    public ManagePropertyUseCase() {
         super("Manage Property");
     }
 

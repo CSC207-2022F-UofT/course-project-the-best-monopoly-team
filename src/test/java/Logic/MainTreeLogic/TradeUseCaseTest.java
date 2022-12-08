@@ -2,17 +2,18 @@ package Logic.MainTreeLogic;
 
 import Entities.*;
 import Logic.GameLogic;
-import Logic.MainTreeNodeLogic.Steal;
+import Logic.MainTreeNodeLogic.TradeUseCase;
+import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class StealTest {
+public class TradeUseCaseTest {
 
     @Test
-    public void testStealCreateState(){
+    public void testTradeCreateState(){
         Player playerOne = new Player("Player One");
         Player playerTwo = new Player("Player Two");
         List<Player> players = new ArrayList<>();
@@ -21,13 +22,13 @@ public class StealTest {
         List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        Steal steal = new Steal();
-        State actual = steal.create_state(0);
+        TradeUseCase tradeUseCase = new TradeUseCase();
+        State actual = tradeUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Player Two");
+        Assertions.assertEquals(actual.getId(), "Trade");
         Assertions.assertEquals(actual.isBackEnable(), true);
-        Assertions.assertEquals(actual.getId(), "Steal");
-        Assertions.assertEquals(actual.getOptions(), options);
+        Assert.assertEquals(actual.getOptions(), options);
     }
 
 }

@@ -9,8 +9,8 @@ import java.util.HashMap;
  * This class represents a use case where the current player selects a property that it owns that will then be either
  * mortgaged, un-mortgaged, or have a house built on it.
  */
-public class SelectProperty extends MainTreeNodeLogic implements NodeLogic {
-    public SelectProperty() {
+public class SelectPropertyUseCase extends MainTreeNodeLogic implements NodeLogic {
+    public SelectPropertyUseCase() {
         super("Select The Property (Manage Property)");
     }
 

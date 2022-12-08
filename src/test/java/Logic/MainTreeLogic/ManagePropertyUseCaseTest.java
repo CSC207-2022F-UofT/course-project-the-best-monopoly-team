@@ -2,54 +2,49 @@ package Logic.MainTreeLogic;
 
 import Entities.*;
 import Logic.GameLogic;
-import Logic.MainTreeNodeLogic.PickPlayer;
+import Logic.MainTreeNodeLogic.ManagePropertyUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PickPlayerTest {
+public class ManagePropertyUseCaseTest {
 
     @Test
-    public void testPickPlayerCreateStateNoProperties(){
+    public void testManagePropertyCreateStateNoProperties(){
         Player playerOne = new Player("Player One");
-        Player playerTwo = new Player("Player Two");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
-        players.add(playerTwo);
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[6],
+                null, 50, 0, false);
         List<Cell> cells = new ArrayList<>();
+        cells.add(test_property);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        PickPlayer pickPlayer = new PickPlayer();
-        State actual = pickPlayer.create_state(0);
+        ManagePropertyUseCase managePropertyUseCase = new ManagePropertyUseCase();
+        State actual = managePropertyUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "User Has No Properties (Manage Properties)");
         Assertions.assertEquals(actual.isBackEnable(), false);
     }
 
     @Test
-    public void testPickPlayerCreateState(){
+    public void testManagePropertyCreateStateWithProperties(){
         Player playerOne = new Player("Player One");
-        Player playerTwo = new Player("Player Two");
-        Property propertyOne = new Property("Property One", "Blue", 100, 100, new int[6],
-                playerOne, 50, 0, false);
-        Property propertyTwo = new Property("Property Two", "Blue", 100, 100, new int[6],
-                playerTwo, 50, 0, false);
-        playerOne.addProperty(propertyOne);
-        playerTwo.addProperty(propertyTwo);
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
-        players.add(playerTwo);
+        Property test_property = new Property("Name", "Blue", 100, 100, new int[6],
+                playerOne, 50, 0, false);
+        playerOne.addProperty(test_property);
         List<Cell> cells = new ArrayList<>();
-        cells.add(propertyOne);
-        cells.add(propertyTwo);
+        cells.add(test_property);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        PickPlayer pickPlayer = new PickPlayer();
-        State actual = pickPlayer.create_state(0);
+        ManagePropertyUseCase managePropertyUseCase = new ManagePropertyUseCase();
+        State actual = managePropertyUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
-        options.add("Property Two");
-        Assertions.assertEquals(actual.getId(), "Pick Player (Trade)");
+        options.add("Name");
+        Assertions.assertEquals(actual.getId(), "Manage Property");
         Assertions.assertEquals(actual.isBackEnable(), true);
         Assertions.assertEquals(actual.getOptions(), options);
     }

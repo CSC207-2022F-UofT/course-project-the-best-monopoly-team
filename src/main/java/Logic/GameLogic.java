@@ -3,9 +3,9 @@ package Logic;
 import Entities.*;
 import Logic.AuctionNodeLogic.*;
 import Logic.MainTreeNodeLogic.*;
-import Logic.TradingNodeLogic.AcceptTrade;
-import Logic.TradingNodeLogic.DeclineTrade;
-import Logic.TradingNodeLogic.TradingParentNode;
+import Logic.TradingNodeLogic.AcceptTradeUseCase;
+import Logic.TradingNodeLogic.DeclineTradeUseCase;
+import Logic.TradingNodeLogic.TradingParentNodeUseCase;
 
 /**
  * This class creates a GameLogic instance which coordinates the flow of the game.
@@ -100,14 +100,14 @@ public class GameLogic {
     public void createTrees(){
         MenuTree[] temp;
         //Creating the game loop tree
-        GameLogicTree main = new GameLogicTree( new MainParentNode());
-        GameLogicTree trade = new GameLogicTree(new Trade());
-        GameLogicTree pickPlayer = new GameLogicTree(new PickPlayer());
-        GameLogicTree pickItemOp = new GameLogicTree(new PickItemOp());
-        GameLogicTree pickItemSelf = new GameLogicTree(new PickItemSelf());
-        GameLogicTree sendTrade = new GameLogicTree(new SendTrade());
+        GameLogicTree main = new GameLogicTree( new MainParentNodeUseCase());
+        GameLogicTree trade = new GameLogicTree(new TradeUseCase());
+        GameLogicTree pickPlayer = new GameLogicTree(new PickPlayerUseCase());
+        GameLogicTree pickItemOp = new GameLogicTree(new PickItemOpUseCase());
+        GameLogicTree pickItemSelf = new GameLogicTree(new PickItemSelfUseCase());
+        GameLogicTree sendTrade = new GameLogicTree(new SendTradeUseCase());
 
-        GameLogicTree nothingToTrade = new GameLogicTree(new NothingToTrade());
+        GameLogicTree nothingToTrade = new GameLogicTree(new NothingToTradeUseCase());
 
         pickItemSelf.addChild(sendTrade);
         pickItemOp.addChild(pickItemSelf);
@@ -115,13 +115,13 @@ public class GameLogic {
         trade.addChild(pickPlayer);
         pickPlayer.addChild(nothingToTrade);
 
-        GameLogicTree manageProperty = new GameLogicTree(new ManageProperty());
-        GameLogicTree selectProperty = new GameLogicTree(new SelectProperty());
-        GameLogicTree mortgage = new GameLogicTree(new Mortgage());
-        GameLogicTree unMortgage = new GameLogicTree(new UnMortgage());
+        GameLogicTree manageProperty = new GameLogicTree(new ManagePropertyUseCase());
+        GameLogicTree selectProperty = new GameLogicTree(new SelectPropertyUseCase());
+        GameLogicTree mortgage = new GameLogicTree(new MortgageUseCase());
+        GameLogicTree unMortgage = new GameLogicTree(new UnMortgageUseCase());
         GameLogicTree buildProperty = new GameLogicTree(new BuildPropertyUseCase());
 
-        GameLogicTree noProperties = new GameLogicTree(new NoProperties());
+        GameLogicTree noProperties = new GameLogicTree(new NoPropertiesUseCase());
 
         temp = new MenuTree[]{mortgage, unMortgage, buildProperty};
         addParentToMultiple(selectProperty,temp);
@@ -129,7 +129,7 @@ public class GameLogic {
         temp = new MenuTree[]{selectProperty, noProperties};
         addParentToMultiple(manageProperty,temp);
 
-        GameLogicTree roll = new GameLogicTree(new Roll());
+        GameLogicTree roll = new GameLogicTree(new RollUseCase());
         GameLogicTree callAction = new GameLogicTree(new CallActionUseCase());
         GameLogicTree emptyPropertySpace = new GameLogicTree(new EmptyPropertySpaceUseCase());
         GameLogicTree buy = new GameLogicTree(new BuyUseCase());
@@ -142,7 +142,7 @@ public class GameLogic {
         temp = new MenuTree[]{buy, auction};
         addParentToMultiple(emptyPropertySpace, temp);
 
-        GameLogicTree steal = new GameLogicTree(new Steal());
+        GameLogicTree steal = new GameLogicTree(new StealUseCase());
         GameLogicTree choosePlayer = new GameLogicTree(new ChoosePlayerUseCase());
 
         steal.addChild(choosePlayer);
@@ -184,9 +184,9 @@ public class GameLogic {
         trees[0] = main;
 
         //Creating the trading tree
-        GameLogicTree tradeTree = new GameLogicTree(new TradingParentNode());
-        GameLogicTree acceptTrade = new GameLogicTree(new AcceptTrade());
-        GameLogicTree declineTrade = new GameLogicTree(new DeclineTrade());
+        GameLogicTree tradeTree = new GameLogicTree(new TradingParentNodeUseCase());
+        GameLogicTree acceptTrade = new GameLogicTree(new AcceptTradeUseCase());
+        GameLogicTree declineTrade = new GameLogicTree(new DeclineTradeUseCase());
 
         temp = new MenuTree[]{acceptTrade, declineTrade};
         addParentToMultiple(tradeTree, temp);

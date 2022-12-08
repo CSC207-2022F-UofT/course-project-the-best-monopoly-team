@@ -8,9 +8,9 @@ import Logic.NodeLogic;
  * This class represents a use case where two Player instances trade with each other. The class handles the actions
  * required to successfully set up a trade.
  */
-public class Trade extends MainTreeNodeLogic implements NodeLogic {
+public class TradeUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public Trade() {
+    public TradeUseCase() {
         super("Trade");
     }
 

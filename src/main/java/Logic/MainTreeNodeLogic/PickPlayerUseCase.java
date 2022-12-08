@@ -10,9 +10,9 @@ import java.util.HashMap;
 /**
  * This class represents a use case where the current player has to choose a player to trade with.
  */
-public class PickPlayer extends MainTreeNodeLogic implements NodeLogic{
+public class PickPlayerUseCase extends MainTreeNodeLogic implements NodeLogic{
 
-    public PickPlayer() {
+    public PickPlayerUseCase() {
         super("Pick Player (Trade)");
     }
 

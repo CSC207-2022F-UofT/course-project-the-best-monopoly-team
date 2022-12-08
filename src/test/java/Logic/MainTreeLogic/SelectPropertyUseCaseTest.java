@@ -2,14 +2,14 @@ package Logic.MainTreeLogic;
 
 import Entities.*;
 import Logic.GameLogic;
-import Logic.MainTreeNodeLogic.SelectProperty;
+import Logic.MainTreeNodeLogic.SelectPropertyUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectPropertyTest {
+public class SelectPropertyUseCaseTest {
 
     @Test
     public void testSelectPropertyCreateCase(){
@@ -22,8 +22,8 @@ public class SelectPropertyTest {
         cells.add(test_property);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        SelectProperty selectProperty = new SelectProperty();
-        State actual = selectProperty.create_state(0);
+        SelectPropertyUseCase selectPropertyUseCase = new SelectPropertyUseCase();
+        State actual = selectPropertyUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Mortgage");
         options.add("Unmortgage");

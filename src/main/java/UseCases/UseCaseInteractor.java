@@ -108,7 +108,7 @@ public class UseCaseInteractor{
      */
     public void createTrees(){
         //creating first tree
-        GameLogicTree initialMenu = new GameLogicTree(new InitialParentNode());
+        GameLogicTree initialMenu = new GameLogicTree(new InitialParentNodeUseCase());
         GameLogicTree newGame = new GameLogicTree(new NewGameUseCase());
         GameLogicTree chooseGameMode = new GameLogicTree(new ChooseGameModeUseCase());
         GameLogicTree numPlayers = new GameLogicTree( new NumberOfPlayersUseCase());

@@ -6,9 +6,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case where the targeted player does not have any properties.
  */
-public class NoProperties extends MainTreeNodeLogic implements NodeLogic {
+public class NoPropertiesUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public NoProperties() {
+    public NoPropertiesUseCase() {
         super("User Has No Properties (Manage Properties)");
     }
 

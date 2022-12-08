@@ -10,9 +10,9 @@ import java.util.HashMap;
 /**
  * This class represents the use case where the current player chooses to mortgage a chosen property.
  */
-public class Mortgage extends MainTreeNodeLogic implements NodeLogic {
+public class MortgageUseCase extends MainTreeNodeLogic implements NodeLogic {
 
-    public Mortgage() {
+    public MortgageUseCase() {
         super("Mortgage Property");
     }
 

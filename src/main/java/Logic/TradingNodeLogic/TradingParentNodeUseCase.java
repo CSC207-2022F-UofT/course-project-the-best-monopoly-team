@@ -6,8 +6,9 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case where a trade is initiated.
  */
-public class TradingParentNode extends TradingTreeNodeLogic implements NodeLogic {
-    public TradingParentNode() {
+
+public class TradingParentNodeUseCase extends TradingTreeNodeLogic implements NodeLogic {
+    public TradingParentNodeUseCase() {
         super("Trading Parent Node");
     }
 

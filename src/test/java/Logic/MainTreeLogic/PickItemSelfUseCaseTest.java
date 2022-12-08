@@ -2,14 +2,14 @@ package Logic.MainTreeLogic;
 
 import Entities.*;
 import Logic.GameLogic;
-import Logic.MainTreeNodeLogic.PickItemSelf;
+import Logic.MainTreeNodeLogic.PickItemSelfUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PickItemSelfTest {
+public class PickItemSelfUseCaseTest {
 
     @Test
     public void testPickItemSelfCreateState(){
@@ -28,8 +28,8 @@ public class PickItemSelfTest {
         cells.add(test_property2);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        PickItemSelf pickItemSelf = new PickItemSelf();
-        State actual = pickItemSelf.create_state(0);
+        PickItemSelfUseCase pickItemSelfUseCase = new PickItemSelfUseCase();
+        State actual = pickItemSelfUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();
         options.add("Yes");
         options.add("No");
