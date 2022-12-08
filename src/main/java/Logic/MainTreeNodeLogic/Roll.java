@@ -1,14 +1,14 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.*;
 import Interactors.CornerTilePerformActionInteractor;
 import Interactors.GameLogic;
 import Interactors.PerformActionSpaceCardInteractor;
 import Interactors.PropertyPerformActionInteractor;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 import UseCases.CornerTilePerformActionUseCase;
 import UseCases.PerformActionSpaceUseCase;
-import UseCases.PlayerLogic;
+import Logic.PlayerLogic;
 import UseCases.PropertyPerformActionUseCase;
 
 /**
@@ -72,12 +72,6 @@ public class Roll extends MainTreeNodeLogic implements NodeLogic {
                         PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
                         ActionSpace actionSpace = (ActionSpace) landedOnCell;
                         setAnswer(actionSpaceInteractor.performAction(actionSpace, currentPlayer, board));
-
-                        if (currentPlayer.isInJail()) {
-                            ActionSpace jail = (ActionSpace) landedOnCell;
-                            setAnswer(actionSpaceInteractor.performAction(jail, currentPlayer, board));
-                        }
-
                 }
 
                 gameLogicInteractor.transverseCurrentTree(1);

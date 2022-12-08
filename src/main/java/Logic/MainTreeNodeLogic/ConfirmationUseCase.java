@@ -1,8 +1,8 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.*;
 import Interactors.GameLogic;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 /**
  * This class represents a use case where the current player has to confirm something.

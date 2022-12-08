@@ -1,6 +1,4 @@
-package GUI;
-
-import ButtonMappings.*;
+package Buttons;
 
 import java.util.ArrayList;
 import java.util.HashMap;

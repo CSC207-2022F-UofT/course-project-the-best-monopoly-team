@@ -1,12 +1,11 @@
-package GUI;
+package Interactors;
 
-import java.awt.*;
 import java.util.HashMap;
 
 /**
  * Class that handles the input for the Display
  */
-public class JDisplayInputHandler {
+public class GameDisplayInputInteractor {
     /**
      * InstanceVar ButtonMap: A mapping between the button pressed and the
      * input that should be passed into the InputInteractor
@@ -16,7 +15,7 @@ public class JDisplayInputHandler {
     /**
      * Constructor that sets up the fixed Mapping
      */
-    public JDisplayInputHandler(){
+    public GameDisplayInputInteractor(){
         this.ButtonMap = new HashMap<>();
         for (int i = 0; i < 20; i++){
             this.ButtonMap.put("B" + String.valueOf(i + 1), i);

@@ -1,7 +1,7 @@
-package UseCases.InitialNodeLogic;
+package Logic.InitialNodeLogic;
 
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 import Persistence.LoadAccess;
 
 public class LoadGame extends InitialLogic implements NodeLogic {

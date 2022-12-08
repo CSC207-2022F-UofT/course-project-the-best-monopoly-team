@@ -1,5 +1,6 @@
 package Entities;
 
+import Logic.InitialNodeLogic.*;
 import UseCases.InitialNodeLogic.*;
 import org.junit.jupiter.api.Test;
 

@@ -1,17 +1,16 @@
-package GUI;
+package Interactors;
 
 import Entities.Description;
 import Entities.Options;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
  * Class that handles the output for the display
  */
-public class JDisplayOutputHandler {
+public class GameDisplayOutputInteractor {
     /**
      * InstanceVar description: the section for the context shown to the user
      * InstanceVar optionSegment: the section for all the option buttons
@@ -23,16 +22,16 @@ public class JDisplayOutputHandler {
     private Options optionSegment;
     private ArrayList<String> options;
 
-    private ButtonDisplayHandler buttonDisplayHandler;
+    private ButtonDisplayInteractor buttonDisplayHandler;
 
     /**
      * The constructor for this class
      */
-    public JDisplayOutputHandler(){
+    public GameDisplayOutputInteractor(){
         this.optionSegment = new Options();
         this.description = new Description();
         this.options = new ArrayList<>();
-        this.buttonDisplayHandler = new ButtonDisplayHandler();
+        this.buttonDisplayHandler = new ButtonDisplayInteractor();
     }
 
     /**

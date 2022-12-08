@@ -1,9 +1,9 @@
-package NodeLogic.AuctionNodeLogic;
+package Logic.AuctionNodeLogic;
 
 import Entities.Player;
 import Entities.State;
 import Interactors.GameLogic;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 import java.util.List;
 

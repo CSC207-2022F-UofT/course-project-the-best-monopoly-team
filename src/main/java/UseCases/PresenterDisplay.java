@@ -1,11 +1,10 @@
 package UseCases;
-import Entities.State;
 import Interactors.InputInteractor;
 import Interactors.OutputInteractor;
 import Persistence.LoadFile;
 import Persistence.SaveFile;
 
-import GUI.JDisplay;
+import Interactors.GameDisplayInteractor;
 import java.io.File;
 
 /**
@@ -16,7 +15,7 @@ public class PresenterDisplay {
 
     /**
      * Function that runs the game loop by getting game data from the OutputInteractor and presenting that to the
-     * user as their options on each turn through Conversion in the JDisplay,
+     * user as their options on each turn through Conversion in the GameDisplayInteractor,
      *  and then getting the user's input and sending that back to the InputInteractor
      * to further handle state changes based on their option choice.
      **/
@@ -24,7 +23,7 @@ public class PresenterDisplay {
         UseCaseInteractor interactor = new UseCaseInteractor(new LoadFile(file), new SaveFile(file));
         InputInteractor inputControl = new InputInteractor(interactor);
         OutputInteractor outputControl = new OutputInteractor(interactor);
-        JDisplay gameFrame = new JDisplay();
+        GameDisplayInteractor gameFrame = new GameDisplayInteractor();
 
         gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
         gameFrame.displayScreen();

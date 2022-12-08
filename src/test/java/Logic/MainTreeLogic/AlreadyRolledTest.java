@@ -1,7 +1,7 @@
-package NodeLogic.MainTreeLogic;
+package Logic.MainTreeLogic;
 
 import Entities.State;
-import NodeLogic.MainTreeNodeLogic.AlreadyRolled;
+import Logic.MainTreeNodeLogic.AlreadyRolled;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -1,10 +1,10 @@
-package NodeLogic.AuctionNodeLogic;
+package Logic.AuctionNodeLogic;
 
 import Entities.Player;
 import Entities.State;
 import Interactors.GameLogic;
-import UseCases.NodeLogic;
-import NodeLogic.GeneralGameLogic;
+import Logic.NodeLogic;
+import Logic.GeneralGameLogic;
 
 public class AuctionParentNode extends AuctionTreeNodeLogic implements NodeLogic {
     public AuctionParentNode() {

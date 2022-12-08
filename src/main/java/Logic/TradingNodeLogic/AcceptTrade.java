@@ -1,8 +1,8 @@
-package NodeLogic.TradingNodeLogic;
+package Logic.TradingNodeLogic;
 
 import Entities.*;
 import Interactors.GameLogic;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 /**
  * This class represents the use case where a player accepts a trade proposal from another player.

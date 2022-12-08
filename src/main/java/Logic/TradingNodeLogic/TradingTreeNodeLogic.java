@@ -1,6 +1,6 @@
-package NodeLogic.TradingNodeLogic;
+package Logic.TradingNodeLogic;
 
-import NodeLogic.GeneralGameLogic;
+import Logic.GeneralGameLogic;
 
 public class TradingTreeNodeLogic extends GeneralGameLogic {
     public TradingTreeNodeLogic(String name){

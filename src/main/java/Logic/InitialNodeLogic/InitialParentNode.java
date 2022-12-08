@@ -1,9 +1,9 @@
-package UseCases.InitialNodeLogic;
+package Logic.InitialNodeLogic;
 
 import Entities.GameLogicTree;
 import Entities.MenuTree;
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 public class InitialParentNode extends InitialLogic implements NodeLogic {
     public InitialParentNode() {

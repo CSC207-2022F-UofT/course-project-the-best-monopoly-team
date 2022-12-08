@@ -1,12 +1,12 @@
 package Interactors;
 
 import Entities.*;
-import TreeHandlers.AuctionNodeLogic.*;
-import TreeHandlers.MainTreeNodeLogic.*;
-import TreeHandlers.TradingNodeLogic.AcceptTrade;
-import TreeHandlers.TradingNodeLogic.DeclineTrade;
-import TreeHandlers.GeneralGameLogic;
-import TreeHandlers.TradingNodeLogic.TradingParentNode;
+import Logic.AuctionNodeLogic.*;
+import Logic.MainTreeNodeLogic.*;
+import Logic.TradingNodeLogic.AcceptTrade;
+import Logic.TradingNodeLogic.DeclineTrade;
+import Logic.GeneralGameLogic;
+import Logic.TradingNodeLogic.TradingParentNode;
 
 /**
  * This class creates a GameLogic instance which coordinates the flow of the game.

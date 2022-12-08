@@ -1,7 +1,7 @@
-package NodeLogic.TradingNodeLogic;
+package Logic.TradingNodeLogic;
 
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 public class TradingParentNode extends TradingTreeNodeLogic implements NodeLogic {
     public TradingParentNode() {

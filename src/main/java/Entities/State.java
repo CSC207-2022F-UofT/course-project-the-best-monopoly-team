@@ -11,97 +11,91 @@ public class State {
     private String description;
     private boolean saveGame;
     private boolean exitToMenu;
+    private String roll;
+    private Property currentPlayerProperty;
+    private Property tradingPlayerProperty;
+    private Property biddingProperty;
+    private int biddingPot;
+    private String id;
+    private ArrayList<String> options = new ArrayList<>();
 
     public String getRoll() {
-        return roll;
+        return this.roll;
     }
 
     public void setRoll(String roll) {
         this.roll = roll;
     }
 
-    public String roll;
-
     public Property getCurrentPlayerProperty() {
-        return currentPlayerProperty;
+        return this.currentPlayerProperty;
     }
 
     public void setCurrentPlayerProperty(Property currentPlayerProperty) {
         this.currentPlayerProperty = currentPlayerProperty;
     }
 
-    private Property currentPlayerProperty;
-
     public Property getTradingPlayerProperty() {
-        return tradingPlayerProperty;
+        return this.tradingPlayerProperty;
     }
 
     public void setTradingPlayerProperty(Property tradingPlayerProperty) {
         this.tradingPlayerProperty = tradingPlayerProperty;
     }
-
-    private Property tradingPlayerProperty;
-    private Property biddingProperty;
-
-    private int biddingPot;
-
-    private String id;
     public boolean isExitToMenu() {
-        return exitToMenu;
+        return this.exitToMenu;
     }
 
     public void setExitToMenu(boolean exitToMenu) {
         this.exitToMenu = exitToMenu;
     }
     public boolean isSaveGame() {
-        return saveGame;
+        return this.saveGame;
     }
 
     public void setSaveGame(boolean saveGame) {
         this.saveGame = saveGame;
     }
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
-    private ArrayList<String> options = new ArrayList<String>();
-
 
     public void addOptions(String option) {
-        options.add(option);
+        this.options.add(option);
     }
 
     public Player getPlayer() {
-        return player;
+        return this.player;
     }
 
     public void setPlayer(Player player) {
         this.player = player;
     }
     public boolean isBackEnable() {
-        return backEnable;
+        return this.backEnable;
     }
     public void setBackEnable(boolean backEnable) {
         this.backEnable = backEnable;
     }
 
     public ArrayList<String> getOptions() {
-        return options;
+        return this.options;
     }
 
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(String id) {
         this.id = id;
     }
     public int getBiddingPot() {
-        return biddingPot;
+        return this.biddingPot;
     }
 
     public void setBiddingPot(int biddingPot) {
@@ -115,7 +109,7 @@ public class State {
         this.biddingProperty = biddingProperty;
     }
     public Player getTradingOpponent() {
-        return tradingPlayer;
+        return this.tradingPlayer;
     }
 
     public void setTradingOpponent(Player tradingPlayer) {

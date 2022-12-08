@@ -1,8 +1,8 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.*;
-import UseCases.NodeLogic;
-import UseCases.PlayerLogic;
+import Logic.NodeLogic;
+import Logic.PlayerLogic;
 
 import java.util.HashMap;
 

@@ -1,7 +1,7 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.*;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 import java.util.HashMap;
 

@@ -1,7 +1,7 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.*;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 /**
  *  This class represents a use case where the current player has nothing to trade.

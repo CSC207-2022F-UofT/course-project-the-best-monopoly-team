@@ -1,5 +1,5 @@
 package Entities;
-import Interface.NodeLogic;
+import Logic.NodeLogic;
 import java.util.List;
 
 public class GameLogicTree extends MenuTree{

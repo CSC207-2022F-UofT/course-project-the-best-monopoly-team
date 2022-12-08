@@ -1,7 +1,7 @@
-package UseCases.InitialNodeLogic;
+package Logic.InitialNodeLogic;
 
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 public class CreateNewGame extends InitialLogic implements NodeLogic {
     public CreateNewGame() {

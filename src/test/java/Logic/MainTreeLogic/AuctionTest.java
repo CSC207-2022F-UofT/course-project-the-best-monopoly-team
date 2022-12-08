@@ -1,8 +1,8 @@
-package NodeLogic.MainTreeLogic;
+package Logic.MainTreeLogic;
 
 import Entities.*;
 import Interactors.GameLogic;
-import NodeLogic.MainTreeNodeLogic.Auction;
+import Logic.MainTreeNodeLogic.Auction;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

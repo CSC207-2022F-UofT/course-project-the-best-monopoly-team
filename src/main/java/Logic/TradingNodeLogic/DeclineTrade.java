@@ -1,10 +1,10 @@
-package NodeLogic.TradingNodeLogic;
+package Logic.TradingNodeLogic;
 
 import Entities.Board;
 import Entities.Player;
 import Entities.State;
 import Interactors.GameLogic;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 /**
  * This class represents the use case when a player declines a trade proposal from another player.

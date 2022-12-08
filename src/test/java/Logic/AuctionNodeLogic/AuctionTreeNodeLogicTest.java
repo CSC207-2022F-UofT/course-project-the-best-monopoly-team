@@ -1,4 +1,4 @@
-package NodeLogic.AuctionNodeLogic;
+package Logic.AuctionNodeLogic;
 
 import org.junit.jupiter.api.Test;
 

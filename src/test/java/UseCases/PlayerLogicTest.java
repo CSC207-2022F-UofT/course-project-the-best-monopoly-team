@@ -1,18 +1,12 @@
 package UseCases;
 
-import Interactors.GameCreation;
+import Logic.PlayerLogic;
 import Persistence.LoadAccess;
 import Persistence.LoadFile;
-import UseCases.PlayerLogic;
 import Entities.*;
-import Interactors.GameCreation;
-import Persistence.LoadAccess;
-import Persistence.LoadFile;
-import UseCases.PlayerLogic;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,12 +16,10 @@ import java.util.ArrayList;
 //
 import Entities.Player;
 import Entities.Property;
-import java.util.ArrayList;
+
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import static org.junit.Assert.*;
 

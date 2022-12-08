@@ -1,8 +1,8 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.*;
 import Interactors.GameLogic;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 /**
  * This class represents the use case when a player ends its turn.

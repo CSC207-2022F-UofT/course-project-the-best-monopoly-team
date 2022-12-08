@@ -1,8 +1,8 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.Player;
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 public class MainParentNode extends MainTreeNodeLogic implements NodeLogic {
     public MainParentNode() {

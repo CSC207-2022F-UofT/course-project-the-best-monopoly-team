@@ -11,6 +11,7 @@ import java.util.Scanner;
  */
 public class StateOutputReader {
     private HashMap<String, String> stateMap;
+    private static final String stateString = "src/initialoutputs/states.txt";
 
     public StateOutputReader(){
         this.stateMap = new HashMap<>();
@@ -22,7 +23,7 @@ public class StateOutputReader {
      */
     public void initStateHash(){
         try {
-            File stateFile = new File("src/initialoutputs/states.txt");
+            File stateFile = new File(stateString);
             Scanner stateFileReader = new Scanner(stateFile);
             while (stateFileReader.hasNextLine()){
                 String stateString = stateFileReader.nextLine();

@@ -1,7 +1,7 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 public class CallAction extends MainTreeNodeLogic implements NodeLogic {
     public CallAction() {

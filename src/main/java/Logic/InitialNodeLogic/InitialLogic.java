@@ -1,4 +1,4 @@
-package UseCases.InitialNodeLogic;
+package Logic.InitialNodeLogic;
 
 import Entities.GameLogicTree;
 import Entities.State;

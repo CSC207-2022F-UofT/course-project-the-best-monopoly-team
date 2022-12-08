@@ -1,8 +1,8 @@
-package NodeLogic.MainTreeLogic;
+package Logic.MainTreeLogic;
 
 import Entities.*;
 import Interactors.GameLogic;
-import NodeLogic.MainTreeNodeLogic.Buy;
+import Logic.MainTreeNodeLogic.Buy;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

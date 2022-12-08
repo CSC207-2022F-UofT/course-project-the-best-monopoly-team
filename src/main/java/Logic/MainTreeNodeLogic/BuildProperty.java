@@ -1,10 +1,10 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.Player;
 import Entities.Property;
 import Entities.State;
-import UseCases.NodeLogic;
-import UseCases.PlayerLogic;
+import Logic.NodeLogic;
+import Logic.PlayerLogic;
 
 import java.util.HashMap;
 

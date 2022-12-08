@@ -1,6 +1,4 @@
-package ButtonMappings;
-
-import GUI.ButtonMapping;
+package Buttons;
 
 public class Button3 extends ButtonMapping {
     public String pressedButton() {

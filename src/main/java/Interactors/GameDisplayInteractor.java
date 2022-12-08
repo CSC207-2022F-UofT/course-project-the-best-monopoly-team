@@ -1,17 +1,14 @@
-package GUI;
+package Interactors;
 
 import Entities.GameScreen;
-
-import javax.swing.*;
-import java.awt.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * JDisplay is a class that creates the Display to show the user
+ * GameDisplayInteractor is a class that creates the Display to show the user
  */
-public class JDisplay {
+public class GameDisplayInteractor {
 
     /**
      * InstanceVar gameFrame: the Frame of the monopoly game
@@ -21,18 +18,18 @@ public class JDisplay {
      * is clicked by the user
      */
     private GameScreen gameFrame;
-    private JDisplayInputHandler inputHandler;
-    private JDisplayOutputHandler labelSegments;
+    private GameDisplayInputInteractor inputHandler;
+    private GameDisplayOutputInteractor labelSegments;
     private String selectedOutput;
 
     /**
      * The constructor for this class, creates the frame and sets the permanent monopoly
      * background and fixes all its size and other properties
      */
-    public JDisplay(){
+    public GameDisplayInteractor(){
         this.gameFrame = new GameScreen();
-        this.inputHandler = new JDisplayInputHandler();
-        this.labelSegments = new JDisplayOutputHandler();
+        this.inputHandler = new GameDisplayInputInteractor();
+        this.labelSegments = new GameDisplayOutputInteractor();
         this.selectedOutput = "";
     }
 

@@ -1,4 +1,4 @@
-package GUI;
+package Buttons;
 
 /**
  * ButtonMapping is an abstract class that all the Button'x' classes in the package

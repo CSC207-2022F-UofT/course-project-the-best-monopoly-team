@@ -1,7 +1,7 @@
-package UseCases.InitialNodeLogic;
+package Logic.InitialNodeLogic;
 
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 public class ChooseGameMode extends InitialLogic implements NodeLogic {
     public ChooseGameMode() {

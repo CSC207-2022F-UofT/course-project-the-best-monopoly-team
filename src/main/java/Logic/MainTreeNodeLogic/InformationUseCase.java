@@ -1,7 +1,7 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 /**
  * This class represents a use case where a tree path is finished and the game has to tell the user something.

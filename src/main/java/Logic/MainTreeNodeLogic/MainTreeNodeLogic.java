@@ -1,7 +1,7 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
-import NodeLogic.AuctionNodeLogic.AuctionTreeNodeLogic;
-import NodeLogic.GeneralGameLogic;
+import Logic.AuctionNodeLogic.AuctionTreeNodeLogic;
+import Logic.GeneralGameLogic;
 
 public class MainTreeNodeLogic extends GeneralGameLogic {
 

@@ -1,10 +1,10 @@
-package NodeLogic.MainTreeNodeLogic;
+package Logic.MainTreeNodeLogic;
 
 import Entities.Board;
 import Entities.Player;
 import Entities.Property;
 import Entities.State;
-import UseCases.NodeLogic;
+import Logic.NodeLogic;
 
 /**
  * This class represents the use case for when the current player wants to buy a property.

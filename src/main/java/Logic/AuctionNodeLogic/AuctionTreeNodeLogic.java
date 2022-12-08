@@ -1,11 +1,11 @@
-package NodeLogic.AuctionNodeLogic;
+package Logic.AuctionNodeLogic;
 
 import Entities.Board;
 import Entities.Player;
 import Entities.Property;
 import Entities.State;
 import Interactors.GameLogic;
-import NodeLogic.GeneralGameLogic;
+import Logic.GeneralGameLogic;
 
 import java.util.List;
 

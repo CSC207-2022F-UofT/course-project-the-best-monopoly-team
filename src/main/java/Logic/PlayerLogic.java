@@ -1,4 +1,4 @@
-package UseCases;
+package Logic;
 
 import Entities.Player;
 import Entities.Property;

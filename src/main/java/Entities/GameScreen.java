@@ -11,6 +11,7 @@ public class GameScreen {
      * InstanceVar gameFrame: JFrame that contains all the contents of the game
      */
     private JFrame gameFrame;
+    private final String imageFile = "src/initialoutputs/monopolyboard.jpg";
 
     /**
      * Constructor that configures the JFrame
@@ -20,7 +21,7 @@ public class GameScreen {
         this.gameFrame.setLayout(null);
         this.gameFrame.setResizable(false);
         this.gameFrame.setSize(900, 630);
-        setBackgroundImage("src/main/java/GUI/monopolyboard.jpg");
+        setBackgroundImage(imageFile);
     }
 
     /**

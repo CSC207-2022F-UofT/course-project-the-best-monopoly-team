@@ -1,4 +1,4 @@
-package NodeLogic;
+package Logic;
 
 import Entities.*;
 import Interactors.GameLogic;

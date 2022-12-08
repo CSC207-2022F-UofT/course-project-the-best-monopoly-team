@@ -1,8 +1,8 @@
-package NodeLogic.MainTreeLogic;
+package Logic.MainTreeLogic;
 
 import Entities.*;
 import Interactors.GameLogic;
-import NodeLogic.MainTreeNodeLogic.PickPlayer;
+import Logic.MainTreeNodeLogic.PickPlayer;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

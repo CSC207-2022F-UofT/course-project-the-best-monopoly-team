@@ -1,6 +1,7 @@
-package Interactors;
+package UseCases;
 
 import Entities.*;
+import Interactors.ActionSpaceCreationInteractor;
 import Persistence.LoadAccess;
 import Persistence.LoadFile;
 
@@ -151,8 +152,6 @@ public class GameCreation {
         ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(loadAccess);
         ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards();
         ActionSpace chance = actionSpaceCreationInteractor.loadChanceCards();
-        // TODO: determine when to call jail ActionSpaces
-        // ActionSpace jail = new ActionSpace("jail");
 
         ArrayList<Cell> cells = standardProperties;
         cells.add(0, go);

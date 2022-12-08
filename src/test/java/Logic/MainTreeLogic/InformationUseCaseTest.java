@@ -1,11 +1,11 @@
-package NodeLogic.MainTreeLogic;
+package Logic.MainTreeLogic;
 
 import Entities.Board;
 import Entities.Cell;
 import Entities.Player;
 import Entities.State;
 import Interactors.GameLogic;
-import NodeLogic.MainTreeNodeLogic.InformationUseCase;
+import Logic.MainTreeNodeLogic.InformationUseCase;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

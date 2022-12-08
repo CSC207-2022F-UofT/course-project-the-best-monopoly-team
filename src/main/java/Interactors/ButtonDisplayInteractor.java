@@ -1,4 +1,6 @@
-package GUI;
+package Interactors;
+
+import Buttons.ButtonFactory;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -7,7 +9,7 @@ import java.util.HashMap;
 /**
  * Class that handles button creation and input on the display
  */
-public class ButtonDisplayHandler {
+public class ButtonDisplayInteractor {
     /**
      * InstanceVar buttonFactory: the ButtonFactory that creates all the buttons
      * InstanceVar buttonList: the mapping between the buttons on the current state and how many times they are pressed
@@ -18,7 +20,7 @@ public class ButtonDisplayHandler {
     /**
      * Constructor for this class
      */
-    public ButtonDisplayHandler() {
+    public ButtonDisplayInteractor() {
         this.buttonFactory = new ButtonFactory();
         this.buttonList = new HashMap<>();
     }
