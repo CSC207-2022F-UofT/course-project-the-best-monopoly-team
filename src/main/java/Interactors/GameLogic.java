@@ -99,6 +99,7 @@ public class GameLogic {
      * This method creates the GameLogic trees for the different scenarios in the game.
      */
     public void createTrees(){
+        MenuTree[] temp;
         //Creating the game loop tree
         GameLogicTree main = new GameLogicTree( new MainParentNode());
         GameLogicTree trade = new GameLogicTree(new Trade());
@@ -123,12 +124,11 @@ public class GameLogic {
 
         GameLogicTree noProperties = new GameLogicTree(new NoProperties());
 
-        selectProperty.addChild(mortgage);
-        selectProperty.addChild(unMortgage);
-        selectProperty.addChild(buildProperty);
-        manageProperty.addChild(selectProperty);
-        manageProperty.addChild(noProperties);
+        temp = new MenuTree[]{mortgage, unMortgage, buildProperty};
+        addParentToMultiple(selectProperty,temp);
 
+        temp = new MenuTree[]{selectProperty, noProperties};
+        addParentToMultiple(manageProperty,temp);
 
         GameLogicTree roll = new GameLogicTree(new Roll());
         GameLogicTree callAction = new GameLogicTree(new CallAction());
@@ -137,12 +137,11 @@ public class GameLogic {
         GameLogicTree auction = new GameLogicTree(new Auction());
         GameLogicTree alreadyRolled = new GameLogicTree(new AlreadyRolled());
 
-        roll.addChild(emptyPropertySpace);
-        roll.addChild(callAction);
-        roll.addChild(alreadyRolled);
+        temp = new MenuTree[]{emptyPropertySpace, callAction, alreadyRolled};
+        addParentToMultiple(roll, temp);
 
-        emptyPropertySpace.addChild(buy);
-        emptyPropertySpace.addChild(auction);
+        temp = new MenuTree[]{buy, auction};
+        addParentToMultiple(emptyPropertySpace, temp);
 
         GameLogicTree steal = new GameLogicTree(new Steal());
         GameLogicTree choosePlayer = new GameLogicTree(new ChoosePlayerUseCase());
@@ -159,33 +158,26 @@ public class GameLogic {
 
         GameLogicTree confirmationNode = new GameLogicTree(new ConfirmationUseCase());
         GameLogicTree informationNode = new GameLogicTree(new InformationUseCase());
+        GameLogicTree finishGameNode = new GameLogicTree(new FinishGameUseCase());
 
-        nothingToTrade.addChild(informationNode);
-        noProperties.addChild(informationNode);
-        sendTrade.addChild(informationNode);
-        choosePlayer.addChild(informationNode);
-        callAction.addChild(informationNode);
-        buildProperty.addChild(informationNode);
-        alreadyRolled.addChild(informationNode);
-        saveGame.addChild(informationNode);
-        endTurn.addChild(informationNode);
-        auction.addChild(informationNode);
+        finishGameNode.addChild(exitGame);
 
-        mortgage.addChild(confirmationNode);
-        exitGame.addChild(confirmationNode);
-        bankruptcy.addChild(confirmationNode);
+        temp = new MenuTree[]{choosePlayer, callAction, buildProperty, alreadyRolled,
+        saveGame, endTurn, auction, noProperties, nothingToTrade};
+        addChildToMultiple(temp,informationNode);
+
+        temp = new MenuTree[]{mortgage, exitGame, bankruptcy};
+        addChildToMultiple(temp, confirmationNode);
+
+        temp = new MenuTree[]{bankruptcy, endTurn};
+        addChildToMultiple(temp, finishGameNode);
 
         settingsMenu.addChild(exitGame);
         settingsMenu.addChild(saveGame);
         settingsMenu.setIsSwitchBlock(true);
 
-        main.addChild(trade);
-        main.addChild(manageProperty);
-        main.addChild(roll);
-        main.addChild(steal);
-        main.addChild(endTurn);
-        main.addChild(settingsMenu);
-        main.addChild(bankruptcy);
+        temp = new MenuTree[]{trade,manageProperty,roll,steal,endTurn,settingsMenu,bankruptcy};
+        addParentToMultiple(main, temp);
 
         main.setIsSwitchBlock(true);
         selectProperty.setIsSwitchBlock(true);
@@ -196,8 +188,9 @@ public class GameLogic {
         GameLogicTree tradeTree = new GameLogicTree(new TradingParentNode());
         GameLogicTree acceptTrade = new GameLogicTree(new AcceptTrade());
         GameLogicTree declineTrade = new GameLogicTree(new DeclineTrade());
-        tradeTree.addChild(acceptTrade);
-        tradeTree.addChild(declineTrade);
+
+        temp = new MenuTree[]{acceptTrade, declineTrade};
+        addParentToMultiple(tradeTree, temp);
         tradeTree.setIsSwitchBlock(true);
         trees[1] = tradeTree;
 
@@ -209,14 +202,24 @@ public class GameLogic {
         GameLogicTree fold = new GameLogicTree(new Fold());
 
         auctionTree.setIsSwitchBlock(true);
-        auctionTree.addChild(lowOption);
-        auctionTree.addChild(mediumOption);
-        auctionTree.addChild(highOption);
-        auctionTree.addChild(fold);
+
+        temp = new MenuTree[]{lowOption, mediumOption, highOption, fold};
+        addParentToMultiple(auctionTree, temp);
         trees[2] = auctionTree;
 
         currentTree = main;
     }
+    public void addChildToMultiple(MenuTree[] trees, MenuTree child){
+        for (MenuTree tree: trees){
+            tree.addChild(child);
+        }
+    }
+    public void addParentToMultiple(MenuTree parent, MenuTree[] trees){
+        for (MenuTree tree: trees){
+            parent.addChild(tree);
+        }
+    }
+
 
     /**
      * This method traverses through the GameLogicTrees that handle the state of the program.
