@@ -14,13 +14,13 @@ public class State {
     private String description;
     private boolean saveGame;
     private boolean exitToMenu;
+    private String roll;
+    private Property currentPlayerProperty;
     private Property tradingPlayerProperty;
     private Property biddingProperty;
     private int biddingPot;
     private String id;
-    public String roll;
-    private Property currentPlayerProperty;
-    private ArrayList<String> options = new ArrayList<String>();
+    private ArrayList<String> options = new ArrayList<>();
 
     /**
      * This method returns the roll value stored in the State object which corresponds to value of the dice rolled by
@@ -28,7 +28,7 @@ public class State {
      * @return A String representation of an integer representing the roll value of the dice rolled by the player.
      */
     public String getRoll() {
-        return roll;
+        return this.roll;
     }
 
     /**
@@ -45,7 +45,7 @@ public class State {
      * @return a Property instance representing a property that the current player owns that is being focused on.
      */
     public Property getCurrentPlayerProperty() {
-        return currentPlayerProperty;
+        return this.currentPlayerProperty;
     }
 
     /**
@@ -56,13 +56,12 @@ public class State {
     public void setCurrentPlayerProperty(Property currentPlayerProperty) {
         this.currentPlayerProperty = currentPlayerProperty;
     }
-
     /**
      * This method returns a Property instance representing a property that the player wants to trade.
      * @return a Property instance representing a property that the player wants to trade.
      */
     public Property getTradingPlayerProperty() {
-        return tradingPlayerProperty;
+        return this.tradingPlayerProperty;
     }
 
     /**
@@ -79,7 +78,7 @@ public class State {
      * @return a boolean value showing if the game should exit to the menu.
      */
     public boolean isExitToMenu() {
-        return exitToMenu;
+        return this.exitToMenu;
     }
 
     /**
@@ -95,7 +94,7 @@ public class State {
      * @return a boolean value showing if the game should be saved.
      */
     public boolean isSaveGame() {
-        return saveGame;
+        return this.saveGame;
     }
 
     /**
@@ -111,7 +110,7 @@ public class State {
      * @return a String which represents a description of the game's current state.
      */
     public String getDescription() {
-        return description;
+        return this.description;
     }
 
     /**
@@ -127,7 +126,7 @@ public class State {
      * @param option A string representing an option to be presented to the user(s).
      */
     public void addOptions(String option) {
-        options.add(option);
+        this.options.add(option);
     }
 
     /**
@@ -135,7 +134,7 @@ public class State {
      * @return an ArrayList containing the options that are to be shown to the user(s).
      */
     public ArrayList<String> getOptions() {
-        return options;
+        return this.options;
     }
 
     /**
@@ -175,7 +174,7 @@ public class State {
      * @return a String representing the "Id" of the tree node that the game is currently in.
      */
     public String getId() {
-        return id;
+        return this.id;
     }
 
     /**
@@ -192,7 +191,7 @@ public class State {
      * @return an int representing the value inside the bidding pot during a property auction.
      */
     public int getBiddingPot() {
-        return biddingPot;
+        return this.biddingPot;
     }
 
     /**
@@ -225,7 +224,7 @@ public class State {
      * @return a Player instance that the current player is trading with.
      */
     public Player getTradingOpponent() {
-        return tradingPlayer;
+        return this.tradingPlayer;
     }
 
     /**

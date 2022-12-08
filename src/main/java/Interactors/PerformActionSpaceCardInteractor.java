@@ -34,7 +34,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      */
     private String advanceAction(Player player, Board board, Card card) {
             String action = card.getAction();
-            int randomNumberOfSteps = new Random().nextInt(39);
+            int randomNumberOfSteps = new Random().nextInt(15);
             player.move(randomNumberOfSteps);
             action = " " + action + " " + randomNumberOfSteps + " steps.";
 
@@ -84,14 +84,15 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     }
 
     /**
-     * Performs the go to jail action of the card
+     * Performs the go-to jail action of the card
      * @param player the player
      * @param card the card
      * @return the message
      */
     private String goToJailAction(Player player, Card card) {
         String action = " " + card.getAction();
-        player.changeJailStatus();
+        player.setInJail(true);
+        player.setPosition(10);
         return action;
     }
 

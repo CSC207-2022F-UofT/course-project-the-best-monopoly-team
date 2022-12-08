@@ -5,6 +5,6 @@ public class GoToJail extends CornerTiles {
     public String returnMessage(Player player) {
         player.changeJailStatus();
         player.setPosition(10);
-        return "Go to Jail!";
+        return " Go to Jail!";
     }
 }

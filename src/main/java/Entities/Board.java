@@ -24,7 +24,7 @@ public class Board{
      * @return A List of all the Player instances stored in Board.
      */
     public List<Player> getPlayers(){
-        return players;
+        return this.players;
     }
 
     /**
@@ -36,15 +36,15 @@ public class Board{
     }
     /**
      * This method is used to return a List of all the Cell instances on Board.
-     * @return This returns this.cells, a List of all the Cell instances on Board.
+     * @return This returns cells, a List of all the Cell instances on Board.
      */
-    public List<Cell> getCells(){return cells;}
+    public List<Cell> getCells(){return this.cells;}
     /**
      * This method is used to return a Cell at a specific position represented by an int value.
      * @param position The position of the cell.
      * @return This returns the Cell at the int position.
      */
-    public Cell getCell(int position){return cells.get(position);}
+    public Cell getCell(int position){return this.cells.get(position);}
 
     /**
      * This method is used to return the Cell instance that a Player instance is on.

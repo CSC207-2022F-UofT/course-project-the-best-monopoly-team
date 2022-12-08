@@ -17,10 +17,11 @@ public class PropertyPerformActionInteractor implements PropertyPerformActionUse
     public String performAction(Property property, Player currentPlayer) {
         // if player balance is negative after paying, then give them option to mortgage properties, or declare bankruptcy
         if (property.getOwner().equals(currentPlayer)){
-            return "Landed on a property you own";
+            return " You landed on a property you own";
         } else {
             currentPlayer.pay(property.getOwner(), property.getRent());
-            return "Paid $" + property.getRent() + " to " + property.getOwner().getName();
+            return " Paid $" + property.getRent() + " to " + property.getOwner().getName() +
+                    " for landing on " + property.getName();
         }
     }
 }
