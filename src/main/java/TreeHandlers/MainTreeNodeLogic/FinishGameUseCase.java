@@ -10,6 +10,11 @@ public class FinishGameUseCase extends MainTreeNodeLogic implements NodeLogic {
 
     @Override
     public State create_state(int input) {
-        return null;
+        State currentState = new State();
+        currentState.setId("Game Complete");
+        currentState.addOptions("Ok");
+        mainStates[0] = 1;
+        return currentState;
+
     }
 }

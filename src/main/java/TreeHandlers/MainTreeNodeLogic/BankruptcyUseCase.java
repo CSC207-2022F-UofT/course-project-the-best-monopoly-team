@@ -51,7 +51,8 @@ public class BankruptcyUseCase extends MainTreeNodeLogic implements NodeLogic {
             }
 
             //changing the player and turning the state back to normal
-            mainStates = new int[2];
+            mainStates[0] = 0;
+            mainStates[1] = 0;
             currentState = afterBottomNode();
         } else {
             //confirmation node setup

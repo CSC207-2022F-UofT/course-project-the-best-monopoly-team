@@ -160,7 +160,9 @@ public class GameLogic {
         GameLogicTree informationNode = new GameLogicTree(new InformationUseCase());
         GameLogicTree finishGameNode = new GameLogicTree(new FinishGameUseCase());
 
-        temp = new MenuTree[]{finishGameNode, choosePlayer, callAction, buildProperty, alreadyRolled,
+        finishGameNode.addChild(exitGame);
+
+        temp = new MenuTree[]{choosePlayer, callAction, buildProperty, alreadyRolled,
         saveGame, endTurn, auction, noProperties, nothingToTrade};
         addChildToMultiple(temp,informationNode);
 
