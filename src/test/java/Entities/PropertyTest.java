@@ -24,7 +24,7 @@ public class PropertyTest {
         Board board = new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
-        assertEquals("Landed on a property you own", returnString);
+        assertEquals(" You landed on a property you own", returnString);
         assertEquals(1500, player1.getMoney());
     }
 
@@ -42,7 +42,7 @@ public class PropertyTest {
         Board board = new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
-        assertEquals("Paid $3 to Player2", returnString);
+        assertEquals(" Paid $3 to Player2 for landing on property1", returnString);
         assertEquals(1497, player1.getMoney());
     }
 
