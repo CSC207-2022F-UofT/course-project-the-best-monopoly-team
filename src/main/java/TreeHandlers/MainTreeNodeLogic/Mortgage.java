@@ -3,6 +3,7 @@ package TreeHandlers.MainTreeNodeLogic;
 import Entities.*;
 import Interactors.GameLogic;
 import Interface.NodeLogic;
+import UseCases.PlayerLogic;
 
 import java.util.HashMap;
 
@@ -27,6 +28,7 @@ public class Mortgage extends MainTreeNodeLogic implements NodeLogic {
 
         GameLogic gameLogicInteractor = getGameLogicInteractor();
         Player currentPlayer = getCurrentPlayer();
+        PlayerLogic currentPlayerLogic = new PlayerLogic(currentPlayer);
         HashMap<String, Integer> selectedOptions = getSelectedOptions();
 
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
@@ -36,7 +38,7 @@ public class Mortgage extends MainTreeNodeLogic implements NodeLogic {
         if (mainStates[0] == 1) {
             //the player chooses to mortgage the property
             Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("PropertySelected"));
-            currentPlayer.mortgage(targetProperty);
+            currentPlayerLogic.mortgage(targetProperty);
             mainStates[0] = 0;
             currentState = afterBottomNode();
         }
