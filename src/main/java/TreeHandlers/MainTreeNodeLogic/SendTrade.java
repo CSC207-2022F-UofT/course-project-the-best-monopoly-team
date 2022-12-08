@@ -32,6 +32,7 @@ public class SendTrade extends MainTreeNodeLogic implements NodeLogic {
         GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();
         State currentState = new State();
         currentState.setId(getName());
+        // if the input is 0, is if the trade is to be sent. Otherwise, the trade will not be sent.
         if (input == 0) {
             Player tradingOpponent = board.getPlayers().get(selectedOptions.get("PickPlayer"));
             currentState.setTradingOpponent(tradingOpponent);

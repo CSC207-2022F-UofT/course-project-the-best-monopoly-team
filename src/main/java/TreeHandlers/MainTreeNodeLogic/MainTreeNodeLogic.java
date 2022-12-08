@@ -3,6 +3,9 @@ package TreeHandlers.MainTreeNodeLogic;
 import TreeHandlers.AuctionNodeLogic.AuctionTreeNodeLogic;
 import TreeHandlers.GeneralGameLogic;
 
+/**
+ * This class handles the logic for the main tree nodes.
+ */
 public class MainTreeNodeLogic extends GeneralGameLogic {
 
 
