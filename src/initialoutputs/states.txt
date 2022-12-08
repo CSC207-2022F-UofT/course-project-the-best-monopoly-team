@@ -1,44 +1,44 @@
-InitialMenu,Welcome to Monopoly++, Would you like to
-NewGame,What mode would you like to play?
-ChooseGameMode,How many players?
-NumberOfPlayers,How many rounds?
-GameLength,Create the game?
-CreateNewGame,
-LoadGame,What save do you want to load?
-ChooseSave,Confirm the load?
-CreateLoadedGame,
-MainTree,""
+Initial Menu Parent Node,Welcome to Monopoly++, Would you like to
+New Game,What mode would you like to play?
+Choose Game Mode,How many players?
+Number of Players,How many rounds?
+Game Length,Create the game?
+Create New Game,
+Load Game,What save do you want to load?
+Choose Save,Confirm the load?
+Create Loaded Game,
+Main Tree Parent Node,""
 Trade,Who do you want to trade with?
-PickPlayer,What property do you want from the player?
-NothingToTrade,Trade cannot be done; one of you have no properties
-PickItemOp,What property are you willing to trade?
-PickItemSelf,Send the trade?
-SendTrade,""
-ManageProperty,What property do you want to manage?
-NoProperties,You have no properties :(
-SelectProperty,What do you want to do with the property?
-Mortgage,Are you sure you want to mortgage?
-UnMortgage,
-BuildProperty,""
-AlreadyRolled,You already rolled this round!
-CallAction,""
-EmptyPropertySpace,""
-Buy,
+Pick Player (Trade),What property do you want from the player?
+Trader/Tradee Has No Properties,Trade cannot be done; one of you have no properties
+Pick Item Of Opponent,What property are you willing to trade?
+Pick Item Of Self,Send the trade?
+Send The Trade,""
+Manage Property,What property do you want to manage?
+User Has No Properties (Manage Properties),You have no properties :(
+Select The Property (Manage Property),What do you want to do with the property?
+Mortgage Property,Are you sure you want to mortgage?
+Un-Mortgage property,
+Build House/Hotel,""
+Already Rolled,You already rolled this round!
+Perform Action,""
+Property Unowned,""
+Buy Property,
 Auction, null
-AuctionTree,""
+Auction Tree Parent Node,""
 Steal,What player do you want to steal from?
-ChoosePlayer,
-EndTurn,You can't end your turn, you have negative money
-SettingsMenu,Welcome to the settings menu!
-ExitGame,Are you sure you want to exit?
-SaveGame,Game saved!
+Choose Player (Steal),
+End Turn,You can't end your turn, you have negative money
+Settings Menu,Welcome to the settings menu!
+Exit Game,Are you sure you want to exit?
+Save The Game,Game saved!
 Bankruptcy,Confirm bankruptcy?
-Confirmation,
-Information,
-LowOption,
-MediumOption,
-HighOption,
+Confirm Action,
+Information Node,
+Low Option,
+Medium Option,
+High Option,
 Fold,""
-TradeTree,
-AcceptTrade,Trade success
-DeclineTrade,Trade failure
+Trading Parent Node,
+Accept The Trade,Trade success
+Decline The Trade,Trade failure

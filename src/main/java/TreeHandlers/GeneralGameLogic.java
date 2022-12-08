@@ -2,17 +2,19 @@ package TreeHandlers;
 
 import Entities.*;
 import Interactors.GameLogic;
+import Interface.NodeLogic;
+import TreeHandlers.AuctionNodeLogic.AuctionTreeNodeLogic;
+import org.w3c.dom.Node;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 /** This class is the parent class of the three tree handlers used during the game phase of the application.
  *  <br> Each of the subclasses coordinate the game logic of the application.
  */
-public class TreeHandler {
-    final int LOW_OPTION = 20;
-    final int MEDIUM_OPTION = 80;
-    final int HIGH_OPTION = 160;
+public class GeneralGameLogic {
+
     //Static variables used by all the subclasses
     static GameLogic gameLogicInteractor;
     static Player currentPlayer;
@@ -21,19 +23,61 @@ public class TreeHandler {
     static int returnPlayerIndex = -1;
     static List<Player> players;
     static GameLogicTree returnTree;
-    static String descriptionOtherTrees;
-    static Property biddingProperty;
+    static String answer;
+    static GameLogicTree confirmationReturn;
 
+    private String name;
+    public GeneralGameLogic(String name){
+        this.name = name;
+    }
+
+
+    public void setAnswer(String answer1){
+        answer = answer1;
+    }
+    public String getAnswer(){
+        return answer;
+    }
+    public void setConfirmationReturn(GameLogicTree tree){
+        confirmationReturn = tree;
+    }
+    public GameLogicTree getConfirmationReturn(){
+        return confirmationReturn;
+    }
+    public List<Player> getPlayers(){
+        return players;
+    }
+    public void setReturnPlayerIndex(int index){
+        returnPlayerIndex = index;
+    }
+    public int getReturnPlayerIndex(){
+        return returnPlayerIndex;
+    }
+    public Board getBoard(){
+        return board;
+    }
+    public GameLogic getGameLogicInteractor(){
+        return gameLogicInteractor;
+    }
+    public HashMap<String, Integer> getSelectedOptions(){
+        return selectedOptions;
+    }
+    /**
+     * Constructor for the class
+     */
+    public GeneralGameLogic(){
+    }
 
     /**
      * This method initializes variables used by the tree handlers
      * @param currentPlayer1 - The current player of the game
      * @param board1 - the current board being used in the game
      */
-    public void initialize(Player currentPlayer1, Board board1){
+    public static void initialize(Player currentPlayer1, Board board1, GameLogic interactor){
         players = board1.getPlayers();
         currentPlayer = currentPlayer1;
         board = board1;
+        gameLogicInteractor = interactor;
     }
 
     /**
@@ -45,21 +89,25 @@ public class TreeHandler {
     }
 
     /**
-     * This method gets the current state object of the program.
-     * @return the current state of the program.
+     * Returns the state object which contains the properties of the current tree and
+     * sets the current tree to the root
+     * @return state object
      */
-    public State getInitialState(){
-        State currentState = new State();
-        if (gameLogicInteractor.getCurrentTreeID() == 0) {
-            currentState.setId(gameLogicInteractor.getCurrentTree().getName());
-            currentState.setDescription(currentPlayer.getName() + " " + gameLogicInteractor.getCurrentTree().getPrompt() + " You currently " +
-                    "have " + currentPlayer.getMoney() + " dollars");
-            currentState.setPlayer(currentPlayer);
-            addSwitchOptions(currentState);
-        }
-        else {
-            return gameLogicInteractor.getAuctionState();
-        }
+    public State getCurrentState(){
+        State currentState = gameLogicInteractor.getCurrentTree().getUseCase().create_state(0);
+//        //mutates the state object with all of its properties
+//        if (gameLogicInteractor.getCurrentTreeID() == 0) {
+//            //object mutation when player is transversing through the main tree
+//
+//            return currentTree.getUseCase().create_state(0);
+//
+//        }
+//        else {
+//            //state return when player is transversing through the auction tree
+//            AuctionTreeNodeLogic temp = new AuctionTreeNodeLogic("Temp");
+//            return temp.getState();
+//        }
+        //mutating the state to have memory of its state, useful for backwards transversal
         gameLogicInteractor.getCurrentTree().setPreviousState(currentState);
         return currentState;
     }
@@ -70,9 +118,11 @@ public class TreeHandler {
      */
     public void addSwitchOptions(State currentState){
         for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){
-            currentState.addOptions(tree.getName());
+
+            currentState.addOptions(((GeneralGameLogic)((GameLogicTree)tree).getUseCase()).getName());
         }
     }
+
 
     /**
      * This method gets the index of the current player in the players arraylist.
@@ -116,19 +166,6 @@ public class TreeHandler {
     }
 
     /**
-     * This array moves the current player along the board.
-     * @param cell_number how many spaces to move the player by
-     */
-    public void movePlayer(int cell_number){
-        int total_squares = 40;
-        int current_player_position = currentPlayer.getPosition();
-        if (cell_number - current_player_position < 0) {
-            currentPlayer.setMoney(currentPlayer.getMoney() + 200);
-        }
-        currentPlayer.setPosition(cell_number);
-    }
-
-    /**
      * Setter method for the current player instance attribute
      * @param player - the player to set
      */
@@ -158,8 +195,31 @@ public class TreeHandler {
     public void setReturnTree(GameLogicTree returnTree1) {
         returnTree = returnTree1;
     }
+
+    /**
+     * Method to change players when their turn is over
+     */
     public void changePlayers(){
         currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
+    }
+    /**
+     * Sets the tree back to its top position and returns the current state of the tree
+     * @return state object
+     */
+    public State afterBottomNode(){
+        gameLogicInteractor.setCurrentTreeToMaxParent();
+        return getCurrentState();
+    }
+    public void addPlayersState(State currentState){
+        ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
+        playerCopy.remove(currentPlayer);
+        for (Player player : playerCopy) {
+            currentState.addOptions(player.getName());
+        }
+
+    }
+    public String getName() {
+        return name;
     }
 
 }
