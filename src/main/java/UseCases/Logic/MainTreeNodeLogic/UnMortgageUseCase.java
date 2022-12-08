@@ -30,7 +30,9 @@ public class UnMortgageUseCase extends MainTreeNodeLogic implements NodeLogic {
         State currentState = new State();
         currentState.setId(getName());
         Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("PropertySelected"));
-        currentPlayerLogic.unmortgage(targetProperty);
+        if (targetProperty.getMortgageStatus()){
+            currentPlayerLogic.unmortgage(targetProperty);
+        }
         currentState = afterBottomNode();
         return currentState;
     }

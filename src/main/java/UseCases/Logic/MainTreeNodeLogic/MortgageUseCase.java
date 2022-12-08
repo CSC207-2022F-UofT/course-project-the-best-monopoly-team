@@ -38,7 +38,9 @@ public class MortgageUseCase extends MainTreeNodeLogic implements NodeLogic {
         if (mainStates[0] == 1) {
             //the player chooses to mortgage the property
             Property targetProperty = currentPlayer.getProperties().get(selectedOptions.get("PropertySelected"));
+            if (!targetProperty.getMortgageStatus()){
             currentPlayerLogic.mortgage(targetProperty);
+            }
             mainStates[0] = 0;
             currentState = afterBottomNode();
         }
