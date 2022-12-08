@@ -121,20 +121,6 @@ public class PlayerLogic {
         return ownedSets;
     }
 
-    /**
-     * Method allowing this player to trade assets with another player
-     * @param tradee the player this player wants to trade with
-     * @param money any sufficient amount of money this player wants to offer the tradee
-     * @param properties properties owned by this player that they would like to offer the tradee
-     * @param jailcards any sufficient amount of jail cards this player wants to offer to the tradee
-     */
-    public void trade(Player tradee, int money, ArrayList<Property> properties, int jailcards) {
-        player.pay(tradee, money);
-        tradee.getProperties().addAll(properties);
-        player.getProperties().removeAll(properties);
-        tradee.addJailCards(jailcards);
-        player.removeJailCards(jailcards);
-    }
 
     /**
      * A helper function for steal that deals with the stealSuccessful situation.
