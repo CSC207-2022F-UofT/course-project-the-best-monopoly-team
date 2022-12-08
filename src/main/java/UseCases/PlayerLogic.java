@@ -140,6 +140,7 @@ public class PlayerLogic {
         double jail = Math.random();
         if (jail <= STEAL_JAIL_CHANCE) {
             player.setInJail(true);
+            player.setPosition(10);
             return ("The police are looking for " + player.getName() + "\n" + player.getName() + " is put in jail");
         } else {
             return ("The police are looking for " + player.getName() + "\n" + player.getName() +

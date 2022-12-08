@@ -82,7 +82,7 @@ public class CornerTilesTest {
         CornerTiles t = new GoToJail();
         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
         assertEquals("Go to Jail!", cornerTileInteractor.performAction(player1, t));
-        assertEquals(player1.getPosition(), 11);
+        assertEquals(player1.getPosition(), 10);
         assertEquals(player1.isInJail(), true);
     }
     @Test
