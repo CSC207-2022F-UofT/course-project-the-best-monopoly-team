@@ -44,8 +44,8 @@ public class InputInteractorTest {
 
     @Test
     public void testSendInputLoadGame() {
-        LoadAccess game = new LoadFile(new File("src/gameData/test.txt"));
-        SaveAccess save = new SaveFile(new File("src/gameData/test.txt"));
+        LoadAccess game = new LoadFile(new File("src/gameData/"));
+        SaveAccess save = new SaveFile(new File("src/gameData/"));
         UseCaseInteractor useCaseTest = new UseCaseInteractor(game, save);
         InputInteractor inputInteractor = new InputInteractor(useCaseTest);
 
@@ -55,9 +55,9 @@ public class InputInteractorTest {
         ArrayList<String> test = inputInteractor.getCurrentState().getOptions();
 
         ArrayList<String> options = new ArrayList<>();
-        options.add("test01.txt");
-        options.add("test.txt");
         options.add("input_test.txt");
+        options.add("test.txt");
+        options.add("test01.txt");
 
         assert test.equals(options);
     }
