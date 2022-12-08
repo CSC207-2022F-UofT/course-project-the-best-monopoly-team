@@ -31,9 +31,13 @@ public class OutputInteractor {
     }
 
     /**
-     * Function that returns the state that the game is in
-     * @return the state that the game is in
+     * Function to return the current Output message for context to the user
+     * @return the context String
      */
+    public String getOutputMessage() {
+        updateLogicStates(this.currentState.getId());
+        return this.output.getStateOutput(this.currentState.getId());
+    }
     public State getCurrentState(){
         return this.currentState;
     }
@@ -43,11 +47,6 @@ public class OutputInteractor {
      * be presented to the user based on the state and presented all the options based on the state
      */
 
-    public void setFinalOutput(){
-        updateLogicStates(this.currentState.getId());
-        this.output.setFinalOutput(this.output.getStateOutput(this.currentState.getId()));
-        addOptionStrings();
-    }
 
     /**
      * This function deals with all the states that need to be updated periodically based on the current state of the game
@@ -131,23 +130,15 @@ public class OutputInteractor {
     }
 
     /**
-     * Function to get the options the user has based on the state and concatenate those options to present to the user
+     * Function to get the options the user has based on the state
+     * @return the ArrayList of options in the current state
      */
-    public void addOptionStrings(){
-        StringBuilder currOptions = new StringBuilder("\n");
-        ArrayList<String> options = this.currentState.getOptions();
-        for (int i = 0; i < options.size(); i++)
-            currOptions.append(options.get(i)).append("(").append(i).append("), ");
-        if (this.currentState.isBackEnable())
-            currOptions.append("back").append("(").append(options.size()).append(")");
-        this.output.addToFinalOutput(currOptions.toString());
-    }
-
-    /**
-     * @return the final output string that is to be presented to the user
-     */
-    public String getOutput(){
-        return this.output.getFinalOutput();
+    public ArrayList<String> getStateOptions(){
+        ArrayList<String> currOptions = new ArrayList<>(this.currentState.getOptions());
+        if (this.currentState.isBackEnable()){
+            currOptions.add("back");
+        }
+        return currOptions;
     }
 
     /**
@@ -156,5 +147,10 @@ public class OutputInteractor {
      */
     public void updateState(State state){
         this.currentState = state;
+    }
+
+    public String getOutput() {
+        updateLogicStates(this.currentState.getId());
+        return this.output.getStateOutput(this.currentState.getId());
     }
 }
