@@ -2,10 +2,8 @@ package Entities;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
-import static UseCases.PlayerLogic.*;
 
 public class Player {
     // Represents a player in the game
@@ -21,9 +19,9 @@ public class Player {
     static final int STARTING_JAILCARDS = 0;
     static final int STARTING_POSITION = 0;
     static final int GO_MONEY = 200;
+
     static final int LAST_POSITION_INDEX = 39;
     static final int BOARD_SIZE = 40;
-
 
     /**
      * This is the constructor method for new player instances
@@ -225,6 +223,16 @@ public class Player {
             money += GO_MONEY;
             position -= BOARD_SIZE;
         }
+    }
+
+    /**
+     * Rigged roll for testing purposes
+     * @param rig - number to change the roll to
+     * @return
+     */
+    public String riggedRoll(int rig) {
+        this.move(rig);
+        return (""+rig);
     }
 
     /**

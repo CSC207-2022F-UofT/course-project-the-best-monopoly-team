@@ -28,9 +28,11 @@ public class EndTurnUseCase extends MainTreeNodeLogic implements NodeLogic {
         currentState.setId(getName());
         //end the turn if the person is not in debt
         if (currentPlayer.getMoney()  >= 0){
+            mainStates[3] += 1;
             //changing the player and turning the state back to normal
             changePlayers();
-            mainStates = new int[2];
+            mainStates[0] = 0;
+            mainStates[1] = 0;
             currentState = afterBottomNode();
         }
         else{

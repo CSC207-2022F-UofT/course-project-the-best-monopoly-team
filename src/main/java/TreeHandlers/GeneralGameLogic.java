@@ -2,9 +2,6 @@ package TreeHandlers;
 
 import Entities.*;
 import Interactors.GameLogic;
-import Interface.NodeLogic;
-import TreeHandlers.AuctionNodeLogic.AuctionTreeNodeLogic;
-import org.w3c.dom.Node;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +50,7 @@ public class GeneralGameLogic {
     public int getReturnPlayerIndex(){
         return returnPlayerIndex;
     }
-    public Board getBoard(){
+    public static Board getBoard(){
         return board;
     }
     public GameLogic getGameLogicInteractor(){
@@ -95,18 +92,7 @@ public class GeneralGameLogic {
      */
     public State getCurrentState(){
         State currentState = gameLogicInteractor.getCurrentTree().getUseCase().create_state(0);
-//        //mutates the state object with all of its properties
-//        if (gameLogicInteractor.getCurrentTreeID() == 0) {
-//            //object mutation when player is transversing through the main tree
-//
-//            return currentTree.getUseCase().create_state(0);
-//
-//        }
-//        else {
-//            //state return when player is transversing through the auction tree
-//            AuctionTreeNodeLogic temp = new AuctionTreeNodeLogic("Temp");
-//            return temp.getState();
-//        }
+
         //mutating the state to have memory of its state, useful for backwards transversal
         gameLogicInteractor.getCurrentTree().setPreviousState(currentState);
         return currentState;
@@ -128,7 +114,7 @@ public class GeneralGameLogic {
      * This method gets the index of the current player in the players arraylist.
      * @return the integer index of the current player.
      */
-    public int getCurrentPlayerIndex(){
+    public static int getCurrentPlayerIndex(){
         for (int i = 0; i< players.size(); i++){
             if (currentPlayer == players.get(i)){
                 return i;
@@ -137,33 +123,6 @@ public class GeneralGameLogic {
         throw new RuntimeException("Player not in array");
     }
 
-    /**
-     * This method generates an array which holds all the instance attributes of the players in the game.
-     * @return an object array holding all the items.
-     */
-    public Object[][] playersToArray(){
-        Object[][] playersArray = new Object[players.size()][6];
-        for(int i = 0; i < players.size(); i++){
-            playersArray[i][0] = players.get(i).getName();
-            playersArray[i][1] = players.get(i).getMoney();
-            playersArray[i][2] = players.get(i).getProperties();
-            playersArray[i][3] = players.get(i).isInJail();
-            playersArray[i][4] = players.get(i).getJailCards();
-            playersArray[i][5] = players.get(i).getPosition();
-        }
-        return playersArray;
-    }
-
-    /**
-     * This array generates an array which holds all the instance attributes of the board in the game.
-     * @return an object array holding all the items.
-     */
-    public Object[] boardToArray(){
-        Object[] boardArray = new Object[4];
-        boardArray[0] = board.getPlayers();
-        boardArray[1] = board.getCells();
-        return boardArray;
-    }
 
     /**
      * Setter method for the current player instance attribute
@@ -179,6 +138,7 @@ public class GeneralGameLogic {
     public Player getCurrentPlayer(){
         return currentPlayer;
     }
+
 
     /**
      * getter method for the return tree instance attribute
