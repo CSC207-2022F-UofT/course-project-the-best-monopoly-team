@@ -3,7 +3,7 @@ package Entities;
 import java.util.ArrayList;
 
 /**
- * A class representing a player in the game of monpoly
+ * A class representing a player in the game of Monopoly
  */
 public class Player {
     /**

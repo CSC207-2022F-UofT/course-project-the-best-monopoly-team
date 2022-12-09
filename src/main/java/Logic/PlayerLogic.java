@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * Class which handles logic methods for a given player
+ */
 public class PlayerLogic {
     private final Player player;
     public static final int BROWN_DARKBLUE_SETSIZE = 2;

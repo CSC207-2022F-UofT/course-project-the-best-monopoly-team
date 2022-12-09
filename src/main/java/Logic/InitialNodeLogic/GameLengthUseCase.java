@@ -5,7 +5,9 @@ import Logic.NodeLogic;
 
 import java.util.HashMap;
 
-
+/**
+ * This class represents the use case where the player has chosen the game length.
+ */
 public class GameLengthUseCase extends InitialLogic implements NodeLogic {
     private final HashMap<Integer, Integer> lengthMap = new HashMap<>();
     public GameLengthUseCase() {

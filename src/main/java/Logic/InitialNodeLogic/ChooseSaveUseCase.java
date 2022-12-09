@@ -2,7 +2,9 @@ package Logic.InitialNodeLogic;
 
 import Entities.State;
 import Logic.NodeLogic;
-
+/**
+ * This class represents the use case where the player has chosen a save file to load.
+ */
 public class ChooseSaveUseCase extends InitialLogic implements NodeLogic {
     public ChooseSaveUseCase() {
         super("Choose Save");

@@ -10,14 +10,14 @@ import Persistence.LoadAccess;
 import UseCases.ActionSpaceCreationUseCase;
 
 /**
- * LoadCardsUseCase
+ * This class loads all the action cards.
  */
 public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase {
 
     private final LoadAccess loadAccess;
 
     /**
-     *
+     * Constructor for ActionSpaceCreationInteractor
      * @param loadAccess the CardAccess object
      */
     public ActionSpaceCreationInteractor(LoadAccess loadAccess) {
@@ -26,8 +26,9 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
     }
 
     /**
-     * 
-     * @return the type of action space (Chance, Jail, Community Chest)
+     * This method loads all the jail cards.
+     * @return an ActionSpace object containing the jail cards.
+     * @throws IOException from CardMapperInteractor
      */
     public ActionSpace loadJailCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
@@ -36,12 +37,22 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
 
     }
 
+    /**
+     * This method loads all the chance cards.
+     * @return an ActionSpace object containing the chance cards.
+     * @throws IOException from CardMapperInteractor
+     */
     public ActionSpace loadChanceCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
         HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperChanceCards(loadAccess.loadCards());
         return new ActionSpace(cards);
     }
 
+    /**
+     * This method loads all the community chest cards.
+     * @return an ActionSpace object containing the community chest cards.
+     * @throws IOException from CardMapperInteractor
+     */
     public ActionSpace loadComChestCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();
         HashMap<String, List<Card>> cards = cardMapperInteractor.cardMapperComChest(loadAccess.loadCards());

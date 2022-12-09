@@ -4,7 +4,10 @@ import Entities.Board;
 import Entities.State;
 import Logic.NodeLogic;
 import Persistence.LoadAccess;
-
+/**
+ * This class represents the use case where the player has confirmed their choice of loading a saved
+ * game.
+ */
 public class CreateLoadedGameUseCase extends InitialLogic implements NodeLogic {
     public CreateLoadedGameUseCase() {
         super("Create Loaded Game");

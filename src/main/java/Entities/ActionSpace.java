@@ -3,6 +3,9 @@ package Entities;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class represents an action space cell.
+ */
 public class ActionSpace extends Cell{
     
     private final List<Card> cards;

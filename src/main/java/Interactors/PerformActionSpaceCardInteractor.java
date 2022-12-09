@@ -10,7 +10,7 @@ import Entities.Player;
 import UseCases.PerformActionSpaceUseCase;
 
 /**
- * GenerateActionSpaceCardUseCase
+ * This class generates and performs the correct action when a player draws an action card.
  */
 public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCase{
     

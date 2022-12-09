@@ -3,6 +3,10 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
+/**
+ * This class represents the use case where the player has confirmed their choice of making a new
+ * game.
+ */
 public class CreateNewGameUseCase extends InitialLogic implements NodeLogic {
     public CreateNewGameUseCase() {
         super("Create New Game");

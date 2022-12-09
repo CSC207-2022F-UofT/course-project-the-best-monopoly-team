@@ -3,6 +3,9 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
+/**
+ * This class represents the use case where the player has chosen the number of players.
+ */
 public class NumberOfPlayersUseCase extends InitialLogic implements NodeLogic {
     public NumberOfPlayersUseCase() {
         super("Number of Players");

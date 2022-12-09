@@ -7,7 +7,6 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case when a player ends its turn.
  */
-
 public class EndTurnUseCase extends MainTreeNodeLogic implements NodeLogic {
 
     public EndTurnUseCase() {

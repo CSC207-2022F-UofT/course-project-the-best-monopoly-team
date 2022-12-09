@@ -8,10 +8,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
+/**
+ * This class maps out the game cards into a HashMap.
+ */
 public class CardMapperInteractor implements CardMapperUseCase {
     
     /**
-     * 
+     * This method puts all the jail cards in a hash map.
      * @param lst the list of cards before they are mapped
      * @return the list of jail cards map to the Card Entity
      */
@@ -35,7 +38,7 @@ public class CardMapperInteractor implements CardMapperUseCase {
     }
 
     /**
-     * 
+     * This method puts all the cards into a HashMap.
      * @param lst the list of cards before they are mapped
      * @return the list of chance cards map to the Card Entity
      */
@@ -59,7 +62,7 @@ public class CardMapperInteractor implements CardMapperUseCase {
     }
 
     /**
-     * 
+     * This method maps all the community chest cards into a HashMap.
      * @param lst the list of cards before they are mapped
      * @return the list of community chest cards map to the Card Entity
      */
