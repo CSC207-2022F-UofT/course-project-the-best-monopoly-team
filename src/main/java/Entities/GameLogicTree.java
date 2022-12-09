@@ -10,7 +10,7 @@ public class GameLogicTree extends MenuTree{
     private boolean switchBlock = false;
 
     private State previousState;
-    private NodeLogic useCase;
+    private final NodeLogic useCase;
 
     /**
      * This is the constructor which creates an instance of GameLogicTree.

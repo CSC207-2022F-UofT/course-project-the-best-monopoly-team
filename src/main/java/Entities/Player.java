@@ -14,7 +14,7 @@ public class Player {
      * InstanceVar jailCards: the number of get out of jail free cards the user has
      * InstanceVar position: the current position of the player on the board
      */
-    private String name;
+    private final String name;
     private int money;
     private ArrayList<Property> properties;
     private boolean inJail;

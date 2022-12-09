@@ -10,7 +10,7 @@ import java.util.Scanner;
  * the initial outputs are all read from the file states.txt
  */
 public class StateOutputReader {
-    private HashMap<String, String> stateMap;
+    private final HashMap<String, String> stateMap;
     private static final String stateString = "src/initialoutputs/states.txt";
 
     public StateOutputReader(){

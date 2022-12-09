@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class InitialLogic {
     //This array contains various states for the program which will be used for various calculations
-    static HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
+    static HashMap<String, Integer> selectedOptions = new HashMap<>();
     static UseCaseInteractor caseInteractor;
     static GameLogicTree currentTree;
     private final String name;

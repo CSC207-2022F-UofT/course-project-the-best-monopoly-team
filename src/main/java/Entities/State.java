@@ -20,7 +20,7 @@ public class State {
     private Property biddingProperty;
     private int biddingPot;
     private String id;
-    private ArrayList<String> options = new ArrayList<>();
+    private final ArrayList<String> options = new ArrayList<>();
 
     /**
      * This method returns the roll value stored in the State object which corresponds to value of the dice rolled by

@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
 
 public class PropertyTest {
 
@@ -22,7 +21,7 @@ public class PropertyTest {
         players.add(player1);
         List<Cell> cells = new ArrayList<>();
         cells.add(property1);
-        Board board = new Board(players, cells);
+        new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
         Assertions.assertEquals(" You landed on a property you own", returnString);
@@ -40,7 +39,7 @@ public class PropertyTest {
         players.add(player2);
         List<Cell> cells = new ArrayList<>();
         cells.add(property1);
-        Board board = new Board(players, cells);
+        new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
         Assertions.assertEquals(" Paid $3 to Player2 for landing on property1", returnString);

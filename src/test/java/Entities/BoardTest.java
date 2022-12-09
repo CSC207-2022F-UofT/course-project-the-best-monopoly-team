@@ -10,7 +10,7 @@ public class BoardTest {
     public void testGetPlayers(){
         Player playerOne = new Player("PlayerOne");
         Player playerTwo = new Player("PlayerTwo");
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(playerOne);
         players.add(playerTwo);
         int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
@@ -19,7 +19,7 @@ public class BoardTest {
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
                 0, false);
-        List<Cell> cells = new ArrayList<Cell>();
+        List<Cell> cells = new ArrayList<>();
         cells.add(cellOne);
         cells.add(cellTwo);
         Board board = new Board(players, cells);
@@ -32,10 +32,10 @@ public class BoardTest {
     public void testRemovePlayer(){
         Player playerOne = new Player("PlayerOne");
         Player playerTwo = new Player("PlayerTwo");
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(playerOne);
         players.add(playerTwo);
-        List<Cell> cells = new ArrayList<Cell>();
+        List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
         board.removePlayer(playerOne);
         List<Player> actual = board.getPlayers();
@@ -47,7 +47,7 @@ public class BoardTest {
     public void testGetCells(){
         Player playerOne = new Player("PlayerOne");
         Player playerTwo = new Player("PlayerTwo");
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(playerOne);
         players.add(playerTwo);
         int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
@@ -56,7 +56,7 @@ public class BoardTest {
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
                 0, false);
-        List<Cell> cells = new ArrayList<Cell>();
+        List<Cell> cells = new ArrayList<>();
         cells.add(cellOne);
         cells.add(cellTwo);
         Board board = new Board(players, cells);
@@ -69,7 +69,7 @@ public class BoardTest {
     public void testGetCell(){
         Player playerOne = new Player("PlayerOne", 0, false, 0, 1);
         Player playerTwo = new Player("PlayerTwo");
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(playerOne);
         players.add(playerTwo);
         int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
@@ -78,7 +78,7 @@ public class BoardTest {
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
                 0, false);
-        List<Cell> cells = new ArrayList<Cell>();
+        List<Cell> cells = new ArrayList<>();
         cells.add(cellOne);
         cells.add(cellTwo);
         Board board = new Board(players, cells);
@@ -91,7 +91,7 @@ public class BoardTest {
     public void testGetPlayerCell(){
         Player playerOne = new Player("PlayerOne", 0, false, 0, 1);
         Player playerTwo = new Player("PlayerTwo");
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         players.add(playerOne);
         players.add(playerTwo);
         int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
@@ -100,7 +100,7 @@ public class BoardTest {
                 0, false);
         Property cellTwo = new Property("cellTwo", "Colour", 0, 0, rentValues2, playerTwo, 0,
                 0, false);
-        List<Cell> cells = new ArrayList<Cell>();
+        List<Cell> cells = new ArrayList<>();
         cells.add(cellOne);
         cells.add(cellTwo);
         Board board = new Board(players, cells);

@@ -15,7 +15,7 @@ public class InputInteractor {
      * InstanceVar currentState: the State object used in processing to obtain the new state
      */
     Input input;
-    private UseCaseInteractor interactor;
+    private final UseCaseInteractor interactor;
     private State currentState;
 
     /**
@@ -48,7 +48,7 @@ public class InputInteractor {
 
     /**
      * A function that gets the users choice and sets that as the current input
-     * @param choice
+     * @param choice the users choice translated to an integer
      */
     public void getChoice(int choice){
         this.input.setInput(choice);

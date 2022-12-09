@@ -11,13 +11,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
-import Entities.Player;
-import Entities.Property;
-
 import java.util.Arrays;
 import java.util.List;
 

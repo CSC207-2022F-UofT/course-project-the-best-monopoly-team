@@ -15,7 +15,7 @@ public class OutputInteractor {
      *  InstanceVar output: an Output object that keeps track and updates the output depending on the state of the game
      *  InstanceVar currentState: a State object that helps with determining the output that should be presented to the user
      */
-    private Output output;
+    private final Output output;
     private State currentState;
 
     /**
