@@ -11,9 +11,16 @@ import java.util.*;
 
 class LoadFileTest {
     File properties = new File("src/save/properties.txt");
-    File cards = new File("src/save/cards.txt");
     LoadAccess load = new LoadFile(properties);
 
+    @Test
+    void testSetFile() {
+        File test = new File("src/save");
+        LoadAccess load = new LoadFile(test);
+        load.setFile("src/gameData");
+
+        assert load.getFile().equals(new File("src/gameData"));
+    }
 
     @Test
     void testLoadGame() throws FileNotFoundException {

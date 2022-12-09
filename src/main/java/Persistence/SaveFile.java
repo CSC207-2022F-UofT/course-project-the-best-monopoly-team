@@ -50,10 +50,10 @@ public class SaveFile implements SaveAccess {
      *                   for each Property instance all values should be Strings:
      *                   index [0] name, [1] colour, [2] cost, [3] houseCost, [4] rent, [5] rent1H,
      *                   [6] rent2H, [7] rent3H, [8] rent4H, [9] rentHotel, [10] playerOwnerName,
-     *                   [11] mortgageValue, [12] numHouses, [13] booleanMortaged ("true" or "false")
+     *                   [11] mortgageValue, [12] numHouses, [13] booleanMortgaged ("true" or "false")
      *
      * @param mainStates an Integer[] array of ints representing main states for Trees
-     * @throws IOException in the case that there was an error writing the data in the subarrays to the file
+     * @throws IOException in the case that there was an error writing the data in the sub arrays to the file
      */
     public String saveGame(String[][] playerData, int[] mainStates) throws IOException {
 
@@ -71,7 +71,7 @@ public class SaveFile implements SaveAccess {
             newLine.append(stateDatum).append(",");
         }
         newLine.deleteCharAt(newLine.length() - 1);
-        writer.write(String.valueOf(newLine) + "\n");
+        writer.write(newLine + "\n");
         writer.write("treeEnd\n");
 
         writer.close();
@@ -92,7 +92,7 @@ public class SaveFile implements SaveAccess {
                 newLine.append(s).append(",");
             }
             newLine.deleteCharAt(newLine.length() - 1);
-            writer.write(String.valueOf(newLine) + "\n");
+            writer.write(newLine + "\n");
         }
     }
 
