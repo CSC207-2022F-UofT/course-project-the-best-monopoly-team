@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > ActionSpaceCreationUseCase</title>
+  <title>Coverage Report > CornerTilePerformActionUseCase</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">UseCases</a>
 </div>
 
-<h1>Coverage Summary for Class: ActionSpaceCreationUseCase (UseCases)</h1>
+<h1>Coverage Summary for Class: CornerTilePerformActionUseCase (UseCases)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">ActionSpaceCreationUseCase</td>
+  <td class="name">CornerTilePerformActionUseCase</td>
 </tr>
 
 </table>
@@ -40,16 +40,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package UseCases;
 &nbsp;
-&nbsp;import java.io.IOException;
+&nbsp;import Entities.Player;
+&nbsp;import Entities.CornerTiles;
 &nbsp;
-&nbsp;import Entities.ActionSpace;
-&nbsp;
-&nbsp;public interface    ActionSpaceCreationUseCase {
-&nbsp;
-&nbsp;    ActionSpace loadJailCards() throws IOException;
-&nbsp;    ActionSpace loadChanceCards() throws IOException;
-&nbsp;    ActionSpace loadComChestCards() throws IOException;
-&nbsp;
+&nbsp;public interface CornerTilePerformActionUseCase {
+&nbsp;    String performAction(Player currentPlayer, CornerTiles corner);
 &nbsp;}
 </code>
 </pre>
@@ -74,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-12-08 23:48</div>
+    <div style="float:right;">generated on 2022-12-09 15:41</div>
 </div>
 </body>
 </html>

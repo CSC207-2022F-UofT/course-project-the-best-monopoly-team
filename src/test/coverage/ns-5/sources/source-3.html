@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    66.7%
+    62.3%
   </span>
   <span class="absValue">
-    (46/69)
+    (43/69)
   </span>
 </td>
 </tr>
@@ -204,8 +204,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;     * @return A string that indicates if the stealing is successful or if the player is in jail.
 &nbsp;     */
 &nbsp;    public String stealSuccessful(Player victim) {
-<b class="nc">&nbsp;        victim.pay(player, STEAL_MONEY);</b>
-<b class="nc">&nbsp;        return player.getName() + &quot; stole money from &quot; + victim.getName();</b>
+<b class="fc">&nbsp;        victim.pay(player, STEAL_MONEY);</b>
+<b class="fc">&nbsp;        return player.getName() + &quot; stole money from &quot; + victim.getName();</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    /**
@@ -213,11 +213,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;     * @return A string that indicates if the stealing is successful or if the player is in jail.
 &nbsp;     */
 &nbsp;    public String stealUnsuccessful() {
-<b class="fc">&nbsp;        double jail = Math.random();</b>
-<b class="fc">&nbsp;        if (jail &lt;= STEAL_JAIL_CHANCE) {</b>
-<b class="fc">&nbsp;            player.setInJail(true);</b>
-<b class="fc">&nbsp;            player.setPosition(10);</b>
-<b class="fc">&nbsp;            return (&quot;The police are looking for &quot; + player.getName() + &quot;\n&quot; + player.getName() + &quot; is put in jail&quot;);</b>
+<b class="nc">&nbsp;        double jail = Math.random();</b>
+<b class="nc">&nbsp;        if (jail &lt;= STEAL_JAIL_CHANCE) {</b>
+<b class="nc">&nbsp;            player.setInJail(true);</b>
+<b class="nc">&nbsp;            player.setPosition(10);</b>
+<b class="nc">&nbsp;            return (&quot;The police are looking for &quot; + player.getName() + &quot;\n&quot; + player.getName() + &quot; is put in jail&quot;);</b>
 &nbsp;        } else {
 <b class="nc">&nbsp;            return (&quot;The police are looking for &quot; + player.getName() + &quot;\n&quot; + player.getName() +</b>
 &nbsp;                    &quot; escaped from the police&quot;);
@@ -234,9 +234,9 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    public String steal(Player victim) {
 <b class="fc">&nbsp;        double success = Math.random();</b>
 <b class="fc">&nbsp;        if (success &lt;= STEAL_CHANCE) {</b>
-<b class="nc">&nbsp;            return stealSuccessful(victim);</b>
+<b class="fc">&nbsp;            return stealSuccessful(victim);</b>
 &nbsp;        } else {
-<b class="fc">&nbsp;            return stealUnsuccessful();</b>
+<b class="nc">&nbsp;            return stealUnsuccessful();</b>
 &nbsp;        }
 &nbsp;    }
 &nbsp;
@@ -305,7 +305,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-12-08 23:48</div>
+    <div style="float:right;">generated on 2022-12-09 15:41</div>
 </div>
 </body>
 </html>

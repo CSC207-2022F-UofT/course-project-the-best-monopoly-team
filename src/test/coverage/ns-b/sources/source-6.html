@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > PropertyPerformActionUseCase</title>
+  <title>Coverage Report > CardMapperUseCase</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">UseCases</a>
 </div>
 
-<h1>Coverage Summary for Class: PropertyPerformActionUseCase (UseCases)</h1>
+<h1>Coverage Summary for Class: CardMapperUseCase (UseCases)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">PropertyPerformActionUseCase</td>
+  <td class="name">CardMapperUseCase</td>
 </tr>
 
 </table>
@@ -40,11 +40,16 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package UseCases;
 &nbsp;
-&nbsp;import Entities.Player;
-&nbsp;import Entities.Property;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;import Entities.Card;
 &nbsp;
-&nbsp;public interface PropertyPerformActionUseCase {
-&nbsp;    String performAction(Property property, Player player);
+&nbsp;public interface CardMapperUseCase {
+&nbsp;    
+&nbsp;    HashMap&lt;String,List&lt;Card&gt;&gt; cardMapperJailCards(List&lt;String&gt; lst);
+&nbsp;    HashMap&lt;String, List&lt;Card&gt;&gt; cardMapperChanceCards(List&lt;String&gt; lst);
+&nbsp;    HashMap&lt;String, List&lt;Card&gt;&gt; cardMapperComChest(List&lt;String&gt; lst);
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -69,7 +74,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-12-08 23:48</div>
+    <div style="float:right;">generated on 2022-12-09 15:41</div>
 </div>
 </body>
 </html>

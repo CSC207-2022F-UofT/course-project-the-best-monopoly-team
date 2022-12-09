@@ -59,10 +59,10 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    50%
+    63.9%
   </span>
   <span class="absValue">
-    (18/36)
+    (23/36)
   </span>
 </td>
 </tr>
@@ -123,11 +123,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;                    transverse to another
 &nbsp;                     */
 <b class="fc">&nbsp;            if (landedOnCell instanceof Property &amp;&amp;</b>
-<b class="fc">&nbsp;                    ((Property) landedOnCell).getOwner() == null) {</b>
-<b class="fc">&nbsp;                gameLogicInteractor.transverseCurrentTree(0);</b>
+<b class="nc">&nbsp;                    ((Property) landedOnCell).getOwner() == null) {</b>
+<b class="nc">&nbsp;                gameLogicInteractor.transverseCurrentTree(0);</b>
 &nbsp;            } else {
 &nbsp;                //perform the action on the space as well
-<b class="nc">&nbsp;                switch (landedOnCell.getType()) {</b>
+<b class="fc">&nbsp;                switch (landedOnCell.getType()) {</b>
 &nbsp;                    case &quot;Property&quot;:
 <b class="nc">&nbsp;                        PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();</b>
 <b class="nc">&nbsp;                        Property property = (Property) landedOnCell;</b>
@@ -138,19 +138,19 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;                        }
 <b class="nc">&nbsp;                        break;</b>
 &nbsp;                    case &quot;Corner Tile&quot;:
-<b class="nc">&nbsp;                        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();</b>
-<b class="nc">&nbsp;                        assert landedOnCell instanceof CornerTiles;</b>
-<b class="nc">&nbsp;                        CornerTiles cornerTile = (CornerTiles) landedOnCell;</b>
+<b class="fc">&nbsp;                        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();</b>
+<b class="fc">&nbsp;                        assert landedOnCell instanceof CornerTiles;</b>
+<b class="fc">&nbsp;                        CornerTiles cornerTile = (CornerTiles) landedOnCell;</b>
 &nbsp;
-<b class="nc">&nbsp;                        setAnswer(cornerTileInteractor.performAction(currentPlayer, cornerTile));</b>
-<b class="nc">&nbsp;                        break;</b>
+<b class="fc">&nbsp;                        setAnswer(cornerTileInteractor.performAction(currentPlayer, cornerTile));</b>
+<b class="fc">&nbsp;                        break;</b>
 &nbsp;                    case &quot;Action Space&quot;:
 <b class="nc">&nbsp;                        PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();</b>
 <b class="nc">&nbsp;                        ActionSpace actionSpace = (ActionSpace) landedOnCell;</b>
 <b class="nc">&nbsp;                        setAnswer(actionSpaceInteractor.performAction(actionSpace, currentPlayer, board));</b>
 &nbsp;                }
 &nbsp;
-<b class="nc">&nbsp;                gameLogicInteractor.transverseCurrentTree(1);</b>
+<b class="fc">&nbsp;                gameLogicInteractor.transverseCurrentTree(1);</b>
 &nbsp;            }
 &nbsp;            //perform the logic in the new node.
 <b class="fc">&nbsp;            currentState = gameLogicInteractor.handleTree(0);</b>
@@ -188,7 +188,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-12-08 23:48</div>
+    <div style="float:right;">generated on 2022-12-09 15:41</div>
 </div>
 </body>
 </html>
