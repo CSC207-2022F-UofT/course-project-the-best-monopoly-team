@@ -9,6 +9,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is used to initialize or create a Monopoly board.
+ */
+
 public class GameCreation {
     /** Initializing a Board instance with default values.
      *

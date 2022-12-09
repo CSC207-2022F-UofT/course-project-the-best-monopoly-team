@@ -1,5 +1,8 @@
 package Entities;
 
+/**
+ * This class represents a card that a player interacts with.
+ */
 public class Card {
 
     private final String type;

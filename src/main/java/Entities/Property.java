@@ -2,6 +2,9 @@ package Entities;
 
 import Logic.PlayerLogic;
 
+/**
+ * This class represents a Property on the Monopoly board.
+ */
 public class Property extends Cell {
     private final String name;
     private final String colour;

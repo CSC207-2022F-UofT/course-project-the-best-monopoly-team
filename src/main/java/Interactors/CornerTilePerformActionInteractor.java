@@ -4,6 +4,9 @@ import Entities.CornerTiles;
 import Entities.Player;
 import UseCases.CornerTilePerformActionUseCase;
 
+/**
+ * This class is an interactor for the performAction function in the case that a player lands on a corner tile.
+ */
 public class CornerTilePerformActionInteractor implements CornerTilePerformActionUseCase {
     /**
      * Take the player and the board and decide which action
