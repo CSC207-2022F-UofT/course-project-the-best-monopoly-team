@@ -1,7 +1,7 @@
 package Interactors;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class GameDisplayOutputInteractorTest {
         displayOutput.setOptions(options);
         displayOutput.createOptionSegment();
 
-        Assertions.assertEquals(options.get(1), displayOutput.getOptionSegment().getText());
+        Assertions.assertEquals(options.size(), displayOutput.getOptionSegment().getComponents().length);
     }
 
     @Test
@@ -67,6 +67,9 @@ public class GameDisplayOutputInteractorTest {
         displayOutput.setOptions(options);
         displayOutput.createOptionSegment();
         displayOutput.clearOptionSegment();
+
+        Assertions.assertEquals(0, displayOutput.getOptionSegment().getComponents().length);
+
     }
 
     @Test
