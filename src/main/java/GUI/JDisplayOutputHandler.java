@@ -22,7 +22,6 @@ public class JDisplayOutputHandler {
     private Description description;
     private Options optionSegment;
     private ArrayList<String> options;
-
     private ButtonDisplayHandler buttonDisplayHandler;
 
     /**
@@ -33,6 +32,14 @@ public class JDisplayOutputHandler {
         this.description = new Description();
         this.options = new ArrayList<>();
         this.buttonDisplayHandler = new ButtonDisplayHandler();
+    }
+
+    /**
+     * Function to get the options for this state
+     * @return the ArrayList that contains the options for the current state
+     */
+    public ArrayList<String> getOptions() {
+        return this.options;
     }
 
     /**

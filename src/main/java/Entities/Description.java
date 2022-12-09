@@ -30,7 +30,7 @@ public class Description {
 
     /**
      * Function to get the context segment
-     * @return the JLabel Segement
+     * @return the JLabel Segment
      */
     public JLabel getDescription() {
         return this.description;
