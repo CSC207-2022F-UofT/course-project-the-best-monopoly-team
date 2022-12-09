@@ -48,28 +48,4 @@ public class Output {
     public void modifyStateOutput(String state, String output){
         this.stateOutput.replace(state, output);
     }
-
-    /**
-     * Function that returns the final complied string
-     * @return the final complied output string
-     */
-    public String getFinalOutput(){
-        return this.finalOutput;
-    }
-
-    /**
-     * set the finalOutput string
-     * @param finalOutput: the output value that is to be used
-     */
-    public void setFinalOutput(String finalOutput) {
-        this.finalOutput = finalOutput;
-    }
-
-    /**
-     * Function that adds strings to the final output, e.g. for adding options to the string
-     * @param adder: the additional output information needed to be added to the output string
-     */
-    public void addToFinalOutput(String adder){
-        this.finalOutput = this.finalOutput + " " + adder;
-    }
 }

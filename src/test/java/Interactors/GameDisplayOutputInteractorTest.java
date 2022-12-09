@@ -1,17 +1,18 @@
-package GUI;
+package Interactors;
 
 //import org.junit.jupiter.api.Test;
+import Interactors.GameDisplayOutputInteractor;
 import org.junit.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class JDisplayOutputHandlerTest {
+public class GameDisplayOutputInteractorTest {
 
     @Test
     public void testSetOptions() {
-        JDisplayOutputHandler displayOutput = new JDisplayOutputHandler();
+        GameDisplayOutputInteractor displayOutput = new GameDisplayOutputInteractor();
 
         ArrayList<String> options = new ArrayList<>();
         options.add("30 rounds");
@@ -25,7 +26,7 @@ public class JDisplayOutputHandlerTest {
 
     @Test
     public void testClearOptions() {
-        JDisplayOutputHandler displayOutput = new JDisplayOutputHandler();
+        GameDisplayOutputInteractor displayOutput = new GameDisplayOutputInteractor();
 
         ArrayList<String> options = new ArrayList<>();
         options.add("30 rounds");
@@ -41,7 +42,7 @@ public class JDisplayOutputHandlerTest {
 
     @Test
     public void testGetOptionSegment() {
-        JDisplayOutputHandler displayOutput = new JDisplayOutputHandler();
+        GameDisplayOutputInteractor displayOutput = new GameDisplayOutputInteractor();
 
         ArrayList<String> options = new ArrayList<>();
         options.add("30 rounds");
@@ -55,7 +56,7 @@ public class JDisplayOutputHandlerTest {
 
     @Test
     public void testClearOptionSegment() {
-        JDisplayOutputHandler displayOutput = new JDisplayOutputHandler();
+        GameDisplayOutputInteractor displayOutput = new GameDisplayOutputInteractor();
 
         ArrayList<String> options = new ArrayList<>();
         options.add("30 rounds");
@@ -70,7 +71,7 @@ public class JDisplayOutputHandlerTest {
 
     @Test
     public void testGetTextSegment() {
-        JDisplayOutputHandler displayOutput = new JDisplayOutputHandler();
+        GameDisplayOutputInteractor displayOutput = new GameDisplayOutputInteractor();
 
         String input = "Hi";
         displayOutput.createTextSegment(input);
@@ -81,7 +82,7 @@ public class JDisplayOutputHandlerTest {
 
     @Test
     public void testClearTextSegment() {
-        JDisplayOutputHandler displayOutput = new JDisplayOutputHandler();
+        GameDisplayOutputInteractor displayOutput = new GameDisplayOutputInteractor();
 
         String input = "Hi";
         displayOutput.createTextSegment(input);

@@ -40,6 +40,7 @@ public class Description {
      * Reset the JLabel
      */
     public void clear(){
+        this.description.setText("");
         this.description.removeAll();
         this.description.setLayout(new FlowLayout());
     }

@@ -1,12 +1,12 @@
-package GUI;
+package Interactors;
 
 import org.junit.jupiter.api.Test;
 
-public class JDisplayInputHandlerTest {
+public class GameDisplayInputInteractorTest {
 
     @Test
     public void getInputMapValue() {
-        JDisplayInputHandler inputDisplay = new JDisplayInputHandler();
+        GameDisplayInputInteractor inputDisplay = new GameDisplayInputInteractor();
 
         int result = inputDisplay.getInputMapValue("B3");
         int result1 = inputDisplay.getInputMapValue("B13");
