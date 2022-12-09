@@ -1,7 +1,7 @@
 package Entities;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import static org.junit.Assert.*;
 
 import java.util.*;
 
@@ -25,7 +25,7 @@ public class BoardTest {
         Board board = new Board(players, cells);
         List<Player> actual = board.getPlayers();
         List<Player> expected = Arrays.asList(playerOne, playerTwo);
-        assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
     }
 
     @Test
@@ -40,7 +40,7 @@ public class BoardTest {
         board.removePlayer(playerOne);
         List<Player> actual = board.getPlayers();
         List<Player> expected = List.of(playerTwo);
-        assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
     }
 
     @Test
@@ -62,7 +62,7 @@ public class BoardTest {
         Board board = new Board(players, cells);
         List<Cell> actual = board.getCells();
         List<Cell> expected = Arrays.asList(cellOne, cellTwo);
-        assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
     }
 
     @Test
@@ -84,7 +84,7 @@ public class BoardTest {
         Board board = new Board(players, cells);
         Cell actual = board.getCell(1);
         Cell expected = board.cells.get(1);
-        assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class BoardTest {
         Board board = new Board(players, cells);
         Cell actual = board.getPlayerCell(playerOne);
         Cell expected = cells.get(playerOne.getPosition());
-        assertEquals(actual, expected);
+        Assertions.assertEquals(actual, expected);
     }
 
 }
