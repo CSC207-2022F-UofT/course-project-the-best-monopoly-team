@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > CornerTilePerformActionUseCase</title>
+  <title>Coverage Report > PerformActionSpaceUseCase</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -21,14 +21,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">UseCases</a>
 </div>
 
-<h1>Coverage Summary for Class: CornerTilePerformActionUseCase (UseCases)</h1>
+<h1>Coverage Summary for Class: PerformActionSpaceUseCase (UseCases)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">CornerTilePerformActionUseCase</td>
+  <td class="name">PerformActionSpaceUseCase</td>
 </tr>
 
 </table>
@@ -41,10 +41,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <code class="sourceCode" id="sourceCode">&nbsp;package UseCases;
 &nbsp;
 &nbsp;import Entities.Player;
-&nbsp;import Entities.CornerTiles;
+&nbsp;import Entities.ActionSpace;
+&nbsp;import Entities.Board;
 &nbsp;
-&nbsp;public interface CornerTilePerformActionUseCase {
-&nbsp;    String performAction(Player currentPlayer, CornerTiles corner);
+&nbsp;public interface PerformActionSpaceUseCase {
+&nbsp;    
+&nbsp;    String performAction(ActionSpace actionSpace, Player player, Board board);
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -69,7 +72,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2022-12-08 23:48</div>
+    <div style="float:right;">generated on 2022-12-09 15:41</div>
 </div>
 </body>
 </html>
