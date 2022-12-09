@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ChoosePlayerUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: ChoosePlayerUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChoosePlayerUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.Board;
+&nbsp;import Entities.Player;
+&nbsp;import Entities.State;
+&nbsp;import Logic.NodeLogic;
+&nbsp;import Logic.PlayerLogic;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represent the use case when a player has to be chosen.
+&nbsp; */
+&nbsp;public class ChoosePlayerUseCase extends MainTreeNodeLogic implements NodeLogic {
+&nbsp;
+&nbsp;    public ChoosePlayerUseCase() {
+<b class="fc">&nbsp;        super(&quot;Choose Player (Steal)&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method creates makes the current player steal from a specific player specified by the input parameter. It
+&nbsp;     * then returns a State object containing information about the steal attempt and information required to continue
+&nbsp;     * the game.
+&nbsp;     * @param input An integer representing the player that the current player wants to steal from.
+&nbsp;     * @return a State object containing information about the steal attempt and information required to continue the
+&nbsp;     * game.
+&nbsp;     */
+&nbsp;    public State create_state(int input){
+<b class="fc">&nbsp;        Board board = getBoard();</b>
+<b class="fc">&nbsp;        Player currentPlayer = getCurrentPlayer();</b>
+&nbsp;
+<b class="fc">&nbsp;        ArrayList&lt;Player&gt; playerCopy = new ArrayList&lt;Player&gt;(board.getPlayers());</b>
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+&nbsp;        //Steal from the target player
+<b class="fc">&nbsp;        playerCopy = new ArrayList&lt;Player&gt;(board.getPlayers());</b>
+<b class="fc">&nbsp;        playerCopy.remove(currentPlayer);</b>
+<b class="fc">&nbsp;        PlayerLogic playerLogic = new PlayerLogic(currentPlayer);</b>
+<b class="fc">&nbsp;        String stealStatus = playerLogic.steal(playerCopy.get(input));</b>
+<b class="fc">&nbsp;        currentState.setDescription(stealStatus);</b>
+<b class="fc">&nbsp;        currentState.addOptions(&quot;Ok&quot;);</b>
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

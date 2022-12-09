@@ -1,0 +1,302 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > GeneralGameLogic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic</a>
+</div>
+
+<h1>Coverage Summary for Class: GeneralGameLogic (Logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GeneralGameLogic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    96.2%
+  </span>
+  <span class="absValue">
+    (25/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.3%
+  </span>
+  <span class="absValue">
+    (41/43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/** This class is the parent class of the three tree handlers used during the game phase of the application.
+&nbsp; *  &lt;br&gt; Each of the subclasses coordinate the game logic of the application.
+&nbsp; */
+&nbsp;public class GeneralGameLogic {
+&nbsp;
+&nbsp;    //Static variables used by all the subclasses
+&nbsp;    static GameLogic gameLogicInteractor;
+&nbsp;    static Player currentPlayer;
+&nbsp;    static Board board;
+<b class="fc">&nbsp;    static HashMap&lt;String, Integer&gt; selectedOptions = new HashMap&lt;String, Integer&gt;();</b>
+<b class="fc">&nbsp;    static int returnPlayerIndex = -1;</b>
+&nbsp;    static List&lt;Player&gt; players;
+&nbsp;    static GameLogicTree returnTree;
+&nbsp;    static String answer;
+&nbsp;    static GameLogicTree confirmationReturn;
+&nbsp;
+&nbsp;    private String name;
+<b class="fc">&nbsp;    public GeneralGameLogic(String name){</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void setAnswer(String answer1){
+<b class="nc">&nbsp;        answer = answer1;</b>
+&nbsp;    }
+&nbsp;    public String getAnswer(){
+<b class="fc">&nbsp;        return answer;</b>
+&nbsp;    }
+&nbsp;    public void setConfirmationReturn(GameLogicTree tree){
+<b class="fc">&nbsp;        confirmationReturn = tree;</b>
+&nbsp;    }
+&nbsp;    public GameLogicTree getConfirmationReturn(){
+<b class="fc">&nbsp;        return confirmationReturn;</b>
+&nbsp;    }
+&nbsp;    public List&lt;Player&gt; getPlayers(){
+<b class="fc">&nbsp;        return players;</b>
+&nbsp;    }
+&nbsp;    public void setReturnPlayerIndex(int index){
+<b class="fc">&nbsp;        returnPlayerIndex = index;</b>
+&nbsp;    }
+&nbsp;    public int getReturnPlayerIndex(){
+<b class="fc">&nbsp;        return returnPlayerIndex;</b>
+&nbsp;    }
+&nbsp;    public static Board getBoard(){
+<b class="fc">&nbsp;        return board;</b>
+&nbsp;    }
+&nbsp;    public GameLogic getGameLogicInteractor(){
+<b class="fc">&nbsp;        return gameLogicInteractor;</b>
+&nbsp;    }
+&nbsp;    public HashMap&lt;String, Integer&gt; getSelectedOptions(){
+<b class="fc">&nbsp;        return selectedOptions;</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Constructor for the class
+&nbsp;     */
+<b class="fc">&nbsp;    public GeneralGameLogic(){</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method initializes variables used by the tree handlers
+&nbsp;     * @param currentPlayer1 - The current player of the game
+&nbsp;     * @param board1 - the current board being used in the game
+&nbsp;     */
+&nbsp;    public static void initialize(Player currentPlayer1, Board board1, GameLogic interactor){
+<b class="fc">&nbsp;        players = board1.getPlayers();</b>
+<b class="fc">&nbsp;        currentPlayer = currentPlayer1;</b>
+<b class="fc">&nbsp;        board = board1;</b>
+<b class="fc">&nbsp;        gameLogicInteractor = interactor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method gives the TreeHandlers a reference to the GameLogicInteractor
+&nbsp;     * @param interactor - the gameLogicInteractor
+&nbsp;     */
+&nbsp;    public void setGameLogicInteractor(GameLogic interactor){
+<b class="fc">&nbsp;        gameLogicInteractor = interactor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the state object which contains the properties of the current tree and
+&nbsp;     * sets the current tree to the root
+&nbsp;     * @return state object
+&nbsp;     */
+&nbsp;    public State getCurrentState(){
+<b class="fc">&nbsp;        State currentState = gameLogicInteractor.getCurrentTree().getUseCase().create_state(0);</b>
+&nbsp;
+&nbsp;        //mutating the state to have memory of its state, useful for backwards transversal
+<b class="fc">&nbsp;        gameLogicInteractor.getCurrentTree().setPreviousState(currentState);</b>
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method mutates the current state object by adding all the subtrees of the current tree as options.
+&nbsp;     * @param currentState - the state object to be mutated
+&nbsp;     */
+&nbsp;    public void addSwitchOptions(State currentState){
+<b class="fc">&nbsp;        for (MenuTree tree: gameLogicInteractor.getCurrentTree().getChildren()){</b>
+&nbsp;
+<b class="fc">&nbsp;            currentState.addOptions(((GeneralGameLogic)((GameLogicTree)tree).getUseCase()).getName());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method gets the index of the current player in the players arraylist.
+&nbsp;     * @return the integer index of the current player.
+&nbsp;     */
+&nbsp;    public static int getCurrentPlayerIndex(){
+<b class="fc">&nbsp;        for (int i = 0; i&lt; players.size(); i++){</b>
+<b class="fc">&nbsp;            if (currentPlayer == players.get(i)){</b>
+<b class="fc">&nbsp;                return i;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        throw new RuntimeException(&quot;Player not in array&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter method for the current player instance attribute
+&nbsp;     * @param player - the player to set
+&nbsp;     */
+<b class="fc">&nbsp;    public void setCurrentPlayer(Player player){currentPlayer = player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * getter method for the current player instance attribute
+&nbsp;     * @return the current player
+&nbsp;     */
+&nbsp;    public Player getCurrentPlayer(){
+<b class="fc">&nbsp;        return currentPlayer;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * getter method for the return tree instance attribute
+&nbsp;     * @return the return tree
+&nbsp;     */
+&nbsp;    public GameLogicTree getReturnTree() {
+<b class="fc">&nbsp;        return returnTree;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * setter method for the return tree instance attribute
+&nbsp;     * @param returnTree1 - the tree to set
+&nbsp;     */
+&nbsp;    public void setReturnTree(GameLogicTree returnTree1) {
+<b class="fc">&nbsp;        returnTree = returnTree1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to change players when their turn is over
+&nbsp;     */
+&nbsp;    public void changePlayers(){
+<b class="fc">&nbsp;        currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Sets the tree back to its top position and returns the current state of the tree
+&nbsp;     * @return state object
+&nbsp;     */
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method returning the current state after the bottom node has been reached.
+&nbsp;     * @return a State object representing the current state after the bottom node has been reached.
+&nbsp;     */
+&nbsp;    public State afterBottomNode(){
+<b class="fc">&nbsp;        gameLogicInteractor.setCurrentTreeToMaxParent();</b>
+<b class="fc">&nbsp;        return getCurrentState();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method adds players other than the current player to the list of options in a State object.
+&nbsp;     * @param currentState a State object that we want to add the players as options to.
+&nbsp;     */
+&nbsp;    public void addPlayersState(State currentState){
+<b class="fc">&nbsp;        ArrayList&lt;Player&gt; playerCopy = new ArrayList&lt;Player&gt;(board.getPlayers());</b>
+<b class="fc">&nbsp;        playerCopy.remove(currentPlayer);</b>
+<b class="fc">&nbsp;        for (Player player : playerCopy) {</b>
+<b class="fc">&nbsp;            currentState.addOptions(player.getName());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a String representing the name of the node.
+&nbsp;     * @return a String representing the name of the node.
+&nbsp;     */
+&nbsp;    public String getName() {
+<b class="fc">&nbsp;        return name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

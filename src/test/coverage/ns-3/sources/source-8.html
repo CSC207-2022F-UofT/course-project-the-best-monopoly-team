@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > GameLogicTree</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Entities</a>
+</div>
+
+<h1>Coverage Summary for Class: GameLogicTree (Entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameLogicTree</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90.9%
+  </span>
+  <span class="absValue">
+    (10/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93.8%
+  </span>
+  <span class="absValue">
+    (15/16)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Entities;
+&nbsp;import Logic.NodeLogic;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents a Tree object pertaining to the flow of the game or logic of the game.
+&nbsp; */
+&nbsp;public class GameLogicTree extends MenuTree{
+&nbsp;
+<b class="fc">&nbsp;    private boolean switchBlock = false;</b>
+&nbsp;
+&nbsp;    private State previousState;
+&nbsp;    private NodeLogic useCase;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the constructor which creates an instance of GameLogicTree.
+&nbsp;     * @param useCase a NodeLogic object representing the use case that the GameLogicTree pertains to.
+&nbsp;     */
+<b class="fc">&nbsp;    public GameLogicTree(NodeLogic useCase) {</b>
+<b class="fc">&nbsp;        this.useCase = useCase;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a NodeLogic object representing the use case that the GameLogicTree pertains to.
+&nbsp;     * @return a NodeLogic object representing the use case that the GameLogicTree pertains to.
+&nbsp;     */
+&nbsp;    public NodeLogic getUseCase(){
+<b class="fc">&nbsp;        return useCase;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the parent instance attribute which represents the parent node of the tree.
+&nbsp;     * @param parent a MenuTree instance attribute which represent the parent node of the tree.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void setParent(MenuTree parent) {
+<b class="fc">&nbsp;        this.parent = parent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a MenuTree instance representing the parent node of the tree.
+&nbsp;     * @return a MenuTree instance representing the parent node of the tree.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public MenuTree getParent() {
+<b class="fc">&nbsp;        return this.parent;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a MenuTree instance that represents the highest parent node of the tree.
+&nbsp;     * @return a MenuTree instance that represents the highest parent node of the tree.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public MenuTree getMaxParent(){
+<b class="fc">&nbsp;        if (this.parent == null){</b>
+<b class="fc">&nbsp;            return this;</b>
+&nbsp;        }
+&nbsp;        else{
+<b class="fc">&nbsp;            return this.parent.getMaxParent();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a List containing the tree&#39;s children.
+&nbsp;     * @return a List containing the tree&#39;s children.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;MenuTree&gt; getChildren() {
+<b class="fc">&nbsp;        return this.children;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method adds a MenuTree instance as a child of the tree.
+&nbsp;     * @param child a MenuTree instance that is to be added as a child of the tree.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public void addChild(MenuTree child) {
+<b class="fc">&nbsp;        child.setParent(this);</b>
+<b class="fc">&nbsp;        this.children.add(child);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the switchBlock instance attribute which represents if there are different scenarios to choose
+&nbsp;     * from after the current one.
+&nbsp;     * @param switchBlock a boolean representing if there are different scenarios to choose from after the current one.
+&nbsp;     */
+&nbsp;    public void setIsSwitchBlock(boolean switchBlock) {
+<b class="fc">&nbsp;        this.switchBlock = switchBlock;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a boolean representing if there are different scenarios to choose from after the current one.
+&nbsp;     * @return a boolean representing if there are different scenarios to choose from after the current one.
+&nbsp;     */
+&nbsp;    public boolean isSwitchBlock() {
+<b class="fc">&nbsp;        return switchBlock;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a State object representing the previous state of the game.
+&nbsp;     * @return a State object representing the previous state of the game.
+&nbsp;     */
+&nbsp;    public State getPreviousState() {
+<b class="nc">&nbsp;        return previousState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the previousState instance attribute which represents the previous state of the game.
+&nbsp;     * @param previousState a State object representing the previous state of the game.
+&nbsp;     */
+&nbsp;    public void setPreviousState(State previousState) {
+<b class="fc">&nbsp;        this.previousState = previousState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

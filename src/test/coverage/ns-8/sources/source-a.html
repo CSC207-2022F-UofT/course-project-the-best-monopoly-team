@@ -1,0 +1,155 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > EndTurnUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: EndTurnUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EndTurnUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    47.1%
+  </span>
+  <span class="absValue">
+    (8/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Logic.NodeLogic;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents the use case when a player ends its turn.
+&nbsp; */
+&nbsp;
+&nbsp;public class EndTurnUseCase extends MainTreeNodeLogic implements NodeLogic {
+&nbsp;
+&nbsp;    public EndTurnUseCase() {
+<b class="fc">&nbsp;        super(&quot;End Turn&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method creates a State object that either helps to tell the user that it cannot end its turn or changes
+&nbsp;     * the current player and makes the state go back to normal.
+&nbsp;     * @param input An integer representing the user&#39;s input. However, this parameter will not be used for this method.
+&nbsp;     * @return A State object containing either an &quot;Ok&quot; option or a State object corresponding to one at the end of a
+&nbsp;     * tree path.
+&nbsp;     */
+&nbsp;    public State create_state(int input){
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        Player currentPlayer = getCurrentPlayer();</b>
+&nbsp;
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+&nbsp;        //end the turn if the person is not in debt
+<b class="fc">&nbsp;        if (currentPlayer.getMoney()  &gt;= 0){</b>
+<b class="nc">&nbsp;            mainStates[3] += 1;</b>
+<b class="nc">&nbsp;            if (mainStates[3] &gt;= mainStates[4] &amp;&amp; mainStates[4] != -1){</b>
+<b class="nc">&nbsp;                gameLogicInteractor.transverseCurrentTree(1);</b>
+<b class="nc">&nbsp;                currentState = gameLogicInteractor.handleTree(0);</b>
+<b class="nc">&nbsp;                return currentState;</b>
+&nbsp;            }
+&nbsp;
+&nbsp;            //changing the player and turning the state back to normal
+<b class="nc">&nbsp;            changePlayers();</b>
+<b class="nc">&nbsp;            mainStates[0] = 0;</b>
+<b class="nc">&nbsp;            mainStates[1] = 0;</b>
+<b class="nc">&nbsp;            currentState = afterBottomNode();</b>
+&nbsp;        }
+&nbsp;        else{
+&nbsp;            //option when the user cannot end their turn
+<b class="fc">&nbsp;            currentState.addOptions(&quot;Ok&quot;);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

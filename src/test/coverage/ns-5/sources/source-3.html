@@ -1,0 +1,311 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PlayerLogic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic</a>
+</div>
+
+<h1>Coverage Summary for Class: PlayerLogic (Logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PlayerLogic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    71.4%
+  </span>
+  <span class="absValue">
+    (10/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (46/69)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic;
+&nbsp;
+&nbsp;import Entities.Player;
+&nbsp;import Entities.Property;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Map;
+&nbsp;
+&nbsp;
+&nbsp;public class PlayerLogic {
+&nbsp;    private Player player;
+&nbsp;    public static final int BROWN_DARKBLUE_SETSIZE = 2;
+&nbsp;    public static final int PROPERTY_SETSIZE = 3;
+&nbsp;    public static final double STEAL_CHANCE = 0.3;
+&nbsp;    public static final double STEAL_JAIL_CHANCE = 0.6;
+&nbsp;    public static final int STEAL_MONEY = 100;
+&nbsp;    static final double MORTGAGE_INTEREST = 1.1;
+&nbsp;
+<b class="fc">&nbsp;    public PlayerLogic(Player player) {</b>
+<b class="fc">&nbsp;        this.player = player;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method rolls the dice for the player. The dice result can indicate this player&#39;s movement while
+&nbsp;     * they are not in jail. If they are in jail, the dice result can determine if the player can get out of jail
+&nbsp;     * @param consecutive the number of consecutive doubles
+&nbsp;     * @return a String of two numbers indicating the numbers rolled from the dice
+&nbsp;     */
+&nbsp;    public String rollDice(int consecutive){
+<b class="fc">&nbsp;        int max = 6;</b>
+<b class="fc">&nbsp;        int min = 1;</b>
+<b class="fc">&nbsp;        int roll1 =  (int) Math.floor(Math.random() * (max - min + 1) + min);</b>
+<b class="fc">&nbsp;        int roll2 = (int) Math.floor(Math.random() * (max - min + 1) + min);</b>
+<b class="fc">&nbsp;        if (isInJail() &amp;&amp; isConsecutive(roll1, roll2)){</b>
+<b class="nc">&nbsp;                this.player.setInJail(false);</b>
+<b class="nc">&nbsp;                this.player.move(roll1 + roll2);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        else if (!isInJail() &amp;&amp; ! isConsecutive(roll1, roll2) ){</b>
+<b class="fc">&nbsp;                this.player.move(roll1 + roll2);</b>
+<b class="fc">&nbsp;                return (String.valueOf( roll1 + roll2));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        else if (!isInJail() &amp;&amp; isConsecutive(roll1, roll2) &amp;&amp; (consecutive + 1) &lt; 3){</b>
+<b class="nc">&nbsp;                return this.rollDice((consecutive + 1));</b>
+&nbsp;            }
+<b class="nc">&nbsp;        else if(!isInJail() &amp;&amp; isConsecutive(roll1, roll2) &amp;&amp; (consecutive + 1) == 3){</b>
+&nbsp;                // the player goes to jail
+<b class="nc">&nbsp;                this.player.setInJail(true);</b>
+<b class="nc">&nbsp;                return (String.valueOf( roll1 + roll2) + &quot;player goes to jail&quot;);</b>
+&nbsp;            }
+<b class="nc">&nbsp;        return (String.valueOf( roll1 + roll2));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Rigged roll for testing purposes
+&nbsp;     * @param rig
+&nbsp;     */
+&nbsp;    public void riggedRoll(int rig) {
+<b class="nc">&nbsp;        player.move(rig);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private static boolean isConsecutive(int roll1, int roll2) {
+<b class="fc">&nbsp;        return roll1 == roll2;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean isInJail() {
+<b class="fc">&nbsp;        return this.player.isInJail();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper function for ownedPropertySets(). This function creates a map with the property colours as the key and
+&nbsp;     * an int counter as its value.
+&nbsp;     * @return a HashMap with the property colours as the key and an int counter as its value.
+&nbsp;     */
+&nbsp;    private HashMap&lt;String, Integer&gt; createSetMap() {
+<b class="fc">&nbsp;        HashMap&lt;String, Integer&gt; sets = new HashMap&lt;&gt;();</b>
+<b class="fc">&nbsp;        sets.put(&quot;Brown&quot;, 0);</b>
+<b class="fc">&nbsp;        sets.put(&quot;Light Blue&quot;, 0);</b>
+<b class="fc">&nbsp;        sets.put(&quot;Pink&quot;, 0);</b>
+<b class="fc">&nbsp;        sets.put(&quot;Orange&quot;, 0);</b>
+<b class="fc">&nbsp;        sets.put(&quot;Red&quot;, 0);</b>
+<b class="fc">&nbsp;        sets.put(&quot;Yellow&quot;, 0);</b>
+<b class="fc">&nbsp;        sets.put(&quot;Green&quot;, 0);</b>
+<b class="fc">&nbsp;        sets.put(&quot;Dark Blue&quot;, 0);</b>
+<b class="fc">&nbsp;        return sets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Counts the number of properties owned by player in each colour set
+&nbsp;     * @return a HashMap mapping each colour to an int value correlating to the number of properties of that colour
+&nbsp;     * owned by this player
+&nbsp;     */
+&nbsp;    public HashMap&lt;String, Integer&gt; countPropertySets() {
+<b class="fc">&nbsp;        HashMap&lt;String, Integer&gt; sets = createSetMap();</b>
+<b class="fc">&nbsp;        for (Property property : player.getProperties()) {</b>
+<b class="fc">&nbsp;            sets.put(property.getColour(), sets.get(property.getColour()) + 1);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return sets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets all the complete sets of properties owned by this player (sets are grouped by colours)
+&nbsp;     *
+&nbsp;     * @return an ArrayList of colours referring to the complete sets of properties owned by this player
+&nbsp;     */
+&nbsp;    public ArrayList&lt;String&gt; ownedPropertySets() {
+<b class="fc">&nbsp;        ArrayList&lt;String&gt; ownedSets = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        HashMap&lt;String, Integer&gt; sets = countPropertySets();</b>
+<b class="fc">&nbsp;        for (Map.Entry&lt;String, Integer&gt; colour : sets.entrySet()) {</b>
+<b class="fc">&nbsp;            if (colour.getKey().equals(&quot;Brown&quot;) || colour.getKey().equals(&quot;Dark Blue&quot;)) {</b>
+<b class="fc">&nbsp;                if (colour.getValue() == BROWN_DARKBLUE_SETSIZE) {</b>
+<b class="nc">&nbsp;                    ownedSets.add(colour.getKey());</b>
+&nbsp;                }
+&nbsp;            } else {
+<b class="fc">&nbsp;                if (colour.getValue() == PROPERTY_SETSIZE) {</b>
+<b class="fc">&nbsp;                    ownedSets.add(colour.getKey());</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return ownedSets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A helper function for steal that deals with the stealSuccessful situation.
+&nbsp;     * @param victim The victim whose moeny is going to be stolen
+&nbsp;     * @return A string that indicates if the stealing is successful or if the player is in jail.
+&nbsp;     */
+&nbsp;    public String stealSuccessful(Player victim) {
+<b class="nc">&nbsp;        victim.pay(player, STEAL_MONEY);</b>
+<b class="nc">&nbsp;        return player.getName() + &quot; stole money from &quot; + victim.getName();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A helper function for steal that deals with the stealUnsuccessful situation.
+&nbsp;     * @return A string that indicates if the stealing is successful or if the player is in jail.
+&nbsp;     */
+&nbsp;    public String stealUnsuccessful() {
+<b class="fc">&nbsp;        double jail = Math.random();</b>
+<b class="fc">&nbsp;        if (jail &lt;= STEAL_JAIL_CHANCE) {</b>
+<b class="fc">&nbsp;            player.setInJail(true);</b>
+<b class="fc">&nbsp;            player.setPosition(10);</b>
+<b class="fc">&nbsp;            return (&quot;The police are looking for &quot; + player.getName() + &quot;\n&quot; + player.getName() + &quot; is put in jail&quot;);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return (&quot;The police are looking for &quot; + player.getName() + &quot;\n&quot; + player.getName() +</b>
+&nbsp;                    &quot; escaped from the police&quot;);
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method that allows this player to steal 100 units of money from a player. The success of stealing relies on
+&nbsp;     * a chance basis. Unsuccessfully stealing from the victim gives this player a chance of being put in jail.
+&nbsp;     * @param victim the player whom this player is stealing from
+&nbsp;     * @return returns a String statement indicating whether stealing was successful. If not, the statement indicates
+&nbsp;     * whether this player is put in jail
+&nbsp;     */
+&nbsp;    public String steal(Player victim) {
+<b class="fc">&nbsp;        double success = Math.random();</b>
+<b class="fc">&nbsp;        if (success &lt;= STEAL_CHANCE) {</b>
+<b class="nc">&nbsp;            return stealSuccessful(victim);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            return stealUnsuccessful();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Placing the property for mortgage
+&nbsp;     * @param property the property to remove and to add the money to the current players balance
+&nbsp;     */
+&nbsp;    public void mortgage(Property property) {
+<b class="fc">&nbsp;        player.changeMoney(property.getMortgageValue());</b>
+<b class="fc">&nbsp;        property.setMortgageStatus(true);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Unmortgaging a property
+&nbsp;     * @param property the property to be unmortgaged
+&nbsp;     */
+&nbsp;    public void unmortgage(Property property) {
+<b class="nc">&nbsp;        player.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));</b>
+<b class="nc">&nbsp;        property.setMortgageStatus(false);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method allows this player to build houses on a currently owned property
+&nbsp;     * @param property the property to build the house on
+&nbsp;     * @param houses the number of houses to build
+&nbsp;     */
+&nbsp;    public String buildHouse(Property property, int houses) {
+<b class="nc">&nbsp;        switch (property.addHouse(player, houses)) {</b>
+&nbsp;            case &quot;house&quot;:
+<b class="nc">&nbsp;                return ((houses + &quot; houses have been built on &quot; + property.getName()));</b>
+&nbsp;            case &quot;hotel&quot;:
+<b class="nc">&nbsp;                return (&quot;A hotel has been built on &quot; + property.getName());</b>
+&nbsp;            case &quot;not owned&quot;:
+<b class="nc">&nbsp;                return (&quot;Player does not own &quot; + property.getName());</b>
+&nbsp;            case &quot;not owned set&quot;:
+<b class="nc">&nbsp;                return (&quot;Player does not own the full colour set of &quot; + property.getName());</b>
+&nbsp;            case &quot;not enough money&quot;:
+<b class="nc">&nbsp;                return (&quot;Player does not have enough money to build &quot; + houses + &quot; houses on &quot; + property.getName());</b>
+&nbsp;            default:
+<b class="nc">&nbsp;                return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

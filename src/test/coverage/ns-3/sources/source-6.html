@@ -1,0 +1,157 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Description</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Description (Entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Description</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Entities;
+&nbsp;
+&nbsp;import javax.swing.*;
+&nbsp;import java.awt.*;
+&nbsp;
+&nbsp;/**
+&nbsp; * Class that presents the description for the context to the user
+&nbsp; */
+&nbsp;public class Description {
+&nbsp;    /**
+&nbsp;     * InstanceVar description: the JLabel that shows the context to the user
+&nbsp;     */
+&nbsp;    private JLabel description;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The constructor for this class that sets the layout
+&nbsp;     */
+<b class="nc">&nbsp;    public Description() {</b>
+<b class="nc">&nbsp;        this.description = new JLabel();</b>
+<b class="nc">&nbsp;        this.description.setLayout(new FlowLayout());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the text in the Label to show to the use
+&nbsp;     * @param textOutput: the text to be put into the Label
+&nbsp;     */
+&nbsp;    public void setDescription(String textOutput) {
+<b class="nc">&nbsp;        this.description.setText(&quot;&lt;HTML&gt;&quot; + textOutput + &quot;&lt;HTML&gt;&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function to get the context segment
+&nbsp;     * @return the JLabel Segement
+&nbsp;     */
+&nbsp;    public JLabel getDescription() {
+<b class="nc">&nbsp;        return this.description;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Reset the JLabel
+&nbsp;     */
+&nbsp;    public void clear(){
+<b class="nc">&nbsp;        this.description.removeAll();</b>
+<b class="nc">&nbsp;        this.description.setLayout(new FlowLayout());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the bounds of the JLabel
+&nbsp;     */
+&nbsp;    public void setDescriptionBounds(){
+<b class="nc">&nbsp;        this.description.setBounds(625, 25, 250, 225);</b>
+<b class="nc">&nbsp;        this.description.repaint();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

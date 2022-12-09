@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PickPlayerUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: PickPlayerUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PickPlayerUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (21/21)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Logic.NodeLogic;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents a use case where the current player has to choose a player to trade with.
+&nbsp; */
+&nbsp;public class PickPlayerUseCase extends MainTreeNodeLogic implements NodeLogic{
+&nbsp;
+&nbsp;    public PickPlayerUseCase() {
+<b class="fc">&nbsp;        super(&quot;Pick Player (Trade)&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method creates a State object and adds the selected player to the State object. It will also add options to
+&nbsp;     * the State object. These options are the items from the inventory of the selected player.
+&nbsp;     * @param input An integer representing the Player instance that the current player has chosen.
+&nbsp;     * @return A State object containing the selected player and a list of the chosen player&#39;s properties.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+<b class="fc">&nbsp;        Board board = getBoard();</b>
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        Player currentPlayer = getCurrentPlayer();</b>
+<b class="fc">&nbsp;        HashMap&lt;String, Integer&gt; selectedOptions = getSelectedOptions();</b>
+&nbsp;
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+<b class="fc">&nbsp;        currentState.setBackEnable(true);</b>
+&nbsp;        //adds the chosen player index in selected options (who the current player wants to trade with)
+&nbsp;
+&nbsp;                /*
+&nbsp;                We asked them for an input in reference to a list with their player removed,
+&nbsp;                thus we have to add 1 to their input in certain cases
+&nbsp;                 */
+<b class="fc">&nbsp;        if (input &gt;= getCurrentPlayerIndex()) {</b>
+<b class="fc">&nbsp;            input += 1;</b>
+&nbsp;        }
+&nbsp;        //getting the player the user wants to trade with
+<b class="fc">&nbsp;        selectedOptions.put(&quot;PickPlayer&quot;, input);</b>
+&nbsp;
+&nbsp;        //provide item options from the inventory of the selected player
+<b class="fc">&nbsp;        Player selectedPlayer = board.getPlayers().get(input);</b>
+<b class="fc">&nbsp;        ArrayList&lt;Property&gt; playerProperties = selectedPlayer.getProperties();</b>
+<b class="fc">&nbsp;        if (playerProperties.isEmpty() || currentPlayer.getProperties().isEmpty()){</b>
+<b class="fc">&nbsp;            gameLogicInteractor.transverseCurrentTree(1);</b>
+<b class="fc">&nbsp;            currentState = gameLogicInteractor.handleTree(0);</b>
+<b class="fc">&nbsp;            return currentState;</b>
+&nbsp;        }
+&nbsp;        //using &quot;i&quot; starting from 0 to number of properties the player has - 1
+<b class="fc">&nbsp;        for (Property playerProperty : playerProperties) {</b>
+<b class="fc">&nbsp;            currentState.addOptions(playerProperty.getName());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

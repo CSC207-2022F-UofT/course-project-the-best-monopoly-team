@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > OutputInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Interactors</a>
+</div>
+
+<h1>Coverage Summary for Class: OutputInteractor (Interactors)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">OutputInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/60)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Interactors;
+&nbsp;
+&nbsp;import Entities.Output;
+&nbsp;import Entities.State;
+&nbsp;import UseCases.UseCaseInteractor;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;/***
+&nbsp; * OutputInteractor is a class that controls the data in the Output Entity and interacts with the UseCaseInteractor
+&nbsp; * to present output the user based on the current state of the game
+&nbsp; */
+&nbsp;public class OutputInteractor {
+&nbsp;    /**
+&nbsp;     *  InstanceVar output: an Output object that keeps track and updates the output depending on the state of the game
+&nbsp;     *  InstanceVar currentState: a State object that helps with determining the output that should be presented to the user
+&nbsp;     */
+&nbsp;    private Output output;
+&nbsp;    private State currentState;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The Constructor for the OutputInteractor Class
+&nbsp;     * @param interactor: gets the initial state of the game
+&nbsp;     */
+<b class="nc">&nbsp;    public OutputInteractor(UseCaseInteractor interactor){</b>
+<b class="nc">&nbsp;        this.output = new Output();</b>
+<b class="nc">&nbsp;        StateOutputReader createInitOutput = new StateOutputReader();</b>
+<b class="nc">&nbsp;        createInitOutput.initStateHash();</b>
+<b class="nc">&nbsp;        this.output.setInitStateHash(createInitOutput.getStateMap());</b>
+<b class="nc">&nbsp;        this.currentState = interactor.getInitialState();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function to return the current Output message for context to the user
+&nbsp;     * @return the context String
+&nbsp;     */
+&nbsp;    public String getOutputMessage() {
+<b class="nc">&nbsp;        updateLogicStates(this.currentState.getId());</b>
+<b class="nc">&nbsp;        return this.output.getStateOutput(this.currentState.getId());</b>
+&nbsp;    }
+&nbsp;    public State getCurrentState(){
+<b class="nc">&nbsp;        return this.currentState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * setFinalOutput updates the string to be presented to the user by updating all the output strings that should
+&nbsp;     * be presented to the user based on the state and presented all the options based on the state
+&nbsp;     */
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function deals with all the states that need to be updated periodically based on the current state of the game
+&nbsp;     * @param state: the current state that game is in
+&nbsp;     */
+&nbsp;    public void updateLogicStates(String state){
+<b class="nc">&nbsp;        switch (state) {</b>
+&nbsp;            case &quot;Main Tree Parent Node&quot;:
+<b class="nc">&nbsp;                updateMainTree();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Send The Trade&quot;:
+<b class="nc">&nbsp;                updateSendTrade();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Build House/Hotel&quot;:
+<b class="nc">&nbsp;                updateBuildProperty();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Perform Action&quot;:
+<b class="nc">&nbsp;                updateCallAction();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Property Unowned&quot;:
+<b class="nc">&nbsp;                updateEmptyPropertySpace();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Auction Tree Parent Node&quot;:
+<b class="nc">&nbsp;                updateAuctionTree();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Fold&quot;:
+<b class="nc">&nbsp;                updateFold();</b>
+<b class="nc">&nbsp;                break;</b>
+&nbsp;            case &quot;Choose Player (Steal)&quot;:
+<b class="nc">&nbsp;                updateSteal();</b>
+&nbsp;            case &quot;Game Complete&quot;:
+<b class="nc">&nbsp;                updateEnding();</b>
+&nbsp;            case &quot;Save The Game&quot;:
+<b class="nc">&nbsp;                updateSave();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * All the functions below are helper update functions
+&nbsp;     */
+&nbsp;    public void updateMainTree(){
+<b class="nc">&nbsp;        String currString = this.currentState.getPlayer().getName() + &quot; It&#39;s your turn! What do you want to do? You currently have &quot; +</b>
+<b class="nc">&nbsp;                this.currentState.getPlayer().getMoney() + &quot; dollars&quot;;</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Main Tree Parent Node&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateSave(){
+<b class="nc">&nbsp;        String currString = this.currentState.getDescription();</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Save The Game&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateEnding(){
+<b class="nc">&nbsp;        String currString = this.currentState.getDescription();</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Game Complete&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateSteal(){
+<b class="nc">&nbsp;        String currString = this.currentState.getDescription();</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Choose Player (Steal)&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateSendTrade(){
+<b class="nc">&nbsp;        String currString = currentState.getTradingOpponent().getName() + &quot;, Incoming trade from player &quot; +</b>
+<b class="nc">&nbsp;                currentState.getPlayer().getName() + &quot; requesting for &quot; + currentState.getTradingPlayerProperty().getName() +</b>
+<b class="nc">&nbsp;                &quot; in return for &quot; + currentState.getCurrentPlayerProperty().getName();</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Send The Trade&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateBuildProperty(){
+<b class="nc">&nbsp;        String currString = currentState.getCurrentPlayerProperty().getHouses() + &quot; houses built on this property&quot;;</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Build House/Hotel&quot;, currString);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void updateCallAction(){
+<b class="nc">&nbsp;        String currString =  &quot;You rolled a &quot; + currentState.getRoll()+ currentState.getDescription();</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Perform Action&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateEmptyPropertySpace(){
+<b class="nc">&nbsp;        String currString = &quot;You rolled a &quot; + currentState.getRoll() + &quot; You have landed on &quot; +</b>
+<b class="nc">&nbsp;                currentState.getCurrentPlayerProperty().getName() + &quot; and no ones owns this. It costs &quot; +</b>
+<b class="nc">&nbsp;                currentState.getCurrentPlayerProperty().getPrice() + &quot; What do you want to do?&quot;;</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Property Unowned&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateAuctionTree(){
+<b class="nc">&nbsp;        String currString = currentState.getPlayer().getName() + &quot;, we are bidding on &quot; + currentState.getBiddingProperty().getName() +</b>
+<b class="nc">&nbsp;                &quot; with the current pot being &quot; + currentState.getBiddingPot();</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Auction Tree Parent Node&quot;, currString);</b>
+&nbsp;    }
+&nbsp;    public void updateFold(){
+<b class="nc">&nbsp;        String currString = currentState.getPlayer().getName() + &quot; won the auction for &quot; + currentState.getBiddingPot() + &quot; dollars&quot;;</b>
+<b class="nc">&nbsp;        this.output.modifyStateOutput(&quot;Fold&quot;, currString.toString());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function to get the options the user has based on the state
+&nbsp;     * @return the ArrayList of options in the current state
+&nbsp;     */
+&nbsp;    public ArrayList&lt;String&gt; getStateOptions(){
+<b class="nc">&nbsp;        ArrayList&lt;String&gt; currOptions = new ArrayList&lt;&gt;(this.currentState.getOptions());</b>
+<b class="nc">&nbsp;        if (this.currentState.isBackEnable()){</b>
+<b class="nc">&nbsp;            currOptions.add(&quot;back&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return currOptions;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Update the current state based on changes on the previous state from the user&#39;s input
+&nbsp;     * @param state: the updated state
+&nbsp;     */
+&nbsp;    public void updateState(State state){
+<b class="nc">&nbsp;        this.currentState = state;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getOutput() {
+<b class="nc">&nbsp;        updateLogicStates(this.currentState.getId());</b>
+<b class="nc">&nbsp;        return this.output.getStateOutput(this.currentState.getId());</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

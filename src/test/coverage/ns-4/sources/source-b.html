@@ -1,0 +1,238 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PerformActionSpaceCardInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Interactors</a>
+</div>
+
+<h1>Coverage Summary for Class: PerformActionSpaceCardInteractor (Interactors)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PerformActionSpaceCardInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/40)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Interactors;
+&nbsp;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Random;
+&nbsp;
+&nbsp;import Entities.ActionSpace;
+&nbsp;import Entities.Board;
+&nbsp;import Entities.Card;
+&nbsp;import Entities.Player;
+&nbsp;import UseCases.PerformActionSpaceUseCase;
+&nbsp;
+&nbsp;/**
+&nbsp; * GenerateActionSpaceCardUseCase
+&nbsp; */
+<b class="nc">&nbsp;public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCase{</b>
+&nbsp;    
+&nbsp;    /**
+&nbsp;     * Generates a random card from the action space
+&nbsp;     * @param actionSpace the action space
+&nbsp;     * @return the card
+&nbsp;     */
+&nbsp;    private Card generateRandomCard(ActionSpace actionSpace) {
+<b class="nc">&nbsp;        int random_index = new Random().nextInt(actionSpace.getCards().size());</b>
+<b class="nc">&nbsp;        return actionSpace.getCards().get(random_index);</b>
+&nbsp;        
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the advance action of the card
+&nbsp;     * @param player the player
+&nbsp;     * @param board the board
+&nbsp;     * @param card the card
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private String advanceAction(Player player, Board board, Card card) {
+<b class="nc">&nbsp;            String action = card.getAction();</b>
+<b class="nc">&nbsp;            int randomNumberOfSteps = new Random().nextInt(15);</b>
+<b class="nc">&nbsp;            player.move(randomNumberOfSteps);</b>
+<b class="nc">&nbsp;            action = &quot; &quot; + action + &quot; &quot; + randomNumberOfSteps + &quot; steps.&quot;;</b>
+&nbsp;
+<b class="nc">&nbsp;            if (player.getPosition() == 0 || player.getPosition() + randomNumberOfSteps &gt; 40) {</b>
+<b class="nc">&nbsp;                player.changeMoney(200);</b>
+&nbsp;            }
+<b class="nc">&nbsp;            return action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the paid action of the card
+&nbsp;     * @param player the player
+&nbsp;     * @param card the card
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private String getPaidAction(Player player, Card card) {
+<b class="nc">&nbsp;        String action = &quot; &quot; + card.getAction();</b>
+<b class="nc">&nbsp;        player.changeMoney(card.getAmount());</b>
+<b class="nc">&nbsp;        return action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the pay action of the card
+&nbsp;     * @param player the player
+&nbsp;     * @param card the card
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private String payAction(Player player, Card card) {
+<b class="nc">&nbsp;        String action = &quot; &quot; + card.getAction();</b>
+<b class="nc">&nbsp;        player.pay(card.getAmount());</b>
+<b class="nc">&nbsp;        return action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the pay all players action of the card
+&nbsp;     * @param player the player
+&nbsp;     * @param board the board
+&nbsp;     * @param card the card
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private String payAllAction(Player player, Board board, Card card) {
+<b class="nc">&nbsp;        String action = &quot; &quot; + card.getAction();</b>
+<b class="nc">&nbsp;        for (int i = 0; i &lt; board.getPlayers().size(); i++) {</b>
+<b class="nc">&nbsp;            player.pay(board.getPlayers().get(i), card.getAmount());</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the go-to jail action of the card
+&nbsp;     * @param player the player
+&nbsp;     * @param card the card
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private String goToJailAction(Player player, Card card) {
+<b class="nc">&nbsp;        String action = &quot; &quot; + card.getAction();</b>
+<b class="nc">&nbsp;        player.setInJail(true);</b>
+<b class="nc">&nbsp;        player.setPosition(10);</b>
+<b class="nc">&nbsp;        return action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Performs the get out of jail card action of the card, adds one to the users jail cards
+&nbsp;     * @param player the player
+&nbsp;     * @param card the card
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    private String getOutOfJailAction(Player player, Card card) {
+<b class="nc">&nbsp;        String action = &quot; &quot; + card.getAction();</b>
+<b class="nc">&nbsp;        player.setJailCards(player.getJailCards() + 1);</b>
+<b class="nc">&nbsp;        return action;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Aggregates all the actions of the card and the main perform action method
+&nbsp;     * @param player the player
+&nbsp;     * @param board the board
+&nbsp;     * @return the message
+&nbsp;     */
+&nbsp;    public String performAction(ActionSpace actionSpace, Player player, Board board) {
+<b class="nc">&nbsp;        Card card = generateRandomCard(actionSpace);</b>
+<b class="nc">&nbsp;        String actionType = card.getActionType();</b>
+<b class="nc">&nbsp;        if (Objects.equals(actionType, &quot;advance&quot;)) {</b>
+<b class="nc">&nbsp;            return advanceAction(player, board, card);</b>
+<b class="nc">&nbsp;        } else if (Objects.equals(actionType, &quot;getPaid&quot;)) {</b>
+<b class="nc">&nbsp;            return getPaidAction(player, card);</b>
+<b class="nc">&nbsp;        } else if (Objects.equals(actionType, &quot;pay&quot;)) {</b>
+<b class="nc">&nbsp;            return payAction(player, card);</b>
+<b class="nc">&nbsp;        } else if (Objects.equals(actionType, &quot;payAll&quot;)) {</b>
+<b class="nc">&nbsp;            return payAllAction(player, board, card);</b>
+<b class="nc">&nbsp;        } else if (Objects.equals(actionType, &quot;goToJail&quot;)) {</b>
+<b class="nc">&nbsp;            return goToJailAction(player, card);</b>
+&nbsp;        } else {
+<b class="nc">&nbsp;            return getOutOfJailAction(player, card);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,251 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > LoadFile</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Persistence</a>
+</div>
+
+<h1>Coverage Summary for Class: LoadFile (Persistence)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LoadFile</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (48/48)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Persistence;
+&nbsp;
+&nbsp;import java.io.File;
+&nbsp;import java.io.FileNotFoundException;
+&nbsp;import java.io.IOException;
+&nbsp;import java.nio.file.Files;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Scanner;
+&nbsp;
+&nbsp;public class LoadFile implements LoadAccess{
+&nbsp;    private File file;
+&nbsp;
+<b class="fc">&nbsp;    public LoadFile(File file){</b>
+<b class="fc">&nbsp;        this.file = file;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setFile(String newFile){
+<b class="fc">&nbsp;        String filePath = newFile;</b>
+<b class="fc">&nbsp;        file = new File(filePath);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public File getFile(){
+<b class="fc">&nbsp;        return file;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Searches the given folder denoted by folderPath and returns an array
+&nbsp;     * of Files inside the given folder. Used by UseCaseInteractor to display
+&nbsp;     * a selection of save files to the user when selecting which file to load a game from.
+&nbsp;     *
+&nbsp;     * @param folderPath  is the folder path to the folder which stores the user&#39;s save files.
+&nbsp;     * @return  an array of the user&#39;s save files.
+&nbsp;     */
+&nbsp;
+&nbsp;    public String[] checkSaves(String folderPath){
+&nbsp;        // TODO test in the future, list.Files() may not return as expected for src/save
+&nbsp;        // checkSaves searches the given folder and returns an array of file names
+&nbsp;        // the user selects the save file from the list of file names
+&nbsp;        // loadGame takes in the filePath of the selected file name
+&nbsp;        // and returns a String array of Player and Board data
+&nbsp;        // the GameCreationInteractor will handle creating the class instances
+&nbsp;
+<b class="fc">&nbsp;        File folder = new File(folderPath);</b>
+<b class="fc">&nbsp;        return folder.list();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Loads the game data from this.file.
+&nbsp;     *
+&nbsp;     * @return an Arraylist of 3 Arraylists of String[] arrays which represent saved data.
+&nbsp;     *         The first Arraylist of String[] arrays represents either Player instance
+&nbsp;     *         attributes or Property instance attributes of a Property owned by a Player.
+&nbsp;     *         The second Arraylist of String[] arrays represents key-value pairs for a
+&nbsp;     *         Player to their position on the Board. The third Arraylist of String[]
+&nbsp;     *         arrays represents the main states for Tree data.
+&nbsp;     *
+&nbsp;     * @throws FileNotFoundException in the case that this.file does not exist
+&nbsp;     */
+&nbsp;
+&nbsp;    public ArrayList&lt;ArrayList&lt;String[]&gt;&gt; loadGame(String filePath) throws FileNotFoundException {
+&nbsp;        // loadGame reads the given filePath and returns an ArrayList of String arrays
+&nbsp;        // each new line on in the txt file given by filePath contains the instance attributes of a Player instance
+&nbsp;        // the Board instance attributes are separated from the Player instance attributes by a header &quot;Board&quot;
+&nbsp;        // the Board instance attributes are stored in the last element of the ArrayList
+&nbsp;
+<b class="fc">&nbsp;        ArrayList&lt;ArrayList&lt;String[]&gt;&gt; gameInfo = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        ArrayList&lt;String[]&gt; players = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        ArrayList&lt;String[]&gt; savedTree = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        boolean player = false;</b>
+<b class="fc">&nbsp;        boolean tree = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        File gameData = new File(file.getPath() + &quot;/&quot; + filePath);</b>
+<b class="fc">&nbsp;        Scanner scan = new Scanner(gameData);</b>
+&nbsp;
+<b class="fc">&nbsp;        while (scan.hasNextLine()) {</b>
+<b class="fc">&nbsp;            String data = scan.nextLine();</b>
+&nbsp;
+<b class="fc">&nbsp;            switch (data.trim()) {</b>
+&nbsp;                case &quot;playerStart&quot;:
+<b class="fc">&nbsp;                    player = true;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;playerEnd&quot;:
+<b class="fc">&nbsp;                    player = false;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;treeStart&quot;:
+<b class="fc">&nbsp;                    tree = true;</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case &quot;treeEnd&quot;:
+<b class="fc">&nbsp;                    tree = false;</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (player){</b>
+<b class="fc">&nbsp;                String[] playerAttributes = data.trim().split(&quot;,&quot;); // denotes either a Player instance or a Property instance owned by a Player</b>
+<b class="fc">&nbsp;                players.add(playerAttributes);</b>
+<b class="fc">&nbsp;            } else if (tree) {</b>
+<b class="fc">&nbsp;                String[] treeData = data.trim().split(&quot;,&quot;); // denotes an array of Integers representing mainStates</b>
+<b class="fc">&nbsp;                savedTree.add(treeData);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        players.remove(0);</b>
+<b class="fc">&nbsp;        savedTree.remove(0);</b>
+<b class="fc">&nbsp;        gameInfo.add(players);</b>
+<b class="fc">&nbsp;        gameInfo.add(savedTree);</b>
+&nbsp;
+<b class="fc">&nbsp;        return gameInfo;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Loads all the instance attributes of properties in properties.txt as an array of String values.
+&nbsp;     *
+&nbsp;     * @return an Arraylist of String[] subarrays where each String[] array contains instance attributes of a Property
+&nbsp;     * @throws FileNotFoundException in case there is an error with finding the properties.txt file
+&nbsp;     */
+&nbsp;    public ArrayList&lt;String[]&gt; loadProperties() throws FileNotFoundException {
+&nbsp;        // return array of all properties in txt file as Strings
+&nbsp;        // GameCreationInteractor will parse Strings to create Property instances
+<b class="fc">&nbsp;        ArrayList&lt;String[]&gt; allProperties = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        String path = new File(&quot;src/save/properties.txt&quot;)</b>
+<b class="fc">&nbsp;                .getAbsolutePath();</b>
+<b class="fc">&nbsp;        File properties = new File(path);</b>
+<b class="fc">&nbsp;        Scanner scan = new Scanner(properties);</b>
+&nbsp;
+<b class="fc">&nbsp;        while (scan.hasNextLine()) {</b>
+<b class="fc">&nbsp;            String property = scan.nextLine();</b>
+<b class="fc">&nbsp;            String[] propertyAttributes = property.split(&quot;,&quot;);</b>
+<b class="fc">&nbsp;            allProperties.add(propertyAttributes);</b>
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        return allProperties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Return a list of all the cards as a list of Strings
+&nbsp;     * @return a list of strings that represents all the cards in the game
+&nbsp;     * @throws IOException in case there was an error reading the file
+&nbsp;     *
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public List&lt;String&gt; loadCards() throws IOException {
+&nbsp;
+<b class="fc">&nbsp;        return Files.readAllLines(this.file.toPath());</b>
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

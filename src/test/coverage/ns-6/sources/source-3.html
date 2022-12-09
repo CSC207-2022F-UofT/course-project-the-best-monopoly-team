@@ -1,0 +1,159 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > FoldUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.AuctionNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: FoldUseCase (Logic.AuctionNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">FoldUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (1/17)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.AuctionNodeLogic;
+&nbsp;
+&nbsp;import Entities.Player;
+&nbsp;import Entities.State;
+&nbsp;import Logic.NodeLogic;
+&nbsp;import Logic.GameLogic;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents a use case when a player folds during an auction.
+&nbsp; */
+&nbsp;public class FoldUseCase extends AuctionTreeNodeLogic implements NodeLogic {
+&nbsp;
+&nbsp;    public FoldUseCase() {
+<b class="fc">&nbsp;        super(&quot;Fold&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method handles a case where a player folds during an auction. It returns a State object containing
+&nbsp;     * information required to continue the auction process.
+&nbsp;     * @param input An integer representing the user&#39;s input. However, this parameter will not be used for this method.
+&nbsp;     * @return A State object containing information required to continue the auction process.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+<b class="nc">&nbsp;        State currentState = beforeLogic();</b>
+<b class="nc">&nbsp;        List&lt;Player&gt; players = getPlayers();</b>
+<b class="nc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+&nbsp;
+<b class="nc">&nbsp;        int returnPlayerIndex = getReturnPlayerIndex();</b>
+&nbsp;
+&nbsp;        //fold indicator
+<b class="nc">&nbsp;        auctionStates[currentPlayerIndex] = 1;</b>
+<b class="nc">&nbsp;        auctionComplete = checkAuction();</b>
+&nbsp;
+&nbsp;        //when the auction is complete
+<b class="nc">&nbsp;        if (auctionComplete != -1){</b>
+&nbsp;            //give the winner their property
+<b class="nc">&nbsp;            playerWon = players.get(auctionComplete);</b>
+<b class="nc">&nbsp;            playerWon.addProperty(biddingProperty);</b>
+<b class="nc">&nbsp;            playerWon.pay(auctionStates[potIndex]);</b>
+&nbsp;
+&nbsp;            //return to the main tree and correct player
+<b class="nc">&nbsp;            gameLogicInteractor.setCurrentTree(getReturnTree());</b>
+<b class="nc">&nbsp;            setCurrentPlayer(players.get(returnPlayerIndex));</b>
+&nbsp;
+&nbsp;            //mutate state object
+<b class="nc">&nbsp;            currentState.setPlayer(playerWon);</b>
+<b class="nc">&nbsp;            currentState.setBiddingPot(auctionStates[potIndex]);</b>
+<b class="nc">&nbsp;            currentState.addOptions(&quot;Ok&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return afterLogic(currentState);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

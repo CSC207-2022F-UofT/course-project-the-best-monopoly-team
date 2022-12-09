@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > PickItemOpUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: PickItemOpUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PickItemOpUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Logic.NodeLogic;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents the use case where the current player has to choose an item of a targeted opponent&#39;s
+&nbsp; * inventory.
+&nbsp; */
+&nbsp;public class PickItemOpUseCase extends MainTreeNodeLogic implements NodeLogic {
+&nbsp;    public PickItemOpUseCase() {
+<b class="fc">&nbsp;        super(&quot;Pick Item Of Opponent&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /** This method creates a State object and adds the selected inventory item belonging to a targeted opponent to the
+&nbsp;     * State object and adds the properties of the current player as options to be chosen from later.
+&nbsp;     * @param input An integer representing the index of the targeted opponent&#39;s property.
+&nbsp;     * @return A State object containing the selected item and options for the current player to choose from later.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+<b class="fc">&nbsp;        Player currentPlayer = getCurrentPlayer();</b>
+<b class="fc">&nbsp;        HashMap&lt;String, Integer&gt; selectedOptions = getSelectedOptions();</b>
+&nbsp;
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        currentState.setBackEnable(true);</b>
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+&nbsp;        //the input corresponds to the index of the targeted opponent&#39;s property inventory
+<b class="fc">&nbsp;        selectedOptions.put(&quot;PickItemOp&quot;, input);</b>
+&nbsp;
+&nbsp;        //provide item options from the current player&#39;s inventory
+<b class="fc">&nbsp;        ArrayList&lt;Property&gt; currentPlayerInventory = currentPlayer.getProperties();</b>
+&nbsp;        //using &quot;i&quot; starting from 0 to number of properties the player has - 1
+<b class="fc">&nbsp;        for(int i = 0; i &lt; currentPlayer.getProperties().size(); i++){</b>
+<b class="fc">&nbsp;            currentState.addOptions(currentPlayerInventory.get(i).getName());</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,206 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > GameDisplayInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Interactors</a>
+</div>
+
+<h1>Coverage Summary for Class: GameDisplayInteractor (Interactors)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameDisplayInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/29)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Interactors;
+&nbsp;
+&nbsp;import Entities.GameScreen;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * GameDisplayInteractor is a class that creates the Display to show the user
+&nbsp; */
+&nbsp;public class GameDisplayInteractor {
+&nbsp;
+&nbsp;    /**
+&nbsp;     * InstanceVar gameFrame: the Frame of the monopoly game
+&nbsp;     * InstanceVar labelSegments: The OutputHandler for the Display
+&nbsp;     * InstanceVar inputHandler: The InputHandler for the Display
+&nbsp;     * InstanceVar selectedOutput: The String of the button that
+&nbsp;     * is clicked by the user
+&nbsp;     */
+&nbsp;    private GameScreen gameFrame;
+&nbsp;    private GameDisplayInputInteractor inputHandler;
+&nbsp;    private GameDisplayOutputInteractor labelSegments;
+&nbsp;    private String selectedOutput;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The constructor for this class, creates the frame and sets the permanent monopoly
+&nbsp;     * background and fixes all its size and other properties
+&nbsp;     */
+<b class="nc">&nbsp;    public GameDisplayInteractor(){</b>
+<b class="nc">&nbsp;        this.gameFrame = new GameScreen();</b>
+<b class="nc">&nbsp;        this.inputHandler = new GameDisplayInputInteractor();</b>
+<b class="nc">&nbsp;        this.labelSegments = new GameDisplayOutputInteractor();</b>
+<b class="nc">&nbsp;        this.selectedOutput = &quot;&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function that adds the outputs to the Display
+&nbsp;     * @param options: The Arraylist of options that the user has
+&nbsp;     * @param outputText: The String of Text shown to the user to
+&nbsp;     *                  explain the current context of the game
+&nbsp;     */
+&nbsp;    public void setOutputs(ArrayList&lt;String&gt; options, String outputText){
+<b class="nc">&nbsp;        this.labelSegments.setOptions(options);</b>
+<b class="nc">&nbsp;        this.labelSegments.createOptionSegment();</b>
+<b class="nc">&nbsp;        this.labelSegments.createTextSegment(outputText);</b>
+<b class="nc">&nbsp;        this.gameFrame.add(this.labelSegments.getTextSegment());</b>
+<b class="nc">&nbsp;        this.gameFrame.add(this.labelSegments.getOptionSegment());</b>
+<b class="nc">&nbsp;        this.labelSegments.drawSegments();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function to get the input from the user on the current turn
+&nbsp;     * @return  if the user has clicked on the of buttons
+&nbsp;     */
+&nbsp;    public boolean waitForInput(){
+<b class="nc">&nbsp;        HashMap&lt;String, Integer&gt; buttonClicks = this.labelSegments.getButtonList();</b>
+<b class="nc">&nbsp;        for (String button: buttonClicks.keySet()){</b>
+<b class="nc">&nbsp;            if (buttonClicks.get(button) == 1){</b>
+<b class="nc">&nbsp;                this.selectedOutput = button;</b>
+<b class="nc">&nbsp;                this.labelSegments.updateButtonList();</b>
+<b class="nc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function to clear the display outputs to create space for the next set of
+&nbsp;     * outputs
+&nbsp;     */
+&nbsp;    public void clearLabels(){
+<b class="nc">&nbsp;        this.labelSegments.clearOptions();</b>
+<b class="nc">&nbsp;        this.labelSegments.clearOptionSegment();</b>
+<b class="nc">&nbsp;        this.labelSegments.clearTextSegment();</b>
+<b class="nc">&nbsp;        this.labelSegments.clearInput();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function that displays the screen to the user, Program ends when window
+&nbsp;     * is closed
+&nbsp;     */
+&nbsp;    public void displayScreen(){
+<b class="nc">&nbsp;        this.gameFrame.display();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Refresh the screen for the next set of outputs
+&nbsp;     */
+&nbsp;    public void refreshScreen(){
+<b class="nc">&nbsp;        clearLabels();</b>
+<b class="nc">&nbsp;        this.gameFrame.remove(this.labelSegments.getTextSegment());</b>
+<b class="nc">&nbsp;        this.gameFrame.remove(this.labelSegments.getOptionSegment());</b>
+<b class="nc">&nbsp;        this.gameFrame.refresh();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * @return the input based on the button clicked
+&nbsp;     */
+&nbsp;    public Integer getInput(){
+<b class="nc">&nbsp;        return this.inputHandler.getInputMapValue(this.selectedOutput);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

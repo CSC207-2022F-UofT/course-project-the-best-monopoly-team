@@ -1,0 +1,156 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AcceptTradeUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.TradingNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: AcceptTradeUseCase (Logic.TradingNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AcceptTradeUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (22/22)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.TradingNodeLogic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Logic.NodeLogic;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents the use case where a player accepts a trade proposal from another player.
+&nbsp; */
+&nbsp;public class AcceptTradeUseCase extends TradingTreeNodeLogic implements NodeLogic {
+&nbsp;
+&nbsp;    public AcceptTradeUseCase() {
+<b class="fc">&nbsp;        super(&quot;Accept The Trade&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method handles the trade when it is accepted and moves their property items from one player to another.
+&nbsp;     * It returns a State object containing an &quot;Ok&quot; option and all the necessary information to continue.
+&nbsp;     * @param input - unused in this node
+&nbsp;     * @return A state object representing the current state of the program
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+<b class="fc">&nbsp;        Board board = getBoard();</b>
+<b class="fc">&nbsp;        int returnPlayerIndex = getReturnPlayerIndex();</b>
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        GameLogicTree returnTree = getReturnTree();</b>
+&nbsp;
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        Player firstTrader = board.getPlayers().get(returnPlayerIndex);</b>
+<b class="fc">&nbsp;        Player secondTrader = getCurrentPlayer();</b>
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+<b class="fc">&nbsp;        Property secondTraderProperty = secondTrader.getProperties().get(getSelectedOptions().get(&quot;PickItemOp&quot;));</b>
+<b class="fc">&nbsp;        Property firstTraderProperty = firstTrader.getProperties().get(getSelectedOptions().get(&quot;PickItemSelf&quot;));</b>
+&nbsp;
+&nbsp;        // swap the asset owners
+<b class="fc">&nbsp;        secondTraderProperty.setOwner(firstTrader);</b>
+<b class="fc">&nbsp;        firstTraderProperty.setOwner(secondTrader);</b>
+<b class="fc">&nbsp;        secondTrader.getProperties().remove(secondTraderProperty);</b>
+<b class="fc">&nbsp;        secondTrader.getProperties().add(firstTraderProperty);</b>
+<b class="fc">&nbsp;        firstTrader.getProperties().remove(firstTraderProperty);</b>
+<b class="fc">&nbsp;        firstTrader.getProperties().add(secondTraderProperty);</b>
+&nbsp;        // swap control back to the original player
+<b class="fc">&nbsp;        setCurrentPlayer(firstTrader);</b>
+&nbsp;        //goes back to initial tree
+<b class="fc">&nbsp;        gameLogicInteractor.setCurrentTree(returnTree);</b>
+<b class="fc">&nbsp;        setCurrentPlayer(getPlayers().get(returnPlayerIndex));</b>
+&nbsp;
+&nbsp;        //option for return node
+<b class="fc">&nbsp;        currentState.addOptions(&quot;Ok&quot;);</b>
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

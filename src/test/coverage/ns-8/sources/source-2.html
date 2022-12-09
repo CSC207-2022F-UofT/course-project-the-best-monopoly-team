@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AuctionUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: AuctionUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuctionUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (11/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.GameLogicTree;
+&nbsp;import Entities.State;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Logic.NodeLogic;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents the use case of when an auction is to be started.
+&nbsp; */
+&nbsp;public class AuctionUseCase extends MainTreeNodeLogic implements NodeLogic {
+&nbsp;    public AuctionUseCase() {
+<b class="fc">&nbsp;        super(&quot;Auction&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a State object containing the original current player and the original tree node that the
+&nbsp;     * game was on. It will then change the trees and start the auction.
+&nbsp;     * @param input An integer representing the user&#39;s input. However, this parameter will not be used for this method.
+&nbsp;     * @return A State object containing the current player and the node that the game was in prior to setting up the
+&nbsp;     * auction.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        GameLogicTree currentTree = gameLogicInteractor.getCurrentTree();</b>
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+&nbsp;        //returnPlayerAddress will hold the original player index in this.board.getPlayers()
+<b class="fc">&nbsp;        setReturnPlayerIndex(getCurrentPlayerIndex());</b>
+&nbsp;
+&nbsp;        //change trees and start the auction
+<b class="fc">&nbsp;        setReturnTree(currentTree);</b>
+<b class="fc">&nbsp;        gameLogicInteractor.setCurrentTree(gameLogicInteractor.getTrees()[2]);</b>
+<b class="fc">&nbsp;        setupAuction();</b>
+<b class="fc">&nbsp;        currentState = getCurrentState();</b>
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

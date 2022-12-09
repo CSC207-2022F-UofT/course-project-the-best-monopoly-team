@@ -1,0 +1,162 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Board</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Board (Entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Board</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (6/6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Entities;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;/**
+&nbsp; * Represents a Monopoly board.
+&nbsp; */
+&nbsp;public class Board{
+&nbsp;
+&nbsp;    List&lt;Player&gt; players;
+&nbsp;    List&lt;Cell&gt; cells;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the constructor which creates a Board instance.
+&nbsp;     * @param players A List of Player instances that we wish to be a part of the board.
+&nbsp;     * @param cells A List of Cell instances that we wish to be a part of the board.
+&nbsp;     */
+<b class="fc">&nbsp;    public Board(List&lt;Player&gt; players, List&lt;Cell&gt; cells){</b>
+<b class="fc">&nbsp;        this.players = players;</b>
+<b class="fc">&nbsp;        this.cells = cells;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used to return a List of all the Player instances that are in Board.
+&nbsp;     * @return A List of all the Player instances stored in Board.
+&nbsp;     */
+&nbsp;    public List&lt;Player&gt; getPlayers(){
+<b class="fc">&nbsp;        return this.players;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used to remove a player from Board.
+&nbsp;     * @param player The player that must be removed.
+&nbsp;     */
+&nbsp;    public void removePlayer(Player player){
+<b class="fc">&nbsp;        this.players.remove(player);</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * This method is used to return a List of all the Cell instances on Board.
+&nbsp;     * @return This returns cells, a List of all the Cell instances on Board.
+&nbsp;     */
+<b class="fc">&nbsp;    public List&lt;Cell&gt; getCells(){return this.cells;}</b>
+&nbsp;    /**
+&nbsp;     * This method is used to return a Cell at a specific position represented by an int value.
+&nbsp;     * @param position The position of the cell.
+&nbsp;     * @return This returns the Cell at the int position.
+&nbsp;     */
+<b class="fc">&nbsp;    public Cell getCell(int position){return this.cells.get(position);}</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method is used to return the Cell instance that a Player instance is on.
+&nbsp;     * @param player This is a Player instance that we want to know which Cell it is on.
+&nbsp;     * @return This returns a Cell which the Player instance is on.
+&nbsp;     */
+&nbsp;    public Cell getPlayerCell(Player player){
+<b class="fc">&nbsp;        int position = player.getPosition();</b>
+<b class="fc">&nbsp;        return this.getCell(position);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

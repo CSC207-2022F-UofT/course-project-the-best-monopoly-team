@@ -1,0 +1,141 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CreateLoadedGameUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.InitialNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: CreateLoadedGameUseCase (Logic.InitialNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CreateLoadedGameUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    7.1%
+  </span>
+  <span class="absValue">
+    (1/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.InitialNodeLogic;
+&nbsp;
+&nbsp;import Entities.Board;
+&nbsp;import Entities.State;
+&nbsp;import Logic.NodeLogic;
+&nbsp;import Persistence.LoadAccess;
+&nbsp;
+&nbsp;public class CreateLoadedGameUseCase extends InitialLogic implements NodeLogic {
+&nbsp;    public CreateLoadedGameUseCase() {
+<b class="fc">&nbsp;        super(&quot;Create Loaded Game&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+&nbsp;        State state;
+&nbsp;        //in &quot;Create Loaded Game&quot; node
+<b class="nc">&nbsp;        if (input == 0){</b>
+&nbsp;            try {
+<b class="nc">&nbsp;                LoadAccess load = caseInteractor.getLoadAccess();</b>
+<b class="nc">&nbsp;                String[] allSaves = load.checkSaves(load.getFile().getAbsolutePath());</b>
+&nbsp;
+<b class="nc">&nbsp;                int integerFile = selectedOptions.get(&quot;SaveChoice&quot;);</b>
+<b class="nc">&nbsp;                Board board = caseInteractor.loadSavedBoard(allSaves[integerFile]);</b>
+<b class="nc">&nbsp;                int[] initialStates = caseInteractor.loadInitialStates(allSaves[integerFile]);</b>
+&nbsp;
+<b class="nc">&nbsp;                caseInteractor.createGame(board, initialStates);</b>
+<b class="nc">&nbsp;                state = caseInteractor.getLogicInteractor().getCurrentState();</b>
+<b class="nc">&nbsp;            } catch (Exception IOException){</b>
+<b class="nc">&nbsp;                return null;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;        }
+&nbsp;        else{
+<b class="nc">&nbsp;            state = caseInteractor.getInitialState();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return afterLogic(state);</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

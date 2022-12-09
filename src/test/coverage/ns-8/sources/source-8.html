@@ -1,0 +1,143 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ConfirmationUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: ConfirmationUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ConfirmationUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (7/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Logic.NodeLogic;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents a use case where the current player has to confirm something.
+&nbsp; */
+&nbsp;public class ConfirmationUseCase extends MainTreeNodeLogic implements NodeLogic {
+&nbsp;
+&nbsp;    public ConfirmationUseCase() {
+<b class="fc">&nbsp;        super(&quot;Confirm Action&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a State object either containing a State object representing the end of a tree path or one
+&nbsp;     * that aids in allowing the user to confirm their actions.
+&nbsp;     * @param input An integer representing if a user would like to confirm their actions.
+&nbsp;     * @return A State object either containing a State object representing the end of a tree path or one that aids in
+&nbsp;     * allowing the user to confirm their actions.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree confirmationReturn = getConfirmationReturn();</b>
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+&nbsp;
+&nbsp;        //Gives the user another chance to reconsider their actions
+<b class="fc">&nbsp;        if (input == 0) {</b>
+<b class="fc">&nbsp;            mainStates[0] = 1;</b>
+<b class="fc">&nbsp;            gameLogicInteractor.setCurrentTree(confirmationReturn);</b>
+<b class="fc">&nbsp;            return gameLogicInteractor.handleTree(input);</b>
+&nbsp;        }
+&nbsp;        else{
+<b class="nc">&nbsp;            return afterBottomNode();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>
