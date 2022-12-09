@@ -4,6 +4,7 @@ package Interactors;
 import Interactors.GameDisplayOutputInteractor;
 import org.junit.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
@@ -88,7 +89,7 @@ public class GameDisplayOutputInteractorTest {
         displayOutput.createTextSegment(input);
         displayOutput.clearTextSegment();
 
-        String output = displayOutput.getTextSegment().getText();
-        assertEquals("", output);
+        Component[] comps = displayOutput.getTextSegment().getComponents();
+        assertEquals(0, comps.length);
     }
 }
