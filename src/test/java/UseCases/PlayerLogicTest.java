@@ -101,7 +101,6 @@ public class PlayerLogicTest {
         player2.move(1);
         assertTrue(property1.getMortgageStatus());
         assertEquals(1500, player2.getMoney());
-
     }
 
     @Test

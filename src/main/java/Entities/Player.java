@@ -124,18 +124,6 @@ public class Player {
 //    }
 
     /**
-     * Increment the player's number of get out of jail free cards by a specific number
-     * @param num this parameter is the number of cards to increment by for player
-     */
-    public void addJailCards(int num) { this.jailCards += num; }
-
-    /**
-     * Decrement the player's number of get out of jail free cards by a specific number
-     * @param num this parameter is the number of cards to decrement by for player
-     */
-    public void removeJailCards(int num) { this.jailCards -= num; }
-
-    /**
      * Changes the jail status of the player
      */
     public void changeJailStatus() {
