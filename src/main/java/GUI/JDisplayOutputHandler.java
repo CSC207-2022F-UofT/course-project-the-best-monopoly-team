@@ -22,6 +22,7 @@ public class JDisplayOutputHandler {
     private Description description;
     private Options optionSegment;
     private ArrayList<String> options;
+
     private ButtonDisplayHandler buttonDisplayHandler;
 
     /**
