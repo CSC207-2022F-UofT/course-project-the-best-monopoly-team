@@ -3,6 +3,7 @@ package Interactors;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class GameDisplayOutputInteractorTest {
@@ -87,7 +88,7 @@ public class GameDisplayOutputInteractorTest {
         displayOutput.createTextSegment(input);
         displayOutput.clearTextSegment();
 
-        String output = displayOutput.getTextSegment().getText();
-        Assertions.assertEquals(("<HTML>" + "<HTML>"), output);
+        Component[] comps = displayOutput.getTextSegment().getComponents();
+        Assertions.assertEquals(0, comps.length);
     }
 }
