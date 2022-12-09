@@ -6,7 +6,10 @@ import Entities.Player;
 
 import java.util.List;
 
-
+/**
+ * This class represents a use case where the game ends either by all but one player going bankrupt, or the
+ * max turn limit being reached.
+ */
 public class FinishGameUseCase extends MainTreeNodeLogic implements NodeLogic {
     public FinishGameUseCase(){
         super("Game Complete");

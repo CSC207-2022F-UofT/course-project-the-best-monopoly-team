@@ -4,7 +4,9 @@ import Entities.GameLogicTree;
 import Entities.MenuTree;
 import Entities.State;
 import Logic.NodeLogic;
-
+/**
+ * This class represents the use case where the game has first initialized.
+ */
 public class InitialParentNodeUseCase extends InitialLogic implements NodeLogic {
     public InitialParentNodeUseCase() {
         super("Initial Menu Parent Node");

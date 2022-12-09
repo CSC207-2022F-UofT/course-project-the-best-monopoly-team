@@ -13,7 +13,6 @@ import java.io.File;
  **/
 public class PresenterDisplay {
 
-
     boolean runGame = true;
     /**
      * Function that runs the game loop by getting game data from the OutputInteractor and presenting that to the

@@ -3,7 +3,9 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 import Persistence.LoadAccess;
-
+/**
+ * This class represents the use case where the player has chosen to load a game.
+ */
 public class LoadGameUseCase extends InitialLogic implements NodeLogic {
     public LoadGameUseCase() {
         super("Load Game");

@@ -9,7 +9,6 @@ import java.util.HashMap;
 /**
  * This class represents a use case where the current user send a trade to the targeted player.
  */
-
 public class SendTradeUseCase extends MainTreeNodeLogic implements NodeLogic {
 
     public SendTradeUseCase() {

@@ -7,7 +7,6 @@ import Logic.NodeLogic;
 /**
  * This class represents the use case where the users want to end the game.
  */
-
 public class ExitGameUseCase extends MainTreeNodeLogic implements NodeLogic {
 
     public ExitGameUseCase() {

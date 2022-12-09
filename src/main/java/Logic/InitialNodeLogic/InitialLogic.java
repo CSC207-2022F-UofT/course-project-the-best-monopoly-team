@@ -5,7 +5,9 @@ import Entities.State;
 import UseCases.UseCaseInteractor;
 
 import java.util.HashMap;
-
+/**
+ * This class contains the logic needed for the nodes in the initial menu tree.
+ */
 public class InitialLogic {
     //This array contains various states for the program which will be used for various calculations
     static HashMap<String, Integer> selectedOptions = new HashMap<>();

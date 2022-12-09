@@ -3,6 +3,9 @@ package Logic.InitialNodeLogic;
 import Entities.State;
 import Logic.NodeLogic;
 
+/**
+ * This class represents the use case where the player has chosen their desired game mode.
+ */
 public class ChooseGameModeUseCase extends InitialLogic implements NodeLogic {
     public ChooseGameModeUseCase() {
         super("Choose Game Mode");

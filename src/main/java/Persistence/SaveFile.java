@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Class which is responsible for the saving of files into text files
+ */
 public class SaveFile implements SaveAccess {
     private File file;
 

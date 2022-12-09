@@ -7,7 +7,9 @@ import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
+/**
+ * Class which is responsible for the loading of files into text files
+ */
 public class LoadFile implements LoadAccess{
     private File file;
 
@@ -33,7 +35,6 @@ public class LoadFile implements LoadAccess{
      */
 
     public String[] checkSaves(String folderPath){
-        // TODO test in the future, list.Files() may not return as expected for src/save
         // checkSaves searches the given folder and returns an array of file names
         // the user selects the save file from the list of file names
         // loadGame takes in the filePath of the selected file name
