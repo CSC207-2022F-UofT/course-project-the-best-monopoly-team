@@ -34,6 +34,14 @@ public class GameDisplayInteractor {
     }
 
     /**
+     * Function that gets the labelSegments instance variable of this class
+     * @return the labelSegments of type GameDisplayOutputInteractor
+     */
+    public GameDisplayOutputInteractor getLabelSegments(){
+        return this.labelSegments;
+    }
+
+    /**
      * Function that adds the outputs to the Display
      * @param options: The Arraylist of options that the user has
      * @param outputText: The String of Text shown to the user to

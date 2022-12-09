@@ -1,5 +1,6 @@
 package Interactors;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class GameDisplayInputInteractorTest {
@@ -11,8 +12,8 @@ public class GameDisplayInputInteractorTest {
         int result = inputDisplay.getInputMapValue("B3");
         int result1 = inputDisplay.getInputMapValue("B13");
 
-        assert result == 2;
-        assert result1 == 12;
+        Assertions.assertEquals(2, result);
+        Assertions.assertEquals(12, result1);
 
     }
 }
