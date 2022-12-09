@@ -32,14 +32,14 @@ public class SendTradeTest {
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        generalGameLogic.setGameLogicInteractor(gameLogic);
+        GeneralGameLogic.setGameLogicInteractor(gameLogic);
         generalGameLogic.getSelectedOptions().put("PickPlayer", 1);
-        generalGameLogic.setCurrentPlayer(playerOne);
+        GeneralGameLogic.setCurrentPlayer(playerOne);
         generalGameLogic.getSelectedOptions().put("PickItemSelf", 0);
         generalGameLogic.getSelectedOptions().put("PickItemOp", 0);
         SendTradeUseCase sendTrade = new SendTradeUseCase();
         State actual = sendTrade.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Accept The Trade");
         options.add("Decline The Trade");
         Assertions.assertEquals(actual.getOptions(), options);

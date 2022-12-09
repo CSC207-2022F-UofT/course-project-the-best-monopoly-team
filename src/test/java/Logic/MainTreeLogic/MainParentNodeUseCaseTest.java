@@ -26,7 +26,7 @@ public class MainParentNodeUseCaseTest {
         new GameLogic(playerOne, board);
         MainParentNodeUseCase mainParentNodeUseCase = new MainParentNodeUseCase();
         State actual = mainParentNodeUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Trade");
         options.add("Manage Property");
         options.add("Roll The Dice");

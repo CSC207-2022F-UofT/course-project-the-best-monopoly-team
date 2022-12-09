@@ -31,7 +31,7 @@ public class EmptyPropertySpaceTest {
         new GameLogic(playerOne, board);
         EmptyPropertySpaceUseCase emptyPropertySpace = new EmptyPropertySpaceUseCase();
         State actual = emptyPropertySpace.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Trade");
         options.add("Manage Property");
         options.add("Roll The Dice");

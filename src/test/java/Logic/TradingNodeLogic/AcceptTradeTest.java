@@ -31,9 +31,9 @@ public class AcceptTradeTest {
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        generalGameLogic.setGameLogicInteractor(gameLogic);
-        generalGameLogic.setReturnPlayerIndex(0);
-        generalGameLogic.setCurrentPlayer(playerTwo);
+        GeneralGameLogic.setGameLogicInteractor(gameLogic);
+        GeneralGameLogic.setReturnPlayerIndex(0);
+        GeneralGameLogic.setCurrentPlayer(playerTwo);
         generalGameLogic.getSelectedOptions().put("PickItemOp", 0);
         generalGameLogic.getSelectedOptions().put("PickItemSelf", 0);
         AcceptTradeUseCase acceptTrade = new AcceptTradeUseCase();

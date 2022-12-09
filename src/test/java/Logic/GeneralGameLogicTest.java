@@ -111,7 +111,7 @@ public class GeneralGameLogicTest {
         MainParentNodeUseCase mainParentNode = new MainParentNodeUseCase();
         State test_state = mainParentNode.create_state(0);
         generalGameLogic.addPlayersState(test_state);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Trade");
         options.add("Manage Property");
         options.add("Roll The Dice");

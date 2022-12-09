@@ -25,7 +25,7 @@ public class ManagePropertyUseCaseTest {
         ManagePropertyUseCase managePropertyUseCase = new ManagePropertyUseCase();
         State actual = managePropertyUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "User Has No Properties (Manage Properties)");
-        Assertions.assertEquals(actual.isBackEnable(), false);
+        Assertions.assertFalse(actual.isBackEnable());
     }
 
     @Test
