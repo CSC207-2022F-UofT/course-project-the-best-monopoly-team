@@ -7,12 +7,13 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class ActionSpaceTest {
 
     @Test
-    void testGetType() throws IOException {
+    void testGetActionType() throws IOException {
         LoadAccess loadAccess = new LoadFile(new File("src/save/cards.txt"));
         ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(loadAccess);
         ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards();
@@ -27,10 +28,23 @@ public class ActionSpaceTest {
     void testGetCard() throws IOException {
         LoadAccess loadAccess = new LoadFile(new File("src/save/cards.txt"));
         ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(loadAccess);
-        ActionSpace jail = actionSpaceCreationInteractor.loadJailCards();
-        Card card = new Card("jail", "Pay child support($100)", "pay", 100);
-        String action = card.getAction();
-        assert Objects.equals(action, "Pay child support($100)");
+        ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards();
+        List<Card> comChestCards = communityChest.getCards();
+
+        // Checking if all the cards are of the same type
+        for (Card card: comChestCards) {
+            assert Objects.equals(card.getType(), "comchest");
+        }
+
+        assert !comChestCards.isEmpty();
+    }
+
+    @Test
+    void testGetType() throws IOException {
+        LoadAccess loadAccess = new LoadFile(new File("src/save/cards.txt"));
+        ActionSpaceCreationInteractor actionSpaceCreationInteractor = new ActionSpaceCreationInteractor(loadAccess);
+        ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards();
+        assert Objects.equals(communityChest.getType(), "Action Space");
     }
 
 }

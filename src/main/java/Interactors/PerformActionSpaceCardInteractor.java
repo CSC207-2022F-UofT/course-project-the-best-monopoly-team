@@ -19,7 +19,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @param actionSpace the action space
      * @return the card
      */
-    private Card generateRandomCard(ActionSpace actionSpace) {
+    public Card generateRandomCard(ActionSpace actionSpace) {
         int random_index = new Random().nextInt(actionSpace.getCards().size());
         return actionSpace.getCards().get(random_index);
         
@@ -28,11 +28,10 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     /**
      * Performs the advance action of the card
      * @param player the player
-     * @param board the board
      * @param card the card
      * @return the message
      */
-    private String advanceAction(Player player, Board board, Card card) {
+    public String advanceAction(Player player, Card card) {
             String action = card.getAction();
             int randomNumberOfSteps = new Random().nextInt(15);
             player.move(randomNumberOfSteps);
@@ -50,7 +49,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @param card the card
      * @return the message
      */
-    private String getPaidAction(Player player, Card card) {
+    public String getPaidAction(Player player, Card card) {
         String action = " " + card.getAction();
         player.changeMoney(card.getAmount());
         return action;
@@ -62,7 +61,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @param card the card
      * @return the message
      */
-    private String payAction(Player player, Card card) {
+    public String payAction(Player player, Card card) {
         String action = " " + card.getAction();
         player.pay(card.getAmount());
         return action;
@@ -75,7 +74,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @param card the card
      * @return the message
      */
-    private String payAllAction(Player player, Board board, Card card) {
+    public String payAllAction(Player player, Board board, Card card) {
         String action = " " + card.getAction();
         for (int i = 0; i < board.getPlayers().size(); i++) {
             player.pay(board.getPlayers().get(i), card.getAmount());
@@ -89,7 +88,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @param card the card
      * @return the message
      */
-    private String goToJailAction(Player player, Card card) {
+    public String goToJailAction(Player player, Card card) {
         String action = " " + card.getAction();
         player.setInJail(true);
         player.setPosition(10);
@@ -102,7 +101,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @param card the card
      * @return the message
      */
-    private String getOutOfJailAction(Player player, Card card) {
+    public String getOutOfJailAction(Player player, Card card) {
         String action = " " + card.getAction();
         player.setJailCards(player.getJailCards() + 1);
         return action;
@@ -118,7 +117,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
         Card card = generateRandomCard(actionSpace);
         String actionType = card.getActionType();
         if (Objects.equals(actionType, "advance")) {
-            return advanceAction(player, board, card);
+            return advanceAction(player, card);
         } else if (Objects.equals(actionType, "getPaid")) {
             return getPaidAction(player, card);
         } else if (Objects.equals(actionType, "pay")) {

@@ -43,12 +43,6 @@ public class OutputInteractor {
     }
 
     /**
-     * setFinalOutput updates the string to be presented to the user by updating all the output strings that should
-     * be presented to the user based on the state and presented all the options based on the state
-     */
-
-
-    /**
      * This function deals with all the states that need to be updated periodically based on the current state of the game
      * @param state: the current state that game is in
      */
@@ -132,7 +126,7 @@ public class OutputInteractor {
     }
     public void updateFold(){
         String currString = currentState.getPlayer().getName() + " won the auction for " + currentState.getBiddingPot() + " dollars";
-        this.output.modifyStateOutput("Fold", currString.toString());
+        this.output.modifyStateOutput("Fold", currString);
     }
 
     /**
@@ -155,8 +149,8 @@ public class OutputInteractor {
         this.currentState = state;
     }
 
-    public String getOutput() {
-        updateLogicStates(this.currentState.getId());
-        return this.output.getStateOutput(this.currentState.getId());
-    }
+//    public String getOutput() {
+//        updateLogicStates(this.currentState.getId());
+//        return this.output.getStateOutput(this.currentState.getId());
+//    }
 }
