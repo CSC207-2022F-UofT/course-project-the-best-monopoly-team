@@ -43,7 +43,7 @@ public class PlayerLogicTest {
         LoadAccess load = new LoadFile(gamefile);
         ArrayList<String[]> propertylist = load.loadProperties();
         GameCreation gameCreator = new GameCreation();
-        Board board = gameCreator.createNewBoard(new ArrayList<String>(Arrays.asList("player1", "player2")), propertylist);
+        Board board = gameCreator.createNewBoard(new ArrayList<>(Arrays.asList("player1", "player2")), propertylist);
         Player player1 = board.getPlayers().get(0);
         Player player2 = board.getPlayers().get(1);
         Property property1 = (Property) board.getCells().get(1);
@@ -62,7 +62,7 @@ public class PlayerLogicTest {
         LoadAccess load = new LoadFile(gamefile);
         ArrayList<String[]> propertylist = load.loadProperties();
         GameCreation gameCreator = new GameCreation();
-        Board board = gameCreator.createNewBoard(new ArrayList<String>(Arrays.asList("player1", "player2")), propertylist);
+        Board board = gameCreator.createNewBoard(new ArrayList<>(Arrays.asList("player1", "player2")), propertylist);
         Player player1 = board.getPlayers().get(0);
         Property property1 = (Property) board.getCells().get(1);
         player1.addProperty(property1);
@@ -84,6 +84,6 @@ public class PlayerLogicTest {
         PlayerLogic pl1 = new PlayerLogic(player1);
         String returnString = pl1.buildHouse(property2, 2);
         Assert.assertEquals("2 houses have been built on property2", returnString);
-        Assert.assertEquals(2L, (long)property2.getHouses());
+        Assert.assertEquals(2L, property2.getHouses());
     }
 }

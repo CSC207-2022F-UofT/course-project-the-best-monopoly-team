@@ -20,12 +20,12 @@ public class StealUseCaseTest {
         players.add(playerTwo);
         List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         StealUseCase stealUseCase = new StealUseCase();
         State actual = stealUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Player Two");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getId(), "Steal");
         Assertions.assertEquals(actual.getOptions(), options);
     }

@@ -25,8 +25,8 @@ public class UnMortgageTest {
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        generalGameLogic.setGameLogicInteractor(gameLogic);
-        generalGameLogic.setCurrentPlayer(playerOne);
+        GeneralGameLogic.setGameLogicInteractor(gameLogic);
+        GeneralGameLogic.setCurrentPlayer(playerOne);
         generalGameLogic.getSelectedOptions().put("PropertySelected", 0);
         UnMortgageUseCase unMortgage = new UnMortgageUseCase();
         State actual = unMortgage.create_state(0);

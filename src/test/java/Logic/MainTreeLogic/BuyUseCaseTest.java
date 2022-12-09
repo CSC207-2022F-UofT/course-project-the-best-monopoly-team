@@ -20,7 +20,7 @@ public class BuyUseCaseTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         BuyUseCase buyUseCase = new BuyUseCase();
         State actual = buyUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");

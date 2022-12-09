@@ -24,7 +24,7 @@ public class MortgageTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(propertyOne);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
         generalGameLogic.getSelectedOptions().put("PropertySelected", 0);
         int[] main_states = new int[4];
@@ -46,7 +46,7 @@ public class MortgageTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(propertyOne);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
         generalGameLogic.getSelectedOptions().put("PropertySelected", 0);
         int[] main_states = new int[4];
@@ -54,7 +54,7 @@ public class MortgageTest {
         MainTreeNodeLogic.initializeStates(main_states);
         MortgageUseCase mortgage = new MortgageUseCase();
         State actual = mortgage.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Yes");
         options.add("No");
         Assertions.assertEquals(actual.getId(), "Mortgage Property");

@@ -12,7 +12,7 @@ public class SettingsMenuUseCaseTest {
         SettingsMenuUseCase settingsMenuUseCase = new SettingsMenuUseCase();
         State actual = settingsMenuUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Settings Menu");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
     }
 
 }

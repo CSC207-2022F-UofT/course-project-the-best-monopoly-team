@@ -13,7 +13,7 @@ public class AlreadyRolledUseCaseTest {
     public void testAlreadyRolledCreateState(){
         AlreadyRolledUseCase alreadyRolledUseCase = new AlreadyRolledUseCase();
         State actual = alreadyRolledUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getOptions(), options);
         Assertions.assertEquals(actual.getId(), "Already Rolled");
