@@ -16,8 +16,8 @@ public class LoadFile implements LoadAccess{
     }
 
     public void setFile(String newFile){
-        String filePath = file.getPath() + "/" + newFile;
-       file = new File(filePath);
+        String filePath = newFile;
+        file = new File(filePath);
     }
 
     public File getFile(){

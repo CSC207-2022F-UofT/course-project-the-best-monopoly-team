@@ -13,6 +13,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class SaveFileTest {
+
+    @Test
+    void testGetFile() {
+        File directory = new File ("src/gameData");
+        SaveAccess save = new SaveFile(directory);
+
+        assert save.getFile().equals(new File("src/gameData"));
+    }
+
     @Test
     void testCheckExistingFile() {
         File existing = new File("src/gameData/test01.txt");

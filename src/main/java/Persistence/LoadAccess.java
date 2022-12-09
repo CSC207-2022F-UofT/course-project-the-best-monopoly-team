@@ -11,6 +11,8 @@ public interface LoadAccess {
     String[] checkSaves(String folderPath);
     File getFile();
 
+    void setFile(String newFile);
+
     ArrayList<String[]> loadProperties() throws FileNotFoundException;
 
     List<String> loadCards() throws IOException;
