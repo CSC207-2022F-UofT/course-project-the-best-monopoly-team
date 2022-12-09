@@ -1,12 +1,9 @@
 package Interactors;
 
-//import org.junit.jupiter.api.Test;
-import Interactors.GameDisplayOutputInteractor;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-
-import static org.junit.Assert.*;
 
 public class GameDisplayOutputInteractorTest {
 
@@ -21,7 +18,7 @@ public class GameDisplayOutputInteractorTest {
         options.add("no limit");
 
         displayOutput.setOptions(options);
-        assertEquals(options, displayOutput.getOptions());
+        Assertions.assertEquals(options, displayOutput.getOptions());
     }
 
     @Test
@@ -37,7 +34,7 @@ public class GameDisplayOutputInteractorTest {
         displayOutput.setOptions(options);
         displayOutput.clearOptions();
 
-        assertEquals(displayOutput.getOptions(), new ArrayList<>());
+        Assertions.assertEquals(displayOutput.getOptions(), new ArrayList<>());
     }
 
     @Test
@@ -52,6 +49,8 @@ public class GameDisplayOutputInteractorTest {
 
         displayOutput.setOptions(options);
         displayOutput.createOptionSegment();
+
+        Assertions.assertEquals(options.get(1), displayOutput.getOptionSegment().getText());
     }
 
     @Test
@@ -77,7 +76,7 @@ public class GameDisplayOutputInteractorTest {
         displayOutput.createTextSegment(input);
 
         String output = displayOutput.getTextSegment().getText();
-        assertEquals(("<HTML>" + input + "<HTML>"), output);
+        Assertions.assertEquals(("<HTML>" + input + "<HTML>"), output);
     }
 
     @Test
@@ -89,6 +88,6 @@ public class GameDisplayOutputInteractorTest {
         displayOutput.clearTextSegment();
 
         String output = displayOutput.getTextSegment().getText();
-        assertEquals("", output);
+        Assertions.assertEquals(("<HTML>" + "<HTML>"), output);
     }
 }

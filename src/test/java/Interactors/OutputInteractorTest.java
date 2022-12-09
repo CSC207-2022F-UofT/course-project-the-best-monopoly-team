@@ -8,7 +8,8 @@ import UseCases.UseCaseInteractor;
 
 import Entities.State;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class OutputInteractorTest {
         inputTest.sendInput();
 
         String testString = "Player 0 It's your turn! What do you want to do? You currently have 1500 dollars";
-        assert testString.equals(useCaseTest.getCurrentState().getPlayer().getName() +
+        Assertions.assertEquals(testString, useCaseTest.getCurrentState().getPlayer().getName() +
                 " It's your turn! What do you want to do? You currently have " +
                 useCaseTest.getCurrentState().getPlayer().getMoney() + " dollars");
     }
@@ -69,8 +70,7 @@ public class OutputInteractorTest {
         String testString = "Player 0 It's your turn! What do you want to do? You currently have 1500 dollars";
         State newState = inputTest.getCurrentState();
         outputTest.updateState(newState);
-        assert testString.equals(outputTest.getOutputMessage());
-
+        Assertions.assertEquals(testString,outputTest.getOutputMessage());
     }
 
 
@@ -101,6 +101,6 @@ public class OutputInteractorTest {
         options.add("90 rounds");
         options.add("no limit");
 
-        assert options.equals(newStateOptions);
+        Assertions.assertEquals(options, newStateOptions);
     }
 }
