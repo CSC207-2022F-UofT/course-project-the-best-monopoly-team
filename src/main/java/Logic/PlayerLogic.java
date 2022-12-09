@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class PlayerLogic {
-    private Player player;
+    private final Player player;
     public static final int BROWN_DARKBLUE_SETSIZE = 2;
     public static final int PROPERTY_SETSIZE = 3;
     public static final double STEAL_CHANCE = 0.3;
@@ -52,13 +52,6 @@ public class PlayerLogic {
         return (String.valueOf( roll1 + roll2));
     }
 
-    /**
-     * Rigged roll for testing purposes
-     * @param rig
-     */
-    public void riggedRoll(int rig) {
-        player.move(rig);
-    }
 
     private static boolean isConsecutive(int roll1, int roll2) {
         return roll1 == roll2;
@@ -75,14 +68,10 @@ public class PlayerLogic {
      */
     private HashMap<String, Integer> createSetMap() {
         HashMap<String, Integer> sets = new HashMap<>();
-        sets.put("Brown", 0);
-        sets.put("Light Blue", 0);
-        sets.put("Pink", 0);
-        sets.put("Orange", 0);
-        sets.put("Red", 0);
-        sets.put("Yellow", 0);
-        sets.put("Green", 0);
-        sets.put("Dark Blue", 0);
+        String [] colours = {"Brown","Light Blue","Pink","Orange","Red","Yellow","Green","Dark Blue"};
+        for (String colour: colours){
+            sets.put(colour, 0);
+        }
         return sets;
     }
 

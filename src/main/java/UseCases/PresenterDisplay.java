@@ -19,6 +19,14 @@ public class PresenterDisplay {
      *  and then getting the user's input and sending that back to the InputInteractor
      * to further handle state changes based on their option choice.
      **/
+    boolean runGame = true;
+
+    /**
+     * Method to end the game.
+     */
+    public void endGame(){
+        runGame = false;
+    }
     public void playGame(File file){
         UseCaseInteractor interactor = new UseCaseInteractor(new LoadFile(file), new SaveFile(file));
         InputInteractor inputControl = new InputInteractor(interactor);
@@ -27,7 +35,7 @@ public class PresenterDisplay {
 
         gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
         gameFrame.displayScreen();
-         while (true){
+         while (runGame){
              try {
                  boolean didInput = false;
                  while (!didInput) {

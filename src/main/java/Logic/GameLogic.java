@@ -11,7 +11,7 @@ import Logic.TradingNodeLogic.TradingParentNodeUseCase;
  * This class creates a GameLogic instance which coordinates the flow of the game.
  */
 public class GameLogic {
-    private GameLogicTree[] trees = new GameLogicTree[3];
+    private final GameLogicTree[] trees = new GameLogicTree[3];
     private GameLogicTree currentTree;
 
     /**
@@ -60,14 +60,6 @@ public class GameLogic {
      */
     public GameLogicTree[] getTrees(){
         return this.trees;
-    }
-
-    /**
-     * This method sets the value of the instance attribute trees.
-     * @param newTrees A GameLogicTree array containing the trees to set the value of the tree instance attribute.
-     */
-    public void setTrees(GameLogicTree[] newTrees){
-        this.trees = newTrees;
     }
 
     /**

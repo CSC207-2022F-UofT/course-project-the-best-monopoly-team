@@ -161,10 +161,7 @@ public class GeneralGameLogic {
     public void changePlayers(){
         currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
     }
-    /**
-     * Sets the tree back to its top position and returns the current state of the tree
-     * @return state object
-     */
+
 
     /**
      * Method returning the current state after the bottom node has been reached.

@@ -15,10 +15,6 @@ public class LoadFile implements LoadAccess{
         this.file = file;
     }
 
-//    public void setFile(String newFile){
-//        String filePath = file.getPath() + "/" + newFile;
-//        file = new File(filePath);
-//    }
     public File getFile(){
         return file;
     }
@@ -33,7 +29,6 @@ public class LoadFile implements LoadAccess{
      */
 
     public String[] checkSaves(String folderPath){
-        // TODO test in the future, list.Files() may not return as expected for src/save
         // checkSaves searches the given folder and returns an array of file names
         // the user selects the save file from the list of file names
         // loadGame takes in the filePath of the selected file name
