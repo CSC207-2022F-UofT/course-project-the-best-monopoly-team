@@ -2,6 +2,7 @@ package Entities;
 
 import Interactors.PropertyPerformActionInteractor;
 import UseCases.PropertyPerformActionUseCase;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -24,8 +25,8 @@ public class PropertyTest {
         Board board = new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
-        assertEquals(" You landed on a property you own", returnString);
-        assertEquals(1500, player1.getMoney());
+        Assertions.assertEquals(" You landed on a property you own", returnString);
+        Assertions.assertEquals(1500, player1.getMoney());
     }
 
     @Test
@@ -42,8 +43,8 @@ public class PropertyTest {
         Board board = new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
-        assertEquals(" Paid $3 to Player2 for landing on property1", returnString);
-        assertEquals(1497, player1.getMoney());
+        Assertions.assertEquals(" Paid $3 to Player2 for landing on property1", returnString);
+        Assertions.assertEquals(1497, player1.getMoney());
     }
 
     @Test
@@ -52,7 +53,7 @@ public class PropertyTest {
         Property property1 = new Property("property1", "Red",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
         property1.setHouses(4);
-        assertEquals(4, property1.getHouses());
+        Assertions.assertEquals(4, property1.getHouses());
     }
 
     @Test
@@ -60,7 +61,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Red",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals(player1, property1.getOwner());
+        Assertions.assertEquals(player1, property1.getOwner());
     }
 
     @Test
@@ -69,7 +70,7 @@ public class PropertyTest {
         Property property1 = new Property("property1", "Red",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, null,200,2,true);
         property1.setOwner(player2);
-        assertEquals(player2, property1.getOwner());
+        Assertions.assertEquals(player2, property1.getOwner());
     }
 
     @Test
@@ -77,7 +78,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Red",
                 5,8, new int[]{1, 2, 3, 4, 5, 6, 6}, player1,200,2,true);
-        assertEquals("property1", property1.getName());
+        Assertions.assertEquals("property1", property1.getName());
     }
 
     @Test
@@ -85,7 +86,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Red",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals("Red", property1.getColour());
+        Assertions.assertEquals("Red", property1.getColour());
     }
 
     @Test
@@ -93,7 +94,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Red",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals(5, property1.getPrice());
+        Assertions.assertEquals(5, property1.getPrice());
     }
 
     @Test
@@ -108,17 +109,17 @@ public class PropertyTest {
         player.addProperty(kentucky);
         player.addProperty(indiana);
 
-        assertEquals(20, illinois.getRent());
+        Assertions.assertEquals(20, illinois.getRent());
         illinois.addHouse(player, 1);
-        assertEquals(100, illinois.getRent());
+        Assertions.assertEquals(100, illinois.getRent());
         illinois.addHouse(player, 1);
-        assertEquals(300, illinois.getRent());
+        Assertions.assertEquals(300, illinois.getRent());
         illinois.addHouse(player, 1);
-        assertEquals(750, illinois.getRent());
+        Assertions.assertEquals(750, illinois.getRent());
         illinois.addHouse(player, 1);
-        assertEquals(925, illinois.getRent());
+        Assertions.assertEquals(925, illinois.getRent());
         illinois.addHouse(player, 1);
-        assertEquals(1100, illinois.getRent());
+        Assertions.assertEquals(1100, illinois.getRent());
     }
 
     @Test
@@ -126,7 +127,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Railroad",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals(100, property1.getRent());
+        Assertions.assertEquals(100, property1.getRent());
     }
 
     @Test
@@ -134,7 +135,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Utility",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals(50, property1.getRent());
+        Assertions.assertEquals(50, property1.getRent());
     }
 
     @Test
@@ -142,7 +143,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Railroad",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals(8, property1.getHouseCost());
+        Assertions.assertEquals(8, property1.getHouseCost());
     }
 
     @Test
@@ -150,7 +151,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Railroad",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals(200, property1.getMortgageValue());
+        Assertions.assertEquals(200, property1.getMortgageValue());
     }
 
     @Test
@@ -159,7 +160,7 @@ public class PropertyTest {
         Property property1 = new Property("property1", "Railroad",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
         property1.setMortgageStatus(false);
-        assertFalse(property1.getMortgageStatus());
+        Assertions.assertFalse(property1.getMortgageStatus());
     }
 
     @Test
@@ -167,7 +168,7 @@ public class PropertyTest {
         Player player1 = new Player("Player1");
         Property property1 = new Property("property1", "Railroad",
                 5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,4,true);
-        assertEquals(4, property1.getHouses());
+        Assertions.assertEquals(4, property1.getHouses());
     }
 
     @Test
@@ -175,7 +176,7 @@ public class PropertyTest {
         int[] rent = new int[]{20,100,300,750,925,1100};
         Property illinois = new Property("Illinois Avenue","Red",240,150, rent, null,120,3,false);
         int price = illinois.getRentSave(illinois.getHouses());
-        assertEquals(price, rent[3]);
+        Assertions.assertEquals(price, rent[3]);
     }
 
     @Test

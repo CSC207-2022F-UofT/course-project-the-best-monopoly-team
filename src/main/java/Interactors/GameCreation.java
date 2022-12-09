@@ -1,7 +1,6 @@
 package Interactors;
 
 import Entities.*;
-import Interactors.ActionSpaceCreationInteractor;
 import Persistence.LoadAccess;
 import Persistence.LoadFile;
 
@@ -67,20 +66,14 @@ public class GameCreation {
         for (String[] instance : gameData.get(0)){
             if (instance.length == 5){
                 // Player instance
-                boolean inJail = false;
-                if (instance[2].equals("true")) {
-                    inJail = true;
-                }
+                boolean inJail = instance[2].equals("true");
 
                 Player player = new Player(instance[0], Integer.parseInt(instance[1]), inJail,
                         Integer.parseInt(instance[3]), Integer.parseInt(instance[4]));
                 players.add(player);
             } else {
                 // Property instance
-                boolean mortgaged = false;
-                if (instance[13].equals("true")) {
-                    mortgaged = true;
-                }
+                boolean mortgaged = instance[13].equals("true");
                 Player owner = getOwner(players, instance[10]);
 
                 int[] rentValues = new int[] {Integer.parseInt(instance[4]), Integer.parseInt(instance[5]),
@@ -91,14 +84,14 @@ public class GameCreation {
                         Integer.parseInt(instance[3]), rentValues, owner, Integer.parseInt(instance[11]),
                         Integer.parseInt(instance[12]), mortgaged);
 
+                assert owner != null;
                 owner.addProperty(property);
                 properties.add(property);
                 }
             }
 
         List<Cell> cells = createCells(properties, standardProperties);
-        Board savedBoard = new Board(players, cells);
-        return savedBoard;
+        return new Board(players, cells);
     }
 
     /**
@@ -153,36 +146,35 @@ public class GameCreation {
         ActionSpace communityChest = actionSpaceCreationInteractor.loadComChestCards();
         ActionSpace chance = actionSpaceCreationInteractor.loadChanceCards();
 
-        ArrayList<Cell> cells = standardProperties;
-        cells.add(0, go);
-        cells.add(2, communityChest);
-        cells.add(4, chance);
-        cells.add(7, chance);
-        cells.add(10, jail);
-        cells.add(18, communityChest);
-        cells.add(21, freeParking);
-        cells.add(23, chance);
-        cells.add(31, goJail);
-        cells.add(34, communityChest);
-        cells.add(37, chance);
-        cells.add(39, communityChest);
+        standardProperties.add(0, go);
+        standardProperties.add(2, communityChest);
+        standardProperties.add(4, chance);
+        standardProperties.add(7, chance);
+        standardProperties.add(10, jail);
+        standardProperties.add(18, communityChest);
+        standardProperties.add(21, freeParking);
+        standardProperties.add(23, chance);
+        standardProperties.add(31, goJail);
+        standardProperties.add(34, communityChest);
+        standardProperties.add(37, chance);
+        standardProperties.add(39, communityChest);
 
         if (!propertiesSoFar.equals(standardProperties)) {
             for (Cell property : propertiesSoFar) {
                 Property cProperty = (Property) property;
                 for (int i = 0; i < 40; i++) {
-                    if (cells.get(i) instanceof Property) {
-                        Property currentCell = (Property) cells.get(i);
+                    if (standardProperties.get(i) instanceof Property) {
+                        Property currentCell = (Property) standardProperties.get(i);
                         if (currentCell.getName().equals(cProperty.getName())) {
-                            cells.remove(i);
-                            cells.add(i, cProperty);
+                            standardProperties.remove(i);
+                            standardProperties.add(i, cProperty);
                         }
                     }
                 }
             }
         }
 
-        return cells;
+        return standardProperties;
     }
 
     /** Creates an Arraylist of Property instances with default values.

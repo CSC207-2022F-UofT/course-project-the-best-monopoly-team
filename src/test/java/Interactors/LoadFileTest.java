@@ -11,7 +11,6 @@ import java.util.*;
 
 class LoadFileTest {
     File properties = new File("src/save/properties.txt");
-    File cards = new File("src/save/cards.txt");
     LoadAccess load = new LoadFile(properties);
 
 

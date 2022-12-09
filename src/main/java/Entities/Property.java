@@ -3,9 +3,9 @@ package Entities;
 import Logic.PlayerLogic;
 
 public class Property extends Cell {
-    private String name;
-    private String colour;
-    private int cost;
+    private final String name;
+    private final String colour;
+    private final int cost;
     private int rent;
     private int rent1H;
     private int rent2H;
@@ -13,8 +13,8 @@ public class Property extends Cell {
     private int rent4H;
     private int rentHotel;
     private Player ownedBy;
-    private int mortgageValue;
-    private int houseCost;
+    private final int mortgageValue;
+    private final int houseCost;
     private int houses;
     private boolean mortgaged;
 

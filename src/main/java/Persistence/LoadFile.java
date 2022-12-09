@@ -15,10 +15,11 @@ public class LoadFile implements LoadAccess{
         this.file = file;
     }
 
-//    public void setFile(String newFile){
-//        String filePath = file.getPath() + "/" + newFile;
-//        file = new File(filePath);
-//    }
+    public void setFile(String newFile){
+        String filePath = file.getPath() + "/" + newFile;
+       file = new File(filePath);
+    }
+
     public File getFile(){
         return file;
     }
@@ -135,7 +136,7 @@ public class LoadFile implements LoadAccess{
     /**
      * Return a list of all the cards as a list of Strings
      * @return a list of strings that represents all the cards in the game
-     * @throws IOException
+     * @throws IOException in case there was an error reading the file
      *
      */
     @Override

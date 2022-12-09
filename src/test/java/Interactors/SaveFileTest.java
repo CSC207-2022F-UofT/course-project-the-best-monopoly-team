@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SaveFileTest {
     @Test
@@ -44,9 +45,10 @@ public class SaveFileTest {
         String saveName = save.saveGameNewFile(playerData, mainStates);
 
         boolean check = false;
-        for (String fileName : directory.list()){
+        for (String fileName : Objects.requireNonNull(directory.list())){
             if (fileName.equals(saveName)){
                 check = true;
+                break;
             }
         }
 
