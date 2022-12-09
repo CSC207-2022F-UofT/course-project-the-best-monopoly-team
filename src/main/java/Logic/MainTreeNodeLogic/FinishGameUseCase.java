@@ -36,8 +36,8 @@ public class FinishGameUseCase extends MainTreeNodeLogic implements NodeLogic {
         } else if (getPlayers().size() == 1) {
             List<Player> players = getPlayers();
             Player winningPlayer = players.get(0);
-            String winnningString = winningPlayer.getName() + " won the game!!!";
-            currentState.setDescription(winnningString);
+            String winningString = winningPlayer.getName() + " won the game!!!";
+            currentState.setDescription(winningString);
         }
 
         mainStates[0] = 1;

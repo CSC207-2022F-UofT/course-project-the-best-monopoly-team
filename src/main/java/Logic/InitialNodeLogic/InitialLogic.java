@@ -11,7 +11,7 @@ public class InitialLogic {
     static HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
     static UseCaseInteractor caseInteractor;
     static GameLogicTree currentTree;
-    private String name;
+    private final String name;
     public static void setCaseInteractor(UseCaseInteractor interactor){
         caseInteractor = interactor;
     }
