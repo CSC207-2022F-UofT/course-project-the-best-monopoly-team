@@ -5,8 +5,8 @@ import java.util.List;
 
 public class ActionSpace extends Cell{
     
-    private List<Card> cards;
-    private String type;
+    private final List<Card> cards;
+    private final String type;
 
     public ActionSpace(HashMap<String, List<Card>> cards) {
         String key = cards.keySet().iterator().next();

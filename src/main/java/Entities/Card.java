@@ -2,10 +2,10 @@ package Entities;
 
 public class Card {
 
-    private String type;
-    private String action;
-    private String actiontype;
-    private Integer amount;
+    private final String type;
+    private final String action;
+    private final String actiontype;
+    private final Integer amount;
 
     public Card(String type, String action, String actiontype, Integer amount) {
         this.type = type;
