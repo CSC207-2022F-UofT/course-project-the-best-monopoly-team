@@ -40,6 +40,7 @@ public class PresenterDisplay {
              }
              catch (Exception e){
                  System.out.println(e.getMessage());
+                 break;
              }
         }
     }

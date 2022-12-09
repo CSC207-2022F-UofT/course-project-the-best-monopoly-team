@@ -7,25 +7,23 @@ import java.util.HashMap;
  */
 public class Output {
     /**
-     * InstanceVar stateOutput: A hashmap that contains predefinied outputs for specific states
+     * InstanceVar stateOutput: A hashmap that contains predefined outputs for specific states
      * InstanceVar finalOutput: the string object containing the cumulative output
      */
     private HashMap<String, String> stateOutput;
-    private String finalOutput;
 
     /**
-     * The constructor for this class, initalizes the mapping between the state and
-     * its ouput and the final output
+     * The constructor for this class, initializes the mapping between the state and
+     * its output and the final output
      */
     public Output(){
         this.stateOutput = new HashMap<>();
-        this.finalOutput = "";
     }
 
     /**
      * This function takes the initial states and their respective outputs that are parsed
      * from a different class
-     * @param initStateHash: the statehash that is parsed in a different class
+     * @param initStateHash: the state hash that is parsed in a different class
      */
     public void setInitStateHash(HashMap<String, String> initStateHash){
         this.stateOutput = initStateHash;
@@ -47,29 +45,5 @@ public class Output {
      */
     public void modifyStateOutput(String state, String output){
         this.stateOutput.replace(state, output);
-    }
-
-    /**
-     * Function that returns the final complied string
-     * @return the final complied output string
-     */
-    public String getFinalOutput(){
-        return this.finalOutput;
-    }
-
-    /**
-     * set the finalOutput string
-     * @param finalOutput: the output value that is to be used
-     */
-    public void setFinalOutput(String finalOutput) {
-        this.finalOutput = finalOutput;
-    }
-
-    /**
-     * Function that adds strings to the final output, e.g. for adding options to the string
-     * @param adder: the additional output information needed to be added to the output string
-     */
-    public void addToFinalOutput(String adder){
-        this.finalOutput = this.finalOutput + " " + adder;
     }
 }

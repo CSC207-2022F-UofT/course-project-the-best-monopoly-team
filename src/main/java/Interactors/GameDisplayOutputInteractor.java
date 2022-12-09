@@ -18,11 +18,11 @@ public class GameDisplayOutputInteractor {
      * InstanceVar options: an ArrayList of all the options on this state
      * InstanceVar buttonDisplayHandler: the handler of the buttons on the display
      */
-    private Description description;
-    private Options optionSegment;
+    private final Description description;
+    private final Options optionSegment;
     private ArrayList<String> options;
 
-    private ButtonDisplayInteractor buttonDisplayHandler;
+    private final ButtonDisplayInteractor buttonDisplayHandler;
 
     /**
      * The constructor for this class
@@ -32,6 +32,14 @@ public class GameDisplayOutputInteractor {
         this.description = new Description();
         this.options = new ArrayList<>();
         this.buttonDisplayHandler = new ButtonDisplayInteractor();
+    }
+
+    /**
+     * Function to get the options for this state
+     * @return the ArrayList that contains the options for the current state
+     */
+    public ArrayList<String> getOptions() {
+        return this.options;
     }
 
     /**

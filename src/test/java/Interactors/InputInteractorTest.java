@@ -36,9 +36,6 @@ public class InputInteractorTest {
         nextOptions.add("90 rounds");
         nextOptions.add("no limit");
 
-        System.out.println(test);
-        System.out.println(nextOptions);
-
         assert test.equals(nextOptions);
     }
 

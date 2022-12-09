@@ -17,9 +17,9 @@ public class GameDisplayInteractor {
      * InstanceVar selectedOutput: The String of the button that
      * is clicked by the user
      */
-    private GameScreen gameFrame;
-    private GameDisplayInputInteractor inputHandler;
-    private GameDisplayOutputInteractor labelSegments;
+    private final GameScreen gameFrame;
+    private final GameDisplayInputInteractor inputHandler;
+    private final GameDisplayOutputInteractor labelSegments;
     private String selectedOutput;
 
     /**

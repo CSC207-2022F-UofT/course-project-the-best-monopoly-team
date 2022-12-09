@@ -18,8 +18,8 @@ public class ButtonFactory {
      * different Button'x' objects to determine user input
      */
     private ArrayList<String> buttonStrings;
-    private HashMap<String, Integer> actionPerformed;
-    private ArrayList<ButtonMapping> buttonMappings;
+    private final HashMap<String, Integer> actionPerformed;
+    private final ArrayList<ButtonMapping> buttonMappings;
 
     /**
      * Constructor with no parameters for this class
