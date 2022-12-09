@@ -47,7 +47,7 @@ public class PlayerLogic {
         else if(!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) == 3){
                 // the player goes to jail
                 this.player.setInJail(true);
-                return (String.valueOf( roll1 + roll2) + "player goes to jail");
+                return ( roll1 + roll2+ "player goes to jail");
             }
         return (String.valueOf( roll1 + roll2));
     }
@@ -113,7 +113,7 @@ public class PlayerLogic {
 
     /**
      * A helper function for steal that deals with the stealSuccessful situation.
-     * @param victim The victim whose moeny is going to be stolen
+     * @param victim The victim whose money is going to be stolen
      * @return A string that indicates if the stealing is successful or if the player is in jail.
      */
     public String stealSuccessful(Player victim) {
@@ -163,8 +163,8 @@ public class PlayerLogic {
     }
 
     /**
-     * Unmortgaging a property
-     * @param property the property to be unmortgaged
+     * Un-mortgaging a property
+     * @param property the property to be un-mortgaged
      */
     public void unmortgage(Property property) {
         player.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));

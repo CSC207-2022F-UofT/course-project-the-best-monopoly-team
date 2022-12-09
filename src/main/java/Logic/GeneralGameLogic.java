@@ -15,7 +15,7 @@ public class GeneralGameLogic {
     static GameLogic gameLogicInteractor;
     static Player currentPlayer;
     static Board board;
-    static HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
+    static HashMap<String, Integer> selectedOptions = new HashMap<>();
     static int returnPlayerIndex = -1;
     static List<Player> players;
     static GameLogicTree returnTree;
@@ -177,7 +177,7 @@ public class GeneralGameLogic {
      * @param currentState a State object that we want to add the players as options to.
      */
     public void addPlayersState(State currentState){
-        ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
+        ArrayList<Player> playerCopy = new ArrayList<>(board.getPlayers());
         playerCopy.remove(currentPlayer);
         for (Player player : playerCopy) {
             currentState.addOptions(player.getName());

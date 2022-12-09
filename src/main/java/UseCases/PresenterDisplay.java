@@ -21,12 +21,6 @@ public class PresenterDisplay {
      **/
     boolean runGame = true;
 
-    /**
-     * Method to end the game.
-     */
-    public void endGame(){
-        runGame = false;
-    }
     public void playGame(File file){
         UseCaseInteractor interactor = new UseCaseInteractor(new LoadFile(file), new SaveFile(file));
         InputInteractor inputControl = new InputInteractor(interactor);
