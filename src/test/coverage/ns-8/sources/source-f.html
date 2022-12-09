@@ -1,0 +1,158 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > MainTreeNodeLogic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: MainTreeNodeLogic (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MainTreeNodeLogic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.3%
+  </span>
+  <span class="absValue">
+    (5/6)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Logic.AuctionNodeLogic.AuctionTreeNodeLogic;
+&nbsp;import Logic.GeneralGameLogic;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class handles the logic for the main tree nodes.
+&nbsp; */
+&nbsp;public class MainTreeNodeLogic extends GeneralGameLogic {
+&nbsp;
+&nbsp;
+&nbsp;    /*
+&nbsp;    STATE ARRAY FORMATTING FOR SAVING:
+&nbsp;[0]: number of players
+&nbsp;[1]: game length (turn where game ends)
+&nbsp;[2]: game mode
+&nbsp;[3]: current turn
+&nbsp;[4]: current player
+&nbsp;[5]: Roll
+&nbsp;
+&nbsp;
+&nbsp;IN GAME STATE ARRAY FORMATTING:
+&nbsp;[0]: Confirmation node
+&nbsp;[1]: Roll
+&nbsp;[2]: Game mode
+&nbsp;[3]: Turn counter
+&nbsp;[4]: Game Length
+&nbsp;
+&nbsp;     */
+<b class="fc">&nbsp;    static int[] mainStates = new int[5];</b>
+&nbsp;    static String diceRoll;
+&nbsp;
+&nbsp;
+&nbsp;    public MainTreeNodeLogic(String name){
+<b class="fc">&nbsp;        super(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * When states are already known.
+&nbsp;     * @param states - The states of the program from the loaded game
+&nbsp;     */
+&nbsp;    public static void initializeStates(int[] states){
+<b class="fc">&nbsp;        mainStates = states;</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * This method is used to initialize the auctionTreeHandler to prepare for an auction scenario.
+&nbsp;     */
+&nbsp;    public void setupAuction(){
+<b class="fc">&nbsp;        AuctionTreeNodeLogic temp = new AuctionTreeNodeLogic(&quot;temp&quot;);</b>
+<b class="fc">&nbsp;        temp.initialize();</b>
+&nbsp;    }
+&nbsp;    public static int[] getStates(){
+<b class="nc">&nbsp;        return mainStates;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

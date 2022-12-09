@@ -1,0 +1,201 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > AuctionTreeNodeLogic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.AuctionNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: AuctionTreeNodeLogic (Logic.AuctionNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AuctionTreeNodeLogic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.5%
+  </span>
+  <span class="absValue">
+    (25/34)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.AuctionNodeLogic;
+&nbsp;
+&nbsp;import Entities.Board;
+&nbsp;import Entities.Player;
+&nbsp;import Entities.Property;
+&nbsp;import Entities.State;
+&nbsp;import Logic.GeneralGameLogic;
+&nbsp;import Logic.GameLogic;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class handles the logic for the auction tree nodes.
+&nbsp; */
+&nbsp;public class AuctionTreeNodeLogic extends GeneralGameLogic {
+<b class="fc">&nbsp;    final int LOW_OPTION = 20;</b>
+<b class="fc">&nbsp;    final int MEDIUM_OPTION = 80;</b>
+<b class="fc">&nbsp;    final int HIGH_OPTION = 160;</b>
+&nbsp;    static int[] auctionStates;
+&nbsp;    static Player playerWon;
+&nbsp;    static Property biddingProperty;
+&nbsp;    static int potIndex;
+&nbsp;    static int currentPlayerIndex;
+<b class="fc">&nbsp;    static int auctionComplete = -1;</b>
+&nbsp;
+&nbsp;    public AuctionTreeNodeLogic(String name){
+<b class="fc">&nbsp;        super(name);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public static void array_init(int playerLength){
+<b class="fc">&nbsp;        auctionStates = new int[playerLength + 1];</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the current state object of the tree when the auction is not yet complete
+&nbsp;     * @return a state object representing the program
+&nbsp;     */
+&nbsp;    public State beforeLogic(){
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        currentPlayerIndex = getCurrentPlayerIndex();</b>
+&nbsp;        //loop through the players every time one gives their choice
+&nbsp;        do {
+<b class="fc">&nbsp;            changePlayers();</b>
+<b class="fc">&nbsp;        }while (auctionStates[getCurrentPlayerIndex()] == 1);</b>
+<b class="fc">&nbsp;        currentState.setId(((GeneralGameLogic)gameLogicInteractor.getCurrentTree().getUseCase()).getName());</b>
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the current state object of the tree when the auction bidding process has finished.
+&nbsp;     * @param currentState a State object representing the current state of the game.
+&nbsp;     * @return a State object of the tree when the auction bidding process has finished.
+&nbsp;     */
+&nbsp;    public State afterLogic(State currentState){
+&nbsp;        //if the auction is still going, go back to the beginning of the tree
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        if (auctionComplete == -1){</b>
+<b class="fc">&nbsp;            gameLogicInteractor.setCurrentTreeToMaxParent();</b>
+<b class="fc">&nbsp;            currentState = gameLogicInteractor.getCurrentState();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Check if the auction is complete
+&nbsp;     * @return an integer representing the index of the player in the array who won.
+&nbsp;     * if no one has won, return -1.
+&nbsp;     */
+&nbsp;    public int checkAuction(){
+<b class="nc">&nbsp;        int auctionFinishedCounter = 0;</b>
+<b class="nc">&nbsp;        int playerIndex = 0;</b>
+&nbsp;
+&nbsp;        //check if everyone but one player has folded
+<b class="nc">&nbsp;        for (int i = 0; i&lt;auctionStates.length - 1; i++){</b>
+<b class="nc">&nbsp;            if (auctionStates[i] == 0){</b>
+<b class="nc">&nbsp;                auctionFinishedCounter += 1;</b>
+<b class="nc">&nbsp;                playerIndex = i;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        if (auctionFinishedCounter == 1){</b>
+<b class="nc">&nbsp;            return playerIndex;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Initialize this tree to prepare for an auction
+&nbsp;     */
+&nbsp;    public void initialize() {
+<b class="fc">&nbsp;        Board board = getBoard();</b>
+<b class="fc">&nbsp;        List&lt;Player&gt; players = getPlayers();</b>
+<b class="fc">&nbsp;        int returnPlayerIndex = getReturnPlayerIndex();</b>
+<b class="fc">&nbsp;        auctionComplete = -1;</b>
+<b class="fc">&nbsp;        biddingProperty = (Property) board.getPlayerCell(players.get(returnPlayerIndex));</b>
+<b class="fc">&nbsp;        auctionStates = new int[players.size() + 1];</b>
+<b class="fc">&nbsp;        potIndex = auctionStates.length - 1;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

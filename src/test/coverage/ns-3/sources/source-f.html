@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Output</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Output (Entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Output</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Entities;
+&nbsp;
+&nbsp;import java.util.HashMap;
+&nbsp;
+&nbsp;/**
+&nbsp; * Output Entity stores all the output data that is to be presented to the user each move
+&nbsp; */
+&nbsp;public class Output {
+&nbsp;    /**
+&nbsp;     * InstanceVar stateOutput: A hashmap that contains predefinied outputs for specific states
+&nbsp;     * InstanceVar finalOutput: the string object containing the cumulative output
+&nbsp;     */
+&nbsp;    private HashMap&lt;String, String&gt; stateOutput;
+&nbsp;    private String finalOutput;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The constructor for this class, initalizes the mapping between the state and
+&nbsp;     * its ouput and the final output
+&nbsp;     */
+<b class="nc">&nbsp;    public Output(){</b>
+<b class="nc">&nbsp;        this.stateOutput = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        this.finalOutput = &quot;&quot;;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This function takes the initial states and their respective outputs that are parsed
+&nbsp;     * from a different class
+&nbsp;     * @param initStateHash: the statehash that is parsed in a different class
+&nbsp;     */
+&nbsp;    public void setInitStateHash(HashMap&lt;String, String&gt; initStateHash){
+<b class="nc">&nbsp;        this.stateOutput = initStateHash;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function that returns the value from the key-value pair of the hashmap
+&nbsp;     * @param state: the key for the state that needs to be accessed
+&nbsp;     * @return the value to be used in the output from the key used
+&nbsp;     */
+&nbsp;    public String getStateOutput(String state){
+<b class="nc">&nbsp;        return this.stateOutput.get(state);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function that modifies some key-value pairs as some outputs change based on state logic
+&nbsp;     * @param state: the current state
+&nbsp;     * @param output: the new output obtained from processing logic
+&nbsp;     */
+&nbsp;    public void modifyStateOutput(String state, String output){
+<b class="nc">&nbsp;        this.stateOutput.replace(state, output);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function that returns the final complied string
+&nbsp;     * @return the final complied output string
+&nbsp;     */
+&nbsp;    public String getFinalOutput(){
+<b class="nc">&nbsp;        return this.finalOutput;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * set the finalOutput string
+&nbsp;     * @param finalOutput: the output value that is to be used
+&nbsp;     */
+&nbsp;    public void setFinalOutput(String finalOutput) {
+<b class="nc">&nbsp;        this.finalOutput = finalOutput;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function that adds strings to the final output, e.g. for adding options to the string
+&nbsp;     * @param adder: the additional output information needed to be added to the output string
+&nbsp;     */
+&nbsp;    public void addToFinalOutput(String adder){
+<b class="nc">&nbsp;        this.finalOutput = this.finalOutput + &quot; &quot; + adder;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,149 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > ManagePropertyUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: ManagePropertyUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ManagePropertyUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (14/14)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Logic.NodeLogic;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents the use case where the users want to manage a property.
+&nbsp; */
+&nbsp;public class ManagePropertyUseCase extends MainTreeNodeLogic implements NodeLogic {
+&nbsp;    public ManagePropertyUseCase() {
+<b class="fc">&nbsp;        super(&quot;Manage Property&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method creates a State object either containing properties as options or moves to another node when there
+&nbsp;     * are no properties to manage.
+&nbsp;     * @param input An integer representing the user&#39;s input. This parameter is not used for this method.
+&nbsp;     * @return A State object containing either properties to manage or moves the game into another node.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        Player currentPlayer = getCurrentPlayer();</b>
+&nbsp;
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        currentState.setBackEnable(true);</b>
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+<b class="fc">&nbsp;        ArrayList&lt;Property&gt; currentPlayerProperties = currentPlayer.getProperties();</b>
+&nbsp;
+&nbsp;        //if player has no properties, go to another node.
+<b class="fc">&nbsp;        if (currentPlayerProperties.isEmpty()){</b>
+<b class="fc">&nbsp;            gameLogicInteractor.transverseCurrentTree(1);</b>
+<b class="fc">&nbsp;            currentState = gameLogicInteractor.handleTree(0);</b>
+&nbsp;        }
+&nbsp;
+&nbsp;        //provide options on the properties available
+<b class="fc">&nbsp;        for (Property currentPlayerProperty : currentPlayerProperties) {</b>
+<b class="fc">&nbsp;            currentState.addOptions(currentPlayerProperty.getName());</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

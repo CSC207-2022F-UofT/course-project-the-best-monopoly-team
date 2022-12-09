@@ -1,0 +1,328 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Property</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Property (Entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Property</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (17/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (58/58)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Entities;
+&nbsp;
+&nbsp;import Logic.PlayerLogic;
+&nbsp;
+&nbsp;public class Property extends Cell {
+&nbsp;    private final String name;
+&nbsp;    private final String colour;
+&nbsp;    private final int cost;
+&nbsp;    private int rent;
+&nbsp;    private int rent1H;
+&nbsp;    private int rent2H;
+&nbsp;    private int rent3H;
+&nbsp;    private int rent4H;
+&nbsp;    private int rentHotel;
+&nbsp;    private Player ownedBy;
+&nbsp;    private final int mortgageValue;
+&nbsp;    private final int houseCost;
+&nbsp;    private int houses;
+&nbsp;    private boolean mortgaged;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A constructor method for new Property instances
+&nbsp;     * @param name the name of this property
+&nbsp;     * @param colour the colour of this property
+&nbsp;     * @param cost the cost to buy this property
+&nbsp;     * @param houseCost the cost to build one house on this property
+&nbsp;     * @param rentValues an integer list of rent for staying on this property, where the index correlates to the number
+&nbsp;     *                   houses built on this property
+&nbsp;     * @param owner the owner of this property
+&nbsp;     * @param mortgageValue the mortgage value for this property
+&nbsp;     * @param houses the number of houses currently built on this property
+&nbsp;     * @param mortgaged a boolean determining whether this property is mortgaged
+&nbsp;     */
+&nbsp;    public Property (String name, String colour, int cost, int houseCost, int[] rentValues,
+<b class="fc">&nbsp;                     Player owner, int mortgageValue, int houses, boolean mortgaged) {</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+<b class="fc">&nbsp;        this.colour = colour;</b>
+<b class="fc">&nbsp;        this.cost = cost;</b>
+<b class="fc">&nbsp;        this.houseCost = houseCost;</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 6; i++){</b>
+<b class="fc">&nbsp;            switch (i) {</b>
+&nbsp;                case 0:
+<b class="fc">&nbsp;                    this.rent = rentValues[i];</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case 1:
+<b class="fc">&nbsp;                    this.rent1H = rentValues[i];</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case 2:
+<b class="fc">&nbsp;                    this.rent2H = rentValues[i];</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case 3:
+<b class="fc">&nbsp;                    this.rent3H = rentValues[i];</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case 4:
+<b class="fc">&nbsp;                    this.rent4H = rentValues[i];</b>
+<b class="fc">&nbsp;                    break;</b>
+&nbsp;                case 5:
+<b class="fc">&nbsp;                    this.rentHotel = rentValues[i];</b>
+&nbsp;                    break;
+&nbsp;            }
+&nbsp;        }
+<b class="fc">&nbsp;        this.ownedBy = owner;</b>
+<b class="fc">&nbsp;        this.mortgageValue = mortgageValue;</b>
+<b class="fc">&nbsp;        this.houses = houses;</b>
+<b class="fc">&nbsp;        this.mortgaged = mortgaged;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the number of houses on this property
+&nbsp;     * @param houses number of houses on this property
+&nbsp;     */
+&nbsp;    public void setHouses(int houses){
+<b class="fc">&nbsp;        this.houses = houses;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the owner of this property
+&nbsp;     * @return the player who owns this property
+&nbsp;     */
+&nbsp;    public Player getOwner(){
+<b class="fc">&nbsp;        return this.ownedBy;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the owner of this property
+&nbsp;     * @param player the player who owns this property
+&nbsp;     */
+<b class="fc">&nbsp;    public void setOwner(Player player){ownedBy = player;}</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the property name
+&nbsp;     * @return the name of the property
+&nbsp;     */
+&nbsp;    public String getName(){
+<b class="fc">&nbsp;        return this.name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the colour of the property
+&nbsp;     * @return the colour correlated to this property
+&nbsp;     */
+&nbsp;    public String getColour(){
+<b class="fc">&nbsp;        return this.colour;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the buying price for this property
+&nbsp;     * @return the price to buy this property
+&nbsp;     */
+&nbsp;    public int getPrice(){
+<b class="fc">&nbsp;        return this.cost;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the current rent for this property
+&nbsp;     * @return the current rent players (beside the owner) need to pay when landing on this property
+&nbsp;     */
+&nbsp;    public int getRent(){
+<b class="fc">&nbsp;        switch (this.colour) {</b>
+&nbsp;            case &quot;Railroad&quot;:
+<b class="fc">&nbsp;                return 100;</b>
+&nbsp;            case &quot;Utility&quot;:
+<b class="fc">&nbsp;                return 50;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return this.getHousesRent(this.houses);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the current rent for this property based on the given amount of houses. Method specifically
+&nbsp;     * used for saving function.
+&nbsp;     * @param houses amount of houses on this property
+&nbsp;     * @return a number indicating the rent cost
+&nbsp;     */
+&nbsp;    public int getRentSave(int houses){
+<b class="fc">&nbsp;        return getHousesRent(houses);</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * Gets the current rent for this property, where this property isn&#39;t a Railroad or Utility property
+&nbsp;     * @return the current rent players (beside the owner) need to pay when landing on this property, based on the
+&nbsp;     * number of houses built on it
+&nbsp;     */
+&nbsp;    private int getHousesRent(int house) {
+<b class="fc">&nbsp;        switch (house) {</b>
+&nbsp;            case 1:
+<b class="fc">&nbsp;                return this.rent1H;</b>
+&nbsp;            case 2:
+<b class="fc">&nbsp;                return this.rent2H;</b>
+&nbsp;            case 3:
+<b class="fc">&nbsp;                return this.rent3H;</b>
+&nbsp;            case 4:
+<b class="fc">&nbsp;                return this.rent4H;</b>
+&nbsp;            case 5:
+<b class="fc">&nbsp;                return this.rentHotel;</b>
+&nbsp;            default:
+<b class="fc">&nbsp;                return this.rent;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the cost to build a house on this property
+&nbsp;     * @return the cost to build a house on this property
+&nbsp;     */
+&nbsp;    public int getHouseCost(){
+<b class="fc">&nbsp;        return this.houseCost;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the mortgage value of this property
+&nbsp;     * @return the mortgage value of this property
+&nbsp;     */
+&nbsp;    public int getMortgageValue(){
+<b class="fc">&nbsp;        return this.mortgageValue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the mortgage status of this property, that is whether it has been mortgaged
+&nbsp;     * @return a boolean showing true if this property has been mortgaged, and false otherwise
+&nbsp;     */
+<b class="fc">&nbsp;    public boolean getMortgageStatus(){return this.mortgaged;}</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the mortgage status for this property
+&nbsp;     * @param status the mortgage status to give this property
+&nbsp;     */
+<b class="fc">&nbsp;    public void setMortgageStatus(boolean status){this.mortgaged = status;}</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the number of houses on this property
+&nbsp;     * @return the number of houses built on this property
+&nbsp;     */
+&nbsp;    public int getHouses(){
+<b class="fc">&nbsp;        return this.houses;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method allows a player to build houses on legible properties
+&nbsp;     * @param currentPlayer the player try to build the houses
+&nbsp;     * @param houses the number of houses that the player wishes to build
+&nbsp;     * @return a boolean determining whether the houses were built successfully
+&nbsp;     */
+&nbsp;    public String addHouse(Player currentPlayer, int houses) {
+<b class="fc">&nbsp;        PlayerLogic logic = new PlayerLogic(currentPlayer);</b>
+<b class="fc">&nbsp;        if (!currentPlayer.getProperties().contains(this)) {</b>
+<b class="fc">&nbsp;            return (&quot;not owned&quot;);</b>
+<b class="fc">&nbsp;        } else if (!logic.ownedPropertySets().contains(this.colour)) {</b>
+<b class="fc">&nbsp;            return (&quot;not owned set&quot;);</b>
+<b class="fc">&nbsp;        } else if (currentPlayer.getMoney() &lt; this.houseCost * houses) {</b>
+<b class="fc">&nbsp;            return (&quot;not enough money&quot;);</b>
+&nbsp;        } else {
+<b class="fc">&nbsp;            this.houses += houses;</b>
+<b class="fc">&nbsp;            currentPlayer.pay(getHouseCost());</b>
+<b class="fc">&nbsp;            if (this.houses == 5) {</b>
+<b class="fc">&nbsp;                return (&quot;hotel&quot;);</b>
+&nbsp;            } else {
+<b class="fc">&nbsp;                return (&quot;house&quot;);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public String getType() {
+<b class="fc">&nbsp;        return &quot;Property&quot;;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,194 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > RollUseCase</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic.MainTreeNodeLogic</a>
+</div>
+
+<h1>Coverage Summary for Class: RollUseCase (Logic.MainTreeNodeLogic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">RollUseCase</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (18/36)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic.MainTreeNodeLogic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Interactors.CornerTilePerformActionInteractor;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Interactors.PerformActionSpaceCardInteractor;
+&nbsp;import Interactors.PropertyPerformActionInteractor;
+&nbsp;import Logic.NodeLogic;
+&nbsp;import UseCases.CornerTilePerformActionUseCase;
+&nbsp;import UseCases.PerformActionSpaceUseCase;
+&nbsp;import Logic.PlayerLogic;
+&nbsp;import UseCases.PropertyPerformActionUseCase;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class represents the use case where the current player rolls the dice.
+&nbsp; */
+<b class="fc">&nbsp;public class RollUseCase extends MainTreeNodeLogic implements NodeLogic {</b>
+&nbsp;
+&nbsp;    public RollUseCase() {
+<b class="fc">&nbsp;        super(&quot;Roll The Dice&quot;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method creates a State object and conducts the appropriate actions related to the current state of the game,
+&nbsp;     * and sets up the tree objects that are required due to the movement of the game.
+&nbsp;     * @param input An integer that represents the input of the user. However, this will not be used in this method.
+&nbsp;     * @return A State object representing the state of the game after the current player rolls the dice.
+&nbsp;     */
+&nbsp;    @Override
+&nbsp;    public State create_state(int input) {
+<b class="fc">&nbsp;        Board board = getBoard();</b>
+<b class="fc">&nbsp;        GameLogic gameLogicInteractor = getGameLogicInteractor();</b>
+<b class="fc">&nbsp;        Player currentPlayer = getCurrentPlayer();</b>
+&nbsp;
+<b class="fc">&nbsp;        State currentState = new State();</b>
+<b class="fc">&nbsp;        currentState.setId(getName());</b>
+<b class="fc">&nbsp;        if (mainStates[1] == 0) {</b>
+&nbsp;            //roll the dice and update the position
+<b class="fc">&nbsp;            PlayerLogic playerLogic = new PlayerLogic(currentPlayer);</b>
+<b class="fc">&nbsp;            diceRoll = playerLogic.rollDice(0);</b>
+&nbsp;
+&nbsp;            //get the space landed on
+<b class="fc">&nbsp;            Cell landedOnCell = board.getCell(currentPlayer.getPosition());</b>
+&nbsp;
+&nbsp;                    /*
+&nbsp;                    if the space is a property and has no owner, transverse to a branch, otherwise,
+&nbsp;                    transverse to another
+&nbsp;                     */
+<b class="fc">&nbsp;            if (landedOnCell instanceof Property &amp;&amp;</b>
+<b class="fc">&nbsp;                    ((Property) landedOnCell).getOwner() == null) {</b>
+<b class="fc">&nbsp;                gameLogicInteractor.transverseCurrentTree(0);</b>
+&nbsp;            } else {
+&nbsp;                //perform the action on the space as well
+<b class="nc">&nbsp;                switch (landedOnCell.getType()) {</b>
+&nbsp;                    case &quot;Property&quot;:
+<b class="nc">&nbsp;                        PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();</b>
+<b class="nc">&nbsp;                        Property property = (Property) landedOnCell;</b>
+<b class="nc">&nbsp;                        if (property.getMortgageStatus()) {</b>
+<b class="nc">&nbsp;                            setAnswer(&quot;This property is mortgaged, don&#39;t need to pay rent.&quot;);</b>
+&nbsp;                        } else {
+<b class="nc">&nbsp;                            setAnswer(propertyInteractor.performAction(property, currentPlayer));</b>
+&nbsp;                        }
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;Corner Tile&quot;:
+<b class="nc">&nbsp;                        CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();</b>
+<b class="nc">&nbsp;                        assert landedOnCell instanceof CornerTiles;</b>
+<b class="nc">&nbsp;                        CornerTiles cornerTile = (CornerTiles) landedOnCell;</b>
+&nbsp;
+<b class="nc">&nbsp;                        setAnswer(cornerTileInteractor.performAction(currentPlayer, cornerTile));</b>
+<b class="nc">&nbsp;                        break;</b>
+&nbsp;                    case &quot;Action Space&quot;:
+<b class="nc">&nbsp;                        PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();</b>
+<b class="nc">&nbsp;                        ActionSpace actionSpace = (ActionSpace) landedOnCell;</b>
+<b class="nc">&nbsp;                        setAnswer(actionSpaceInteractor.performAction(actionSpace, currentPlayer, board));</b>
+&nbsp;                }
+&nbsp;
+<b class="nc">&nbsp;                gameLogicInteractor.transverseCurrentTree(1);</b>
+&nbsp;            }
+&nbsp;            //perform the logic in the new node.
+<b class="fc">&nbsp;            currentState = gameLogicInteractor.handleTree(0);</b>
+&nbsp;            //player can no longer roll
+<b class="fc">&nbsp;            mainStates[1] = 1;</b>
+<b class="fc">&nbsp;        }</b>
+&nbsp;        else{
+&nbsp;            //go to a node where it tells the user that they cannot roll
+<b class="nc">&nbsp;            gameLogicInteractor.transverseCurrentTree(2);</b>
+<b class="nc">&nbsp;            currentState = gameLogicInteractor.handleTree(0);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

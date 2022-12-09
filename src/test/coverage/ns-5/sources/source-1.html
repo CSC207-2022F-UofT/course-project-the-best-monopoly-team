@@ -1,0 +1,387 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > GameLogic</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Logic</a>
+</div>
+
+<h1>Coverage Summary for Class: GameLogic (Logic)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GameLogic</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    87.5%
+  </span>
+  <span class="absValue">
+    (14/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92.4%
+  </span>
+  <span class="absValue">
+    (109/118)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Logic;
+&nbsp;
+&nbsp;import Entities.*;
+&nbsp;import Logic.AuctionNodeLogic.*;
+&nbsp;import Logic.MainTreeNodeLogic.*;
+&nbsp;import Logic.TradingNodeLogic.AcceptTradeUseCase;
+&nbsp;import Logic.TradingNodeLogic.DeclineTradeUseCase;
+&nbsp;import Logic.TradingNodeLogic.TradingParentNodeUseCase;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class creates a GameLogic instance which coordinates the flow of the game.
+&nbsp; */
+&nbsp;public class GameLogic {
+<b class="fc">&nbsp;    private GameLogicTree[] trees = new GameLogicTree[3];</b>
+&nbsp;    private GameLogicTree currentTree;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the constructor for creating a GameLogic instance.
+&nbsp;     * @param currentPlayer A Player instance that is intended to be the current player of the game&#39;s turn.
+&nbsp;     * @param board A board instance that the GameLogic instance will help govern.
+&nbsp;     */
+<b class="fc">&nbsp;    public GameLogic(Player currentPlayer, Board board){</b>
+<b class="fc">&nbsp;        initialize(currentPlayer, board);</b>
+&nbsp;    }
+&nbsp;    public void initialize(Player currentPlayer, Board board){
+<b class="fc">&nbsp;        AuctionTreeNodeLogic.array_init(board.getPlayers().size());</b>
+<b class="fc">&nbsp;        GeneralGameLogic.initialize(currentPlayer,board, this);</b>
+<b class="fc">&nbsp;        createTrees();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the constructor for creating a GameLogic instance.
+&nbsp;     * @param board A board instance that the GameLogic instance will help govern.
+&nbsp;     * @param states array of integers containing what is needed to create the game
+&nbsp;     */
+<b class="fc">&nbsp;    public GameLogic(Board board, int[] states){</b>
+<b class="fc">&nbsp;        Player currentPlayer = board.getPlayers().get(states[4]);</b>
+<b class="fc">&nbsp;        initialize(currentPlayer,board);</b>
+<b class="fc">&nbsp;        int [] gameStates = new int[5];</b>
+<b class="fc">&nbsp;        gameStates[0] = 0;</b>
+<b class="fc">&nbsp;        gameStates[1] = states[5];</b>
+<b class="fc">&nbsp;        gameStates[2] = states[2];</b>
+<b class="fc">&nbsp;        gameStates[3] = states[3];</b>
+<b class="fc">&nbsp;        gameStates[4] = states[1];</b>
+<b class="fc">&nbsp;        MainTreeNodeLogic.initializeStates(gameStates);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a State object which represents the state of the game.
+&nbsp;     * @return A State object representing the state of the game.
+&nbsp;     */
+&nbsp;    public State getCurrentState(){
+<b class="fc">&nbsp;        GeneralGameLogic temp = new GeneralGameLogic();</b>
+<b class="fc">&nbsp;        return temp.getCurrentState();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the instance attribute called trees in the GameLogic instance.
+&nbsp;     * @return Returns a GameLogicTree array containing the trees stored in the GameLogic instance.
+&nbsp;     */
+&nbsp;    public GameLogicTree[] getTrees(){
+<b class="fc">&nbsp;        return this.trees;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the value of the instance attribute trees.
+&nbsp;     * @param newTrees A GameLogicTree array containing the trees to set the value of the tree instance attribute.
+&nbsp;     */
+&nbsp;    public void setTrees(GameLogicTree[] newTrees){
+<b class="nc">&nbsp;        this.trees = newTrees;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns a tree stored by the currentTree instance attribute. The currentTree instance attribute
+&nbsp;     * stores the tree that determines the flow of the game at the current turn.
+&nbsp;     * @return A GameLogicTree that determines the flow of the game at the current turn.
+&nbsp;     */
+&nbsp;    public GameLogicTree getCurrentTree(){
+<b class="fc">&nbsp;        return this.currentTree;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the value of the currentTree instance attribute.
+&nbsp;     * @param newCurrentTree a GameLogicTree that will be set as the currentTree.
+&nbsp;     */
+&nbsp;    public void setCurrentTree(GameLogicTree newCurrentTree){
+<b class="fc">&nbsp;        this.currentTree = newCurrentTree;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the currentTree instance attribute to the highest possible node of the currenTree.
+&nbsp;     */
+&nbsp;    public void setCurrentTreeToMaxParent(){
+<b class="fc">&nbsp;        currentTree = (GameLogicTree) currentTree.getMaxParent();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method creates the GameLogic trees for the different scenarios in the game.
+&nbsp;     */
+&nbsp;    public void createTrees(){
+&nbsp;        MenuTree[] temp;
+&nbsp;        //Creating the game loop tree
+<b class="fc">&nbsp;        GameLogicTree main = new GameLogicTree( new MainParentNodeUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree trade = new GameLogicTree(new TradeUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree pickPlayer = new GameLogicTree(new PickPlayerUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree pickItemOp = new GameLogicTree(new PickItemOpUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree pickItemSelf = new GameLogicTree(new PickItemSelfUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree sendTrade = new GameLogicTree(new SendTradeUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree nothingToTrade = new GameLogicTree(new NothingToTradeUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        pickItemSelf.addChild(sendTrade);</b>
+<b class="fc">&nbsp;        pickItemOp.addChild(pickItemSelf);</b>
+<b class="fc">&nbsp;        pickPlayer.addChild(pickItemOp);</b>
+<b class="fc">&nbsp;        trade.addChild(pickPlayer);</b>
+<b class="fc">&nbsp;        pickPlayer.addChild(nothingToTrade);</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree manageProperty = new GameLogicTree(new ManagePropertyUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree selectProperty = new GameLogicTree(new SelectPropertyUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree mortgage = new GameLogicTree(new MortgageUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree unMortgage = new GameLogicTree(new UnMortgageUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree buildProperty = new GameLogicTree(new BuildPropertyUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree noProperties = new GameLogicTree(new NoPropertiesUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{mortgage, unMortgage, buildProperty};</b>
+<b class="fc">&nbsp;        addParentToMultiple(selectProperty,temp);</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{selectProperty, noProperties};</b>
+<b class="fc">&nbsp;        addParentToMultiple(manageProperty,temp);</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree roll = new GameLogicTree(new RollUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree callAction = new GameLogicTree(new CallActionUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree emptyPropertySpace = new GameLogicTree(new EmptyPropertySpaceUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree buy = new GameLogicTree(new BuyUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree auction = new GameLogicTree(new AuctionUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree alreadyRolled = new GameLogicTree(new AlreadyRolledUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{emptyPropertySpace, callAction, alreadyRolled};</b>
+<b class="fc">&nbsp;        addParentToMultiple(roll, temp);</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{buy, auction};</b>
+<b class="fc">&nbsp;        addParentToMultiple(emptyPropertySpace, temp);</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree steal = new GameLogicTree(new StealUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree choosePlayer = new GameLogicTree(new ChoosePlayerUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        steal.addChild(choosePlayer);</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree endTurn = new GameLogicTree(new EndTurnUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree settingsMenu = new GameLogicTree(new SettingsMenuUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree exitGame = new GameLogicTree(new ExitGameUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree saveGame = new GameLogicTree(new SaveGameUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree bankruptcy = new GameLogicTree(new BankruptcyUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        GameLogicTree confirmationNode = new GameLogicTree(new ConfirmationUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree informationNode = new GameLogicTree(new InformationUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree finishGameNode = new GameLogicTree(new FinishGameUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        finishGameNode.addChild(exitGame);</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{choosePlayer, callAction, buildProperty, alreadyRolled,</b>
+&nbsp;        saveGame, endTurn, auction, noProperties, nothingToTrade, sendTrade};
+<b class="fc">&nbsp;        addChildToMultiple(temp,informationNode);</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{mortgage, exitGame, bankruptcy};</b>
+<b class="fc">&nbsp;        addChildToMultiple(temp, confirmationNode);</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{bankruptcy, endTurn};</b>
+<b class="fc">&nbsp;        addChildToMultiple(temp, finishGameNode);</b>
+&nbsp;
+<b class="fc">&nbsp;        settingsMenu.addChild(exitGame);</b>
+<b class="fc">&nbsp;        settingsMenu.addChild(saveGame);</b>
+<b class="fc">&nbsp;        settingsMenu.setIsSwitchBlock(true);</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{trade,manageProperty,roll,steal,endTurn,settingsMenu,bankruptcy};</b>
+<b class="fc">&nbsp;        addParentToMultiple(main, temp);</b>
+&nbsp;
+<b class="fc">&nbsp;        main.setIsSwitchBlock(true);</b>
+<b class="fc">&nbsp;        selectProperty.setIsSwitchBlock(true);</b>
+<b class="fc">&nbsp;        emptyPropertySpace.setIsSwitchBlock(true);</b>
+<b class="fc">&nbsp;        trees[0] = main;</b>
+&nbsp;
+&nbsp;        //Creating the trading tree
+<b class="fc">&nbsp;        GameLogicTree tradeTree = new GameLogicTree(new TradingParentNodeUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree acceptTrade = new GameLogicTree(new AcceptTradeUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree declineTrade = new GameLogicTree(new DeclineTradeUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{acceptTrade, declineTrade};</b>
+<b class="fc">&nbsp;        addParentToMultiple(tradeTree, temp);</b>
+<b class="fc">&nbsp;        tradeTree.setIsSwitchBlock(true);</b>
+<b class="fc">&nbsp;        trees[1] = tradeTree;</b>
+&nbsp;
+&nbsp;        //Creating the auction tree
+<b class="fc">&nbsp;        GameLogicTree auctionTree = new GameLogicTree(new AuctionParentNode());</b>
+<b class="fc">&nbsp;        GameLogicTree lowOption = new GameLogicTree(new LowOptionUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree mediumOption = new GameLogicTree(new MediumOptionUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree highOption = new GameLogicTree(new HighOptionUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree fold = new GameLogicTree(new FoldUseCase());</b>
+&nbsp;
+<b class="fc">&nbsp;        auctionTree.setIsSwitchBlock(true);</b>
+&nbsp;
+<b class="fc">&nbsp;        temp = new MenuTree[]{lowOption, mediumOption, highOption, fold};</b>
+<b class="fc">&nbsp;        addParentToMultiple(auctionTree, temp);</b>
+<b class="fc">&nbsp;        trees[2] = auctionTree;</b>
+&nbsp;
+<b class="fc">&nbsp;        currentTree = main;</b>
+&nbsp;    }
+&nbsp;    public void addChildToMultiple(MenuTree[] trees, MenuTree child){
+<b class="fc">&nbsp;        for (MenuTree tree: trees){</b>
+<b class="fc">&nbsp;            tree.addChild(child);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    public void addParentToMultiple(MenuTree parent, MenuTree[] trees){
+<b class="fc">&nbsp;        for (MenuTree tree: trees){</b>
+<b class="fc">&nbsp;            parent.addChild(tree);</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method traverses through the GameLogicTrees that handle the state of the program.
+&nbsp;     * @param input an int value that represents the direction of which the GameLogicTrees are to be traversed. -1
+&nbsp;     *              represents traversing backwards. Otherwise, it will traverse forwards.
+&nbsp;     * @return A state object indicating the current state of the program
+&nbsp;     */
+&nbsp;    public State performInput(int input){
+&nbsp;        //Moving through the tree depending on the input and the node
+<b class="nc">&nbsp;        if (input == -1){</b>
+&nbsp;            //Move backwards in tree
+<b class="nc">&nbsp;            currentTree = (GameLogicTree) currentTree.getParent();</b>
+<b class="nc">&nbsp;            return currentTree.getPreviousState();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else if (currentTree.isSwitchBlock()){</b>
+&nbsp;            //Move forward in tree to one of the branches
+<b class="nc">&nbsp;            transverseCurrentTree(input);</b>
+&nbsp;        }
+&nbsp;        else{
+&nbsp;            //Move forward in tree
+<b class="nc">&nbsp;            currentTree = (GameLogicTree) currentTree.getChildren().get(0);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        return handleTree(input);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method sets the currentTree instance attribute to a GameLogicTree which is a child of the currentTree
+&nbsp;     * selected through the parameter.
+&nbsp;     * @param branchNumber an int value that identifies the GameLogicTree that is to be set as currentTree.
+&nbsp;     */
+&nbsp;    public void transverseCurrentTree(int branchNumber){
+<b class="fc">&nbsp;        currentTree =  (GameLogicTree) currentTree.getChildren().get(branchNumber);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method handles the GameLogicTree that corresponds to the current state of the game and returns a State
+&nbsp;     * instance containing relevant information related to the action performed.
+&nbsp;     * @param input an int value corresponding to a specific action for mainTreeHandler to handle.
+&nbsp;     * @return a State instance containing relevant information related to the action handled.
+&nbsp;     */
+&nbsp;    public State handleTree(int input){
+&nbsp;
+<b class="fc">&nbsp;            State returnState =  currentTree.getUseCase().create_state(input);</b>
+<b class="fc">&nbsp;            currentTree.setPreviousState(returnState);</b>
+<b class="fc">&nbsp;            return returnState;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * This method returns the currentTree instance attribute&#39;s ID.
+&nbsp;     * @return an int value representing the currentTree&#39;s ID. It will return -1 if the ID failed to be retrieved.
+&nbsp;     */
+&nbsp;    public int getCurrentTreeID(){
+<b class="fc">&nbsp;        for (int  i = 0; i&lt;trees.length; i++){</b>
+<b class="fc">&nbsp;            if (trees[i] == currentTree.getMaxParent()){</b>
+<b class="fc">&nbsp;                return i;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        return -1;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

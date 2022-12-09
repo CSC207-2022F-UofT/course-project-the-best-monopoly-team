@@ -30,3 +30,4 @@ The Logic pertaining to storing game data in and getting game data from a file
 
 ## Test
 This directory includes all the test files for each entity and their use case.
+The coverage directory includes the generated coverage report from IntelliJ.

@@ -1,0 +1,375 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Player</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Entities</a>
+</div>
+
+<h1>Coverage Summary for Class: Player (Entities)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Player</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72%
+  </span>
+  <span class="absValue">
+    (18/25)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    55.7%
+  </span>
+  <span class="absValue">
+    (34/61)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Entities;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.HashMap;
+&nbsp;import java.util.Objects;
+&nbsp;
+&nbsp;/**
+&nbsp; * A class representing a player in the game of monpoly
+&nbsp; */
+&nbsp;public class Player {
+&nbsp;    /**
+&nbsp;     * InstanceVar name: the name of the player
+&nbsp;     * InstanceVar money: the amount of money the player has
+&nbsp;     * InstanceVar properties: the properties the player owns
+&nbsp;     * InstanceVar inJail: a variable representing if the player is in jail or not
+&nbsp;     * InstanceVar jailCards: the number of get out of jail free cards the user has
+&nbsp;     * InstanceVar position: the current position of the player on the board
+&nbsp;     */
+&nbsp;    private String name;
+&nbsp;    private int money;
+&nbsp;    private ArrayList&lt;Property&gt; properties;
+&nbsp;    private boolean inJail;
+&nbsp;    private int jailCards;
+&nbsp;    private int position;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Global Variables representing constant values
+&nbsp;     */
+&nbsp;    private static final int STARTING_MONEY = 1500;
+&nbsp;    private static final int STARTING_JAILCARDS = 0;
+&nbsp;    private static final int STARTING_POSITION = 0;
+&nbsp;    private static final int GO_MONEY = 200;
+&nbsp;
+&nbsp;    private static final int LAST_POSITION_INDEX = 39;
+&nbsp;    private static final int BOARD_SIZE = 40;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the constructor method for new player instances
+&nbsp;     * @param name this parameter is for the name of the player
+&nbsp;     */
+<b class="fc">&nbsp;    public Player(String name) {</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+<b class="fc">&nbsp;        this.money = STARTING_MONEY;</b>
+<b class="fc">&nbsp;        this.properties = new ArrayList&lt;Property&gt;();</b>
+<b class="fc">&nbsp;        this.inJail = false;</b>
+<b class="fc">&nbsp;        this.jailCards = STARTING_JAILCARDS;</b>
+<b class="fc">&nbsp;        this.position = STARTING_POSITION;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This is the constructor method for new player instances that takes in more parameters. Useful when loading a
+&nbsp;     * previously saved game
+&nbsp;     * @param name the name of the player
+&nbsp;     * @param money the amount of money in the player&#39;s balance
+&nbsp;     * @param inJail the player&#39;s jail status
+&nbsp;     * @param jailCards the number of get out of jail free cards owned by the player
+&nbsp;     * @param position the player&#39;s current position on the board
+&nbsp;     */
+<b class="fc">&nbsp;    public Player(String name, int money, boolean inJail, int jailCards, int position) {</b>
+<b class="fc">&nbsp;        this.name = name;</b>
+<b class="fc">&nbsp;        this.money = money;</b>
+<b class="fc">&nbsp;        this.properties = new ArrayList&lt;Property&gt;();</b>
+<b class="fc">&nbsp;        this.inJail = inJail;</b>
+<b class="fc">&nbsp;        this.jailCards = jailCards;</b>
+<b class="fc">&nbsp;        this.position = position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This basically sets the player attribute of inJail, which in this case is a boolean value
+&nbsp;     * @param inJail the parameter for this is a boolean value that sets their inJail property to true or false
+&nbsp;     */
+&nbsp;    public void setInJail(boolean inJail) {
+<b class="fc">&nbsp;        this.inJail = inJail;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Set the player&#39;s position.
+&nbsp;     * This is useful when the player needs to move by a mean beside rolling the dice
+&nbsp;     * e.g. action cards, or when we need to load a previous game.
+&nbsp;     * @param position the position of the player on the board should be between 0 and 39 inclusive.
+&nbsp;     */
+&nbsp;    public void setPosition(int position){
+<b class="fc">&nbsp;        this.position = position;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This sets the number of get out of jail free cards the player has that was drawn from the community chest or
+&nbsp;     * chance cards
+&nbsp;     * @param num this parameter is the number of cards to increment by for player
+&nbsp;     */
+&nbsp;    public void setJailCards(int num) {
+<b class="fc">&nbsp;        this.jailCards = this.jailCards + num;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The getter method for jailCards
+&nbsp;     * @return the return value is of type int and returns the number of jail cards the current player has
+&nbsp;     */
+<b class="fc">&nbsp;    public int getJailCards() { return jailCards; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The getter method for position of the player
+&nbsp;     * @return  returns the int that is from 0 to 39 inclusive corresponding to the player position
+&nbsp;     */
+<b class="fc">&nbsp;    public int getPosition() { return position; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The getter method to see if the player is in jail or not
+&nbsp;     * @return returns a boolean value of False and True
+&nbsp;     */
+<b class="fc">&nbsp;    public boolean isInJail() { return inJail; }</b>
+&nbsp;    public int getRailroads() {
+<b class="nc">&nbsp;        int railroads = 0;</b>
+<b class="nc">&nbsp;        for (Property property : this.properties) {</b>
+<b class="nc">&nbsp;            if (Objects.equals(property.getColour(), &quot;Railroad&quot;)) {</b>
+<b class="nc">&nbsp;                railroads += 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return railroads;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets the number of utilities owned by this player
+&nbsp;     * @return the number of utilities owned by this player
+&nbsp;     */
+&nbsp;    public int getUtilities() {
+<b class="nc">&nbsp;        int utility = 0;</b>
+<b class="nc">&nbsp;        for (Property property : this.properties) {</b>
+<b class="nc">&nbsp;            if (Objects.equals(property.getColour(), &quot;Utility&quot;)) {</b>
+<b class="nc">&nbsp;                utility += 1;</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+<b class="nc">&nbsp;        return utility;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Increment the player&#39;s number of get out of jail free cards by a specific number
+&nbsp;     * @param num this parameter is the number of cards to increment by for player
+&nbsp;     */
+<b class="nc">&nbsp;    public void addJailCards(int num) { this.jailCards += num; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decrement the player&#39;s number of get out of jail free cards by a specific number
+&nbsp;     * @param num this parameter is the number of cards to decrement by for player
+&nbsp;     */
+<b class="nc">&nbsp;    public void removeJailCards(int num) { this.jailCards -= num; }</b>
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Helper function for ownedPropertySets(). This function creates a map with the property colours as the key and
+&nbsp;     * an int counter as its value.
+&nbsp;     * @return a HashMap with the property colours as the key and an int counter as its value.
+&nbsp;     */
+&nbsp;    private HashMap&lt;String, Integer&gt; createSetMap() {
+<b class="nc">&nbsp;        HashMap&lt;String, Integer&gt; sets = new HashMap&lt;&gt;();</b>
+<b class="nc">&nbsp;        sets.put(&quot;Brown&quot;, 0);</b>
+<b class="nc">&nbsp;        sets.put(&quot;Light Blue&quot;, 0);</b>
+<b class="nc">&nbsp;        sets.put(&quot;Pink&quot;, 0);</b>
+<b class="nc">&nbsp;        sets.put(&quot;Orange&quot;, 0);</b>
+<b class="nc">&nbsp;        sets.put(&quot;Red&quot;, 0);</b>
+<b class="nc">&nbsp;        sets.put(&quot;Yellow&quot;, 0);</b>
+<b class="nc">&nbsp;        sets.put(&quot;Green&quot;, 0);</b>
+<b class="nc">&nbsp;        sets.put(&quot;Dark Blue&quot;, 0);</b>
+<b class="nc">&nbsp;        return sets;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Changes the jail status of the player
+&nbsp;     */
+&nbsp;    public void changeJailStatus() {
+<b class="fc">&nbsp;        this.inJail = !this.inJail;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter method for the name of the player
+&nbsp;     * @return returns a string, which is the name of the player
+&nbsp;     */
+&nbsp;    public String getName(){
+<b class="fc">&nbsp;        return this.name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Setter method for setting the amount money
+&nbsp;     * @param money the money that we want to set the money of the player to
+&nbsp;     */
+&nbsp;    public void setMoney(int money) {
+<b class="fc">&nbsp;        this.money = money;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Getter method for getting the current amount of money that the player has.
+&nbsp;     * @return returns and integer
+&nbsp;     */
+&nbsp;    public int getMoney() {
+<b class="fc">&nbsp;        return this.money;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Adds a certain property to the current player
+&nbsp;     * @param property the property to add to the properties list of the player
+&nbsp;     */
+&nbsp;    public void addProperty(Property property) {
+<b class="fc">&nbsp;        this.properties.add(property);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Method to move the player by x number of steps
+&nbsp;     * @param step the steps to move the player to
+&nbsp;     */
+&nbsp;    public void move(int step) {
+<b class="fc">&nbsp;        position += step;</b>
+<b class="fc">&nbsp;        if (position &gt; LAST_POSITION_INDEX) {</b>
+&nbsp;            //Money on passing go
+<b class="fc">&nbsp;            money += GO_MONEY;</b>
+<b class="fc">&nbsp;            position -= BOARD_SIZE;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Rigged roll for testing purposes
+&nbsp;     * @param rig - number to change the roll to
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public String riggedRoll(int rig) {
+<b class="nc">&nbsp;        this.move(rig);</b>
+<b class="nc">&nbsp;        return (&quot;&quot;+rig);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Increases the amount of money owned by this player
+&nbsp;     * @param change an integer indicating how much money will be added to the player&#39;s balance
+&nbsp;     */
+&nbsp;    public void changeMoney(int change) {
+<b class="fc">&nbsp;        this.money += change;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decrease the money of the player
+&nbsp;     * @param money the amount of money to decrease by
+&nbsp;     */
+&nbsp;    public void pay(int money) {
+<b class="fc">&nbsp;        this.money -= money;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Decrease the money of the current player and add it to another players money
+&nbsp;     * @param player the player to add the money to
+&nbsp;     * @param money the amount of money to decrease by for current player and increase by for the other player
+&nbsp;     */
+&nbsp;    public void pay(Player player, int money) {
+<b class="fc">&nbsp;        this.money -= money;</b>
+<b class="fc">&nbsp;        player.money += money;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Gets all of the properties of the current player
+&nbsp;     * @return returns and array list of properties
+&nbsp;     */
+&nbsp;    public ArrayList&lt;Property&gt; getProperties() {
+<b class="fc">&nbsp;        return properties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Sets the current players properties to another ArrayList of properties
+&nbsp;     * @param properties the ArrayList of properties to change it to
+&nbsp;     */
+&nbsp;    public void setProperties(ArrayList&lt;Property&gt; properties) {
+<b class="nc">&nbsp;        this.properties = properties;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

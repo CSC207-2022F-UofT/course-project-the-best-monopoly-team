@@ -1,0 +1,356 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UseCaseInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">UseCases</a>
+</div>
+
+<h1>Coverage Summary for Class: UseCaseInteractor (UseCases)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UseCaseInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (10/16)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    70.3%
+  </span>
+  <span class="absValue">
+    (52/74)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;
+&nbsp;package UseCases;
+&nbsp;
+&nbsp;import Entities.Board;
+&nbsp;import Entities.GameLogicTree;
+&nbsp;import Entities.State;
+&nbsp;import Interactors.GameCreation;
+&nbsp;import Interactors.SavePackager;
+&nbsp;import Logic.InitialNodeLogic.*;
+&nbsp;import Persistence.LoadAccess;
+&nbsp;import Logic.GameLogic;
+&nbsp;import Persistence.SaveAccess;
+&nbsp;
+&nbsp;import java.io.FileNotFoundException;
+&nbsp;import java.io.IOException;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;
+&nbsp;/**
+&nbsp; * This class creates a UseCaseInteractor which coordinates the inputs to the entities layer of the program.
+&nbsp; */
+&nbsp;public class UseCaseInteractor{
+&nbsp;
+&nbsp;    private GameLogicTree currentTree;
+<b class="fc">&nbsp;    private boolean menuTreeActive = true;</b>
+&nbsp;    private GameLogic logicInteractor;
+&nbsp;    private LoadAccess loadAccess;
+&nbsp;    private SaveAccess saveAccess;
+&nbsp;    private GameCreation gameCreation;
+&nbsp;    private SavePackager savePackager;
+&nbsp;    private State currentState;
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Constructor for the UseCaseInteractor.
+&nbsp;     */
+<b class="fc">&nbsp;    public UseCaseInteractor(LoadAccess loadAccess, SaveAccess saveAccess){</b>
+<b class="fc">&nbsp;        this.saveAccess = saveAccess;</b>
+<b class="fc">&nbsp;        this.loadAccess = loadAccess;</b>
+<b class="fc">&nbsp;        createTrees();</b>
+<b class="fc">&nbsp;        this.gameCreation = new GameCreation();</b>
+<b class="fc">&nbsp;        this.savePackager = new SavePackager();</b>
+<b class="fc">&nbsp;        InitialLogic.setCaseInteractor(this);</b>
+&nbsp;    }
+&nbsp;    public LoadAccess getLoadAccess(){
+<b class="fc">&nbsp;        return loadAccess;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method returns the state that the game is in
+&nbsp;     * @return the state that the game is in
+&nbsp;     */
+&nbsp;    public State getCurrentState() {
+<b class="nc">&nbsp;        return this.currentState;</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * This method handles the input of the user. &lt;br&gt;It moves through the current tree with the user&#39;s input,
+&nbsp;     * and uses helper methods to deal with the logic afterwards.
+&nbsp;     * @param input the translated input of the user from the input interface
+&nbsp;     */
+&nbsp;    public State handleInput(int input){
+&nbsp;        //If the initial menu is open, transverse through this tree
+<b class="fc">&nbsp;        if (menuTreeActive){</b>
+&nbsp;            //Moving through the tree depending on the input and the node
+<b class="fc">&nbsp;            if (input == -1){</b>
+&nbsp;                //Move backwards in tree
+<b class="nc">&nbsp;                currentTree = (GameLogicTree) currentTree.getParent();</b>
+<b class="nc">&nbsp;                return currentTree.getPreviousState();</b>
+&nbsp;            }
+<b class="fc">&nbsp;            else if (currentTree.isSwitchBlock()){</b>
+&nbsp;                //Move forward in tree to one of the branches
+<b class="fc">&nbsp;                currentTree = (GameLogicTree) currentTree.getChildren().get(input);</b>
+&nbsp;            }
+&nbsp;            else{
+&nbsp;                //Move forward in tree
+<b class="fc">&nbsp;                currentTree = (GameLogicTree) currentTree.getChildren().get(0);</b>
+&nbsp;            }
+&nbsp;            //performs logic when inside nodes
+<b class="fc">&nbsp;            currentState = currentTree.getUseCase().create_state(input);</b>
+&nbsp;        }
+&nbsp;        else{
+&nbsp;            //forwards input to GameLogic once the game has started
+<b class="nc">&nbsp;            currentState = handleOtherTrees(input);</b>
+&nbsp;        }
+&nbsp;        //returns to the menu screen
+<b class="fc">&nbsp;        if (currentState.isExitToMenu()){</b>
+<b class="nc">&nbsp;            return returnToStart();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        else if(currentState.isSaveGame()){</b>
+<b class="nc">&nbsp;            saveGame();</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return currentState;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method allows the user to exit from the game and return to the initial menu.
+&nbsp;     * @return a State object which gives the current state of the program
+&nbsp;     */
+&nbsp;    public State returnToStart(){
+<b class="nc">&nbsp;        menuTreeActive = true;</b>
+<b class="nc">&nbsp;        currentTree = (GameLogicTree) currentTree.getMaxParent();</b>
+<b class="nc">&nbsp;        return getInitialState();</b>
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * This method creates the initial menu tree for the program &lt;br&gt;
+&nbsp;     * The tree is for the initialization part of the program, allowing the user
+&nbsp;     * to choose game modes, number of players, etc.
+&nbsp;     */
+&nbsp;    public void createTrees(){
+&nbsp;        //creating first tree
+<b class="fc">&nbsp;        GameLogicTree initialMenu = new GameLogicTree(new InitialParentNodeUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree newGame = new GameLogicTree(new NewGameUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree chooseGameMode = new GameLogicTree(new ChooseGameModeUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree numPlayers = new GameLogicTree( new NumberOfPlayersUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree gameLength = new GameLogicTree(new GameLengthUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree createNewGame = new GameLogicTree(new CreateNewGameUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree loadGame = new GameLogicTree(new LoadGameUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree chooseSave = new GameLogicTree(new ChooseSaveUseCase());</b>
+<b class="fc">&nbsp;        GameLogicTree createLoadedGame = new GameLogicTree(new CreateLoadedGameUseCase());</b>
+&nbsp;
+&nbsp;        //creating the tree structure
+<b class="fc">&nbsp;        gameLength.addChild(createNewGame);</b>
+<b class="fc">&nbsp;        numPlayers.addChild(gameLength);</b>
+&nbsp;
+<b class="fc">&nbsp;        chooseGameMode.addChild(numPlayers);</b>
+<b class="fc">&nbsp;        newGame.addChild(chooseGameMode);</b>
+&nbsp;
+<b class="fc">&nbsp;        chooseSave.addChild(createLoadedGame);</b>
+<b class="fc">&nbsp;        loadGame.addChild(chooseSave);</b>
+&nbsp;
+<b class="fc">&nbsp;        initialMenu.addChild(newGame);</b>
+<b class="fc">&nbsp;        initialMenu.addChild(loadGame);</b>
+&nbsp;
+&nbsp;        //indicates that this tree switches with input
+<b class="fc">&nbsp;        initialMenu.setIsSwitchBlock(true);</b>
+&nbsp;
+&nbsp;        //adding the tree into an array for later retrieval
+<b class="fc">&nbsp;        currentTree = initialMenu;</b>
+&nbsp;
+&nbsp;    }
+&nbsp;    public void saveGame(){
+&nbsp;        try{
+<b class="nc">&nbsp;            String saveReturn = saveAccess.saveGameNewFile(savePackager.getPlayerPropertyData(), savePackager.getStates());</b>
+<b class="nc">&nbsp;            currentState.setDescription(&quot;Successful save in file: &quot;+ saveReturn);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (Exception IOException){</b>
+<b class="nc">&nbsp;            currentState.setDescription(&quot;Save failed&quot;);</b>
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the state object which contains the properties of the root of the current tree and
+&nbsp;     * sets the current tree to the root
+&nbsp;     * @return state object
+&nbsp;     */
+&nbsp;    public State getInitialState(){
+&nbsp;
+&nbsp;        //makes the currentTree the root
+<b class="fc">&nbsp;        currentTree = (GameLogicTree) currentTree.getMaxParent();</b>
+<b class="fc">&nbsp;        return currentTree.getUseCase().create_state(0);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method handles the input of the user in the game part of the program.
+&nbsp;     * &lt;p&gt;
+&nbsp;     */
+&nbsp;    public State handleOtherTrees(int input){
+&nbsp;        //deciding what to do based on node visited
+<b class="nc">&nbsp;        return logicInteractor.performInput(input);</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public void createNewGame(int[] states){
+&nbsp;        Board loadedBoard;
+<b class="fc">&nbsp;        loadedBoard = loadFiles(states[0], states[2]);</b>
+<b class="fc">&nbsp;        createGame(loadedBoard, states);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method allows the user to create a game, new or loaded, by loading the files
+&nbsp;     * that deal with the game
+&nbsp;     * @param board is the Board instance containing the save file information
+&nbsp;     * @param states is an int[] containing save file information
+&nbsp;     */
+&nbsp;    public void createGame(Board board, int[] states){
+<b class="fc">&nbsp;        logicInteractor = new GameLogic(board, states);</b>
+<b class="fc">&nbsp;        menuTreeActive = false;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method loads the files used in the program and creates an object which contains all the necessary game
+&nbsp;     * files to begin a game
+&nbsp;     * @return the object which will supply the data to create the game
+&nbsp;     */
+&nbsp;    public Board loadFiles(int numberOfPlayers, int mode) {
+&nbsp;        try {
+<b class="fc">&nbsp;            ArrayList&lt;String[]&gt; newProperties = this.loadAccess.loadProperties();</b>
+<b class="fc">&nbsp;            ArrayList&lt;String&gt; playerNames = new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;            for (int i = 0; i &lt; numberOfPlayers; i++) {</b>
+<b class="fc">&nbsp;                playerNames.add(&quot;Player &quot; + i);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            Board newBoard = this.gameCreation.createNewBoard(playerNames, newProperties);</b>
+<b class="fc">&nbsp;            gameCreation.initializeMode(newBoard, mode);</b>
+<b class="fc">&nbsp;            return newBoard;</b>
+&nbsp;        }
+<b class="nc">&nbsp;        catch (Exception IOException){</b>
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;    /**
+&nbsp;     * This method loads the files used in the program and the save file and
+&nbsp;     * an object which contains all the necessary game files to load a previous game
+&nbsp;     * @return the object which will supply the data to create the game
+&nbsp;     */
+&nbsp;    public Board loadSavedBoard(String file) throws IOException{
+<b class="nc">&nbsp;        ArrayList&lt;ArrayList&lt;String[]&gt;&gt; loadedGame = this.loadAccess.loadGame(file);</b>
+<b class="nc">&nbsp;        ArrayList&lt;String[]&gt; newProperties = this.loadAccess.loadProperties();</b>
+&nbsp;
+<b class="nc">&nbsp;        return this.gameCreation.createSavedBoard(loadedGame, newProperties);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * This method loads the save file and returns the initial states required for the
+&nbsp;     * Tree when creating a game
+&nbsp;     * @return an Integer[] of initial states
+&nbsp;     * @throws FileNotFoundException
+&nbsp;     */
+&nbsp;    public int[] loadInitialStates(String file) throws FileNotFoundException {
+<b class="nc">&nbsp;        ArrayList&lt;ArrayList&lt;String[]&gt;&gt; loadedGame = this.loadAccess.loadGame(file);</b>
+<b class="nc">&nbsp;        return this.gameCreation.getInitialStates(loadedGame);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the current tree used in this program
+&nbsp;     * @return the current tree
+&nbsp;     */
+&nbsp;    public GameLogicTree getCurrentTree(){
+<b class="fc">&nbsp;        return currentTree;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Returns the GameLogic instance used in this object
+&nbsp;     * @return the GameLogic instance
+&nbsp;     */
+&nbsp;    public GameLogic getLogicInteractor() {
+<b class="fc">&nbsp;        return logicInteractor;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>

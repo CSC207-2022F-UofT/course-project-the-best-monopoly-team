@@ -1,0 +1,168 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > InputInteractor</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">Interactors</a>
+</div>
+
+<h1>Coverage Summary for Class: InputInteractor (Interactors)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InputInteractor</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    80%
+  </span>
+  <span class="absValue">
+    (4/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    72.7%
+  </span>
+  <span class="absValue">
+    (8/11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package Interactors;
+&nbsp;
+&nbsp;import Entities.Input;
+&nbsp;import Entities.State;
+&nbsp;import UseCases.UseCaseInteractor;
+&nbsp;
+&nbsp;/**
+&nbsp; * InputInteractor is a class that controls the data in the Input Entity and interacts with the UseCaseInteractor to
+&nbsp; * process the input and obtain an updated state
+&nbsp; */
+&nbsp;public class InputInteractor {
+&nbsp;    /**
+&nbsp;     * InstanceVar input: the Input object which represents the users current input
+&nbsp;     * InstanceVar interactor: the UseCaseInteractor object that takes in the input for processing
+&nbsp;     * InstanceVar currentState: the State object used in processing to obtain the new state
+&nbsp;     */
+&nbsp;    Input input;
+&nbsp;    private UseCaseInteractor interactor;
+&nbsp;    private State currentState;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * The constructor for the InputInteractor Class
+&nbsp;     * @param interactor: the UseCaseInteractor object used for data processing and logic
+&nbsp;     */
+<b class="fc">&nbsp;    public InputInteractor(UseCaseInteractor interactor){</b>
+<b class="fc">&nbsp;        this.input = new Input();</b>
+<b class="fc">&nbsp;        this.interactor = interactor;</b>
+<b class="fc">&nbsp;        this.currentState = interactor.getInitialState();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function returns the state that the game is in
+&nbsp;     * @return the state that the game is in
+&nbsp;     */
+&nbsp;    public State getCurrentState() {
+<b class="fc">&nbsp;        return this.currentState;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Function that updates the state based on the user&#39;s input
+&nbsp;     */
+&nbsp;    public void sendInput() {
+<b class="fc">&nbsp;        if (this.input.getInput() == this.currentState.getOptions().size())</b>
+<b class="nc">&nbsp;            this.currentState = this.interactor.handleInput(-1);</b>
+&nbsp;        else
+<b class="fc">&nbsp;            this.currentState = this.interactor.handleInput(this.input.getInput());</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A function that gets the users choice and sets that as the current input
+&nbsp;     * @param choice
+&nbsp;     */
+&nbsp;    public void getChoice(int choice){
+<b class="fc">&nbsp;        this.input.setInput(choice);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    /**
+&nbsp;     * A function that processes the logic to get the new state and returns the updated state
+&nbsp;     * @return the updated state
+&nbsp;     */
+&nbsp;    public State getUpdatedState(){
+<b class="nc">&nbsp;        sendInput();</b>
+<b class="nc">&nbsp;        return this.currentState;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2022-12-08 23:48</div>
+</div>
+</body>
+</html>
