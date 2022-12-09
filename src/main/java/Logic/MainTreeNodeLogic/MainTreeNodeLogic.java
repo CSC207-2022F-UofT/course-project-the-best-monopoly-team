@@ -10,21 +10,21 @@ public class MainTreeNodeLogic extends GeneralGameLogic {
 
 
     /*
-    STATE ARRAY FORMATTING FOR SAVING:
-[0]: number of players
-[1]: game length (turn where game ends)
-[2]: game mode
-[3]: current turn
-[4]: current player
-[5]: Roll
+    mainStates ARRAY FORMATTING FOR SAVING:
+    [0]: number of players
+    [1]: game length (turn where game ends)
+    [2]: game mode
+    [3]: current turn
+    [4]: current player
+    [5]: Roll
 
 
-IN GAME STATE ARRAY FORMATTING:
-[0]: Confirmation node
-[1]: Roll
-[2]: Game mode
-[3]: Turn counter
-[4]: Game Length
+    IN GAME mainStates ARRAY FORMATTING:
+    [0]: Confirmation node
+    [1]: Roll
+    [2]: Game mode
+    [3]: Turn counter
+    [4]: Game Length
 
      */
     static int[] mainStates = new int[5];
