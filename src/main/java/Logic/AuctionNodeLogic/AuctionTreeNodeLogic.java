@@ -39,7 +39,7 @@ public class AuctionTreeNodeLogic extends GeneralGameLogic {
         State currentState = new State();
         GameLogic gameLogicInteractor = getGameLogicInteractor();
         currentPlayerIndex = getCurrentPlayerIndex();
-        //loop through the players every time one gives their choice
+        //loop through the players till we get a player who has not folded
         do {
             changePlayers();
         }while (auctionStates[getCurrentPlayerIndex()] == 1);

@@ -66,8 +66,8 @@ public class RollUseCase extends MainTreeNodeLogic implements NodeLogic {
                         CornerTilePerformActionUseCase cornerTileInteractor = new CornerTilePerformActionInteractor();
                         assert landedOnCell instanceof CornerTiles;
                         CornerTiles cornerTile = (CornerTiles) landedOnCell;
-
                         setAnswer(cornerTileInteractor.performAction(currentPlayer, cornerTile));
+
                         break;
                     case "Action Space":
                         PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
