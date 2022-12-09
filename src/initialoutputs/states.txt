@@ -8,7 +8,7 @@ Load Game,What save do you want to load?
 Choose Save,Confirm the load?
 Create Loaded Game,
 Main Tree Parent Node,""
-Trade,Who do you want to tradeUseCase with?
+Trade,Who do you want to trade with?
 Pick Player (Trade),What property do you want from the player?
 Trader/Tradee Has No Properties,Trade cannot be done; one of you have no properties
 Pick Item Of Opponent,What property are you willing to trade?
