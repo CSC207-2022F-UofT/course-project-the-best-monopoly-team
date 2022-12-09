@@ -8,11 +8,11 @@ Load Game,What save do you want to load?
 Choose Save,Confirm the load?
 Create Loaded Game,
 Main Tree Parent Node,""
-Trade,Who do you want to trade with?
+Trade,Who do you want to tradeUseCase with?
 Pick Player (Trade),What property do you want from the player?
 Trader/Tradee Has No Properties,Trade cannot be done; one of you have no properties
-Pick Item Of Opponent,What property are you willing to trade?
-Pick Item Of Self,Send the trade?
+Pick Item Of Opponent,What property are you willing to tradeUseCase?
+Pick Item Of Self,Send the tradeUseCase?
 Send The Trade,""
 Manage Property,What property do you want to manage?
 User Has No Properties (Manage Properties),You have no properties :(
@@ -26,12 +26,12 @@ Property Unowned,""
 Buy Property,
 Auction, null
 Auction Tree Parent Node,""
-Steal,What player do you want to steal from?
+Steal,What player do you want to stealUseCase from?
 Choose Player (Steal),
 End Turn,You can't end your turn, you have negative money
 Settings Menu,Welcome to the settings menu!
 Exit Game,Are you sure you want to exit?
-Save The Game,Game saved!
+Save The Game,
 Bankruptcy,Confirm bankruptcy?
 Confirm Action,
 Information Node,
@@ -42,3 +42,4 @@ Fold,""
 Trading Parent Node,
 Accept The Trade,Trade success
 Decline The Trade,Trade failure
+Game Complete,

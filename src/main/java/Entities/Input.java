@@ -15,6 +15,6 @@ public class Input {
     }
 
     public int getInput() {
-        return input;
+        return this.input;
     }
 }

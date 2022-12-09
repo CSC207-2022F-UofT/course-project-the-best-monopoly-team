@@ -1,6 +1,5 @@
 package UseCases;
 
-import Entities.Board;
 import Entities.Player;
 import Entities.Property;
 

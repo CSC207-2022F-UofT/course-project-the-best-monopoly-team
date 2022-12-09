@@ -24,7 +24,7 @@ public class PropertyTest {
         Board board = new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
-        assertEquals("Landed on a property you own", returnString);
+        assertEquals(" You landed on a property you own", returnString);
         assertEquals(1500, player1.getMoney());
     }
 
@@ -42,7 +42,7 @@ public class PropertyTest {
         Board board = new Board(players, cells);
         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
         String returnString = propertyInteractor.performAction(property1, player1);
-        assertEquals("Paid $3 to Player2", returnString);
+        assertEquals(" Paid $3 to Player2 for landing on property1", returnString);
         assertEquals(1497, player1.getMoney());
     }
 
@@ -98,10 +98,27 @@ public class PropertyTest {
 
     @Test
     public void testGetHousesRent() {
-        Player player1 = new Player("Player1");
-        Property property1 = new Property("property1", "Red",
-                5,8, new int[]{1, 2, 3, 4, 5, 6}, player1,200,2,true);
-        assertEquals(3, property1.getRent());
+        int[] rentRed = new int[]{18,90,250,700,875,1050};
+        int[] rentIllinois = new int[]{20,100,300,750,925,1100};
+        Player player = new Player("landlord");
+        Property illinois = new Property("Illinois Avenue","Red",240,150, rentIllinois, player,120,0,false);
+        Property kentucky = new Property("Kentucky Avenue","Red",220,150,rentRed, player, 110,0, false);
+        Property indiana = new Property("Indiana Avenue","Red",220,150,rentRed, player, 110,0, false);
+        player.addProperty(illinois);
+        player.addProperty(kentucky);
+        player.addProperty(indiana);
+
+        assertEquals(20, illinois.getRent());
+        illinois.addHouse(player, 1);
+        assertEquals(100, illinois.getRent());
+        illinois.addHouse(player, 1);
+        assertEquals(300, illinois.getRent());
+        illinois.addHouse(player, 1);
+        assertEquals(750, illinois.getRent());
+        illinois.addHouse(player, 1);
+        assertEquals(925, illinois.getRent());
+        illinois.addHouse(player, 1);
+        assertEquals(1100, illinois.getRent());
     }
 
     @Test
@@ -153,4 +170,37 @@ public class PropertyTest {
         assertEquals(4, property1.getHouses());
     }
 
+    @Test
+    public void testGetRentSave() {
+        int[] rent = new int[]{20,100,300,750,925,1100};
+        Property illinois = new Property("Illinois Avenue","Red",240,150, rent, null,120,3,false);
+        int price = illinois.getRentSave(illinois.getHouses());
+        assertEquals(price, rent[3]);
+    }
+
+    @Test
+    public void testAddHouse() {
+        int[] rentRed = new int[]{18,90,250,700,875,1050};
+        int[] rentIllinois = new int[]{20,100,300,750,925,1100};
+        Player player = new Player("landlord");
+        Property illinois = new Property("Illinois Avenue","Red",240,150, rentIllinois, null,120,0,false);
+        String notOwned = illinois.addHouse(player, 1);
+        assert notOwned.equals("not owned");
+        illinois.setOwner(player);
+        player.addProperty(illinois);
+        String setNotOwned = illinois.addHouse(player, 1);
+        assert setNotOwned.equals("not owned set");
+        Property kentucky = new Property("Kentucky Avenue","Red",220,150,rentRed, player, 110,0, false);
+        Property indiana = new Property("Indiana Avenue","Red",220,150,rentRed, player, 110,0, false);
+        player.addProperty(kentucky);
+        player.addProperty(indiana);
+        player.setMoney(0);
+        String notEnoughMoney = illinois.addHouse(player, 1);
+        assert notEnoughMoney.equals("not enough money");
+        player.setMoney(100000);
+        String oneHouse = illinois.addHouse(player,1);
+        assert oneHouse.equals("house");
+        String hotel = illinois.addHouse(player, 4);
+        assert hotel.equals("hotel");
+    }
 }

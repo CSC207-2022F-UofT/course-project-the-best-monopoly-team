@@ -71,6 +71,10 @@ public class OutputInteractor {
                 break;
             case "Choose Player (Steal)":
                 updateSteal();
+            case "Game Complete":
+                updateEnding();
+            case "Save The Game":
+                updateSave();
         }
     }
 
@@ -81,6 +85,14 @@ public class OutputInteractor {
         String currString = this.currentState.getPlayer().getName() + " It's your turn! What do you want to do? You currently have " +
                 this.currentState.getPlayer().getMoney() + " dollars";
         this.output.modifyStateOutput("Main Tree Parent Node", currString);
+    }
+    public void updateSave(){
+        String currString = this.currentState.getDescription();
+        this.output.modifyStateOutput("Save The Game", currString);
+    }
+    public void updateEnding(){
+        String currString = this.currentState.getDescription();
+        this.output.modifyStateOutput("Game Complete", currString);
     }
     public void updateSteal(){
         String currString = this.currentState.getDescription();

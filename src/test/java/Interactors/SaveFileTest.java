@@ -29,6 +29,34 @@ public class SaveFileTest {
     }
 
     @Test
+    void testSaveGameNewFile() throws IOException {
+        String[][] playerData = new String[][]{
+                {"Player01", "100", "false", "1", "10"},
+                {"Mediterranean Avenue","Brown","60","50","2","10","30","90","160","250","Player01","30","0","true"},
+                {"Illinois Avenue","Red","240","150","20","100","300","750","925","1100","Player01","120","0","false"},
+                {"Player02", "200", "true", "0", "10"},
+                {"Boardwalk","Dark Blue","400","200","50","200","600","1400","1700","2000","Player02","200","0","false"}
+        };
+        int[] mainStates = new int[]{1,23,4,5};
+
+        File directory = new File("src/gameData");
+        SaveAccess save = new SaveFile(directory);
+        String saveName = save.saveGameNewFile(playerData, mainStates);
+
+        boolean check = false;
+        for (String fileName : directory.list()){
+            if (fileName.equals(saveName)){
+                check = true;
+            }
+        }
+
+        assert check;
+        File delete = new File(directory.getAbsolutePath() + "/" + saveName);
+        boolean deleteTestFile = delete.delete();
+        assert deleteTestFile;
+    }
+
+    @Test
     void testSaveGame() throws IOException {
         // declare expected values for the test
         // overwrite the file text to some random strings
