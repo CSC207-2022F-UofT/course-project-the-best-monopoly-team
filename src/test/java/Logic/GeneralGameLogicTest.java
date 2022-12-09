@@ -27,12 +27,12 @@ public class GeneralGameLogicTest {
         cells.add(propertyOne);
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
         MainParentNodeUseCase mainParentNode = new MainParentNodeUseCase();
         State test_state = mainParentNode.create_state(0);
         generalGameLogic.addSwitchOptions(test_state);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Trade");
         options.add("Manage Property");
         options.add("Roll The Dice");
@@ -68,10 +68,9 @@ public class GeneralGameLogicTest {
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        generalGameLogic.setGameLogicInteractor(gameLogic);
-        generalGameLogic.setCurrentPlayer(playerOne);
-        Assertions.assertEquals(generalGameLogic.getCurrentPlayerIndex(), 0);
+        GeneralGameLogic.setGameLogicInteractor(gameLogic);
+        GeneralGameLogic.setCurrentPlayer(playerOne);
+        Assertions.assertEquals(GeneralGameLogic.getCurrentPlayerIndex(), 0);
     }
 
     @Test
@@ -84,11 +83,10 @@ public class GeneralGameLogicTest {
         List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
-        GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        generalGameLogic.setGameLogicInteractor(gameLogic);
-        generalGameLogic.setCurrentPlayer(playerOne);
-        generalGameLogic.changePlayers();
-        Assertions.assertEquals(generalGameLogic.getCurrentPlayer(), playerTwo);
+        GeneralGameLogic.setGameLogicInteractor(gameLogic);
+        GeneralGameLogic.setCurrentPlayer(playerOne);
+        GeneralGameLogic.changePlayers();
+        Assertions.assertEquals(GeneralGameLogic.getCurrentPlayer(), playerTwo);
     }
 
     @Test
@@ -108,7 +106,7 @@ public class GeneralGameLogicTest {
         cells.add(propertyOne);
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
         MainParentNodeUseCase mainParentNode = new MainParentNodeUseCase();
         State test_state = mainParentNode.create_state(0);

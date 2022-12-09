@@ -28,7 +28,7 @@ public class SelectPropertyUseCaseTest {
         options.add("Mortgage");
         options.add("Unmortgage");
         options.add("Build a house");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getId(), "Select The Property (Manage Property)");
         Assertions.assertEquals(actual.getOptions(), options);
     }

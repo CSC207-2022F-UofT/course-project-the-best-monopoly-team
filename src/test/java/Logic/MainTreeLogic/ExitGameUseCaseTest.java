@@ -21,7 +21,7 @@ public class ExitGameUseCaseTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         ExitGameUseCase exitGameUseCase = new ExitGameUseCase();
         State actual = exitGameUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();

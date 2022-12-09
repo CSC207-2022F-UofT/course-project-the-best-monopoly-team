@@ -67,7 +67,7 @@ public class SendTradeTest {
         cells.add(propertyOne);
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         SendTradeUseCase sendTrade = new SendTradeUseCase();
         State actual = sendTrade.create_state(1);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");

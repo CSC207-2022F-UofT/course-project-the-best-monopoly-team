@@ -21,7 +21,7 @@ public class NothingToTradeUseCaseTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         NothingToTradeUseCase nothingToTradeUseCase = new NothingToTradeUseCase();
         State actual = nothingToTradeUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<String>();

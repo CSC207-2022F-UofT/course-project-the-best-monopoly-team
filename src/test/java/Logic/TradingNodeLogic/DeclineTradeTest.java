@@ -28,13 +28,12 @@ public class DeclineTradeTest {
         cells.add(propertyOne);
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
-        GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        generalGameLogic.setReturnPlayerIndex(0);
-        generalGameLogic.setCurrentPlayer(playerTwo);
+        new GameLogic(playerOne, board);
+        GeneralGameLogic.setReturnPlayerIndex(0);
+        GeneralGameLogic.setCurrentPlayer(playerTwo);
         DeclineTradeUseCase declineTrade = new DeclineTradeUseCase();
         State actual = declineTrade.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "Decline The Trade");
         Assertions.assertEquals(actual.getOptions(), options);

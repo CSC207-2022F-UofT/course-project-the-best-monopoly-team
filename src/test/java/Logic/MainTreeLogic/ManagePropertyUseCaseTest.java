@@ -21,7 +21,7 @@ public class ManagePropertyUseCaseTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         ManagePropertyUseCase managePropertyUseCase = new ManagePropertyUseCase();
         State actual = managePropertyUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "User Has No Properties (Manage Properties)");
@@ -39,13 +39,13 @@ public class ManagePropertyUseCaseTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         ManagePropertyUseCase managePropertyUseCase = new ManagePropertyUseCase();
         State actual = managePropertyUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Name");
         Assertions.assertEquals(actual.getId(), "Manage Property");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getOptions(), options);
     }
 

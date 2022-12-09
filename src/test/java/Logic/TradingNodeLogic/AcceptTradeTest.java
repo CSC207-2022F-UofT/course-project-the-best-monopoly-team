@@ -38,7 +38,7 @@ public class AcceptTradeTest {
         generalGameLogic.getSelectedOptions().put("PickItemSelf", 0);
         AcceptTradeUseCase acceptTrade = new AcceptTradeUseCase();
         State actual = acceptTrade.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "Accept The Trade");
         Assertions.assertEquals(actual.getOptions(), options);

@@ -3,7 +3,6 @@ package Logic.MainTreeLogic;
 import Entities.*;
 import Logic.GameLogic;
 import Logic.MainTreeNodeLogic.TradeUseCase;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -21,14 +20,14 @@ public class TradeUseCaseTest {
         players.add(playerTwo);
         List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         TradeUseCase tradeUseCase = new TradeUseCase();
         State actual = tradeUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Player Two");
         Assertions.assertEquals(actual.getId(), "Trade");
-        Assertions.assertEquals(actual.isBackEnable(), true);
-        Assert.assertEquals(actual.getOptions(), options);
+        Assertions.assertTrue(actual.isBackEnable());
+        Assertions.assertEquals(actual.getOptions(), options);
     }
 
 }

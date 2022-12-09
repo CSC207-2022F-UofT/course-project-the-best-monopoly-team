@@ -27,12 +27,12 @@ public class PickItemOpUseCaseTest {
         cells.add(test_property1);
         cells.add(test_property2);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         PickItemOpUseCase pickItemOpUseCase = new PickItemOpUseCase();
         State actual = pickItemOpUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Property One");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getId(), "Pick Item Of Opponent");
         Assertions.assertEquals(actual.getOptions(), options);
     }

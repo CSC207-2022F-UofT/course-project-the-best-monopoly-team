@@ -16,7 +16,7 @@ public class SaveGameUseCaseTest {
         ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "Save The Game");
-        Assertions.assertEquals(actual.isSaveGame(), true);
+        Assertions.assertTrue(actual.isSaveGame());
         Assertions.assertEquals(actual.getOptions(), options);
     }
 
