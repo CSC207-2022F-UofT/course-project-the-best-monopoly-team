@@ -15,6 +15,11 @@ public class LoadFile implements LoadAccess{
         this.file = file;
     }
 
+    public void setFile(String newFile){
+        String filePath = newFile;
+        file = new File(filePath);
+    }
+
     public File getFile(){
         return file;
     }
@@ -29,6 +34,7 @@ public class LoadFile implements LoadAccess{
      */
 
     public String[] checkSaves(String folderPath){
+        // TODO test in the future, list.Files() may not return as expected for src/save
         // checkSaves searches the given folder and returns an array of file names
         // the user selects the save file from the list of file names
         // loadGame takes in the filePath of the selected file name
@@ -130,7 +136,7 @@ public class LoadFile implements LoadAccess{
     /**
      * Return a list of all the cards as a list of Strings
      * @return a list of strings that represents all the cards in the game
-     * @throws IOException
+     * @throws IOException in case there was an error reading the file
      *
      */
     @Override

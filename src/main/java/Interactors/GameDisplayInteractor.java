@@ -17,9 +17,9 @@ public class GameDisplayInteractor {
      * InstanceVar selectedOutput: The String of the button that
      * is clicked by the user
      */
-    private GameScreen gameFrame;
-    private GameDisplayInputInteractor inputHandler;
-    private GameDisplayOutputInteractor labelSegments;
+    private final GameScreen gameFrame;
+    private final GameDisplayInputInteractor inputHandler;
+    private final GameDisplayOutputInteractor labelSegments;
     private String selectedOutput;
 
     /**
@@ -31,6 +31,14 @@ public class GameDisplayInteractor {
         this.inputHandler = new GameDisplayInputInteractor();
         this.labelSegments = new GameDisplayOutputInteractor();
         this.selectedOutput = "";
+    }
+
+    /**
+     * Function that gets the labelSegments instance variable of this class
+     * @return the labelSegments of type GameDisplayOutputInteractor
+     */
+    public GameDisplayOutputInteractor getLabelSegments(){
+        return this.labelSegments;
     }
 
     /**

@@ -10,8 +10,18 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SaveFileTest {
+
+    @Test
+    void testGetFile() {
+        File directory = new File ("src/gameData");
+        SaveAccess save = new SaveFile(directory);
+
+        assert save.getFile().equals(new File("src/gameData"));
+    }
+
     @Test
     void testCheckExistingFile() {
         File existing = new File("src/gameData/test01.txt");
@@ -44,9 +54,10 @@ public class SaveFileTest {
         String saveName = save.saveGameNewFile(playerData, mainStates);
 
         boolean check = false;
-        for (String fileName : directory.list()){
+        for (String fileName : Objects.requireNonNull(directory.list())){
             if (fileName.equals(saveName)){
                 check = true;
+                break;
             }
         }
 

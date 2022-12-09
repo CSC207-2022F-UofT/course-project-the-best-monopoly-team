@@ -10,7 +10,7 @@ public class Options {
     /**
      * InstanceVar: the JLabel that contains all the options the user has
      */
-    private JLabel options;
+    private final JLabel options;
 
     /**
      * The constructor for this class that sets the layout
@@ -29,7 +29,7 @@ public class Options {
     }
 
     /**
-     * Fuction to get the Label
+     * Function to get the Label
      * @return the label
      */
     public JLabel getOptions() {

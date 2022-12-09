@@ -33,32 +33,27 @@ public class PlayerLogic {
         int min = 1;
         int roll1 =  (int) Math.floor(Math.random() * (max - min + 1) + min);
         int roll2 = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        if (isInJail() && isConsecutive(roll1, roll2)){
+        if (player.isInJail() && isConsecutive(roll1, roll2)){
                 this.player.setInJail(false);
                 this.player.move(roll1 + roll2);
             }
-        else if (!isInJail() && ! isConsecutive(roll1, roll2) ){
+        else if (!player.isInJail() && ! isConsecutive(roll1, roll2) ){
                 this.player.move(roll1 + roll2);
                 return (String.valueOf( roll1 + roll2));
             }
-        else if (!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) < 3){
+        else if (!player.isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) < 3){
                 return this.rollDice((consecutive + 1));
             }
-        else if(!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) == 3){
+        else if(!player.isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) == 3){
                 // the player goes to jail
                 this.player.setInJail(true);
-                return ( roll1 + roll2+ "player goes to jail");
+                return ((roll1 + roll2) + "player goes to jail");
             }
         return (String.valueOf( roll1 + roll2));
     }
 
-
     private static boolean isConsecutive(int roll1, int roll2) {
         return roll1 == roll2;
-    }
-
-    private boolean isInJail() {
-        return this.player.isInJail();
     }
 
     /**
@@ -68,10 +63,14 @@ public class PlayerLogic {
      */
     private HashMap<String, Integer> createSetMap() {
         HashMap<String, Integer> sets = new HashMap<>();
-        String [] colours = {"Brown","Light Blue","Pink","Orange","Red","Yellow","Green","Dark Blue"};
-        for (String colour: colours){
-            sets.put(colour, 0);
-        }
+        sets.put("Brown", 0);
+        sets.put("Light Blue", 0);
+        sets.put("Pink", 0);
+        sets.put("Orange", 0);
+        sets.put("Red", 0);
+        sets.put("Yellow", 0);
+        sets.put("Green", 0);
+        sets.put("Dark Blue", 0);
         return sets;
     }
 
@@ -109,7 +108,6 @@ public class PlayerLogic {
         }
         return ownedSets;
     }
-
 
     /**
      * A helper function for steal that deals with the stealSuccessful situation.
@@ -163,8 +161,8 @@ public class PlayerLogic {
     }
 
     /**
-     * Un-mortgaging a property
-     * @param property the property to be un-mortgaged
+     * Unmortgaging a property
+     * @param property the property to be unmortgaged
      */
     public void unmortgage(Property property) {
         player.pay((int) (property.getMortgageValue() * MORTGAGE_INTEREST));
