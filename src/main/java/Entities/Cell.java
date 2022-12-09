@@ -5,6 +5,9 @@ package Entities;
  * action the player needs to perform on the cell.
  */
 
+/**
+ * Represents a cell on the Monopoly board.
+ */
 public abstract class Cell {
     public abstract String getType();
 }

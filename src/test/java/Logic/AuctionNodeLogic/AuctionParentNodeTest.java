@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AuctionParentNodeTest {
-
     @Test
     public void testAuctionParentNodeCreateState(){
         Player playerOne = new Player("Player One");
