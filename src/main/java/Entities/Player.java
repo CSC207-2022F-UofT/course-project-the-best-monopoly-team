@@ -1,14 +1,12 @@
 package Entities;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Objects;
 
 
 public class Player {
     // Represents a player in the game
 
-    private String name;
+    private final String name;
     private int money;
     private ArrayList<Property> properties;
     private boolean inJail;
@@ -30,7 +28,7 @@ public class Player {
     public Player(String name) {
         this.name = name;
         this.money = STARTING_MONEY;
-        this.properties = new ArrayList<Property>();
+        this.properties = new ArrayList<>();
         this.inJail = false;
         this.jailCards = STARTING_JAILCARDS;
         this.position = STARTING_POSITION;
@@ -48,7 +46,7 @@ public class Player {
     public Player(String name, int money, boolean inJail, int jailCards, int position) {
         this.name = name;
         this.money = money;
-        this.properties = new ArrayList<Property>();
+        this.properties = new ArrayList<>();
         this.inJail = inJail;
         this.jailCards = jailCards;
         this.position = position;
@@ -98,29 +96,32 @@ public class Player {
      * @return returns a boolean value of False and True
      */
     public boolean isInJail() { return inJail; }
-    public int getRailroads() {
-        int railroads = 0;
-        for (Property property : this.properties) {
-            if (Objects.equals(property.getColour(), "Railroad")) {
-                railroads += 1;
-            }
-        }
-        return railroads;
-    }
 
-    /**
-     * Gets the number of utilities owned by this player
-     * @return the number of utilities owned by this player
-     */
-    public int getUtilities() {
-        int utility = 0;
-        for (Property property : this.properties) {
-            if (Objects.equals(property.getColour(), "Utility")) {
-                utility += 1;
-            }
-        }
-        return utility;
-    }
+//  FOR FUTURE IMPLEMENTATION ALLOWING PLAYERS TO CHARGE RENT BASED ON THE NUMBER OF RAILROADS OR UTILITIES OWNED
+//  COMMENTED OUT BECAUSE CURRENTLY UNUSED
+//    public int getRailroads() {
+//        int railroads = 0;
+//        for (Property property : this.properties) {
+//            if (Objects.equals(property.getColour(), "Railroad")) {
+//                railroads += 1;
+//            }
+//        }
+//        return railroads;
+//    }
+//
+//    /**
+//     * Gets the number of utilities owned by this player
+//     * @return the number of utilities owned by this player
+//     */
+//    public int getUtilities() {
+//        int utility = 0;
+//        for (Property property : this.properties) {
+//            if (Objects.equals(property.getColour(), "Utility")) {
+//                utility += 1;
+//            }
+//        }
+//        return utility;
+//    }
 
     /**
      * Increment the player's number of get out of jail free cards by a specific number
@@ -133,24 +134,6 @@ public class Player {
      * @param num this parameter is the number of cards to decrement by for player
      */
     public void removeJailCards(int num) { this.jailCards -= num; }
-
-    /**
-     * Helper function for ownedPropertySets(). This function creates a map with the property colours as the key and
-     * an int counter as its value.
-     * @return a HashMap with the property colours as the key and an int counter as its value.
-     */
-    private HashMap<String, Integer> createSetMap() {
-        HashMap<String, Integer> sets = new HashMap<>();
-        sets.put("Brown", 0);
-        sets.put("Light Blue", 0);
-        sets.put("Pink", 0);
-        sets.put("Orange", 0);
-        sets.put("Red", 0);
-        sets.put("Yellow", 0);
-        sets.put("Green", 0);
-        sets.put("Dark Blue", 0);
-        return sets;
-    }
 
     /**
      * Changes the jail status of the player
@@ -206,16 +189,6 @@ public class Player {
     }
 
     /**
-     * Rigged roll for testing purposes
-     * @param rig - number to change the roll to
-     * @return
-     */
-    public String riggedRoll(int rig) {
-        this.move(rig);
-        return (""+rig);
-    }
-
-    /**
      * Increases the amount of money owned by this player
      * @param change an integer indicating how much money will be added to the player's balance
      */
@@ -242,7 +215,7 @@ public class Player {
     }
 
     /**
-     * Gets all of the properties of the current player
+     * Gets all the properties of the current player
      * @return returns and array list of properties
      */
     public ArrayList<Property> getProperties() {

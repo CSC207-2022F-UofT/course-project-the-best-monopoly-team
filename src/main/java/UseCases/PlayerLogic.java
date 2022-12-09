@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 public class PlayerLogic {
-    private Player player;
+    private final Player player;
     public static final int BROWN_DARKBLUE_SETSIZE = 2;
     public static final int PROPERTY_SETSIZE = 3;
     public static final double STEAL_CHANCE = 0.3;
@@ -33,39 +33,27 @@ public class PlayerLogic {
         int min = 1;
         int roll1 =  (int) Math.floor(Math.random() * (max - min + 1) + min);
         int roll2 = (int) Math.floor(Math.random() * (max - min + 1) + min);
-        if (isInJail() && isConsecutive(roll1, roll2)){
+        if (player.isInJail() && isConsecutive(roll1, roll2)){
                 this.player.setInJail(false);
                 this.player.move(roll1 + roll2);
             }
-        else if (!isInJail() && ! isConsecutive(roll1, roll2) ){
+        else if (!player.isInJail() && ! isConsecutive(roll1, roll2) ){
                 this.player.move(roll1 + roll2);
                 return (String.valueOf( roll1 + roll2));
             }
-        else if (!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) < 3){
+        else if (!player.isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) < 3){
                 return this.rollDice((consecutive + 1));
             }
-        else if(!isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) == 3){
+        else if(!player.isInJail() && isConsecutive(roll1, roll2) && (consecutive + 1) == 3){
                 // the player goes to jail
                 this.player.setInJail(true);
-                return (String.valueOf( roll1 + roll2) + "player goes to jail");
+                return ((roll1 + roll2) + "player goes to jail");
             }
         return (String.valueOf( roll1 + roll2));
     }
 
-    /**
-     * Rigged roll for testing purposes
-     * @param rig
-     */
-    public void riggedRoll(int rig) {
-        player.move(rig);
-    }
-
     private static boolean isConsecutive(int roll1, int roll2) {
         return roll1 == roll2;
-    }
-
-    private boolean isInJail() {
-        return this.player.isInJail();
     }
 
     /**
@@ -121,10 +109,9 @@ public class PlayerLogic {
         return ownedSets;
     }
 
-
     /**
      * A helper function for steal that deals with the stealSuccessful situation.
-     * @param victim The victim whose moeny is going to be stolen
+     * @param victim The victim whose money is going to be stolen
      * @return A string that indicates if the stealing is successful or if the player is in jail.
      */
     public String stealSuccessful(Player victim) {
