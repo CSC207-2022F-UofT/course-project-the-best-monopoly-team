@@ -6,6 +6,7 @@ import Entities.Property;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Class which handles logic methods for a given player
@@ -84,7 +85,9 @@ public class PlayerLogic {
     public HashMap<String, Integer> countPropertySets() {
         HashMap<String, Integer> sets = createSetMap();
         for (Property property : player.getProperties()) {
-            sets.put(property.getColour(), sets.get(property.getColour()) + 1);
+            if (!Objects.equals(property.getColour(), "Railroad") && !Objects.equals(property.getColour(), "Utility")){
+                sets.put(property.getColour(), sets.get(property.getColour()) + 1);
+            }
         }
         return sets;
     }
