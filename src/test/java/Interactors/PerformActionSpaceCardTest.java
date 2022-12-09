@@ -97,7 +97,7 @@ public class PerformActionSpaceCardTest {
         int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, player, 0,
                 0, false);
-        List<Cell> cells = new ArrayList<Cell>();
+        List<Cell> cells = new ArrayList<>();
         cells.add(cellOne);
 
         Board board = new Board(playerList, cells);
@@ -131,7 +131,7 @@ public class PerformActionSpaceCardTest {
         int [] rentValues1 = new int[] {1, 2, 3, 4, 5, 6};
         Property cellOne = new Property("cellOne", "Colour", 0, 0, rentValues1, player, 0,
                 0, false);
-        List<Cell> cells = new ArrayList<Cell>();
+        List<Cell> cells = new ArrayList<>();
         cells.add(cellOne);
 
         Board board = new Board(playerList, cells);
