@@ -10,7 +10,7 @@ public class Description {
     /**
      * InstanceVar description: the JLabel that shows the context to the user
      */
-    private JLabel description;
+    private final JLabel description;
 
     /**
      * The constructor for this class that sets the layout
@@ -40,7 +40,6 @@ public class Description {
      * Reset the JLabel
      */
     public void clear(){
-        this.description.setText("");
         this.description.removeAll();
         this.description.setLayout(new FlowLayout());
     }

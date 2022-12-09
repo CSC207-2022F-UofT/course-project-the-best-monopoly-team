@@ -14,7 +14,7 @@ public class ButtonDisplayInteractor {
      * InstanceVar buttonFactory: the ButtonFactory that creates all the buttons
      * InstanceVar buttonList: the mapping between the buttons on the current state and how many times they are pressed
      */
-    private ButtonFactory buttonFactory;
+    private final ButtonFactory buttonFactory;
     private HashMap<String, Integer> buttonList;
 
     /**
