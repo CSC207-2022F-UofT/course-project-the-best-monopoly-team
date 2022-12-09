@@ -24,7 +24,7 @@ public class NothingToTradeUseCaseTest {
         new GameLogic(playerOne, board);
         NothingToTradeUseCase nothingToTradeUseCase = new NothingToTradeUseCase();
         State actual = nothingToTradeUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "Trader/Tradee Has No Properties");
         Assertions.assertEquals(actual.getOptions(), options);

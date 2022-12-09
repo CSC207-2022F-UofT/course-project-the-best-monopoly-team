@@ -24,7 +24,7 @@ public class ExitGameUseCaseTest {
         new GameLogic(playerOne, board);
         ExitGameUseCase exitGameUseCase = new ExitGameUseCase();
         State actual = exitGameUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Yes");
         options.add("No");
         Assertions.assertEquals(actual.getId(), "Exit Game");

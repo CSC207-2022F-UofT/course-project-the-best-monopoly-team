@@ -14,12 +14,12 @@ public class ChooseSaveUseCaseTest {
 
     @Test
     public void testChooseSaveUseCaseCreateState(){
-        InitialLogic initialLogic = new InitialLogic("Choose Save");
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor(new LoadFile
+        new InitialLogic("Choose Save");
+        new UseCaseInteractor(new LoadFile
                 (new File("src/gameData/test.txt")), new SaveFile(new File("src/gameData/test.txt")));
         ChooseSaveUseCase chooseSaveUseCase = new ChooseSaveUseCase();
         State actual = chooseSaveUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Yes");
         options.add("No");
         Assertions.assertEquals(actual.getId(), "Initial Menu Parent Node");

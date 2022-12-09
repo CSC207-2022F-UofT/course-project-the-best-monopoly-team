@@ -39,11 +39,11 @@ public class PlayerLogicTest {
 
     @Test
     public void testMortgageLandedOn() throws IOException {
-        File gamefile = new File("src/properties.txt");
-        LoadAccess load = new LoadFile(gamefile);
-        ArrayList<String[]> propertylist = load.loadProperties();
+        File gameFile = new File("src/properties.txt");
+        LoadAccess load = new LoadFile(gameFile);
+        ArrayList<String[]> propertyList = load.loadProperties();
         GameCreation gameCreator = new GameCreation();
-        Board board = gameCreator.createNewBoard(new ArrayList<>(Arrays.asList("player1", "player2")), propertylist);
+        Board board = gameCreator.createNewBoard(new ArrayList<>(Arrays.asList("player1", "player2")), propertyList);
         Player player1 = board.getPlayers().get(0);
         Player player2 = board.getPlayers().get(1);
         Property property1 = (Property) board.getCells().get(1);
@@ -58,11 +58,11 @@ public class PlayerLogicTest {
 
     @Test
     public void testUnmortgage() throws IOException {
-        File gamefile = new File("src/properties.txt");
-        LoadAccess load = new LoadFile(gamefile);
-        ArrayList<String[]> propertylist = load.loadProperties();
+        File gameFile = new File("src/properties.txt");
+        LoadAccess load = new LoadFile(gameFile);
+        ArrayList<String[]> propertyList = load.loadProperties();
         GameCreation gameCreator = new GameCreation();
-        Board board = gameCreator.createNewBoard(new ArrayList<>(Arrays.asList("player1", "player2")), propertylist);
+        Board board = gameCreator.createNewBoard(new ArrayList<>(Arrays.asList("player1", "player2")), propertyList);
         Player player1 = board.getPlayers().get(0);
         Property property1 = (Property) board.getCells().get(1);
         player1.addProperty(property1);

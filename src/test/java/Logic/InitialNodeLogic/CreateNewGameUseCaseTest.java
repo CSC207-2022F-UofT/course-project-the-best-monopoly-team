@@ -13,10 +13,9 @@ public class CreateNewGameUseCaseTest {
 
     @Test
     public void testCreateNewGameCreateStateConfirmed(){
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor(new LoadFile
+        new UseCaseInteractor(new LoadFile
                 (new File("src/gameData/test.txt")), new SaveFile(new File("src/gameData/test.txt")));
         InitialLogic initialLogic = new InitialLogic("Initial Menu Parent Node");
-        State before = initialLogic.beforeLogic();
         initialLogic.getSelectedOptions().put("NumOfPlayers", 2);
         initialLogic.getSelectedOptions().put("GameLength", 2);
         initialLogic.getSelectedOptions().put("GameMode", 0);
@@ -27,10 +26,9 @@ public class CreateNewGameUseCaseTest {
 
     @Test
     public void testCreateNewGameCreateStateNotConfirmed() {
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor(new LoadFile
-                (new File("src/gameData/test.txt")), new SaveFile(new File("src/gameData/test.txt")));
-        InitialLogic initialLogic = new InitialLogic("Initial Menu Parent Node");
-        State before = initialLogic.beforeLogic();
+        new UseCaseInteractor(new LoadFile(new File("src/gameData/test.txt")),
+                new SaveFile(new File("src/gameData/test.txt")));
+        new InitialLogic("Initial Menu Parent Node");
         CreateNewGameUseCase createNewGameUseCase = new CreateNewGameUseCase();
         State actual = createNewGameUseCase.create_state(1);
         Assertions.assertEquals(actual.getId(), "Initial Menu Parent Node");

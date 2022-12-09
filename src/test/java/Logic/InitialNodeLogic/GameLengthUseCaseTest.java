@@ -16,7 +16,7 @@ public class GameLengthUseCaseTest {
     public void testGameLengthUseCaseCreateState(){
         InitialLogic initialLogic = new InitialLogic("Game Length");
         initialLogic.getSelectedOptions().put("NumOfPlayers", 2);
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor(new LoadFile
+        new UseCaseInteractor(new LoadFile
                 (new File("src/gameData/test.txt")), new SaveFile(new File("src/gameData/test.txt")));
         GameLengthUseCase gameLengthUseCase = new GameLengthUseCase();
         State actual = gameLengthUseCase.create_state(0);
@@ -24,7 +24,7 @@ public class GameLengthUseCaseTest {
         options.add("Yes");
         options.add("No");
         Assertions.assertEquals(actual.getOptions(), options);
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getId(), "Initial Menu Parent Node");
     }
 

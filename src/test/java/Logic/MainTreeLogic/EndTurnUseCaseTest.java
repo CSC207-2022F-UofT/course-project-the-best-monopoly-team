@@ -22,7 +22,7 @@ public class EndTurnUseCaseTest {
         new GameLogic(playerOne, board);
         EndTurnUseCase endTurnUseCase = new EndTurnUseCase();
         State actual = endTurnUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "End Turn");
         Assertions.assertEquals(actual.getOptions(), options);
