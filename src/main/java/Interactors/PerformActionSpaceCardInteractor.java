@@ -34,9 +34,9 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      */
     private String advanceAction(Player player, Board board, Card card) {
             String action = card.getAction();
-            int randomNumberOfSteps = new Random().nextInt(39);
+            int randomNumberOfSteps = new Random().nextInt(15);
             player.move(randomNumberOfSteps);
-            action = new String(action + " " + randomNumberOfSteps + " steps.");
+            action = " " + action + " " + randomNumberOfSteps + " steps.";
 
             if (player.getPosition() == 0 || player.getPosition() + randomNumberOfSteps > 40) {
                 player.changeMoney(200);
@@ -51,7 +51,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @return the message
      */
     private String getPaidAction(Player player, Card card) {
-        String action = card.getAction();
+        String action = " " + card.getAction();
         player.changeMoney(card.getAmount());
         return action;
     }
@@ -63,7 +63,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @return the message
      */
     private String payAction(Player player, Card card) {
-        String action = card.getAction();
+        String action = " " + card.getAction();
         player.pay(card.getAmount());
         return action;
     }
@@ -76,7 +76,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @return the message
      */
     private String payAllAction(Player player, Board board, Card card) {
-        String action = card.getAction();
+        String action = " " + card.getAction();
         for (int i = 0; i < board.getPlayers().size(); i++) {
             player.pay(board.getPlayers().get(i), card.getAmount());
         }
@@ -84,14 +84,15 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
     }
 
     /**
-     * Performs the go to jail action of the card
+     * Performs the go-to jail action of the card
      * @param player the player
      * @param card the card
      * @return the message
      */
     private String goToJailAction(Player player, Card card) {
-        String action = card.getAction();
-        player.changeJailStatus();
+        String action = " " + card.getAction();
+        player.setInJail(true);
+        player.setPosition(10);
         return action;
     }
 
@@ -102,7 +103,7 @@ public class PerformActionSpaceCardInteractor implements PerformActionSpaceUseCa
      * @return the message
      */
     private String getOutOfJailAction(Player player, Card card) {
-        String action = card.getAction();
+        String action = " " + card.getAction();
         player.setJailCards(player.getJailCards() + 1);
         return action;
     }

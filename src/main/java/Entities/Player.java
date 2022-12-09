@@ -2,24 +2,35 @@ package Entities;
 
 import java.util.ArrayList;
 
-
+/**
+ * A class representing a player in the game of monpoly
+ */
 public class Player {
-    // Represents a player in the game
-
-    private final String name;
+    /**
+     * InstanceVar name: the name of the player
+     * InstanceVar money: the amount of money the player has
+     * InstanceVar properties: the properties the player owns
+     * InstanceVar inJail: a variable representing if the player is in jail or not
+     * InstanceVar jailCards: the number of get out of jail free cards the user has
+     * InstanceVar position: the current position of the player on the board
+     */
+    private String name;
     private int money;
     private ArrayList<Property> properties;
     private boolean inJail;
     private int jailCards;
     private int position;
 
-    static final int STARTING_MONEY = 1500;
-    static final int STARTING_JAILCARDS = 0;
-    static final int STARTING_POSITION = 0;
-    static final int GO_MONEY = 200;
+    /**
+     * Global Variables representing constant values
+     */
+    private static final int STARTING_MONEY = 1500;
+    private static final int STARTING_JAILCARDS = 0;
+    private static final int STARTING_POSITION = 0;
+    private static final int GO_MONEY = 200;
 
-    static final int LAST_POSITION_INDEX = 39;
-    static final int BOARD_SIZE = 40;
+    private static final int LAST_POSITION_INDEX = 39;
+    private static final int BOARD_SIZE = 40;
 
     /**
      * This is the constructor method for new player instances

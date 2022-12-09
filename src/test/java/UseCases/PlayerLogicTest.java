@@ -1,6 +1,7 @@
 package UseCases;
 
 import Interactors.GameCreation;
+import Logic.PlayerLogic;
 import Persistence.LoadAccess;
 import Persistence.LoadFile;
 import Entities.*;
@@ -18,7 +19,6 @@ import Entities.Player;
 import Entities.Property;
 
 import java.util.Arrays;
-import java.util.List;
 
 import org.junit.Assert;
 

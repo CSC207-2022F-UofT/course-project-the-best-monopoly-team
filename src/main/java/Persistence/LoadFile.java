@@ -15,9 +15,12 @@ public class LoadFile implements LoadAccess{
         this.file = file;
     }
 
-    public void setFile(String newFile){
-        String filePath = file.getPath() + "/" + newFile;
-        file = new File(filePath);
+//    public void setFile(String newFile){
+//        String filePath = file.getPath() + "/" + newFile;
+//        file = new File(filePath);
+//    }
+    public File getFile(){
+        return file;
     }
 
     /**
@@ -55,7 +58,7 @@ public class LoadFile implements LoadAccess{
      * @throws FileNotFoundException in the case that this.file does not exist
      */
 
-    public ArrayList<ArrayList<String[]>> loadGame() throws FileNotFoundException {
+    public ArrayList<ArrayList<String[]>> loadGame(String filePath) throws FileNotFoundException {
         // loadGame reads the given filePath and returns an ArrayList of String arrays
         // each new line on in the txt file given by filePath contains the instance attributes of a Player instance
         // the Board instance attributes are separated from the Player instance attributes by a header "Board"
@@ -67,7 +70,7 @@ public class LoadFile implements LoadAccess{
         boolean player = false;
         boolean tree = false;
 
-        File gameData = new File(file.getPath());
+        File gameData = new File(file.getPath() + "/" + filePath);
         Scanner scan = new Scanner(gameData);
 
         while (scan.hasNextLine()) {

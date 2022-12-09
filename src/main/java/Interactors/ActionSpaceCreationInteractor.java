@@ -27,7 +27,7 @@ public class ActionSpaceCreationInteractor implements ActionSpaceCreationUseCase
 
     /**
      * 
-     * @return the action space
+     * @return the type of action space (Chance, Jail, Community Chest)
      */
     public ActionSpace loadJailCards() throws IOException {
         CardMapperInteractor cardMapperInteractor = new CardMapperInteractor();

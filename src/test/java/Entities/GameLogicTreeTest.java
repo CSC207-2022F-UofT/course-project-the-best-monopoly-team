@@ -1,6 +1,6 @@
 package Entities;
 
-import UseCases.InitialNodeLogic.*;
+import Logic.InitialNodeLogic.*;
 import org.junit.jupiter.api.Test;
 
 class GameLogicTreeTest {
@@ -20,17 +20,17 @@ class GameLogicTreeTest {
 
 
     private GameLogicTree createTree(){
-        GameLogicTree gameLength = new GameLogicTree(new GameLength());
-        GameLogicTree gameType = new GameLogicTree(new ChooseGameMode());
+        GameLogicTree gameLength = new GameLogicTree(new GameLengthUseCase());
+        GameLogicTree gameType = new GameLogicTree(new ChooseGameModeUseCase());
         gameType.addChild(gameLength);
 
-        GameLogicTree numPlayers = new GameLogicTree(new NumberOfPlayers());
-        GameLogicTree newGame = new GameLogicTree(new NewGame());
+        GameLogicTree numPlayers = new GameLogicTree(new NumberOfPlayersUseCase());
+        GameLogicTree newGame = new GameLogicTree(new NewGameUseCase());
         newGame.addChild(numPlayers);
         newGame.addChild(gameType);
 
-        GameLogicTree loadGame = new GameLogicTree(new LoadGame());
-        GameLogicTree startMenu = new GameLogicTree(new InitialParentNode());
+        GameLogicTree loadGame = new GameLogicTree(new LoadGameUseCase());
+        GameLogicTree startMenu = new GameLogicTree(new InitialParentNodeUseCase());
         startMenu.addChild(loadGame);
         startMenu.addChild(newGame);
 
