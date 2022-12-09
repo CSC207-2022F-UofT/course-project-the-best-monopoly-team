@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 
 public class GameLengthUseCase extends InitialLogic implements NodeLogic {
-    HashMap<Integer, Integer> lengthMap = new HashMap<>();
+    private final HashMap<Integer, Integer> lengthMap = new HashMap<>();
     public GameLengthUseCase() {
         super("Game Length");
         lengthMap.put(0,30);

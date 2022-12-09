@@ -27,14 +27,14 @@ public class PickItemSelfUseCaseTest {
         cells.add(test_property1);
         cells.add(test_property2);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         PickItemSelfUseCase pickItemSelfUseCase = new PickItemSelfUseCase();
         State actual = pickItemSelfUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Yes");
         options.add("No");
         Assertions.assertEquals(actual.getId(), "Pick Item Of Self");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getOptions(), options);
     }
 

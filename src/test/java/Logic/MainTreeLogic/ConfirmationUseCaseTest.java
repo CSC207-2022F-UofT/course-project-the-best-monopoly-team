@@ -27,7 +27,7 @@ public class ConfirmationUseCaseTest {
         GameLogic gameLogic = new GameLogic(playerOne, board);
         GeneralGameLogic.initialize(playerOne, board, gameLogic);
         ConfirmationUseCase confirmationUseCase = new ConfirmationUseCase();
-        State actual = confirmationUseCase.create_state(0);
+        State actual = confirmationUseCase.create_state(1);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");
     }
 

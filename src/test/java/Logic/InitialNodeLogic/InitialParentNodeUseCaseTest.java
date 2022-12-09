@@ -14,8 +14,8 @@ public class InitialParentNodeUseCaseTest {
 
     @Test
     public void testInitialParentUseCaseCreateState(){
-        InitialLogic initialLogic = new InitialLogic("Initial Menu Parent Node");
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor(new LoadFile
+        new InitialLogic("Initial Menu Parent Node");
+        new UseCaseInteractor(new LoadFile
                 (new File("src/gameData/test.txt")), new SaveFile(new File("src/gameData/test.txt")));
         InitialParentNodeUseCase initialParentNodeUseCase = new InitialParentNodeUseCase();
         State actual = initialParentNodeUseCase.create_state(0);

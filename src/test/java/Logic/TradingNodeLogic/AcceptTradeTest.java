@@ -31,14 +31,14 @@ public class AcceptTradeTest {
         Board board = new Board(players, cells);
         GameLogic gameLogic = new GameLogic(playerOne, board);
         GeneralGameLogic generalGameLogic = new GeneralGameLogic();
-        generalGameLogic.setGameLogicInteractor(gameLogic);
-        generalGameLogic.setReturnPlayerIndex(0);
-        generalGameLogic.setCurrentPlayer(playerTwo);
+        GeneralGameLogic.setGameLogicInteractor(gameLogic);
+        GeneralGameLogic.setReturnPlayerIndex(0);
+        GeneralGameLogic.setCurrentPlayer(playerTwo);
         generalGameLogic.getSelectedOptions().put("PickItemOp", 0);
         generalGameLogic.getSelectedOptions().put("PickItemSelf", 0);
         AcceptTradeUseCase acceptTrade = new AcceptTradeUseCase();
         State actual = acceptTrade.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "Accept The Trade");
         Assertions.assertEquals(actual.getOptions(), options);

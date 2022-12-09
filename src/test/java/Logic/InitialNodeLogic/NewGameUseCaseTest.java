@@ -14,8 +14,8 @@ public class NewGameUseCaseTest {
 
     @Test
     public void testNewGameUseCaseCreateState(){
-        InitialLogic initialLogic = new InitialLogic("Initial Menu Parent Node");
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor(new LoadFile
+        new InitialLogic("Initial Menu Parent Node");
+        new UseCaseInteractor(new LoadFile
                 (new File("src/gameData/test.txt")), new SaveFile(new File("src/gameData/test.txt")));
         NewGameUseCase newGameUseCase = new NewGameUseCase();
         State actual = newGameUseCase.create_state(0);
@@ -23,7 +23,7 @@ public class NewGameUseCaseTest {
         options.add("Normal mode");
         options.add("Rich mode");
         Assertions.assertEquals(actual.getId(), "Initial Menu Parent Node");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getOptions(), options);
     }
 

@@ -13,6 +13,8 @@ import java.io.File;
  **/
 public class PresenterDisplay {
 
+
+    boolean runGame = true;
     /**
      * Function that runs the game loop by getting game data from the OutputInteractor and presenting that to the
      * user as their options on each turn through Conversion in the GameDisplayInteractor,
@@ -27,7 +29,7 @@ public class PresenterDisplay {
 
         gameFrame.setOutputs(outputControl.getStateOptions(), outputControl.getOutputMessage());
         gameFrame.displayScreen();
-         while (true){
+         while (runGame){
              try {
                  boolean didInput = false;
                  while (!didInput) {

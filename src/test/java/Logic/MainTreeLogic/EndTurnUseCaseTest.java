@@ -19,10 +19,10 @@ public class EndTurnUseCaseTest {
         players.add(playerOne);
         List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         EndTurnUseCase endTurnUseCase = new EndTurnUseCase();
         State actual = endTurnUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Ok");
         Assertions.assertEquals(actual.getId(), "End Turn");
         Assertions.assertEquals(actual.getOptions(), options);

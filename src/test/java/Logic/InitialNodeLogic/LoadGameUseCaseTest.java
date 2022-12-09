@@ -1,14 +1,8 @@
 package Logic.InitialNodeLogic;
 
-import Entities.State;
-import Persistence.LoadFile;
-import Persistence.SaveFile;
-import UseCases.UseCaseInteractor;
-import org.junit.jupiter.api.Assertions;
+
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-import java.util.ArrayList;
 
 public class LoadGameUseCaseTest {
 

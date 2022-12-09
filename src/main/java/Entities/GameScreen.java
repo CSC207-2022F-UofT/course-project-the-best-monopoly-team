@@ -10,7 +10,7 @@ public class GameScreen {
     /**
      * InstanceVar gameFrame: JFrame that contains all the contents of the game
      */
-    private JFrame gameFrame;
+    private final JFrame gameFrame;
     private final String imageFile = "src/initialoutputs/monopolyboard.jpg";
 
     /**

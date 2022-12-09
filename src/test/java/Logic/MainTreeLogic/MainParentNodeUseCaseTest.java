@@ -23,10 +23,10 @@ public class MainParentNodeUseCaseTest {
         List<Cell> cells = new ArrayList<>();
         cells.add(test_property);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         MainParentNodeUseCase mainParentNodeUseCase = new MainParentNodeUseCase();
         State actual = mainParentNodeUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Trade");
         options.add("Manage Property");
         options.add("Roll The Dice");

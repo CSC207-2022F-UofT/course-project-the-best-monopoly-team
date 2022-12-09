@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class ChooseGameModeUseCaseTest {
@@ -16,9 +15,9 @@ public class ChooseGameModeUseCaseTest {
     @Test
     public void testChooseGameModeUseCaseTest(){
 
-        InitialLogic initialLogic = new InitialLogic("Choose Game Mode");
-        UseCaseInteractor useCaseInteractor = new UseCaseInteractor(new LoadFile
-                (new File("src/gameData/test.txt")), new SaveFile(new File("src/gameData/test.txt")));
+        new InitialLogic("Choose Game Mode");
+        new UseCaseInteractor(new LoadFile (new File("src/gameData/test.txt")),
+                new SaveFile(new File("src/gameData/test.txt")));
         ChooseGameModeUseCase chooseGameModeUseCase = new ChooseGameModeUseCase();
         State actual = chooseGameModeUseCase.create_state(0);
         ArrayList<String> options = new ArrayList<>();
@@ -29,7 +28,7 @@ public class ChooseGameModeUseCaseTest {
         options.add("6 players");
         options.add("7 players");
         options.add("8 players");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getId(), "Initial Menu Parent Node");
         Assertions.assertEquals(actual.getOptions(), options);
     }

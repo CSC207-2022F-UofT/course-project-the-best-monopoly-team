@@ -13,7 +13,6 @@ public class MediumOptionUseCaseTest {
     @Test
     public void testHighOptionCreateState(){
         Player playerOne = new Player("Player One");
-        Player playerTwo = new Player("Player Two");
         List<Player> players = new ArrayList<>();
         players.add(playerOne);
         Property test_property1 = new Property("Property One", "Blue", 100, 100, new int[6],
@@ -25,7 +24,7 @@ public class MediumOptionUseCaseTest {
         cells.add(test_property1);
         cells.add(test_property2);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         MediumOptionUseCase mediumOptionUseCase = new MediumOptionUseCase();
         State actual = mediumOptionUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");

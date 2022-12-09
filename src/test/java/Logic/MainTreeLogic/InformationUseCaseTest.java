@@ -23,7 +23,7 @@ public class InformationUseCaseTest {
         players.add(playerTwo);
         List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         InformationUseCase informationUseCase = new InformationUseCase();
         State actual =  informationUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "Main Tree Parent Node");

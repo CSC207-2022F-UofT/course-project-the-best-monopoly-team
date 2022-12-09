@@ -20,11 +20,11 @@ public class PickPlayerUseCaseTest {
         players.add(playerTwo);
         List<Cell> cells = new ArrayList<>();
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         PickPlayerUseCase pickPlayerUseCase = new PickPlayerUseCase();
         State actual = pickPlayerUseCase.create_state(0);
         Assertions.assertEquals(actual.getId(), "User Has No Properties (Manage Properties)");
-        Assertions.assertEquals(actual.isBackEnable(), false);
+        Assertions.assertFalse(actual.isBackEnable());
     }
 
     @Test
@@ -44,13 +44,13 @@ public class PickPlayerUseCaseTest {
         cells.add(propertyOne);
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         PickPlayerUseCase pickPlayerUseCase = new PickPlayerUseCase();
         State actual = pickPlayerUseCase.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Property Two");
         Assertions.assertEquals(actual.getId(), "Pick Player (Trade)");
-        Assertions.assertEquals(actual.isBackEnable(), true);
+        Assertions.assertTrue(actual.isBackEnable());
         Assertions.assertEquals(actual.getOptions(), options);
     }
 

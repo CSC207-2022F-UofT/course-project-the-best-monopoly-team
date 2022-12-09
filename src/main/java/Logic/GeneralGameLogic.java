@@ -12,15 +12,15 @@ import java.util.List;
 public class GeneralGameLogic {
 
     //Static variables used by all the subclasses
-    static GameLogic gameLogicInteractor;
-    static Player currentPlayer;
-    static Board board;
-    static HashMap<String, Integer> selectedOptions = new HashMap<String, Integer>();
-    static int returnPlayerIndex = -1;
-    static List<Player> players;
-    static GameLogicTree returnTree;
-    static String answer;
-    static GameLogicTree confirmationReturn;
+    private static GameLogic gameLogicInteractor;
+    private static Player currentPlayer;
+    private static Board board;
+    private static final HashMap<String, Integer> selectedOptions = new HashMap<>();
+    private static int returnPlayerIndex = -1;
+    private static List<Player> players;
+    private static GameLogicTree returnTree;
+    private static String answer;
+    private static GameLogicTree confirmationReturn;
 
     private String name;
     public GeneralGameLogic(String name){
@@ -43,10 +43,10 @@ public class GeneralGameLogic {
     public List<Player> getPlayers(){
         return players;
     }
-    public void setReturnPlayerIndex(int index){
+    public static void setReturnPlayerIndex(int index){
         returnPlayerIndex = index;
     }
-    public int getReturnPlayerIndex(){
+    public static int getReturnPlayerIndex(){
         return returnPlayerIndex;
     }
     public static Board getBoard(){
@@ -80,7 +80,7 @@ public class GeneralGameLogic {
      * This method gives the TreeHandlers a reference to the GameLogicInteractor
      * @param interactor - the gameLogicInteractor
      */
-    public void setGameLogicInteractor(GameLogic interactor){
+    public static void setGameLogicInteractor(GameLogic interactor){
         gameLogicInteractor = interactor;
     }
 
@@ -127,14 +127,14 @@ public class GeneralGameLogic {
      * Setter method for the current player instance attribute
      * @param player - the player to set
      */
-    public void setCurrentPlayer(Player player){currentPlayer = player;
+    public static void setCurrentPlayer(Player player){currentPlayer = player;
     }
 
     /**
      * getter method for the current player instance attribute
      * @return the current player
      */
-    public Player getCurrentPlayer(){
+    public static Player getCurrentPlayer(){
         return currentPlayer;
     }
 
@@ -158,13 +158,10 @@ public class GeneralGameLogic {
     /**
      * Method to change players when their turn is over
      */
-    public void changePlayers(){
+    public static void changePlayers(){
         currentPlayer = players.get((getCurrentPlayerIndex() + 1) % players.size());
     }
-    /**
-     * Sets the tree back to its top position and returns the current state of the tree
-     * @return state object
-     */
+
 
     /**
      * Method returning the current state after the bottom node has been reached.
@@ -180,7 +177,7 @@ public class GeneralGameLogic {
      * @param currentState a State object that we want to add the players as options to.
      */
     public void addPlayersState(State currentState){
-        ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
+        ArrayList<Player> playerCopy = new ArrayList<>(board.getPlayers());
         playerCopy.remove(currentPlayer);
         for (Player player : playerCopy) {
             currentState.addOptions(player.getName());

@@ -29,11 +29,11 @@ public class ChoosePlayerUseCase extends MainTreeNodeLogic implements NodeLogic 
         Board board = getBoard();
         Player currentPlayer = getCurrentPlayer();
 
-        ArrayList<Player> playerCopy = new ArrayList<Player>(board.getPlayers());
+        ArrayList<Player> playerCopy;
         State currentState = new State();
         currentState.setId(getName());
         //Steal from the target player
-        playerCopy = new ArrayList<Player>(board.getPlayers());
+        playerCopy = new ArrayList<>(board.getPlayers());
         playerCopy.remove(currentPlayer);
         PlayerLogic playerLogic = new PlayerLogic(currentPlayer);
         String stealStatus = playerLogic.steal(playerCopy.get(input));

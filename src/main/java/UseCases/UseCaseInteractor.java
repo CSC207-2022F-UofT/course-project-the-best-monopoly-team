@@ -24,10 +24,10 @@ public class UseCaseInteractor{
     private GameLogicTree currentTree;
     private boolean menuTreeActive = true;
     private GameLogic logicInteractor;
-    private LoadAccess loadAccess;
-    private SaveAccess saveAccess;
-    private GameCreation gameCreation;
-    private SavePackager savePackager;
+    private final LoadAccess loadAccess;
+    private final SaveAccess saveAccess;
+    private final GameCreation gameCreation;
+    private final SavePackager savePackager;
     private State currentState;
 
 
@@ -225,7 +225,7 @@ public class UseCaseInteractor{
      * This method loads the save file and returns the initial states required for the
      * Tree when creating a game
      * @return an Integer[] of initial states
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException - Exception thrown when loadGame method in loadAccess fails
      */
     public int[] loadInitialStates(String file) throws FileNotFoundException {
         ArrayList<ArrayList<String[]>> loadedGame = this.loadAccess.loadGame(file);

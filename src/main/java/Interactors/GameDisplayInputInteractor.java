@@ -18,7 +18,7 @@ public class GameDisplayInputInteractor {
     public GameDisplayInputInteractor(){
         this.ButtonMap = new HashMap<>();
         for (int i = 0; i < 20; i++){
-            this.ButtonMap.put("B" + String.valueOf(i + 1), i);
+            this.ButtonMap.put("B" + (i + 1), i);
         }
     }
 

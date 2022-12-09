@@ -54,6 +54,7 @@ public class RollUseCase extends MainTreeNodeLogic implements NodeLogic {
                 switch (landedOnCell.getType()) {
                     case "Property":
                         PropertyPerformActionUseCase propertyInteractor = new PropertyPerformActionInteractor();
+                        assert landedOnCell instanceof Property;
                         Property property = (Property) landedOnCell;
                         if (property.getMortgageStatus()) {
                             setAnswer("This property is mortgaged, don't need to pay rent.");
@@ -70,6 +71,7 @@ public class RollUseCase extends MainTreeNodeLogic implements NodeLogic {
                         break;
                     case "Action Space":
                         PerformActionSpaceUseCase actionSpaceInteractor = new PerformActionSpaceCardInteractor();
+                        assert landedOnCell instanceof ActionSpace;
                         ActionSpace actionSpace = (ActionSpace) landedOnCell;
                         setAnswer(actionSpaceInteractor.performAction(actionSpace, currentPlayer, board));
                 }

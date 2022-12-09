@@ -25,10 +25,10 @@ public class FinishGameUseCase extends MainTreeNodeLogic implements NodeLogic {
             List<Player> players = getPlayers();
             String player_with_most_money = "";
             int max_money = 0;
-            for (int i = 0; i < players.size(); i++) {
-                if (players.get(i).getMoney() > max_money) {
-                    player_with_most_money = players.get(i).getName();
-                    max_money = players.get(i).getMoney();
+            for (Player player : players) {
+                if (player.getMoney() > max_money) {
+                    player_with_most_money = player.getName();
+                    max_money = player.getMoney();
                 }
             }
             currentState.setDescription("Max turn reaches, " + player_with_most_money + " has the most money and wins the game.");
@@ -36,8 +36,8 @@ public class FinishGameUseCase extends MainTreeNodeLogic implements NodeLogic {
         } else if (getPlayers().size() == 1) {
             List<Player> players = getPlayers();
             Player winningPlayer = players.get(0);
-            String winnningString = winningPlayer.getName() + " won the game!!!";
-            currentState.setDescription(winnningString);
+            String winningString = winningPlayer.getName() + " won the game!!!";
+            currentState.setDescription(winningString);
         }
 
         mainStates[0] = 1;

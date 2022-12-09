@@ -4,7 +4,7 @@ import Logic.InitialNodeLogic.*;
 import org.junit.jupiter.api.Test;
 
 class GameLogicTreeTest {
-    private GameLogicTree tree = createTree();
+    private final GameLogicTree tree = createTree();
 
 
     @Test

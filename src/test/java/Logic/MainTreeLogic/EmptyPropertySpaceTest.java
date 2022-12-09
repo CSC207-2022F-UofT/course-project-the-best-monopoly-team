@@ -28,10 +28,10 @@ public class EmptyPropertySpaceTest {
         cells.add(propertyOne);
         cells.add(propertyTwo);
         Board board = new Board(players, cells);
-        GameLogic gameLogic = new GameLogic(playerOne, board);
+        new GameLogic(playerOne, board);
         EmptyPropertySpaceUseCase emptyPropertySpace = new EmptyPropertySpaceUseCase();
         State actual = emptyPropertySpace.create_state(0);
-        ArrayList<String> options = new ArrayList<String>();
+        ArrayList<String> options = new ArrayList<>();
         options.add("Trade");
         options.add("Manage Property");
         options.add("Roll The Dice");

@@ -14,7 +14,7 @@ public class GameDisplayOutputInteractor {
     /**
      * InstanceVar description: the section for the context shown to the user
      * InstanceVar optionSegment: the section for all the option buttons
-     *
+     * <p>
      * InstanceVar options: an ArrayList of all the options on this state
      * InstanceVar buttonDisplayHandler: the handler of the buttons on the display
      */
