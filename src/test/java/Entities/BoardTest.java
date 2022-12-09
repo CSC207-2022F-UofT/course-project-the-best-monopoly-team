@@ -83,7 +83,7 @@ public class BoardTest {
         cells.add(cellTwo);
         Board board = new Board(players, cells);
         Cell actual = board.getCell(1);
-        Cell expected = board.cells.get(1);
+        Cell expected = board.getCells().get(1);
         Assertions.assertEquals(actual, expected);
     }
 

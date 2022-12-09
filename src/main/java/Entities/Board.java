@@ -6,8 +6,8 @@ import java.util.*;
  */
 public class Board{
 
-    List<Player> players;
-    List<Cell> cells;
+    private final List<Player> players;
+    private final List<Cell> cells;
 
     /**
      * This is the constructor which creates a Board instance.

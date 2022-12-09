@@ -12,15 +12,15 @@ import java.util.List;
 public class GeneralGameLogic {
 
     //Static variables used by all the subclasses
-    static GameLogic gameLogicInteractor;
-    static Player currentPlayer;
-    static Board board;
-    static HashMap<String, Integer> selectedOptions = new HashMap<>();
-    static int returnPlayerIndex = -1;
-    static List<Player> players;
-    static GameLogicTree returnTree;
-    static String answer;
-    static GameLogicTree confirmationReturn;
+    private static GameLogic gameLogicInteractor;
+    private static Player currentPlayer;
+    private static Board board;
+    private static final HashMap<String, Integer> selectedOptions = new HashMap<>();
+    private static int returnPlayerIndex = -1;
+    private static List<Player> players;
+    private static GameLogicTree returnTree;
+    private static String answer;
+    private static GameLogicTree confirmationReturn;
 
     private String name;
     public GeneralGameLogic(String name){
