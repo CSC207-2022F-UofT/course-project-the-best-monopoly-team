@@ -3,7 +3,7 @@ package Logic.AuctionNodeLogic;
 import org.junit.jupiter.api.Test;
 
 public class AuctionTreeNodeLogicTest {
-
+    //TODO: IMPLEMENT THESE TESTS
     @Test
     public void testBeforeLogic(){
 
